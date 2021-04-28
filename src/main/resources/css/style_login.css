@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+#main_login {
+    -fx-background-color: #dfdeff;
+    -fx-background-radius:20px;
+    -fx-border-radius: 20px;
+
+}
+
+#left-main{
+    -fx-background-color: #005eb1;
+    -fx-background-radius: 20px 0 0 20px;
+    -fx-border-radius: 20px 0 0 20px;
+}
+
+#right-main {
+    -fx-font-family: 'Roboto', sans-serif;
+    -fx-font-size: 20px;
+}
+
+#img-pane {
+    -fx-background-image: url("../images/img_login.png");
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
+
+#lb-wel, #lb-left, #lb-us-pa{
+    -fx-font-family: 'Roboto', sans-serif;
+}
+
+#lb-wel {
+    -fx-font-size: 35px;
+}
+
