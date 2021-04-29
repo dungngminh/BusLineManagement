@@ -67,7 +67,7 @@ public class MainWindow implements Initializable {
     }
 
     public void showBusPage() throws IOException {
-        AnchorPane newPane = FXMLLoader.load(getClass().getResource("../../resources/view/BusPage.fxml"));
+        AnchorPane newPane = FXMLLoader.load(getClass().getResource("../view/BusPage.fxml"));
         this.rootPane.getChildren().setAll(newPane);
 
     }

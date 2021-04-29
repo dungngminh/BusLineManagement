@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pane" prefHeight="670.0" prefWidth="1240.0" style="-fx-background-color: #AAEFDF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Java.Controller.BusPage">
+<AnchorPane fx:id="pane" prefHeight="670.0" prefWidth="1240.0" style="-fx-background-color: #AAEFDF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BusPage">
    <children>
       <SplitPane id="splitpane" dividerPositions="0.2521166509877705" prefHeight="671.0" prefWidth="1240.0" stylesheets="@../css/BusPage.css">
         <items>
