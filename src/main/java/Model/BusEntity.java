@@ -1,6 +1,7 @@
 package Model;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Table(name = "Bus", schema = "dbo", catalog = "QuanLyNhaXeKhach")
@@ -8,11 +9,14 @@ public class BusEntity {
     private int idBus;
     private String busName;
     private String plateNumber;
+    private int idType;
     private Boolean isDelete;
     private int status;
+    private TypeOfBusEntity typeOfBusByIdType;
+    private Collection<ScheduleEntity> schedulesByIdBus;
 
     @Id
-    @Column(name = "idBus")
+    @Column(name = "idBus", nullable = false)
     public int getIdBus() {
         return idBus;
     }
@@ -22,7 +26,7 @@ public class BusEntity {
     }
 
     @Basic
-    @Column(name = "busName")
+    @Column(name = "busName", nullable = false, length = 50)
     public String getBusName() {
         return busName;
     }
@@ -32,7 +36,7 @@ public class BusEntity {
     }
 
     @Basic
-    @Column(name = "plateNumber")
+    @Column(name = "plateNumber", nullable = false, length = 10)
     public String getPlateNumber() {
         return plateNumber;
     }
@@ -42,7 +46,17 @@ public class BusEntity {
     }
 
     @Basic
-    @Column(name = "isDelete")
+    @Column(name = "idType", nullable = false, insertable = false, updatable = false)
+    public int getIdType() {
+        return idType;
+    }
+
+    public void setIdType(int idType) {
+        this.idType = idType;
+    }
+
+    @Basic
+    @Column(name = "isDelete", nullable = true)
     public Boolean getDelete() {
         return isDelete;
     }
@@ -52,7 +66,7 @@ public class BusEntity {
     }
 
     @Basic
-    @Column(name = "status")
+    @Column(name = "status", nullable = false)
     public int getStatus() {
         return status;
     }
@@ -69,6 +83,7 @@ public class BusEntity {
         BusEntity busEntity = (BusEntity) o;
 
         if (idBus != busEntity.idBus) return false;
+        if (idType != busEntity.idType) return false;
         if (status != busEntity.status) return false;
         if (busName != null ? !busName.equals(busEntity.busName) : busEntity.busName != null) return false;
         if (plateNumber != null ? !plateNumber.equals(busEntity.plateNumber) : busEntity.plateNumber != null)
@@ -83,8 +98,28 @@ public class BusEntity {
         int result = idBus;
         result = 31 * result + (busName != null ? busName.hashCode() : 0);
         result = 31 * result + (plateNumber != null ? plateNumber.hashCode() : 0);
+        result = 31 * result + idType;
         result = 31 * result + (isDelete != null ? isDelete.hashCode() : 0);
         result = 31 * result + status;
         return result;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "idType", referencedColumnName = "idType", nullable = false)
+    public TypeOfBusEntity getTypeOfBusByIdType() {
+        return typeOfBusByIdType;
+    }
+
+    public void setTypeOfBusByIdType(TypeOfBusEntity typeOfBusByIdType) {
+        this.typeOfBusByIdType = typeOfBusByIdType;
+    }
+
+    @OneToMany(mappedBy = "busByIdBus")
+    public Collection<ScheduleEntity> getSchedulesByIdBus() {
+        return schedulesByIdBus;
+    }
+
+    public void setSchedulesByIdBus(Collection<ScheduleEntity> schedulesByIdBus) {
+        this.schedulesByIdBus = schedulesByIdBus;
     }
 }

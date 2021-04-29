@@ -7,9 +7,11 @@
   <!-- Database connection settings -->
   <property name="connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
   <property name="connection.url">jdbc:sqlserver://34.72.153.240;database=QuanLyNhaXeKhach</property>
-  <property name="connection.username">sqlserver</property>
-  <property name="connection.password">123456</property>
-
+  <property name="hibernate.connection.username">sqlserver</property>
+  <property name="hibernate.connection.password">123456</property>
+  <property name="hibernate.show_sql">true</property>
+  <property name="hibernate.connection.release_mode">auto</property>
+  <property name="hibernate.connection.autoReconnect">true</property>
   <!-- JDBC connection pool (use the built-in) -->
   <property name="connection.pool_size">1</property>
 
@@ -25,12 +27,28 @@
   <!-- Echo all executed SQL to stdout -->
   <property name="show_sql">true</property>
 
+  <property name = "hibernate.temp.use_jdbc_metadata_defaults">false</property>
+
   <mapping class="Model.AccountEntity" />
   <mapping class="Model.BusEntity" />
   <mapping class="Model.RouteEntity" />
   <mapping class="Model.ScheduleEntity" />
   <mapping class="Model.TicketEntity" />
   <mapping class="Model.TripInformationEntity" />
+  <mapping class="Model.DriverEntity"/>
+  <mapping class="Model.ProvinceEntity"/>
+  <mapping class="Model.RoleEntity"/>
+  <mapping class="Model.RoleAccountEntity"/>
+  <mapping class="Model.StationEntity"/>
+  <mapping class="Model.TypeOfBusEntity"/>
 
 </session-factory>
 </hibernate-configuration>
+
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.2"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+<!-- Define persistence unit -->
+<persistence-unit name="my-persistence-unit">
+</persistence-unit>
+</persistence>

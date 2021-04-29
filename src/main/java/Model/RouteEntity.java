@@ -1,6 +1,7 @@
 package Model;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Table(name = "Route", schema = "dbo", catalog = "QuanLyNhaXeKhach")
@@ -12,9 +13,10 @@ public class RouteEntity {
     private String note;
     private Boolean isDelete;
     private int status;
+    private Collection<ScheduleEntity> schedulesByIdRoute;
 
     @Id
-    @Column(name = "idRoute")
+    @Column(name = "idRoute", nullable = false)
     public int getIdRoute() {
         return idRoute;
     }
@@ -24,7 +26,7 @@ public class RouteEntity {
     }
 
     @Basic
-    @Column(name = "startStation")
+    @Column(name = "startStation", nullable = true, length = 50)
     public String getStartStation() {
         return startStation;
     }
@@ -34,7 +36,7 @@ public class RouteEntity {
     }
 
     @Basic
-    @Column(name = "endStation")
+    @Column(name = "endStation", nullable = true, length = 50)
     public String getEndStation() {
         return endStation;
     }
@@ -44,7 +46,7 @@ public class RouteEntity {
     }
 
     @Basic
-    @Column(name = "distance")
+    @Column(name = "distance", nullable = true)
     public Integer getDistance() {
         return distance;
     }
@@ -54,7 +56,7 @@ public class RouteEntity {
     }
 
     @Basic
-    @Column(name = "note")
+    @Column(name = "note", nullable = true, length = 50)
     public String getNote() {
         return note;
     }
@@ -64,7 +66,7 @@ public class RouteEntity {
     }
 
     @Basic
-    @Column(name = "isDelete")
+    @Column(name = "isDelete", nullable = true)
     public Boolean getDelete() {
         return isDelete;
     }
@@ -74,7 +76,7 @@ public class RouteEntity {
     }
 
     @Basic
-    @Column(name = "status")
+    @Column(name = "status", nullable = false)
     public int getStatus() {
         return status;
     }
@@ -111,5 +113,14 @@ public class RouteEntity {
         result = 31 * result + (isDelete != null ? isDelete.hashCode() : 0);
         result = 31 * result + status;
         return result;
+    }
+
+    @OneToMany(mappedBy = "routeByIdRoute")
+    public Collection<ScheduleEntity> getSchedulesByIdRoute() {
+        return schedulesByIdRoute;
+    }
+
+    public void setSchedulesByIdRoute(Collection<ScheduleEntity> schedulesByIdRoute) {
+        this.schedulesByIdRoute = schedulesByIdRoute;
     }
 }

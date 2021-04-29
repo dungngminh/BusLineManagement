@@ -1,16 +1,19 @@
 package Model;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Table(name = "Account", schema = "dbo", catalog = "QuanLyNhaXeKhach")
 public class AccountEntity {
-    private int idUser;
+    private Integer idUser;
     private String username;
     private String password;
+    private Collection<RoleAccountEntity> roleAccountsByIdUser;
+    private Collection<TicketEntity> ticketsByIdUser;
 
     @Id
-    @Column(name = "idUser")
+    @Column(name = "idUser", nullable = false)
     public int getIdUser() {
         return idUser;
     }
@@ -20,7 +23,7 @@ public class AccountEntity {
     }
 
     @Basic
-    @Column(name = "Username")
+    @Column(name = "Username", nullable = false, length = 50)
     public String getUsername() {
         return username;
     }
@@ -30,7 +33,7 @@ public class AccountEntity {
     }
 
     @Basic
-    @Column(name = "Password")
+    @Column(name = "Password", nullable = false, length = 50)
     public String getPassword() {
         return password;
     }
@@ -59,5 +62,23 @@ public class AccountEntity {
         result = 31 * result + (username != null ? username.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         return result;
+    }
+
+    @OneToMany(mappedBy = "accountByIdUser")
+    public Collection<RoleAccountEntity> getRoleAccountsByIdUser() {
+        return roleAccountsByIdUser;
+    }
+
+    public void setRoleAccountsByIdUser(Collection<RoleAccountEntity> roleAccountsByIdUser) {
+        this.roleAccountsByIdUser = roleAccountsByIdUser;
+    }
+
+    @OneToMany(mappedBy = "accountByIdUser")
+    public Collection<TicketEntity> getTicketsByIdUser() {
+        return ticketsByIdUser;
+    }
+
+    public void setTicketsByIdUser(Collection<TicketEntity> ticketsByIdUser) {
+        this.ticketsByIdUser = ticketsByIdUser;
     }
 }

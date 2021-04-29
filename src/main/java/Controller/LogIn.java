@@ -24,7 +24,7 @@ public class LogIn {
         String username = txf_username.getText();
         String password = txf_password.getText();
         try {
-            if(BLL_LogIn.getInstance().validate_Account(username, password)) {
+            if(BLL_Admin.getInstance().validate_Account(username, password)) {
 //                  new Alert(Alert.AlertType.INFORMATION, "Successful!").showAndWait();
                 FXMLLoader main_Page = new FXMLLoader();
                 main_Page.setLocation(getClass().getResource("/view/admin_view/MainWindow.fxml"));
