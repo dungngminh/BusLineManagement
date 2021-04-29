@@ -1,33 +1,17 @@
 package Services;
 import Model.*;
-import Util.DB_Helper;
+import Util.HibernateUtils;
+import org.hibernate.Session;
 
 import java.sql.SQLException;
 import java.util.*;
 
 public class DAL {
     private static DAL instance;
-    private List<Account> list_acc;
-    private List<Bus> list_bus;
 
-    public List<Bus> getList_bus() {
-        return list_bus;
-    }
-
-    public void setList_bus(Bus bus) {
-        this.list_bus.add(bus);
-    }
-
-    public void setAccount(Account account) {
-        list_acc.add(account);
-    }
-
-    public List<Account> getAccount() {
-        return list_acc;
-    }
 
     private DAL(){
-        list_acc = new ArrayList<Account> ();
+
     }
 
     public static DAL getInstance() {
@@ -37,11 +21,26 @@ public class DAL {
         return instance;
     }
 
-    public void getListAcc() throws SQLException, ClassNotFoundException {
-        DB_Helper.getInstance().getRecord("SELECT * FROM Account", "Account");
+    public List<AccountEntity> getListAcc() throws SQLException, ClassNotFoundException {
+//        DB_Helper.getInstance().getRecord("SELECT * FROM Account", "Account");
+//        SessionFactory factory = new HibernateUtils.getSessionFactory();
+        try (Session session = HibernateUtils.getSessionFactory().openSession();) {
+            // Begin a unit of work
+            session.beginTransaction();
+
+            // Get users
+            List<AccountEntity> list_acc = session.createQuery("FROM AccountEntity ", AccountEntity.class).list();
+//            list_acc.forEach(System.out::println);
+
+            // Commit the current resource transaction, writing any unflushed changes to the database.
+            session.getTransaction().commit();
+
+            return list_acc;
+
+        }
     }
 
     public void getListBus() throws SQLException, ClassNotFoundException {
-        DB_Helper.getInstance().getRecord("SELECT * FROM Bus", "Bus");
+//        DB_Helper.getInstance().getRecord("SELECT * FROM Bus", "Bus");
     }
 }

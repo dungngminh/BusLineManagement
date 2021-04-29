@@ -20,7 +20,7 @@ public class BLL_LogIn {
     public boolean validate_Account(String username, String password) throws SQLException, ClassNotFoundException {
         AtomicBoolean valid = new AtomicBoolean(false);
         DAL.getInstance().getListAcc();
-        DAL.getInstance().getAccount().forEach(account -> {
+        DAL.getInstance().getListAcc().forEach(account -> {
             if(account.getUsername().equals(username) && account.getPassword().equals(password))
                 valid.set(true);
         });

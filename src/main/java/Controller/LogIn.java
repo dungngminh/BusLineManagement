@@ -27,7 +27,7 @@ public class LogIn {
             if(BLL_LogIn.getInstance().validate_Account(username, password)) {
 //                  new Alert(Alert.AlertType.INFORMATION, "Successful!").showAndWait();
                 FXMLLoader main_Page = new FXMLLoader();
-                main_Page.setLocation(getClass().getResource("/view/MainWindow.fxml"));
+                main_Page.setLocation(getClass().getResource("/view/admin_view/MainWindow.fxml"));
 
                 Scene scene = new Scene(main_Page.load());
                 Stage stage = new Stage();
