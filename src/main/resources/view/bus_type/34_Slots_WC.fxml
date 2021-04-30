@@ -2,88 +2,72 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="807.0" prefWidth="290.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <GridPane layoutX="3.0" layoutY="24.0" prefHeight="686.0" prefWidth="282.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="1" />
-            <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="22" GridPane.rowIndex="8" />
-            <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="21" GridPane.columnIndex="2" GridPane.rowIndex="7" />
-            <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="20" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-            <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="15" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-            <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="14" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="13" GridPane.rowIndex="4" />
-            <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="12" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-            <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="11" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="10" GridPane.rowIndex="3" />
-            <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="9" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="8" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="7" GridPane.rowIndex="2" />
-            <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="6" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="5" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="4" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="3" GridPane.columnIndex="2" />
-            <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="2" GridPane.columnIndex="1" />
-            <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="19" GridPane.rowIndex="7" />
-            <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="18" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-            <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="17" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="16" GridPane.rowIndex="5" />
-            <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="26" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-            <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="25" GridPane.rowIndex="9" />
-            <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="24" GridPane.columnIndex="2" GridPane.rowIndex="8" />
-            <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="23" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-            <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="30" GridPane.columnIndex="2" GridPane.rowIndex="10" />
-            <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="29" GridPane.columnIndex="1" GridPane.rowIndex="10" />
-            <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="27" GridPane.columnIndex="2" GridPane.rowIndex="9" />
-            <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="28" GridPane.rowIndex="10" />
-            <Label prefHeight="27.0" prefWidth="40.0" text="WC" GridPane.columnIndex="2" GridPane.rowIndex="6">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-         </children>
-      </GridPane>
-      <GridPane layoutX="12.0" layoutY="710.0" prefHeight="78.0" prefWidth="265.0">
-        <columnConstraints>
-          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="31" />
-            <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="32" GridPane.columnIndex="1" />
-            <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="33" GridPane.columnIndex="2" />
-            <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="34" GridPane.columnIndex="3" />
-         </children>
-      </GridPane>
-   </children>
-</Pane>
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="564.0" prefWidth="317.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Bus_Type.Bus34WCBed">
+  <tabs>
+    <Tab text="Tầng 1">
+         <content>
+            <Pane prefHeight="558.0" prefWidth="317.0">
+               <children>
+                  <Button fx:id="a3" layoutX="14.0" layoutY="81.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="A3" />
+                  <Button fx:id="a4" layoutX="14.0" layoutY="160.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="A4" />
+                  <Button fx:id="a9" layoutX="14.0" layoutY="235.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="A9" />
+                  <Button fx:id="a2" layoutX="124.0" layoutY="81.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="A2" />
+                  <Button fx:id="a7" layoutX="233.0" layoutY="235.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="A7" />
+                  <Button fx:id="a8" layoutX="124.0" layoutY="235.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="A8" />
+                  <Button fx:id="a5" layoutX="124.0" layoutY="160.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="A5" />
+                  <Button fx:id="a6" layoutX="233.0" layoutY="160.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="A6" />
+                  <Button fx:id="a1" layoutX="233.0" layoutY="81.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="A1" />
+                  <Button fx:id="a10" layoutX="14.0" layoutY="310.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="A10" />
+                  <Button fx:id="a11" layoutX="124.0" layoutY="310.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="A11" />
+                  <Button fx:id="a12" layoutX="233.0" layoutY="310.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="A12" />
+                  <Button fx:id="a15" layoutX="14.0" layoutY="384.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="A15" />
+                  <Button fx:id="a14" layoutX="124.0" layoutY="384.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="A14" />
+                  <Button fx:id="a13" layoutX="233.0" layoutY="384.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="A13" />
+                  <Button fx:id="a16" layoutX="14.0" layoutY="467.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="A16" />
+                  <Button fx:id="a17" layoutX="124.0" layoutY="467.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="A17" />
+                  <Label layoutX="240.0" layoutY="37.0" text="Đường lên">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="256.0" layoutY="471.0" text="WC">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </content>
+    </Tab>
+    <Tab text="Tầng 2">
+         <content>
+            <Pane prefHeight="558.0" prefWidth="317.0">
+               <children>
+                  <Button fx:id="b3" layoutX="14.0" layoutY="81.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="B3" />
+                  <Button fx:id="b4" layoutX="14.0" layoutY="160.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="B4" />
+                  <Button layoutX="14.0" layoutY="235.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="B9" />
+                  <Button fx:id="b2" layoutX="124.0" layoutY="81.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="B2" />
+                  <Button fx:id="b7" layoutX="233.0" layoutY="235.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="B7" />
+                  <Button layoutX="124.0" layoutY="235.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="B8" />
+                  <Button fx:id="b5" layoutX="124.0" layoutY="160.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="B5" />
+                  <Button fx:id="b6" layoutX="233.0" layoutY="160.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="B6" />
+                  <Button fx:id="b1" layoutX="233.0" layoutY="81.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="B1" />
+                  <Button layoutX="14.0" layoutY="310.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="B10" />
+                  <Button layoutX="124.0" layoutY="310.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="B11" />
+                  <Button layoutX="233.0" layoutY="310.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="B12" />
+                  <Button layoutX="14.0" layoutY="384.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="B15" />
+                  <Button fx:id="b14" layoutX="124.0" layoutY="384.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="B14" />
+                  <Button fx:id="b13" layoutX="233.0" layoutY="384.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="B13" />
+                  <Button fx:id="b16" layoutX="14.0" layoutY="467.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="B16" />
+                  <Button fx:id="b17" layoutX="124.0" layoutY="467.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="B17" />
+               </children>
+            </Pane>
+         </content>
+    </Tab>
+  </tabs>
+</TabPane>

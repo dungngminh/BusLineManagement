@@ -1,4 +1,4 @@
-package Java.Controller.Bus_Type;
+package Controller.Bus_Type;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

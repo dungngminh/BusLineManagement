@@ -1,4 +1,4 @@
-package Java.Controller.Bus_Type;
+package Controller.Bus_Type;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -7,70 +7,70 @@ import javafx.scene.input.MouseEvent;
 public class Bus22 {
 
     @FXML
-    private Button seat16;
+    private Button a3;
 
     @FXML
-    private Button seat15;
+    private Button a7;
 
     @FXML
-    private Button seat12;
+    private Button a6;
 
     @FXML
-    private Button seat11;
+    private Button a11;
 
     @FXML
-    private Button seat8;
+    private Button a2;
 
     @FXML
-    private Button seat7;
+    private Button a9;
 
     @FXML
-    private Button seat4;
+    private Button a8;
 
     @FXML
-    private Button seat3;
+    private Button a10;
 
     @FXML
-    private Button seat5;
+    private Button a1;
 
     @FXML
-    private Button seat6;
+    private Button a5;
 
     @FXML
-    private Button seat9;
+    private Button a4;
 
     @FXML
-    private Button seat10;
+    private Button b3;
 
     @FXML
-    private Button seat13;
+    private Button b7;
 
     @FXML
-    private Button seat14;
+    private Button b6;
 
     @FXML
-    private Button seat17;
+    private Button b11;
 
     @FXML
-    private Button seat18;
+    private Button b2;
 
     @FXML
-    private Button seat1;
+    private Button b9;
 
     @FXML
-    private Button seat2;
+    private Button b8;
 
     @FXML
-    private Button seat22;
+    private Button b10;
 
     @FXML
-    private Button seat21;
+    private Button b1;
 
     @FXML
-    private Button seat20;
+    private Button b5;
 
     @FXML
-    private Button seat19;
+    private Button b4;
 
     @FXML
     void onSeatClick(MouseEvent event) {
