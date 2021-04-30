@@ -3,7 +3,7 @@ package Model;
 import javax.persistence.*;
 import java.util.Collection;
 
-@Entity
+@Entity(name = "BusEntity")
 @Table(name = "Bus", schema = "dbo", catalog = "QuanLyNhaXeKhach")
 public class BusEntity {
     private int idBus;
@@ -16,6 +16,7 @@ public class BusEntity {
     private Collection<ScheduleEntity> schedulesByIdBus;
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "idBus", nullable = false)
     public int getIdBus() {
         return idBus;
@@ -104,8 +105,8 @@ public class BusEntity {
         return result;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "idType", referencedColumnName = "idType", nullable = false)
+    @ManyToOne(targetEntity = TypeOfBusEntity.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "idType")
     public TypeOfBusEntity getTypeOfBusByIdType() {
         return typeOfBusByIdType;
     }
@@ -114,7 +115,7 @@ public class BusEntity {
         this.typeOfBusByIdType = typeOfBusByIdType;
     }
 
-    @OneToMany(mappedBy = "busByIdBus")
+    @OneToMany(mappedBy = "busByIdBus", fetch = FetchType.LAZY)
     public Collection<ScheduleEntity> getSchedulesByIdBus() {
         return schedulesByIdBus;
     }

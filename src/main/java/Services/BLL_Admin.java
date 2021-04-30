@@ -1,10 +1,16 @@
 package Services;
 
+import Model.BusEntity;
+import Model.DataTable.TableBusPage;
 import Model.TypeOfBusEntity;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class BLL_Admin {
     private static BLL_Admin instance;
@@ -22,11 +28,9 @@ public class BLL_Admin {
 
     public boolean validate_Account(String username, String password) throws SQLException, ClassNotFoundException {
         AtomicBoolean valid = new AtomicBoolean(false);
-        DAL.getInstance().getListAcc();
-        DAL.getInstance().getListAcc().forEach(account -> {
-            if(account.getUsername().equals(username) && account.getPassword().equals(password))
-                valid.set(true);
-        });
+        DAL.getInstance().getListAcc().stream().filter(account -> account.getUsername().equals(username) &&
+                account.getPassword().equals(DAL.getInstance().encryptSHA1(password))).map(account -> true).
+                    forEach(valid::set);
         return valid.get();
     }
 
@@ -34,14 +38,30 @@ public class BLL_Admin {
         return DAL.getInstance().getListTypeOFBus();
     }
 
-    public List<String> getBrandSlotFromTypeName(String nameType) {
-        List<String> ans = new ArrayList<String>();
-        DAL.getInstance().getListTypeOFBus().forEach(type -> {
-            if(type.getTypeName().equals(nameType)) {
-                ans.add(type.getBrandName());
-                ans.add(String.valueOf(type.getSlot()));
+    public TypeOfBusEntity getTypeOfBusObj(int idType) {
+        List<TypeOfBusEntity> l = DAL.getInstance().getListTypeOFBus();
+        for (TypeOfBusEntity typeOfBusEntity : l) {
+            if (typeOfBusEntity.getIdType() == idType) {
+                return typeOfBusEntity;
+            }
+        }
+        return null;
+    }
+
+    public void addBus(String busName, String plateNumber, TypeOfBusEntity tob, boolean del, int stt) {
+        DAL.getInstance().insertBus(busName, plateNumber, tob, del, stt);
+    }
+
+
+    public List<TableBusPage> updateTableBusPage(int slot, String name) {
+        List<TableBusPage> list = new ArrayList<TableBusPage>();
+        DAL.getInstance().getDataForBusPage().forEach(b -> {
+            if(slot == 0 && b.getBusName().contains(name))
+                list.add(new TableBusPage(b.getIdBus(), b.getBusName(), b.getPlateNumber(), b.getTypeOfBusByIdType().getTypeName(), b.getTypeOfBusByIdType().getBrandName(), b.getTypeOfBusByIdType().getSlot()));
+            else if(slot == b.getTypeOfBusByIdType().getSlot() && b.getBusName().contains(name)) {
+                list.add(new TableBusPage(b.getIdBus(), b.getBusName(), b.getPlateNumber(), b.getTypeOfBusByIdType().getTypeName(), b.getTypeOfBusByIdType().getBrandName(), b.getTypeOfBusByIdType().getSlot()));
             }
         });
-        return ans;
+        return list;
     }
 }

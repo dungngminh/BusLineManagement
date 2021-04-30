@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -37,9 +38,14 @@
                         <Font size="21.0" />
                      </font>
                   </Label>
-                  <TextField id="txf_username" fx:id="txf_username" layoutX="175.0" layoutY="187.0" prefHeight="36.0" prefWidth="171.0" />
-                  <TextField id="txf_password" fx:id="txf_password" layoutX="175.0" layoutY="273.0" prefHeight="36.0" prefWidth="171.0" />
+                  <TextField id="txf_username" fx:id="txf_username" layoutX="149.0" layoutY="187.0" prefHeight="44.0" prefWidth="249.0" />
+                  <PasswordField id="txf_password" fx:id="txf_password" layoutX="150.0" layoutY="270.0" />
                   <Button id="btn_login" layoutX="113.0" layoutY="411.0" mnemonicParsing="false" onMouseClicked="#btn_login_clicked" text="Log in">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Button>
+                  <Button id="btn_cancel" fx:id="btn_cancel" layoutX="242.0" layoutY="411.0" mnemonicParsing="false" onMouseClicked="#btn_cancel_clicked" text="Cancel">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -48,11 +54,6 @@
                      <font>
                         <Font size="13.0" />
                      </font></Hyperlink>
-                  <Button id="btn_cancel" fx:id="btn_cancel" layoutX="242.0" layoutY="411.0" mnemonicParsing="false" onMouseClicked="#btn_cancel_clicked" text="Cancel">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Button>
                </children>
             </AnchorPane>
         </items>

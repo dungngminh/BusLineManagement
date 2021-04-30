@@ -9,9 +9,9 @@
   <property name="connection.url">jdbc:sqlserver://34.72.153.240;database=QuanLyNhaXeKhach</property>
   <property name="hibernate.connection.username">sqlserver</property>
   <property name="hibernate.connection.password">123456</property>
-  <property name="hibernate.show_sql">true</property>
   <property name="hibernate.connection.release_mode">auto</property>
   <property name="hibernate.connection.autoReconnect">true</property>
+  <property name="hibernate.connection.autocommit">false</property>
   <!-- JDBC connection pool (use the built-in) -->
   <property name="connection.pool_size">1</property>
 
@@ -25,9 +25,13 @@
   <property name="cache.provider_class">org.hibernate.cache.internal.NoCachingRegionFactory</property>
 
   <!-- Echo all executed SQL to stdout -->
-  <property name="show_sql">true</property>
+  <property name="show_sql">false</property>
+  <property name="logging.level.org.hibernate.SQL">OFF</property>
 
-  <property name = "hibernate.temp.use_jdbc_metadata_defaults">false</property>
+  <property name = "hibernate.temp.use_jdbc_metadata_defaults">true</property>
+
+  <!-- Drop and re-create the database schema on startup -->
+  <property name="hbm2ddl.auto">update</property>
 
   <mapping class="Model.AccountEntity" />
   <mapping class="Model.BusEntity" />
@@ -41,14 +45,7 @@
   <mapping class="Model.RoleAccountEntity"/>
   <mapping class="Model.StationEntity"/>
   <mapping class="Model.TypeOfBusEntity"/>
+  <mapping class="Model.DataTable.TableBusPage"/>
 
 </session-factory>
 </hibernate-configuration>
-
-<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
-             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.2"
-             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
-<!-- Define persistence unit -->
-<persistence-unit name="my-persistence-unit">
-</persistence-unit>
-</persistence>

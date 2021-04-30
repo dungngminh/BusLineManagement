@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Arrays;
 import java.util.Collection;
 
-@Entity
+@Entity(name = "TypeOfBusEntity")
 @Table(name = "TypeOfBus", schema = "dbo", catalog = "QuanLyNhaXeKhach")
 public class TypeOfBusEntity {
     private int idType;
@@ -16,6 +16,7 @@ public class TypeOfBusEntity {
     private Collection<BusEntity> busesByIdType;
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "idType", nullable = false)
     public int getIdType() {
         return idType;
@@ -95,15 +96,15 @@ public class TypeOfBusEntity {
     @Override
     public int hashCode() {
         int result = idType;
-        result = 31 * result + (typeName != null ? typeName.hashCode() : 0);
-        result = 31 * result + (brandName != null ? brandName.hashCode() : 0);
-        result = 31 * result + slot;
+        result = result + (typeName != null ? typeName.hashCode() : 0);
+        result = result + (brandName != null ? brandName.hashCode() : 0);
+        result = result + slot;
         result = 31 * result + Arrays.hashCode(picture);
         result = 31 * result + (isDelete ? 1 : 0);
         return result;
     }
 
-    @OneToMany(mappedBy = "typeOfBusByIdType")
+    @OneToMany(targetEntity = BusEntity.class, mappedBy = "typeOfBusByIdType", fetch = FetchType.LAZY)
     public Collection<BusEntity> getBusesByIdType() {
         return busesByIdType;
     }
@@ -111,4 +112,5 @@ public class TypeOfBusEntity {
     public void setBusesByIdType(Collection<BusEntity> busesByIdType) {
         this.busesByIdType = busesByIdType;
     }
+
 }

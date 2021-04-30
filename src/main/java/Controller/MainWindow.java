@@ -54,7 +54,7 @@ public class MainWindow implements Initializable {
                     burgerTask.setRate(burgerTask.getRate() * -1);
                 flag = true;
                 burgerTask.play();
-                if(jfx_drawer.isShowing()) {
+                if(jfx_drawer.isShown()) {
                     jfx_drawer.close();
                 }
                 else jfx_drawer.open();

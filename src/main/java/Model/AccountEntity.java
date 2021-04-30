@@ -1,5 +1,8 @@
 package Model;
 
+import Services.DAL;
+import org.apache.commons.codec.digest.DigestUtils;
+
 import javax.persistence.*;
 import java.util.Collection;
 
