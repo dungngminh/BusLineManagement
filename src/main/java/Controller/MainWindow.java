@@ -26,7 +26,7 @@ public class MainWindow implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            VBox box = FXMLLoader.load(getClass().getResource("/view/NavBar.fxml"));
+            VBox box = FXMLLoader.load(getClass().getResource("/view/admin_view/NavBar.fxml"));
             jfx_drawer.setSidePane(box);
 
             for (Node node: box.getChildren()) {
@@ -67,7 +67,7 @@ public class MainWindow implements Initializable {
     }
 
     public void showBusPage() throws IOException {
-        AnchorPane newPane = FXMLLoader.load(getClass().getResource("../view/BusPage.fxml"));
+        AnchorPane newPane = FXMLLoader.load(getClass().getResource("../view/admin_view/BusPage.fxml"));
         this.rootPane.getChildren().setAll(newPane);
 
     }

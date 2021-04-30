@@ -10,7 +10,7 @@
 
 <AnchorPane prefHeight="587.0" prefWidth="927.0" style="-fx-background-color: #373E40;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LogIn">
    <children>
-      <SplitPane id="main_login" dividerPositions="0.4880095923261391" layoutX="43.0" layoutY="36.0" prefHeight="520.0" prefWidth="836.0" stylesheets="@../css/style_login.css">
+      <SplitPane id="main_login" dividerPositions="0.4880095923261391" layoutX="43.0" layoutY="36.0" prefHeight="520.0" prefWidth="836.0" stylesheets="@../../css/style_login.css">
         <items>
           <AnchorPane id="left-main" minHeight="0.0" minWidth="0.0" prefHeight="518.0" prefWidth="400.0" stylesheets="@../css/style_login.css">
                <children>
