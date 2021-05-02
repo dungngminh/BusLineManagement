@@ -11,9 +11,9 @@
   <property name="hibernate.connection.password">123456</property>
   <property name="hibernate.connection.release_mode">auto</property>
   <property name="hibernate.connection.autoReconnect">true</property>
-  <property name="hibernate.connection.autocommit">false</property>
+  <property name="hibernate.connection.autocommit">true</property>
   <!-- JDBC connection pool (use the built-in) -->
-  <property name="connection.pool_size">1</property>
+  <property name="connection.pool_size">10</property>
 
   <!-- SQL dialect -->
   <property name="dialect">org.hibernate.dialect.SQLServerDialect</property>

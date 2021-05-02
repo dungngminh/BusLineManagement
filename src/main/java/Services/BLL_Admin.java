@@ -52,16 +52,23 @@ public class BLL_Admin {
         DAL.getInstance().insertBus(busName, plateNumber, tob, del, stt);
     }
 
-
     public List<TableBusPage> updateTableBusPage(int slot, String name) {
         List<TableBusPage> list = new ArrayList<TableBusPage>();
         DAL.getInstance().getDataForBusPage().forEach(b -> {
             if(slot == 0 && b.getBusName().contains(name))
-                list.add(new TableBusPage(b.getIdBus(), b.getBusName(), b.getPlateNumber(), b.getTypeOfBusByIdType().getTypeName(), b.getTypeOfBusByIdType().getBrandName(), b.getTypeOfBusByIdType().getSlot()));
+                list.add(new TableBusPage(b.getIdBus(), b.getBusName(), b.getPlateNumber(), b.getTypeOfBusByIdType().getTypeName(), b.getTypeOfBusByIdType().getBrandName(), b.getTypeOfBusByIdType().getSlot(), b.getStatus()));
             else if(slot == b.getTypeOfBusByIdType().getSlot() && b.getBusName().contains(name)) {
-                list.add(new TableBusPage(b.getIdBus(), b.getBusName(), b.getPlateNumber(), b.getTypeOfBusByIdType().getTypeName(), b.getTypeOfBusByIdType().getBrandName(), b.getTypeOfBusByIdType().getSlot()));
+                list.add(new TableBusPage(b.getIdBus(), b.getBusName(), b.getPlateNumber(), b.getTypeOfBusByIdType().getTypeName(), b.getTypeOfBusByIdType().getBrandName(), b.getTypeOfBusByIdType().getSlot(), b.getStatus()));
             }
         });
         return list;
+    }
+
+    public void updateBus(int idBus, String busName, String plateNumber, TypeOfBusEntity tob, int stt) {
+        DAL.getInstance().updateBus(idBus, busName, plateNumber, tob, stt);
+    }
+
+    public void deleteBus(int idBus) {
+        DAL.getInstance().deleteBus(idBus);
     }
 }

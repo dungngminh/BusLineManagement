@@ -61,7 +61,7 @@ public class DAL {
 
     public List<AccountEntity> getListAcc() throws SQLException, ClassNotFoundException {
 //        SessionFactory factory = new HibernateUtils.getSessionFactory();
-        try (Session session = HibernateUtils.getSessionFactory().openSession();) {
+        try (Session session = HibernateUtils.getSessionFactory().openSession()) {
             // Begin a unit of work
             session.beginTransaction();
 
@@ -82,10 +82,10 @@ public class DAL {
     }
 
     public List<TypeOfBusEntity> getListTypeOFBus() {
-        try (Session session = HibernateUtils.getSessionFactory().openSession();) {
+        try (Session session = HibernateUtils.getSessionFactory().openSession()) {
             // Begin a unit of work
             session.beginTransaction();
-            // Get users
+            // Get types
 //            List<TypeOfBusEntity> list_tob = session.createQuery("FROM TypeOfBusEntity ", TypeOfBusEntity.class).list();
             NativeQuery<TypeOfBusEntity> query = session.createNativeQuery("SELECT * FROM TypeOfBus", TypeOfBusEntity.class );
             List<TypeOfBusEntity> list_tob = query.getResultList();
@@ -98,11 +98,11 @@ public class DAL {
     }
 
     public List<BusEntity> getDataForBusPage() {
-        try (Session session = HibernateUtils.getSessionFactory().openSession();) {
+        try (Session session = HibernateUtils.getSessionFactory().openSession()) {
             // Begin a unit of work
             session.beginTransaction();
             Query<BusEntity> query = session.createQuery("SELECT BUS " +
-                    "FROM BusEntity BUS INNER JOIN BUS.typeOfBusByIdType as TOB", BusEntity.class);
+                    "FROM BusEntity BUS INNER JOIN BUS.typeOfBusByIdType as TOB WHERE BUS.delete = false", BusEntity.class);
             final List<BusEntity> list = query.getResultList();
 
 //            list_acc.forEach(System.out::println);
@@ -127,7 +127,38 @@ public class DAL {
 
             //Commit the transaction
             session.getTransaction().commit();
-            HibernateUtils.close();
+            session.close();
 
+    }
+
+    public void updateBus(int idBus, String busName, String plateNumber, TypeOfBusEntity tob, int stt) {
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query query = session.createQuery("update BusEntity set busName = :busName, plateNumber = :plateNumber, typeOfBusByIdType = :tob, status = :stt" +
+                " where idBus = :idBus" );
+        query.setParameter("busName", busName);
+        query.setParameter("plateNumber", plateNumber);
+        query.setParameter("tob", tob);
+        query.setParameter("stt", stt);
+        query.setParameter("idBus", idBus);
+        int result = query.executeUpdate();
+
+        //Commit the transaction
+        session.getTransaction().commit();
+        session.close();
+    }
+
+    public void deleteBus(int idBus) {
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query query = session.createQuery("update BusEntity set isDelete = :del" +
+                " where idBus = :idBus" );
+        query.setParameter("del", true);
+        query.setParameter("idBus", idBus);
+        int result = query.executeUpdate();
+
+        //Commit the transaction
+        session.getTransaction().commit();
+        session.close();
     }
 }

@@ -11,6 +11,9 @@ public class TableBusPage {
     private String typeName;
     private String brandName;
     private int slot;
+    private int status;
+
+
 
     public int getIdBus() {
         return idBus;
@@ -19,9 +22,6 @@ public class TableBusPage {
     public void setIdBus(int idBus) {
         this.idBus = idBus;
     }
-
-
-
 
     public String getBusName() {
         return busName;
@@ -63,13 +63,22 @@ public class TableBusPage {
         this.slot = slot;
     }
 
+    public int getStatus() {
+        return status;
+    }
 
-    public TableBusPage(int idBus, String busName, String plateNumber, String typeName, String brandName, int slot) {
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public TableBusPage(int idBus, String busName, String plateNumber, String typeName, String brandName, int slot, int status) {
         this.idBus = idBus;
         this.busName = busName;
         this.plateNumber = plateNumber;
         this.typeName = typeName;
         this.brandName = brandName;
         this.slot = slot;
+        this.status = status;
     }
+
 }

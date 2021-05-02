@@ -62,8 +62,8 @@ public class BusEntity {
         return isDelete;
     }
 
-    public void setDelete(Boolean delete) {
-        isDelete = delete;
+    public void setDelete(Boolean isDelete) {
+        this.isDelete = isDelete;
     }
 
     @Basic

@@ -32,7 +32,7 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>5.4.30.Final</version>
+            <version>5.4.31.Final</version>
         </dependency>
 
         <dependency>
@@ -40,11 +40,13 @@
             <artifactId>javafx-fxml</artifactId>
             <version>16</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-entitymanager -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
-            <version>5.4.30.Final</version>
+            <version>5.4.31.Final</version>
         </dependency>
+
         <!-- https://mvnrepository.com/artifact/org.hibernate.javax.persistence/hibernate-jpa-2.1-api -->
         <dependency>
             <groupId>org.hibernate.javax.persistence</groupId>
@@ -57,12 +59,8 @@
             <artifactId>commons-codec</artifactId>
             <version>1.15</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.fxmisc.easybind/easybind -->
-        <dependency>
-            <groupId>org.fxmisc.easybind</groupId>
-            <artifactId>easybind</artifactId>
-            <version>1.0.3</version>
-        </dependency>
+
+
 
     </dependencies>
     <build>
