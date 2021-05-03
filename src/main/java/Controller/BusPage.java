@@ -143,6 +143,14 @@ public class BusPage implements Initializable {
                                 }
                                 break;
                             }
+                            case "decen": {
+                                try {
+                                    showDecentralizePage();
+                                } catch (IOException ioException) {
+                                    ioException.printStackTrace();
+                                }
+                                break;
+                            }
                             default:
                                 break;
                         }
@@ -212,6 +220,11 @@ public class BusPage implements Initializable {
 
     }
 
+    public void showDecentralizePage() throws IOException {
+        AnchorPane newPane = FXMLLoader.load(getClass().getResource("../view/admin_view/Decentralize.fxml"));
+        this.pane.getChildren().setAll(newPane);
+    }
+
     @FXML
     void btn_create_clicked(MouseEvent event) {
         CRUDType = "Create";
@@ -233,14 +246,14 @@ public class BusPage implements Initializable {
 
     @FXML
     void btn_delete_clicked(MouseEvent event) {
-//        try {
+        try {
             TableBusPage tbl = table_view.getSelectionModel().getSelectedItem();
             idBus = tbl.getIdBus();
             BLL_Admin.getInstance().deleteBus(idBus);
             show(0, "");
-//        } catch (Exception err) {
-//            new Alert(Alert.AlertType.INFORMATION, "Choose only 1 row!").showAndWait();
-//        }
+        } catch (Exception err) {
+            new Alert(Alert.AlertType.INFORMATION, "Choose only 1 row!").showAndWait();
+        }
     }
 
     @FXML

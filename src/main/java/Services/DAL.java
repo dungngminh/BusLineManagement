@@ -77,11 +77,8 @@ public class DAL {
         }
     }
 
-    public void getListBus() throws SQLException, ClassNotFoundException {
-//        DB_Helper.getInstance().getRecord("SELECT * FROM Bus", "Bus");
-    }
-
-    public List<TypeOfBusEntity> getListTypeOFBus() {
+    // DAL for Bus
+    public List<TypeOfBusEntity> getListTypeOfBus() {
         try (Session session = HibernateUtils.getSessionFactory().openSession()) {
             // Begin a unit of work
             session.beginTransaction();
@@ -161,4 +158,49 @@ public class DAL {
         session.getTransaction().commit();
         session.close();
     }
+
+    // Done Bus here ?
+
+    // DAL for Decentralize ?
+    public void addUserToAccount(String username, String password, int idRole) {
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        session.beginTransaction();
+        AccountEntity acc = new AccountEntity();
+        acc.setUsername(username);
+        acc.setPassword(password);
+
+        int idUser = (Integer)session.save(acc);
+
+        RoleEntity role_obj = session.find(RoleEntity.class, idRole);
+        RoleAccountEntity role_acc = new RoleAccountEntity();
+        role_acc.setIdRole(idRole);
+        role_acc.setIdUser(idUser);
+        role_acc.setAccountByIdUser(acc);
+        role_acc.setRoleByIdRole(role_obj);
+
+        session.save(role_acc);
+
+        //Commit the transaction
+        session.getTransaction().commit();
+        session.close();
+    }
+
+    public void updateRole(AccountEntity acc, int idRole) {
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        Query<RoleAccountEntity> query = session.createQuery("update RoleAccountEntity set idRole = :idRole " +
+                "where idUser = :idUser");
+
+        query.setParameter("idRole", idRole);
+        query.setParameter("idUser", acc.getIdUser());
+
+        int result = query.executeUpdate();
+
+        //Commit the transaction
+        session.getTransaction().commit();
+        session.close();
+    }
+
+    // Done Decentralize here ?
 }

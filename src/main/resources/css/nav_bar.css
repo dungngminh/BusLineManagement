@@ -1,15 +1,15 @@
 #navbar {
     -fx-background-color: #2A2B2E;
-    -fx-background-radius: 0 30px 30px 0;
-    -fx-border-radius: 0 30px 30px 0;
+    -fx-background-radius: 0 20px 20px 0;
+    -fx-border-radius: 0 20px 20px 0;
 }
 
 .btn {
-    -fx-background-color: #383843 !important;
+    -fx-background-color: #242429 !important;
 }
 
 .btn:hover {
-    -fx-background-color: #9d0030 !important;
+    -fx-background-color: #625e61 !important;
     -fx-background-radius: 9px 9px 9px 9px;
     -fx-border-radius: 7px 7px 7px 7px;
     -fx-border-color: white;

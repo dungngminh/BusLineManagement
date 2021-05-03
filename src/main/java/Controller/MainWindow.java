@@ -42,6 +42,14 @@ public class MainWindow implements Initializable {
                                 }
                                 break;
                             }
+                            case "decen": {
+                                try {
+                                    showDecentralizePage();
+                                } catch (IOException ioException) {
+                                    ioException.printStackTrace();
+                                }
+                                break;
+                            }
                             default:
                                 break;
                         }
@@ -70,7 +78,11 @@ public class MainWindow implements Initializable {
     public void showBusPage() throws IOException {
         AnchorPane newPane = FXMLLoader.load(getClass().getResource("../view/admin_view/BusPage.fxml"));
         this.rootPane.getChildren().setAll(newPane);
+    }
 
+    public void showDecentralizePage() throws IOException {
+        AnchorPane newPane = FXMLLoader.load(getClass().getResource("../view/admin_view/Decentralize.fxml"));
+        this.rootPane.getChildren().setAll(newPane);
     }
 
 }

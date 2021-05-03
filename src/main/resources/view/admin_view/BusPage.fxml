@@ -24,7 +24,7 @@
       <Pane prefHeight="679.0" prefWidth="1187.0">
          <children>
             <JFXHamburger fx:id="jfx_hambur" alignment="TOP_RIGHT" layoutX="5.0" layoutY="5.0" prefHeight="25.0" prefWidth="32.0" />
-            <JFXDrawer fx:id="jfx_drawer" alignment="TOP_LEFT" defaultDrawerSize="190.0" layoutX="-8.0" layoutY="-7.0" overLayVisible="false" prefHeight="692.0" prefWidth="90.0" />
+            <JFXDrawer fx:id="jfx_drawer" alignment="TOP_LEFT" defaultDrawerSize="190.0" layoutX="-8.0" layoutY="-8.0" overLayVisible="false" prefHeight="690.0" prefWidth="99.0" />
             <Pane layoutX="-3.0" prefHeight="671.0" prefWidth="282.0">
                <children>
                   <TitledPane animated="false" layoutX="8.0" layoutY="100.0" prefHeight="195.0" prefWidth="270.0" text="Type of bus">
