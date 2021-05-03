@@ -11,6 +11,7 @@ public class ProvinceEntity {
     private Collection<StationEntity> stationsByIdProvince;
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "idProvince", nullable = false)
     public int getIdProvince() {
         return idProvince;

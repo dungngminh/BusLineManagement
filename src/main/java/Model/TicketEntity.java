@@ -19,6 +19,7 @@ public class TicketEntity {
     private TripInformationEntity tripInformationByIdTrip;
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "idTicket", nullable = false)
     public int getIdTicket() {
         return idTicket;

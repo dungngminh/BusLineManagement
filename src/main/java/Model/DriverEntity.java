@@ -15,6 +15,7 @@ public class DriverEntity {
     private Collection<TripInformationEntity> tripInformationsByIdDriver;
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "idDriver", nullable = false)
     public int getIdDriver() {
         return idDriver;

@@ -29,7 +29,6 @@ public class MainWindow implements Initializable {
         try {
             VBox box = FXMLLoader.load(getClass().getResource("/view/admin_view/NavBar.fxml"));
             jfx_drawer.setSidePane(box);
-
             for (Node node: box.getChildren()) {
                 if(node.lookup(".btn").getAccessibleText() != null) {
                     node.lookup(".btn").addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
@@ -37,6 +36,14 @@ public class MainWindow implements Initializable {
                             case "bus": {
                                 try {
                                     showBusPage();
+                                } catch (IOException ioException) {
+                                    ioException.printStackTrace();
+                                }
+                                break;
+                            }
+                            case "route": {
+                                try {
+                                    showRoutePage();
                                 } catch (IOException ioException) {
                                     ioException.printStackTrace();
                                 }
@@ -56,7 +63,6 @@ public class MainWindow implements Initializable {
                     });
                 }
             }
-
             HamburgerBackArrowBasicTransition burgerTask = new HamburgerBackArrowBasicTransition(jfx_hambur);
             jfx_hambur.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
                 if(flag)
@@ -67,19 +73,19 @@ public class MainWindow implements Initializable {
                     jfx_drawer.close();
                 }
                 else jfx_drawer.open();
-
             });
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
-
     public void showBusPage() throws IOException {
         AnchorPane newPane = FXMLLoader.load(getClass().getResource("../view/admin_view/BusPage.fxml"));
         this.rootPane.getChildren().setAll(newPane);
     }
-
+    public void showRoutePage() throws IOException{
+        AnchorPane newPane = FXMLLoader.load(getClass().getResource("../view/admin_view/RoutePage.fxml"));
+        this.rootPane.getChildren().setAll(newPane);
+    }
     public void showSettingPage() throws IOException {
         AnchorPane newPane = FXMLLoader.load(getClass().getResource("../view/admin_view/Setting.fxml"));
         this.rootPane.getChildren().setAll(newPane);

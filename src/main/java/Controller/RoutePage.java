@@ -51,22 +51,22 @@ public class RoutePage {
     private TableView<TableRoutePage> table_view;
 
     @FXML
-    private TableColumn<?, ?> col_idStation;
+    private TableColumn<TableRoutePage, Integer> col_idStation;
 
     @FXML
-    private TableColumn<?, ?> col_startstation;
+    private TableColumn<TableRoutePage, String> col_startstation;
 
     @FXML
-    private TableColumn<?, ?> col_endstation;
+    private TableColumn<TableRoutePage, String> col_endstation;
 
     @FXML
-    private TableColumn<?, ?> col_distance;
+    private TableColumn<TableRoutePage, Integer> col_distance;
 
     @FXML
-    private TableColumn<?, ?> col_status;
+    private TableColumn<TableRoutePage, Integer> col_status;
 
     @FXML
-    private TableColumn<?, ?> col_note;
+    private TableColumn<TableRoutePage, String> col_note;
 
     @FXML
     private ButtonBar grp_btn_tbl;
