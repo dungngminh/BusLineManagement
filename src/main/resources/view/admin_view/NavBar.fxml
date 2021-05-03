@@ -113,7 +113,7 @@
       <graphic>
          <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
             <image>
-               <Image url="@../../images/Icon/decentralized.png" />
+               <Image url="@../../images/Icon/setting.png" />
             </image>
          </ImageView>
       </graphic>

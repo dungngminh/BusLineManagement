@@ -16,6 +16,7 @@ public class RouteEntity {
     private Collection<ScheduleEntity> schedulesByIdRoute;
 
     @Id
+
     @Column(name = "idRoute", nullable = false)
     public int getIdRoute() {
         return idRoute;

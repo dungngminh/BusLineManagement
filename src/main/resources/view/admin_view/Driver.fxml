@@ -27,9 +27,9 @@
                   <TableView fx:id="table_view" layoutY="100.0" prefHeight="435.0" prefWidth="894.0">
                      <columns>
                         <TableColumn fx:id="col_id" prefWidth="75.0" text="ID" />
-                        <TableColumn fx:id="col_nameofbus" prefWidth="75.0" text="Name of driver" />
-                        <TableColumn fx:id="col_platenumber" prefWidth="75.0" text="Phone number" />
-                        <TableColumn fx:id="col_nameoftype" prefWidth="75.0" text="Address" />
+                        <TableColumn fx:id="col_nameofdriver" prefWidth="75.0" text="Name of driver" />
+                        <TableColumn fx:id="col_phonenumber" prefWidth="75.0" text="Phone number" />
+                        <TableColumn fx:id="col_address" prefWidth="75.0" text="Address" />
                         <TableColumn fx:id="col_status" prefWidth="75.0" text="Status" />
                      </columns>
                      <columnResizePolicy>
@@ -138,8 +138,8 @@
                                           <Insets right="10.0" />
                                        </GridPane.margin>
                                     </Label>
-                                    <TextField fx:id="txf_nameofdriver" editable="false" prefHeight="30.0" prefWidth="130.0" style="-fx-background-color: white;" GridPane.columnIndex="1" />
-                                    <TextField fx:id="txf_phonenumber" editable="false" prefHeight="30.0" prefWidth="130.0" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <TextField fx:id="txf_nameofdriver" prefHeight="30.0" prefWidth="130.0" style="-fx-background-color: white;" GridPane.columnIndex="1" />
+                                    <TextField fx:id="txf_phonenumber" prefHeight="30.0" prefWidth="130.0" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                     <Label fx:id="lbl_status" alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="30.0" prefWidth="114.0" text="Status" textAlignment="RIGHT" visible="false" GridPane.rowIndex="3">
                                        <font>
                                           <Font size="16.0" />
@@ -159,7 +159,7 @@
                                           <Insets right="10.0" />
                                        </GridPane.margin>
                                     </Label>
-                                    <TextField fx:id="txf_address" editable="false" prefHeight="30.0" prefWidth="130.0" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <TextField fx:id="txf_address" prefHeight="30.0" prefWidth="130.0" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                  </children>
                               </GridPane>
                            </children>

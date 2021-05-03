@@ -1,13 +1,19 @@
 package Controller;
 
+import Model.DataTable.TableBusPage;
+import Model.DriverEntity;
+import Services.BLL_Admin;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -52,22 +58,22 @@ public class Driver implements Initializable {
     private Button btn_cancel;
 
     @FXML
-    private TableView<?> table_view;
+    private TableView<DriverEntity> table_view;
 
     @FXML
-    private TableColumn<?, ?> col_id;
+    private TableColumn<DriverEntity, String> col_id;
 
     @FXML
-    private TableColumn<?, ?> col_nameofbus;
+    private TableColumn<DriverEntity, String> col_nameofdriver;
 
     @FXML
-    private TableColumn<?, ?> col_platenumber;
+    private TableColumn<DriverEntity, String> col_phonenumber;
 
     @FXML
-    private TableColumn<?, ?> col_nameoftype;
+    private TableColumn<DriverEntity, String> col_address;
 
     @FXML
-    private TableColumn<?, ?> col_status;
+    private TableColumn<DriverEntity, Integer> col_status;
 
     @FXML
     private ButtonBar grp_btn_tbl;
@@ -179,10 +185,24 @@ public class Driver implements Initializable {
         this.pane.getChildren().setAll(newPane);
     }
 
+    public void show(int slot, String name) {
+        ObservableList<TableBusPage> listObj = FXCollections.observableArrayList(BLL_Admin.getInstance().
+                updateTableBusPage(slot, name));
+
+        col_id.setCellValueFactory(new PropertyValueFactory<>("idDriver"));
+        col_nameofdriver.setCellValueFactory(new PropertyValueFactory<>("nameDriver"));
+        col_phonenumber.setCellValueFactory(new PropertyValueFactory<>("phone"));
+        col_address.setCellValueFactory(new PropertyValueFactory<>("address"));
+        col_status.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+//        table_view.setItems(listObj);
+        table_view.refresh();
+    }
+
 
     //done
 
-
+    // Handle event
     @FXML
     void btn_cancel_clicked(MouseEvent event) {
 

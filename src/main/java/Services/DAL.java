@@ -212,4 +212,24 @@ public class DAL {
     }
 
     // Done Decentralize here ?
+
+    // DAL for Driver ?
+    public List<TypeOfBusEntity> getDriver() {
+        try (Session session = HibernateUtils.getSessionFactory().openSession()) {
+            // Begin a unit of work
+            session.beginTransaction();
+            // Get types
+//            List<TypeOfBusEntity> list_tob = session.createQuery("FROM TypeOfBusEntity ", TypeOfBusEntity.class).list();
+            NativeQuery<TypeOfBusEntity> query = session.createNativeQuery("SELECT * FROM TypeOfBus", TypeOfBusEntity.class );
+            List<TypeOfBusEntity> list_tob = query.getResultList();
+
+//            list_acc.forEach(System.out::println);
+            // Commit the current resource transaction, writing any unflushed changes to the database.
+            session.getTransaction().commit();
+            return list_tob;
+        }
+    }
+
+
+    // done Driver ?
 }
