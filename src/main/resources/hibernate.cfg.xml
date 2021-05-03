@@ -12,26 +12,33 @@
   <property name="hibernate.connection.release_mode">auto</property>
   <property name="hibernate.connection.autoReconnect">true</property>
   <property name="hibernate.connection.autocommit">true</property>
-  <!-- JDBC connection pool (use the built-in) -->
-  <property name="connection.pool_size">10</property>
+<!--  &lt;!&ndash; JDBC connection pool (use the built-in) &ndash;&gt;-->
+<!--  <property name="connection.pool_size">10</property>-->
 
-  <!-- SQL dialect -->
+<!--  &lt;!&ndash; SQL dialect &ndash;&gt;-->
   <property name="dialect">org.hibernate.dialect.SQLServerDialect</property>
 
-  <!-- Enable Hibernate's automatic session context management -->
-  <property name="current_session_context_class">thread</property>
+<!--  &lt;!&ndash; Enable Hibernate's automatic session context management &ndash;&gt;-->
+<!--  <property name="current_session_context_class">thread</property>-->
 
-  <!-- Disable the second-level cache -->
-  <property name="cache.provider_class">org.hibernate.cache.internal.NoCachingRegionFactory</property>
+<!--  &lt;!&ndash; Disable the second-level cache &ndash;&gt;-->
+<!--  <property name="cache.provider_class">org.hibernate.cache.internal.NoCachingRegionFactory</property>-->
 
-  <!-- Echo all executed SQL to stdout -->
-  <property name="show_sql">false</property>
-  <property name="logging.level.org.hibernate.SQL">OFF</property>
+<!--  &lt;!&ndash; Echo all executed SQL to stdout &ndash;&gt;-->
+<!--  <property name="show_sql">false</property>-->
+<!--  <property name="logging.level.org.hibernate.SQL">OFF</property>-->
 
-  <property name = "hibernate.temp.use_jdbc_metadata_defaults">true</property>
+<!--  <property name = "hibernate.temp.use_jdbc_metadata_defaults">true</property>-->
 
-  <!-- Drop and re-create the database schema on startup -->
-  <property name="hbm2ddl.auto">update</property>
+<!--  &lt;!&ndash; Drop and re-create the database schema on startup &ndash;&gt;-->
+<!--  <property name="hbm2ddl.auto">update</property>-->
+
+  <!-- c3p0 connection pool -->
+  <property name="hibernate.c3p0.min_size">1</property>
+  <property name="hibernate.c3p0.max_size">100</property>
+  <property name="hibernate.c3p0.timeout">200</property>
+  <property name="hibernate.c3p0.max_statements">100</property>
+  <property name="hibernate.c3p0.idle_test_period">5000</property>
 
   <mapping class="Model.AccountEntity" />
   <mapping class="Model.BusEntity" />

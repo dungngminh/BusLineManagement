@@ -1,37 +1,64 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Sans:wght@500&display=swap');
+#frame-1 {
+    -fx-background-image: url(../images/frame_1_login.jpg);
+    -fx-background-size: 100% 100%;
+}
 
-#main_login {
-    -fx-background-color: #dfdeff;
+#pane {
+    -fx-background-color: #EBF5EE;
+    /*-fx-background-size: 100% 100%;*/
     -fx-background-radius:20px;
     -fx-border-radius: 20px;
 
 }
 
-#left-main{
-    -fx-background-color: #005eb1;
-    -fx-background-radius: 20px 0 0 20px;
-    -fx-border-radius: 20px 0 0 20px;
-}
-
-#right-main {
-    -fx-font-family: 'Roboto', sans-serif;
-    -fx-font-size: 20px;
-}
-
-#img-pane {
-    -fx-background-image: url("../images/img_login.png");
-}
-
-img {
-    width: 100%;
-    height: auto;
-}
-
-#lb-wel, #lb-left, #lb-us-pa{
-    -fx-font-family: 'Roboto', sans-serif;
-}
 
 #lb-wel {
-    -fx-font-size: 35px;
+    -fx-font-color: #283044;
+    -fx-font-family: 'Anton', sans-serif;
+    -fx-font-size: 30px;
 }
 
+.animate
+{
+    -fx-transition: all 0.1s;
+    -fx-webkit-transition: all 0.1s;
+}
+
+.action-button
+{
+    -fx-position: relative;
+    -fx-padding: 10px 40px;
+    -fx-margin: 0px 10px 10px 0px;
+    -fx-float: left;
+    -fx-border-radius: 10px;
+    -fx-font-family: 'Pacifico', cursive;
+    -fx-font-size: 18px;
+    -fx-font-color: #FFF;
+    -fx-text-decoration: none;
+}
+
+#blue
+{
+    -fx-background-color: #3498DB;
+    -fx-border-bottom: 5px solid #2980B9;
+    -fx-text-shadow: 0px -2px #2980B9;
+}
+
+#red
+{
+    -fx-background-color: #E74C3C;
+    -fx-border-bottom: 5px solid #BD3E31;
+    -fx-text-shadow: 0px -2px #BD3E31;
+}
+
+.action-button:hover {
+    -fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+    -fx-background-radius: 3px, 3px, 2px, 1px;
+    -fx-padding: 0.333333em 0.666667em 0.333333em 0.666667em; /* 4 8 4 8 */
+    -fx-text-fill: -fx-text-base-color;
+    -fx-alignment: CENTER;
+    -fx-content-display: LEFT;
+}

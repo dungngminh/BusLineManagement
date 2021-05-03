@@ -4,6 +4,7 @@ import com.jfoenix.controls.*;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 import javafx.fxml.*;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -30,9 +31,9 @@ public class MainWindow implements Initializable {
             jfx_drawer.setSidePane(box);
 
             for (Node node: box.getChildren()) {
-                if(node.getAccessibleText() != null) {
-                    node.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-                        switch(node.getAccessibleText()) {
+                if(node.lookup(".btn").getAccessibleText() != null) {
+                    node.lookup(".btn").addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+                        switch(node.lookup(".btn").getId()) {
                             case "bus": {
                                 try {
                                     showBusPage();

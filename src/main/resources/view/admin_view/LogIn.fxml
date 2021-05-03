@@ -1,62 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="587.0" prefWidth="927.0" style="-fx-background-color: #373E40;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LogIn">
+<AnchorPane id="frame-1" blendMode="DARKEN" prefHeight="518.0" prefWidth="565.0" style="-fx-background-color: #373E40;" stylesheets="@../../css/style_login.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LogIn">
    <children>
-      <SplitPane id="main_login" dividerPositions="0.4880095923261391" layoutX="43.0" layoutY="36.0" prefHeight="520.0" prefWidth="836.0" stylesheets="@../../css/style_login.css">
-        <items>
-          <AnchorPane id="left-main" minHeight="0.0" minWidth="0.0" prefHeight="518.0" prefWidth="400.0" stylesheets="@../css/style_login.css">
+      <Pane id="pane" layoutX="50.0" layoutY="36.0" prefHeight="447.0" prefWidth="466.0" stylesheets="@../../css/style_login.css">
+         <children>
+            <Label id="lb-wel" layoutX="73.0" layoutY="26.0" prefHeight="45.0" prefWidth="390.0" stylesheets="@../../css/style_login.css" text="BUS MANAGEMENT APPLICATION" textAlignment="CENTER" textFill="#e84855">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <GridPane layoutX="40.0" layoutY="114.0" prefHeight="272.0" prefWidth="367.0">
+              <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
                <children>
-                  <Label id="lb-left" contentDisplay="CENTER" layoutX="20.0" layoutY="61.0" prefHeight="59.0" prefWidth="365.0" stylesheets="@../css/style_login.css" text="BUS MANAGEMENT APPLICATION" textFill="WHITE">
+                  <Label id="lb-us-pa" alignment="CENTER_RIGHT" prefHeight="31.0" prefWidth="153.0" stylesheets="@../../css/style_login.css" text="Username" textFill="#1f1e78">
                      <font>
-                        <Font name="System Bold" size="22.0" />
+                        <Font name="Arial Black" size="21.0" />
                      </font>
                   </Label>
-               </children></AnchorPane>
-          <AnchorPane id="right-main" minHeight="0.0" minWidth="0.0" prefHeight="518.0" prefWidth="404.0" stylesheets="@../css/style_login.css">
-               <children>
-                  <Label id="lb-wel" layoutX="113.0" layoutY="94.0" stylesheets="@../css/style_login.css" text="Welcome Back" textFill="#1f1e78">
+                  <TextField id="txf_username" fx:id="txf_username" prefHeight="39.0" prefWidth="183.0" GridPane.columnIndex="1">
                      <font>
-                        <Font size="27.0" />
+                        <Font name="Arial" size="18.0" />
+                     </font></TextField>
+                  <Label id="lb-us-pa" alignment="CENTER_RIGHT" prefHeight="31.0" prefWidth="152.0" stylesheets="@../../css/style_login.css" text="Password" textFill="#1f1e78" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Arial Black" size="21.0" />
                      </font>
                   </Label>
-                  <Label id="lb-us-pa" layoutX="31.0" layoutY="277.0" stylesheets="@../css/style_login.css" text="Password" textFill="#1f1e78">
+                  <PasswordField id="txf_password" fx:id="txf_password" prefHeight="37.0" prefWidth="183.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <font>
-                        <Font size="21.0" />
-                     </font>
-                  </Label>
-                  <Label id="lb-us-pa" layoutX="31.0" layoutY="194.0" stylesheets="@../css/style_login.css" text="Username" textFill="#1f1e78">
-                     <font>
-                        <Font size="21.0" />
-                     </font>
-                  </Label>
-                  <TextField id="txf_username" fx:id="txf_username" layoutX="149.0" layoutY="187.0" prefHeight="44.0" prefWidth="249.0" />
-                  <PasswordField id="txf_password" fx:id="txf_password" layoutX="150.0" layoutY="270.0" />
-                  <Button id="btn_login" layoutX="113.0" layoutY="411.0" mnemonicParsing="false" onMouseClicked="#btn_login_clicked" text="Log in">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Button>
-                  <Button id="btn_cancel" fx:id="btn_cancel" layoutX="242.0" layoutY="411.0" mnemonicParsing="false" onMouseClicked="#btn_cancel_clicked" text="Cancel">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Button>
-                  <Hyperlink id="href_fypassword" layoutX="31.0" layoutY="362.0" text="Forgot your password!">
+                        <Font name="Arial" size="18.0" />
+                     </font></PasswordField>
+                  <Hyperlink id="href_fypassword" alignment="CENTER_RIGHT" layoutX="25.0" prefHeight="25.0" prefWidth="144.0" text="Forgot your password!" GridPane.rowIndex="2">
                      <font>
                         <Font size="13.0" />
-                     </font></Hyperlink>
+                     </font>
+                     <GridPane.margin>
+                        <Insets left="40.0" right="-15.0" />
+                     </GridPane.margin>
+                  </Hyperlink>
+                  <Button id="blue" mnemonicParsing="false" onMouseClicked="#btn_login_clicked" stylesheets="@../../css/style_login.css" text="Log in" textFill="WHITE" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="21.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets left="50.0" />
+                     </GridPane.margin>
+                     <styleClass>
+                        <String fx:value="action-button" />
+                        <String fx:value="animate" />
+                     </styleClass>
+                  </Button>
+                  <Button id="red" fx:id="btn_cancel" mnemonicParsing="false" onMouseClicked="#btn_cancel_clicked" stylesheets="@../../css/style_login.css" text="Cancel" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="21.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets left="15.0" />
+                     </GridPane.margin>
+                     <styleClass>
+                        <String fx:value="action-button" />
+                        <String fx:value="animate" />
+                     </styleClass>
+                  </Button>
                </children>
-            </AnchorPane>
-        </items>
-      </SplitPane>
+            </GridPane>
+         </children>
+      </Pane>
+      <TextArea layoutX="-421.0" layoutY="-86.0" prefHeight="200.0" prefWidth="200.0" text="BUS MANAGEMENT &#10;APPLICATION" />
    </children>
 </AnchorPane>

@@ -132,9 +132,9 @@ public class BusPage implements Initializable {
             jfx_drawer.setSidePane(box);
 
             for (Node node : box.getChildren()) {
-                if (node.getAccessibleText() != null) {
-                    node.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-                        switch (node.getAccessibleText()) {
+                if (node.lookup(".btn").getAccessibleText() != null) {
+                    node.lookup(".btn").addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+                        switch (node.lookup(".btn").getId()) {
                             case "dashboard": {
                                 try {
                                     showMainPage();
@@ -221,7 +221,10 @@ public class BusPage implements Initializable {
     @FXML
     void btn_search_clicked(MouseEvent event) {
         try {
-            show(Integer.parseInt(txf_slot.getText().trim()), txf_search_nameofbus.getText().trim());
+            if(txf_slot.getText().trim().equals(""))
+                show(0, txf_search_nameofbus.getText().trim());
+            else
+                show(Integer.parseInt(txf_slot.getText().trim()), txf_search_nameofbus.getText().trim());
         }
         catch(Exception err) {
             new Alert(Alert.AlertType.WARNING, "Check again!").showAndWait();
@@ -328,8 +331,8 @@ public class BusPage implements Initializable {
             btn_reset.setVisible(false);
             btn_cancel.setVisible(false);
             grp_btn_tbl.setVisible(true);
-            table_view.setLayoutX(-280);
-            table_view.setPrefWidth(1175);
+            table_view.setLayoutX(-273);
+            table_view.setPrefWidth(1155);
             hbox.setLayoutX(0);
             grp_btn_tbl.setLayoutX(85);
             table_view.toFront();
