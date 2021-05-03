@@ -23,7 +23,7 @@
    <children>
       <Pane prefHeight="679.0" prefWidth="1187.0">
          <children>
-            <JFXHamburger fx:id="jfx_hambur" alignment="TOP_RIGHT" layoutX="5.0" layoutY="5.0" prefHeight="25.0" prefWidth="32.0" />
+            <JFXHamburger fx:id="jfx_hambur" alignment="TOP_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="32.0" />
             <JFXDrawer fx:id="jfx_drawer" alignment="TOP_LEFT" defaultDrawerSize="190.0" layoutX="-8.0" layoutY="-8.0" overLayVisible="false" prefHeight="690.0" prefWidth="99.0" />
             <Pane layoutX="-3.0" prefHeight="671.0" prefWidth="282.0">
                <children>
@@ -137,7 +137,7 @@
                   </ButtonBar>
                </children>
             </Pane>
-            <Pane layoutX="279.0" prefHeight="671.0" prefWidth="901.0">
+            <Pane layoutX="279.0" prefHeight="679.0" prefWidth="901.0">
                <children>
                   <TableView fx:id="table_view" layoutY="100.0" prefHeight="435.0" prefWidth="894.0">
                     <columns>

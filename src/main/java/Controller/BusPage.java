@@ -143,9 +143,9 @@ public class BusPage implements Initializable {
                                 }
                                 break;
                             }
-                            case "decen": {
+                            case "setting": {
                                 try {
-                                    showDecentralizePage();
+                                    showSettingPage();
                                 } catch (IOException ioException) {
                                     ioException.printStackTrace();
                                 }
@@ -220,8 +220,8 @@ public class BusPage implements Initializable {
 
     }
 
-    public void showDecentralizePage() throws IOException {
-        AnchorPane newPane = FXMLLoader.load(getClass().getResource("../view/admin_view/Decentralize.fxml"));
+    public void showSettingPage() throws IOException {
+        AnchorPane newPane = FXMLLoader.load(getClass().getResource("../view/admin_view/Setting.fxml"));
         this.pane.getChildren().setAll(newPane);
     }
 

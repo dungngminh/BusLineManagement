@@ -33,9 +33,13 @@ public class BLL_Admin {
     // BLL for BusPage
     public boolean validate_Account(String username, String password) throws SQLException, ClassNotFoundException {
         AtomicBoolean valid = new AtomicBoolean(false);
-        DAL.getInstance().getListAcc().stream().filter(account -> account.getUsername().equals(username) &&
-                account.getPassword().equals(DAL.getInstance().encryptSHA1(password))).map(account -> true).
-                    forEach(valid::set);
+        DAL.getInstance().getListAcc().forEach(account -> {
+           if(account.getUsername().equals(username) &&
+                   account.getPassword().equals(DAL.getInstance().encryptSHA1(password))) {
+               valid.set(true);
+               DAL.getInstance().setCurrent(account);
+           }
+        });
         return valid.get();
     }
 

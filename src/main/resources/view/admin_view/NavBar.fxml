@@ -103,7 +103,7 @@
          <Insets bottom="10.0" />
       </VBox.margin>
     </Button>
-    <Button id="decen" fx:id="btn_decen" accessibleText="decen" contentDisplay="TOP" mnemonicParsing="false" prefHeight="50.0" prefWidth="140.0" styleClass="btn" stylesheets="@../../css/nav_bar.css" text="Decentralize" textAlignment="JUSTIFY" textFill="WHITE">
+    <Button id="setting" fx:id="btn_decen" accessibleText="decen" contentDisplay="TOP" mnemonicParsing="false" prefHeight="50.0" prefWidth="140.0" styleClass="btn" stylesheets="@../../css/nav_bar.css" text="Setting" textAlignment="JUSTIFY" textFill="WHITE">
         <font>
           <Font name="Segoe UI Bold" size="16.0" />
         </font>

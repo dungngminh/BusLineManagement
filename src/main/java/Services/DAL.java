@@ -15,6 +15,7 @@ import java.util.*;
 public class DAL {
     private static DAL instance;
 
+    private AccountEntity current;
 
     private DAL(){
 
@@ -25,6 +26,14 @@ public class DAL {
             instance = new DAL();
         }
         return instance;
+    }
+
+    public AccountEntity getCurrent() {
+        return this.current;
+    }
+
+    public  void setCurrent(AccountEntity current) {
+        this.current = current;
     }
 
     public String encryptSHA1(String input)

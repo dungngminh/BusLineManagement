@@ -38,8 +38,6 @@ public class LogIn {
                 cl.close();
             }
             else {
-//                System.out.println(txf_username.getText());
-//                System.out.println(txf_password.getText());
                 new Alert(Alert.AlertType.WARNING, "Your username or password was wrong!").showAndWait();
             }
         }
