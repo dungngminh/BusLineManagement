@@ -1,10 +1,7 @@
 package Services;
 
-import Model.AccountEntity;
-import Model.DataTable.TableBusPage;
-import Model.DriverEntity;
-import Model.ProvinceEntity;
-import Model.TypeOfBusEntity;
+import Model.*;
+import Model.ViewModel.BusEntity_ViewModel;
 
 import java.sql.SQLException;
 import java.util.*;
@@ -60,13 +57,13 @@ public class BLL_Admin {
         DAL.getInstance().insertBus(busName, plateNumber, tob, del, stt);
     }
 
-    public List<TableBusPage> updateTableBusPage(int slot, String name) {
-        List<TableBusPage> list = new ArrayList<TableBusPage>();
+    public List<BusEntity_ViewModel> updateTableBusPage(int slot, String name) {
+        List<BusEntity_ViewModel> list = new ArrayList<BusEntity_ViewModel>();
         DAL.getInstance().getDataForBusPage().forEach(b -> {
             if(slot == 0 && b.getBusName().contains(name))
-                list.add(new TableBusPage(b.getIdBus(), b.getBusName(), b.getPlateNumber(), b.getTypeOfBusByIdType().getTypeName(), b.getTypeOfBusByIdType().getBrandName(), b.getTypeOfBusByIdType().getSlot(), b.getStatus()));
+                list.add(new BusEntity_ViewModel(b.getIdBus(), b.getBusName(), b.getPlateNumber(), b.getTypeOfBusByIdType().getTypeName(), b.getTypeOfBusByIdType().getBrandName(), b.getTypeOfBusByIdType().getSlot(), b.getStatus()));
             else if(slot == b.getTypeOfBusByIdType().getSlot() && b.getBusName().contains(name)) {
-                list.add(new TableBusPage(b.getIdBus(), b.getBusName(), b.getPlateNumber(), b.getTypeOfBusByIdType().getTypeName(), b.getTypeOfBusByIdType().getBrandName(), b.getTypeOfBusByIdType().getSlot(), b.getStatus()));
+                list.add(new BusEntity_ViewModel(b.getIdBus(), b.getBusName(), b.getPlateNumber(), b.getTypeOfBusByIdType().getTypeName(), b.getTypeOfBusByIdType().getBrandName(), b.getTypeOfBusByIdType().getSlot(), b.getStatus()));
             }
         });
         return list;
@@ -130,4 +127,25 @@ public class BLL_Admin {
     }
     //done Driver ?
 
+
+    //Route
+    public void addRoute(String startStation, String endStation, int distance) {
+        var route = new RouteEntity();
+        route.setStartStation(startStation);
+        route.setEndStation(endStation);
+        route.setDistance(distance);
+        DAL.getInstance().insertRoute(route);
+    }
+    public List<RouteEntity> getRoutes(int status) {
+        List<RouteEntity> data = new ArrayList<>();
+        DAL.getInstance().getRoutes().forEach(route ->{
+            if(status == 0){
+                data.add(route);
+            }
+            else if(status == route.getStatus()){
+                data.add(route);
+            }
+        });
+        return data;
+    }
 }

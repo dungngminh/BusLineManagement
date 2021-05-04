@@ -54,7 +54,7 @@
   <mapping class="Model.RoleAccountEntity"/>
   <mapping class="Model.StationEntity"/>
   <mapping class="Model.TypeOfBusEntity"/>
-  <mapping class="Model.DataTable.TableBusPage"/>
+  <mapping class="Model.ViewModel.BusEntity_ViewModel"/>
 
 </session-factory>
 </hibernate-configuration>

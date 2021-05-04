@@ -1,12 +1,14 @@
 package Controller.Admin;
 
-import Model.DataTable.TableRoutePage;
 import Model.ProvinceEntity;
+import Model.RouteEntity;
 import Model.StationEntity;
 import Services.BLL_Admin;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +20,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -62,25 +65,25 @@ public class RoutePage implements Initializable {
     private ComboBox<StationEntity> cbx_endstation;
 
     @FXML
-    private TableView<TableRoutePage> table_view;
+    private TableView<RouteEntity> table_view;
 
     @FXML
-    private TableColumn<TableRoutePage, Integer> col_idStation;
+    private TableColumn<RouteEntity, Integer> col_idStation;
 
     @FXML
-    private TableColumn<TableRoutePage, String> col_startstation;
+    private TableColumn<RouteEntity, String> col_startstation;
 
     @FXML
-    private TableColumn<TableRoutePage, String> col_endstation;
+    private TableColumn<RouteEntity, String> col_endstation;
 
     @FXML
-    private TableColumn<TableRoutePage, Integer> col_distance;
+    private TableColumn<RouteEntity, Integer> col_distance;
 
     @FXML
-    private TableColumn<TableRoutePage, Integer> col_status;
+    private TableColumn<RouteEntity, Integer> col_status;
 
     @FXML
-    private TableColumn<TableRoutePage, String> col_note;
+    private TableColumn<RouteEntity, String> col_note;
 
     @FXML
     private ButtonBar grp_btn_tbl;
@@ -106,7 +109,6 @@ public class RoutePage implements Initializable {
     @FXML
     private Button btn_search;
 
-    private static StationEntity startStation;
     @FXML
     void btn_cancel_clicked(MouseEvent event) {
 
@@ -124,7 +126,7 @@ public class RoutePage implements Initializable {
 
     @FXML
     void btn_ok_clicked(MouseEvent event) {
-        
+
     }
 
     @FXML
@@ -149,16 +151,14 @@ public class RoutePage implements Initializable {
 
     @FXML
     void cbx_StationEnd_Action(ActionEvent event) {
-
     }
 
     @FXML
     void cbx_provinceEndAction(ActionEvent event) {
-        cbx_endstation.getItems().clear();
         Object[] list = cbx_provinceEnd.getSelectionModel().getSelectedItem().getStationsByIdProvince().toArray();
         List<Object> listToCBBEnd = Arrays.asList(list);
         listToCBBEnd.forEach(station -> cbx_endstation.getItems().add((StationEntity)station));
-        cbx_endstation.getItems().remove(startStation);
+        cbx_endstation.getItems().remove(cbx_startstation.getSelectionModel().getSelectedItem());
     }
 
     @FXML
@@ -170,7 +170,13 @@ public class RoutePage implements Initializable {
     }
     @FXML
     void cbx_stationStart_Action(ActionEvent event) {
-        startStation = cbx_startstation.getSelectionModel().getSelectedItem();
+        if(cbx_endstation.getSelectionModel().getSelectedItem() != null){
+            cbx_endstation.getItems().clear();
+            Object[] list = cbx_provinceEnd.getSelectionModel().getSelectedItem().getStationsByIdProvince().toArray();
+            List<Object> listToCBBEnd = Arrays.asList(list);
+            listToCBBEnd.forEach(station -> cbx_endstation.getItems().add((StationEntity)station));
+            cbx_endstation.getItems().remove(cbx_startstation.getSelectionModel().getSelectedItem());
+        }
     }
     private static boolean flag = false;
     @Override
@@ -186,6 +192,14 @@ public class RoutePage implements Initializable {
                                 try {
                                     showMainPage();
                                 } catch (IOException ioException) {
+                                    ioException.printStackTrace();
+                                }
+                                break;
+                            }
+                            case "bus":{
+                                try{
+                                    showBusPage();
+                                }catch (IOException ioException) {
                                     ioException.printStackTrace();
                                 }
                                 break;
@@ -234,6 +248,7 @@ public class RoutePage implements Initializable {
             // Init combobox status
             // done
             // Init tableview
+            show(0);
             //done
 
             //Init button
@@ -246,11 +261,28 @@ public class RoutePage implements Initializable {
     public void showMainPage() throws IOException {
         AnchorPane newPane = FXMLLoader.load(getClass().getResource("/view/admin_view/MainWindow.fxml"));
         this.pane.getChildren().setAll(newPane);
-
+    }
+    public void showBusPage() throws IOException {
+        AnchorPane newPane = FXMLLoader.load(getClass().getResource("/view/admin_view/BusPage.fxml"));
+        this.pane.getChildren().setAll(newPane);
     }
     public void showSettingPage() throws IOException {
         AnchorPane newPane = FXMLLoader.load(getClass().getResource("/view/admin_view/Setting.fxml"));
         this.pane.getChildren().setAll(newPane);
+    }
+    public void show(int status){
+        ObservableList<RouteEntity> listObj = FXCollections.observableArrayList(BLL_Admin.getInstance().getRoutes(status));
+
+
+        col_idStation.setCellValueFactory(new PropertyValueFactory<>("idRoute"));
+        col_startstation.setCellValueFactory(new PropertyValueFactory<>("startStation"));
+        col_endstation.setCellValueFactory(new PropertyValueFactory<>("endStation"));
+        col_distance.setCellValueFactory(new PropertyValueFactory<>("distance"));
+        col_status.setCellValueFactory(new PropertyValueFactory<>("status"));
+        col_note.setCellValueFactory(new PropertyValueFactory<>("note"));
+
+        table_view.setItems(listObj);
+        table_view.refresh();
     }
 }
 

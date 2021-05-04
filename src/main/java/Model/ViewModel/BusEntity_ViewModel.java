@@ -1,10 +1,6 @@
-package Model.DataTable;
+package Model.ViewModel;
 
-import Services.BLL_Admin;
-import javafx.application.Application;
-import javafx.stage.Stage;
-
-public class TableBusPage {
+public class BusEntity_ViewModel {
     private int idBus;
     private String busName;
     private String plateNumber;
@@ -71,7 +67,7 @@ public class TableBusPage {
         this.status = status;
     }
 
-    public TableBusPage(int idBus, String busName, String plateNumber, String typeName, String brandName, int slot, int status) {
+    public BusEntity_ViewModel(int idBus, String busName, String plateNumber, String typeName, String brandName, int slot, int status) {
         this.idBus = idBus;
         this.busName = busName;
         this.plateNumber = plateNumber;

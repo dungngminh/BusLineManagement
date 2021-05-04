@@ -285,4 +285,21 @@ public class DAL {
         session.close();
         return result;
     }
+
+    public void insertRoute(RouteEntity route){
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        session.beginTransaction();
+        session.save(route);
+        session.getTransaction().commit();
+        session.close();
+    }
+    public List<RouteEntity> getRoutes(){
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query<RouteEntity> query = session.createQuery("From RouteEntity",RouteEntity.class);
+        List<RouteEntity> result = query.getResultList();
+        session.getTransaction().commit();
+        session.close();
+        return result;
+    }
 }

@@ -1,6 +1,6 @@
 package Controller.Admin;
 
-import Model.DataTable.TableBusPage;
+import Model.ViewModel.BusEntity_ViewModel;
 import Model.TypeOfBusEntity;
 import Services.BLL_Admin;
 import com.jfoenix.controls.JFXDrawer;
@@ -73,28 +73,28 @@ public class BusPage implements Initializable {
 
     // for tableview
     @FXML
-    private TableView<TableBusPage> table_view;
+    private TableView<BusEntity_ViewModel> table_view;
 
     @FXML
-    private TableColumn<TableBusPage, Integer> col_id;
+    private TableColumn<BusEntity_ViewModel, Integer> col_id;
 
     @FXML
-    private TableColumn<TableBusPage, String> col_nameofbus;
+    private TableColumn<BusEntity_ViewModel, String> col_nameofbus;
 
     @FXML
-    private TableColumn<TableBusPage, String> col_platenumber;
+    private TableColumn<BusEntity_ViewModel, String> col_platenumber;
 
     @FXML
-    private TableColumn<TableBusPage, String> col_nameoftype;
+    private TableColumn<BusEntity_ViewModel, String> col_nameoftype;
 
     @FXML
-    private TableColumn<TableBusPage, String> col_brandname;
+    private TableColumn<BusEntity_ViewModel, String> col_brandname;
 
     @FXML
-    private TableColumn<TableBusPage, Integer> col_slots;
+    private TableColumn<BusEntity_ViewModel, Integer> col_slots;
 
     @FXML
-    private TableColumn<TableBusPage, Integer> col_status;
+    private TableColumn<BusEntity_ViewModel, Integer> col_status;
 
     @FXML
     private ButtonBar grp_btn_tbl;
@@ -197,7 +197,7 @@ public class BusPage implements Initializable {
     }
 
     public void show(int slot, String name) {
-        ObservableList<TableBusPage> listObj = FXCollections.observableArrayList(BLL_Admin.getInstance().
+        ObservableList<BusEntity_ViewModel> listObj = FXCollections.observableArrayList(BLL_Admin.getInstance().
                 updateTableBusPage(slot, name));
 
         col_id.setCellValueFactory(new PropertyValueFactory<>("idBus"));
@@ -245,7 +245,7 @@ public class BusPage implements Initializable {
     @FXML
     void btn_delete_clicked(MouseEvent event) {
         try {
-            TableBusPage tbl = table_view.getSelectionModel().getSelectedItem();
+            BusEntity_ViewModel tbl = table_view.getSelectionModel().getSelectedItem();
             idBus = tbl.getIdBus();
             BLL_Admin.getInstance().deleteBus(idBus);
             show(0, "");
@@ -308,7 +308,7 @@ public class BusPage implements Initializable {
     @FXML
     void btn_update_clicked(MouseEvent event) {
         try {
-            TableBusPage tbl = table_view.getSelectionModel().getSelectedItem();
+            BusEntity_ViewModel tbl = table_view.getSelectionModel().getSelectedItem();
             idBus = tbl.getIdBus();
             cbx_nameoftype.getSelectionModel().select(tbl.getTypeName());
             txf_brandname.setText(tbl.getBrandName());
