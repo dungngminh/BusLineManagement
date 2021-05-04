@@ -1,6 +1,6 @@
 package Services;
+
 import Model.*;
-import Model.DataTable.TableBusPage;
 import Util.HibernateUtils;
 import org.hibernate.Session;
 import org.hibernate.query.NativeQuery;
@@ -10,14 +10,14 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.List;
 
 public class DAL {
     private static DAL instance;
 
     private AccountEntity current;
 
-    private DAL(){
+    private DAL() {
 
     }
 
@@ -32,12 +32,11 @@ public class DAL {
         return this.current;
     }
 
-    public  void setCurrent(AccountEntity current) {
+    public void setCurrent(AccountEntity current) {
         this.current = current;
     }
 
-    public String encryptSHA1(String input)
-    {
+    public String encryptSHA1(String input) {
         try {
             // getInstance() method is called with algorithm SHA-1
             MessageDigest md = MessageDigest.getInstance("SHA-1");
@@ -75,12 +74,14 @@ public class DAL {
             session.beginTransaction();
 
             // Get users
-            List<AccountEntity> list_acc = session.createQuery("FROM AccountEntity ", AccountEntity.class).list();
+            Query<AccountEntity> query = session.createQuery("from AccountEntity ", AccountEntity.class);
+
+            List<AccountEntity> list_acc = query.getResultList();
 //            list_acc.forEach(System.out::println);
 
             // Commit the current resource transaction, writing any unflushed changes to the database.
             session.getTransaction().commit();
-
+            session.close();
             return list_acc;
 
         }
@@ -93,12 +94,13 @@ public class DAL {
             session.beginTransaction();
             // Get types
 //            List<TypeOfBusEntity> list_tob = session.createQuery("FROM TypeOfBusEntity ", TypeOfBusEntity.class).list();
-            NativeQuery<TypeOfBusEntity> query = session.createNativeQuery("SELECT * FROM TypeOfBus", TypeOfBusEntity.class );
+            Query<TypeOfBusEntity> query = session.createQuery("FROM TypeOfBusEntity ", TypeOfBusEntity.class);
             List<TypeOfBusEntity> list_tob = query.getResultList();
 
 //            list_acc.forEach(System.out::println);
             // Commit the current resource transaction, writing any unflushed changes to the database.
             session.getTransaction().commit();
+            session.close();
             return list_tob;
         }
     }
@@ -108,32 +110,33 @@ public class DAL {
             // Begin a unit of work
             session.beginTransaction();
             Query<BusEntity> query = session.createQuery("SELECT BUS " +
-                    "FROM BusEntity BUS INNER JOIN BUS.typeOfBusByIdType as TOB WHERE BUS.delete = false", BusEntity.class);
+                    "FROM BusEntity BUS INNER JOIN BUS.typeOfBusByIdType as TOB WHERE BUS.isDelete = false", BusEntity.class);
             final List<BusEntity> list = query.getResultList();
 
 //            list_acc.forEach(System.out::println);
             // Commit the current resource transaction, writing any unflushed changes to the database.
             session.getTransaction().commit();
+            session.close();
             return list;
         }
     }
 
     public void insertBus(String busName, String plateNumber, TypeOfBusEntity tob, boolean del, int stt) {
-            Session session = HibernateUtils.getSessionFactory().openSession();
-            session.beginTransaction();
-            BusEntity bus = new BusEntity();
-            bus.setBusName(busName);
-            bus.setPlateNumber(plateNumber);
-            bus.setIdType(tob.getIdType());
-            bus.setDelete(false);
-            bus.setStatus(1);
-            bus.setTypeOfBusByIdType(tob);
-            //Save the employee in database
-            session.save(bus);
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        session.beginTransaction();
+        BusEntity bus = new BusEntity();
+        bus.setBusName(busName);
+        bus.setPlateNumber(plateNumber);
+        bus.setIdType(tob.getIdType());
+        bus.setIsDelete(false);
+        bus.setStatus(1);
+        bus.setTypeOfBusByIdType(tob);
+        //Save the employee in database
+        session.save(bus);
 
-            //Commit the transaction
-            session.getTransaction().commit();
-            session.close();
+        //Commit the transaction
+        session.getTransaction().commit();
+        session.close();
 
     }
 
@@ -141,7 +144,7 @@ public class DAL {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
         Query query = session.createQuery("update BusEntity set busName = :busName, plateNumber = :plateNumber, typeOfBusByIdType = :tob, status = :stt" +
-                " where idBus = :idBus" );
+                " where idBus = :idBus");
         query.setParameter("busName", busName);
         query.setParameter("plateNumber", plateNumber);
         query.setParameter("tob", tob);
@@ -157,8 +160,8 @@ public class DAL {
     public void deleteBus(int idBus) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
-        Query query = session.createQuery("update BusEntity set isDelete = :del" +
-                " where idBus = :idBus" );
+        Query<BusEntity> query = session.createQuery("update BusEntity set isDelete = :del" +
+                " where idBus = :idBus");
         query.setParameter("del", true);
         query.setParameter("idBus", idBus);
         int result = query.executeUpdate();
@@ -178,7 +181,7 @@ public class DAL {
         acc.setUsername(username);
         acc.setPassword(password);
 
-        int idUser = (Integer)session.save(acc);
+        int idUser = (Integer) session.save(acc);
 
         RoleEntity role_obj = session.find(RoleEntity.class, idRole);
         RoleAccountEntity role_acc = new RoleAccountEntity();
@@ -214,21 +217,65 @@ public class DAL {
     // Done Decentralize here ?
 
     // DAL for Driver ?
-    public List<TypeOfBusEntity> getDriver() {
+    public List<DriverEntity> getListDriver() {
         try (Session session = HibernateUtils.getSessionFactory().openSession()) {
             // Begin a unit of work
             session.beginTransaction();
-            // Get types
+            // Get drivers
 //            List<TypeOfBusEntity> list_tob = session.createQuery("FROM TypeOfBusEntity ", TypeOfBusEntity.class).list();
-            NativeQuery<TypeOfBusEntity> query = session.createNativeQuery("SELECT * FROM TypeOfBus", TypeOfBusEntity.class );
-            List<TypeOfBusEntity> list_tob = query.getResultList();
+            Query<DriverEntity> query = session.createQuery("FROM DriverEntity WHERE isDelete = false ", DriverEntity.class);
+            List<DriverEntity> list_driver = query.getResultList();
 
-//            list_acc.forEach(System.out::println);
             // Commit the current resource transaction, writing any unflushed changes to the database.
             session.getTransaction().commit();
-            return list_tob;
+            session.close();
+            return list_driver;
         }
     }
+
+    public void insertDriver(DriverEntity driver) {
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        session.beginTransaction();
+        //Save the employee in database
+        session.save(driver);
+
+        //Commit the transaction
+        session.getTransaction().commit();
+        session.close();
+    }
+
+    public void updateDriver(int id, String driverName, String phoneNumber, String address, int stt) {
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query query = session.createQuery("update DriverEntity set nameDriver = :name, phone = :phoneNumber, address = :address, status = :stt" +
+                " where idDriver = :id");
+        query.setParameter("name", driverName);
+        query.setParameter("phoneNumber", phoneNumber);
+        query.setParameter("address", address);
+        query.setParameter("stt", stt);
+        query.setParameter("id", id);
+        int result = query.executeUpdate();
+
+        //Commit the transaction
+        session.getTransaction().commit();
+        session.close();
+    }
+
+    public void deleteDriver(int idDriver) {
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query<DriverEntity> query = session.createQuery("update DriverEntity set isDelete = :del" +
+                " where idDriver = :idDriver");
+        query.setParameter("del", true);
+        query.setParameter("idDriver", idDriver);
+        int result = query.executeUpdate();
+
+        //Commit the transaction
+        session.getTransaction().commit();
+        session.close();
+    }
+
+
 
 
     // done Driver ?

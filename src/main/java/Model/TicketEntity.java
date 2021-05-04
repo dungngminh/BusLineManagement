@@ -71,12 +71,12 @@ public class TicketEntity {
 
     @Basic
     @Column(name = "isDelete", nullable = true)
-    public Boolean getDelete() {
+    public Boolean getIsDelete() {
         return isDelete;
     }
 
-    public void setDelete(Boolean delete) {
-        isDelete = delete;
+    public void setIsDelete(Boolean delete) {
+        this.isDelete = delete;
     }
 
     @Basic

@@ -87,7 +87,7 @@ public class AccountEntity {
         this.roleAccountsByIdUser = roleAccountsByIdUser;
     }
 
-    @OneToMany(mappedBy = "accountByIdUser", fetch = FetchType.EAGER )
+    @OneToMany(mappedBy = "accountByIdUser", fetch = FetchType.LAZY )
     @Fetch(value = FetchMode.SUBSELECT)
     public Collection<TicketEntity> getTicketsByIdUser() {
         return ticketsByIdUser;

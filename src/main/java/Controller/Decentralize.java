@@ -22,7 +22,6 @@ import org.hibernate.Session;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class Decentralize implements Initializable {
@@ -52,6 +51,9 @@ public class Decentralize implements Initializable {
 
     @FXML
     private PasswordField txf_password;
+
+    @FXML
+    private PasswordField txf_password_confirm;
 
     @FXML
     private Button btn_add;
@@ -185,10 +187,14 @@ public class Decentralize implements Initializable {
     void btn_add_clicked(MouseEvent event) {
         String userName = txf_username.getText().trim();
         String passWord = txf_password.getText().trim();
+        String confirm_password = txf_password_confirm.getText().trim();
         int role = cbx_role_add.getSelectionModel().getSelectedIndex() + 1;
-        if(userName.equals("") || passWord.equals("") ||
-                cbx_role_add.getSelectionModel().getSelectedItem().equals("")) {
+        if(userName.equals("") || passWord.equals("") || confirm_password.equals("")) {
             new Alert(Alert.AlertType.WARNING, "Fill all field!").showAndWait();
+            return;
+        }
+        if(!passWord.equals(confirm_password)) {
+            new Alert(Alert.AlertType.WARNING, "Check password again!").showAndWait();
             return;
         }
         try {

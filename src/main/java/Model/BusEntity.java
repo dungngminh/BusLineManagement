@@ -3,7 +3,7 @@ package Model;
 import javax.persistence.*;
 import java.util.Collection;
 
-@Entity(name = "BusEntity")
+@Entity
 @Table(name = "Bus", schema = "dbo", catalog = "QuanLyNhaXeKhach")
 public class BusEntity {
     private int idBus;
@@ -58,11 +58,11 @@ public class BusEntity {
 
     @Basic
     @Column(name = "isDelete", nullable = true)
-    public Boolean getDelete() {
+    public Boolean getIsDelete() {
         return isDelete;
     }
 
-    public void setDelete(Boolean isDelete) {
+    public void setIsDelete(Boolean isDelete) {
         this.isDelete = isDelete;
     }
 

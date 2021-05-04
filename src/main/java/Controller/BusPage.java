@@ -1,13 +1,11 @@
 package Controller;
 
-import Model.BusEntity;
 import Model.DataTable.TableBusPage;
 import Model.TypeOfBusEntity;
 import Services.BLL_Admin;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -357,7 +355,7 @@ public class BusPage implements Initializable {
             btn_cancel.setVisible(true);
             grp_btn_tbl.setVisible(false);
             table_view.setLayoutX(0);
-            table_view.setPrefWidth(894);
+            table_view.setPrefWidth(885);
             hbox.setLayoutX(114);
             grp_btn_tbl.setLayoutX(253);
         }

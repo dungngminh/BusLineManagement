@@ -11,7 +11,7 @@ public class DriverEntity {
     private String phone;
     private String address;
     private int status;
-    private boolean isDelete;
+    private Boolean isDelete;
     private Collection<TripInformationEntity> tripInformationsByIdDriver;
 
     @Id
@@ -67,12 +67,12 @@ public class DriverEntity {
 
     @Basic
     @Column(name = "isDelete", nullable = false)
-    public boolean isDelete() {
+    public Boolean getIsDelete() {
         return isDelete;
     }
 
-    public void setDelete(boolean delete) {
-        isDelete = delete;
+    public void setIsDelete(Boolean delete) {
+        this.isDelete = delete;
     }
 
     @Override

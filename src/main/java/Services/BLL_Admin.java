@@ -1,20 +1,13 @@
 package Services;
 
 import Model.AccountEntity;
-import Model.BusEntity;
 import Model.DataTable.TableBusPage;
-import Model.RoleAccountEntity;
+import Model.DriverEntity;
 import Model.TypeOfBusEntity;
-import Util.HibernateUtils;
-import org.hibernate.Session;
 
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class BLL_Admin {
     private static BLL_Admin instance;
@@ -97,9 +90,38 @@ public class BLL_Admin {
     }
     //done Decentralize Page
 
-    // BLL for
+    // BLL for Driver ?
+    public List<DriverEntity> getListDriver(int status, String name) {
+        List<DriverEntity> data = new ArrayList<>();
+        DAL.getInstance().getListDriver().forEach(driver -> {
+           if(status == -1 && driver.getNameDriver().contains(name)) {
+               data.add(driver);
+           }
+           else if(status == driver.getStatus() && driver.getNameDriver().contains(name)) {
+               data.add(driver);
+           }
+        });
+        return data;
+    }
 
-    //
+    public void addDriver(String driverName, String phoneNumber, String address, int stt) {
+        DriverEntity driver = new DriverEntity();
+        driver.setNameDriver(driverName);
+        driver.setPhone(phoneNumber);
+        driver.setAddress(address);
+        driver.setIsDelete(false);
+        driver.setStatus(1);
+        DAL.getInstance().insertDriver(driver);
+    }
 
+    public void updateDriver(int idDriver, String driverName, String phoneNumber, String address, int stt) {
+
+        DAL.getInstance().updateDriver(idDriver, driverName, phoneNumber, address, stt);
+    }
+
+    public void deleteDriver(int idDriver) {
+        DAL.getInstance().deleteDriver(idDriver);
+    }
+    //done Driver ?
 
 }

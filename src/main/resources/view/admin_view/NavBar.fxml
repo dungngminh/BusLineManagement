@@ -7,11 +7,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox id="navbar" alignment="BASELINE_CENTER" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="156.0" stylesheets="@../../css/nav_bar.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.NavBar">
+<VBox id="navbar" alignment="BASELINE_CENTER" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="156.0" stylesheets="@../../css/nav_bar.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.NavBar">
    <ImageView fitHeight="118.0" fitWidth="121.0" pickOnBounds="true" preserveRatio="true" styleClass="btn">
       <image>
          <Image url="@../../images/Icon/logo.png" />
       </image>
+      <VBox.margin>
+         <Insets top="5.0" />
+      </VBox.margin>
    </ImageView>
     <Button id="dashboard" fx:id="btn_dashboard" accessibleText="dashboard" contentDisplay="TOP" mnemonicParsing="false" prefHeight="75.0" prefWidth="140.0" styleClass="btn" stylesheets="@../../css/nav_bar.css" text="Dashboard" textAlignment="JUSTIFY" textFill="WHITE">
         <font>

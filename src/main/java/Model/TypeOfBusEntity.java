@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Arrays;
 import java.util.Collection;
 
-@Entity(name = "TypeOfBusEntity")
+@Entity
 @Table(name = "TypeOfBus", schema = "dbo", catalog = "QuanLyNhaXeKhach")
 public class TypeOfBusEntity {
     private int idType;
@@ -12,7 +12,7 @@ public class TypeOfBusEntity {
     private String brandName;
     private int slot;
     private byte[] picture;
-    private boolean isDelete;
+    private Boolean isDelete;
     private Collection<BusEntity> busesByIdType;
 
     @Id
@@ -68,12 +68,12 @@ public class TypeOfBusEntity {
 
     @Basic
     @Column(name = "isDelete", nullable = false)
-    public boolean isDelete() {
+    public Boolean getIsDelete() {
         return isDelete;
     }
 
-    public void setDelete(boolean delete) {
-        isDelete = delete;
+    public void setIsDelete(Boolean delete) {
+        this.isDelete = delete;
     }
 
     @Override
@@ -96,9 +96,9 @@ public class TypeOfBusEntity {
     @Override
     public int hashCode() {
         int result = idType;
-        result = result + (typeName != null ? typeName.hashCode() : 0);
-        result = result + (brandName != null ? brandName.hashCode() : 0);
-        result = result + slot;
+        result = 31 * result + (typeName != null ? typeName.hashCode() : 0);
+        result = 31 * result + (brandName != null ? brandName.hashCode() : 0);
+        result = 31 * result + slot;
         result = 31 * result + Arrays.hashCode(picture);
         result = 31 * result + (isDelete ? 1 : 0);
         return result;

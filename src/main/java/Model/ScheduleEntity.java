@@ -12,7 +12,7 @@ public class ScheduleEntity {
     private int idBus;
     private Date departTime;
     private int duration;
-    private boolean isDelete;
+    private Boolean isDelete;
     private RouteEntity routeByIdRoute;
     private BusEntity busByIdBus;
     private Collection<TripInformationEntity> tripInformationsByIdSchedule;
@@ -70,12 +70,12 @@ public class ScheduleEntity {
 
     @Basic
     @Column(name = "isDelete", nullable = false)
-    public boolean isDelete() {
+    public Boolean getIsDelete() {
         return isDelete;
     }
 
-    public void setDelete(boolean delete) {
-        isDelete = delete;
+    public void setIsDelete(Boolean delete) {
+        this.isDelete = delete;
     }
 
     @Override
