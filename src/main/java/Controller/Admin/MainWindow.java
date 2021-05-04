@@ -1,4 +1,4 @@
-package Controller;
+package Controller.Admin;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
@@ -79,15 +79,15 @@ public class MainWindow implements Initializable {
         }
     }
     public void showBusPage() throws IOException {
-        AnchorPane newPane = FXMLLoader.load(getClass().getResource("../view/admin_view/BusPage.fxml"));
+        AnchorPane newPane = FXMLLoader.load(getClass().getResource("/view/admin_view/BusPage.fxml"));
         this.rootPane.getChildren().setAll(newPane);
     }
     public void showRoutePage() throws IOException{
-        AnchorPane newPane = FXMLLoader.load(getClass().getResource("../view/admin_view/RoutePage.fxml"));
+        AnchorPane newPane = FXMLLoader.load(getClass().getResource("/view/admin_view/RoutePage.fxml"));
         this.rootPane.getChildren().setAll(newPane);
     }
     public void showSettingPage() throws IOException {
-        AnchorPane newPane = FXMLLoader.load(getClass().getResource("../view/admin_view/Setting.fxml"));
+        AnchorPane newPane = FXMLLoader.load(getClass().getResource("/view/admin_view/Setting.fxml"));
         this.rootPane.getChildren().setAll(newPane);
     }
 

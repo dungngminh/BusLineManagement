@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="frame-1" blendMode="DARKEN" prefHeight="518.0" prefWidth="565.0" style="-fx-background-color: #373E40;" stylesheets="@../../css/style_login.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LogIn">
+<AnchorPane id="frame-1" blendMode="DARKEN" prefHeight="518.0" prefWidth="565.0" style="-fx-background-color: #373E40;" stylesheets="@../../css/style_login.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Admin.LogIn">
    <children>
       <Pane id="pane" layoutX="50.0" layoutY="36.0" prefHeight="447.0" prefWidth="466.0" stylesheets="@../../css/style_login.css">
          <children>

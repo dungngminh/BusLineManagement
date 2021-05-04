@@ -1,4 +1,4 @@
-package Controller;
+package Controller.Admin;
 import Services.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

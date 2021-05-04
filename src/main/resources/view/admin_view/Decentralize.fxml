@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pane" prefHeight="627.0" prefWidth="1166.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Decentralize">
+<AnchorPane fx:id="pane" prefHeight="627.0" prefWidth="1166.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Admin.Decentralize">
    <children>
       <Button fx:id="btn_adduser" layoutX="432.0" layoutY="133.0" mnemonicParsing="false" onMouseClicked="#btn_adduser_clicked" prefHeight="44.0" prefWidth="88.0" text="Add user" />
       <Button fx:id="btn_changerole" layoutX="648.0" layoutY="133.0" mnemonicParsing="false" onMouseClicked="#btn_changerole_clicked" prefHeight="44.0" prefWidth="88.0" text="Change Role" />

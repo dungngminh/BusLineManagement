@@ -1,4 +1,4 @@
-package Controller;
+package Controller.Admin;
 
 import Model.DataTable.TableRoutePage;
 import com.jfoenix.controls.JFXDrawer;

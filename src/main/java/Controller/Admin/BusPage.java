@@ -1,4 +1,4 @@
-package Controller;
+package Controller.Admin;
 
 import Model.DataTable.TableBusPage;
 import Model.TypeOfBusEntity;
@@ -219,7 +219,7 @@ public class BusPage implements Initializable {
     }
 
     public void showSettingPage() throws IOException {
-        AnchorPane newPane = FXMLLoader.load(getClass().getResource("../view/admin_view/Setting.fxml"));
+        AnchorPane newPane = FXMLLoader.load(getClass().getResource("/view/admin_view/Setting.fxml"));
         this.pane.getChildren().setAll(newPane);
     }
 

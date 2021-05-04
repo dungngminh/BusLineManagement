@@ -1,4 +1,4 @@
-package Controller;
+package Controller.Admin;
 
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
@@ -90,17 +90,17 @@ public class Setting implements Initializable {
     }
 
     public void showBusPage() throws IOException {
-        AnchorPane newPane = FXMLLoader.load(getClass().getResource("../view/admin_view/BusPage.fxml"));
+        AnchorPane newPane = FXMLLoader.load(getClass().getResource("/view/admin_view/BusPage.fxml"));
         this.pane.getChildren().setAll(newPane);
     }
 
     public void showDecentralizePage() throws IOException {
-        AnchorPane newPane = FXMLLoader.load(getClass().getResource("../view/admin_view/Decentralize.fxml"));
+        AnchorPane newPane = FXMLLoader.load(getClass().getResource("/view/admin_view/Decentralize.fxml"));
         this.pane.getChildren().setAll(newPane);
     }
 
     public void showDriverPage() throws IOException {
-        AnchorPane newPane = FXMLLoader.load(getClass().getResource("../view/admin_view/Driver.fxml"));
+        AnchorPane newPane = FXMLLoader.load(getClass().getResource("/view/admin_view/Driver.fxml"));
         this.pane.getChildren().setAll(newPane);
     }
 

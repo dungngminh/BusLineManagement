@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.JFXHamburger?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane prefHeight="642.0" prefWidth="1065.0" style="-fx-background-color: #AAEFDF;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Java.Controller.BusPage">
+   <children>
+      <Pane prefHeight="650.0" prefWidth="1166.0" />
+      <JFXHamburger fx:id="jfx_hambur" layoutX="10.0" layoutY="10.0" />
+      <JFXDrawer fx:id="jfx_drawer" defaultDrawerSize="190.0" layoutX="-2.0" prefHeight="652.0" prefWidth="99.0" />
+   </children>
+</AnchorPane>

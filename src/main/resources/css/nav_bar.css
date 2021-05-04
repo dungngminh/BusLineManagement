@@ -15,3 +15,16 @@
     -fx-border-color: white;
     -fx-border-width: 3px;
 }
+
+.subbtn {
+    -fx-background-color: #f1f1f5 !important;
+    -fx-font-size: 20px;
+}
+
+.subbtn:hover {
+    -fx-background-color: #6ca7ab !important;
+    -fx-background-radius: 9px 9px 9px 9px;
+    -fx-border-radius: 7px 7px 7px 7px;
+    -fx-border-color: white;
+    -fx-border-width: 3px;
+}

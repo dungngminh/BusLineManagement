@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="bus_page" fx:id="pane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1166.0" style="-fx-background-color: #EDB183;" stylesheets="@../../css/BusPage.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BusPage">
+<AnchorPane id="bus_page" fx:id="pane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1166.0" style="-fx-background-color: #EDB183;" stylesheets="@../../css/BusPage.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Admin.BusPage">
    <children>
       <JFXDrawer fx:id="jfx_drawer" alignment="TOP_LEFT" defaultDrawerSize="190.0" minHeight="-Infinity" minWidth="-Infinity" overLayVisible="false" prefHeight="650.0" prefWidth="99.0" />
       <Pane prefHeight="650.0" prefWidth="1166.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

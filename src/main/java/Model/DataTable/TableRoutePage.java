@@ -1,9 +1,11 @@
 package Model.DataTable;
 
 public class TableRoutePage {
+
     private int idRoute;
     private String startStation;
     private String endStation;
+    private final Boolean isDelete;
     private int distance;
     private String note;
     private int status;

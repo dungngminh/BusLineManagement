@@ -1,4 +1,4 @@
-package Controller;
+package Controller.Admin;
 
 import Model.AccountEntity;
 import Model.RoleAccountEntity;
@@ -158,12 +158,12 @@ public class Decentralize implements Initializable {
     }
 
     public void showBusPage() throws IOException {
-        AnchorPane newPane = FXMLLoader.load(getClass().getResource("../view/admin_view/BusPage.fxml"));
+        AnchorPane newPane = FXMLLoader.load(getClass().getResource("/view/admin_view/BusPage.fxml"));
         this.pane.getChildren().setAll(newPane);
     }
 
     public void showSettingPage() throws IOException {
-        AnchorPane newPane = FXMLLoader.load(getClass().getResource("../view/admin_view/Setting.fxml"));
+        AnchorPane newPane = FXMLLoader.load(getClass().getResource("/view/admin_view/Setting.fxml"));
         this.pane.getChildren().setAll(newPane);
     }
 

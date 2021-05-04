@@ -1,4 +1,4 @@
-package Controller;
+package Controller.Admin;
 
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 import javafx.fxml.FXML;
