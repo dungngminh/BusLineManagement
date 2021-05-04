@@ -42,8 +42,8 @@
       </Button>
       <MenuButton id="ticket" alignment="CENTER_RIGHT" contentDisplay="TOP" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" popupSide="RIGHT" prefHeight="85.0" prefWidth="140.0" styleClass="btn" stylesheets="@../../css/nav_bar.css" text="Ticket" textFill="#eeeeee">
         <items>
-          <MenuItem mnemonicParsing="false" styleClass="subbtn" text="Ticket Info" />
-          <MenuItem mnemonicParsing="false" styleClass="subbtn" text="Update Ticket" />
+          <MenuItem id="ticketinfo" mnemonicParsing="false" styleClass="subbtn" text="Ticket Info" />
+          <MenuItem id="ticketupdate" mnemonicParsing="false" styleClass="subbtn" text="Update Ticket" />
         </items>
          <graphic>
             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
