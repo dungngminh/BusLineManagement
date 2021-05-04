@@ -272,8 +272,6 @@ public class RoutePage implements Initializable {
     }
     public void show(int status){
         ObservableList<RouteEntity> listObj = FXCollections.observableArrayList(BLL_Admin.getInstance().getRoutes(status));
-
-
         col_idStation.setCellValueFactory(new PropertyValueFactory<>("idRoute"));
         col_startstation.setCellValueFactory(new PropertyValueFactory<>("startStation"));
         col_endstation.setCellValueFactory(new PropertyValueFactory<>("endStation"));

@@ -127,6 +127,14 @@ public class Driver implements Initializable {
                                 }
                                 break;
                             }
+                            case "route":{
+                                try {
+                                    showRoutePage();
+                                } catch (IOException ioException) {
+                                    ioException.printStackTrace();
+                                }
+                                break;
+                            }
                             case "bus": {
                                 try {
                                     showBusPage();
@@ -188,7 +196,10 @@ public class Driver implements Initializable {
         AnchorPane newPane = FXMLLoader.load(getClass().getResource("/view/admin_view/MainWindow.fxml"));
         this.pane.getChildren().setAll(newPane);
     }
-
+    public void showRoutePage() throws IOException{
+        AnchorPane newPane = FXMLLoader.load(getClass().getResource("/view/admin_view/RoutePage.fxml"));
+        this.pane.getChildren().setAll(newPane);
+    }
     public void showBusPage() throws IOException {
         AnchorPane newPane = FXMLLoader.load(getClass().getResource("/view/admin_view/BusPage.fxml"));
         this.pane.getChildren().setAll(newPane);
