@@ -3,6 +3,7 @@ package Services;
 import Model.AccountEntity;
 import Model.DataTable.TableBusPage;
 import Model.DriverEntity;
+import Model.ProvinceEntity;
 import Model.TypeOfBusEntity;
 
 import java.sql.SQLException;
@@ -34,6 +35,11 @@ public class BLL_Admin {
            }
         });
         return valid.get();
+    }
+
+    //Province
+    public List<ProvinceEntity> getProvinceName(){
+        return DAL.getInstance().getProvinceName();
     }
 
     public List<TypeOfBusEntity> getListTypeOfBus() {

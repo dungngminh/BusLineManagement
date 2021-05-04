@@ -72,4 +72,7 @@ public class StationEntity {
     public void setProvinceByIdProvince(ProvinceEntity provinceByIdProvince) {
         this.provinceByIdProvince = provinceByIdProvince;
     }
+    public String toString() {
+        return this.getStationName();
+    }
 }

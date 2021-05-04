@@ -275,8 +275,14 @@ public class DAL {
         session.close();
     }
 
-
-
-
     // done Driver ?
+    public List<ProvinceEntity> getProvinceName(){
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query<ProvinceEntity> query = session.createQuery("From ProvinceEntity ", ProvinceEntity.class);
+        List<ProvinceEntity> result = query.getResultList();
+        session.getTransaction().commit();
+        session.close();
+        return result;
+    }
 }
