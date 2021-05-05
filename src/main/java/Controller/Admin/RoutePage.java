@@ -25,6 +25,7 @@ import javafx.scene.layout.VBox;
 import java.io.IOException;
 import java.net.URL;
 import java.text.AttributedCharacterIterator;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -211,6 +212,24 @@ public class RoutePage implements Initializable {
             RouteEntity routeEntity = table_view.getSelectionModel().getSelectedItem();
             idRoute = routeEntity.getIdRoute();
             // cbx start station // end station
+            List<StationEntity> listStation = new ArrayList<>();
+            List<ProvinceEntity> listProvinces = BLL_Admin.getInstance().getProvinceName();
+            listProvinces.forEach(province ->{
+                List<Object> list = Arrays.asList(province.getStationsByIdProvince().toArray());
+                list.forEach(station -> {
+                    listStation.add((StationEntity)station);
+                });
+            });
+            listStation.forEach(station -> {
+                if(routeEntity.getStartStation().equals(station.getStationName())){
+                    cbx_startstation.getSelectionModel().select(station);
+                    cbx_provinceStart.getSelectionModel().select(station.getProvinceByIdProvince());
+                }
+                if(routeEntity.getEndStation().equals(station.getStationName())){
+                    cbx_endstation.getSelectionModel().select(station);
+                    cbx_provinceEnd.getSelectionModel().select(station.getProvinceByIdProvince());
+                }
+            });
             tfx_distance.setText(routeEntity.getDistance().toString());
             tax_note.setText(routeEntity.getNote().toString());
             if(routeEntity.getStatus() == 0) cbx_status.getSelectionModel().selectFirst();

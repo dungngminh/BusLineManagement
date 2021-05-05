@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -28,11 +29,17 @@
             <image>
                <Image url="@../../images/Icon/dashboard.png" />
             </image>
+            <cursor>
+               <Cursor fx:constant="WAIT" />
+            </cursor>
          </ImageView>
       </graphic>
       <VBox.margin>
          <Insets bottom="10.0" />
       </VBox.margin>
+      <cursor>
+         <Cursor fx:constant="DEFAULT" />
+      </cursor>
     </Button>
     <Button id="bus" accessibleText="bus" contentDisplay="TOP" mnemonicParsing="false" prefHeight="70.0" prefWidth="140.0" styleClass="btn" stylesheets="@../../css/nav_bar.css" text="Bus" textAlignment="JUSTIFY" textFill="WHITE">
         <font>
@@ -51,6 +58,9 @@
       <VBox.margin>
          <Insets bottom="10.0" />
       </VBox.margin>
+      <cursor>
+         <Cursor fx:constant="DEFAULT" />
+      </cursor>
     </Button>
     <Button id="route" accessibleText="route" contentDisplay="TOP" mnemonicParsing="false" prefHeight="50.0" prefWidth="140.0" styleClass="btn" stylesheets="@../../css/nav_bar.css" text="Route" textAlignment="JUSTIFY" textFill="WHITE">
         <font>
@@ -69,6 +79,9 @@
       <VBox.margin>
          <Insets bottom="10.0" />
       </VBox.margin>
+      <cursor>
+         <Cursor fx:constant="DEFAULT" />
+      </cursor>
     </Button>
     <Button id="trip" accessibleText="trip" contentDisplay="TOP" mnemonicParsing="false" prefHeight="50.0" prefWidth="140.0" styleClass="btn" stylesheets="@../../css/nav_bar.css" text="Trip" textAlignment="JUSTIFY" textFill="WHITE">
         <font>
@@ -87,6 +100,9 @@
       <VBox.margin>
          <Insets bottom="10.0" />
       </VBox.margin>
+      <cursor>
+         <Cursor fx:constant="DEFAULT" />
+      </cursor>
     </Button>
     <Button id="setting" accessibleText="decen" contentDisplay="TOP" mnemonicParsing="false" prefHeight="50.0" prefWidth="140.0" styleClass="btn" stylesheets="@../../css/nav_bar.css" text="Setting" textAlignment="JUSTIFY" textFill="WHITE">
         <font>
@@ -105,6 +121,9 @@
       <VBox.margin>
          <Insets bottom="10.0" />
       </VBox.margin>
+      <cursor>
+         <Cursor fx:constant="DEFAULT" />
+      </cursor>
     </Button>
    <padding>
       <Insets top="10.0" />

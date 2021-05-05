@@ -154,5 +154,8 @@ public class BLL_Admin {
     public void deleteRoute(int idRoute){
         DAL.getInstance().deleteRoute(idRoute);
     }
+
+    public void getStationName() {
+    }
     // done ?
 }
