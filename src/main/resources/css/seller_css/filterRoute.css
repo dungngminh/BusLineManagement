@@ -1,0 +1,18 @@
+#rootpane {
+    -fx-background-image: url(../../images/filterroute.jpg);
+    -fx-background-size: 100% 100%;
+}
+
+.btn {
+    -fx-background-color: #FFC43D !important;
+    -fx-background-radius: 9px;
+    -fx-border-radius: 7px;
+}
+
+.btn:hover {
+    -fx-background-color: #FFCF99 !important;
+    -fx-background-radius: 11px;
+    -fx-border-radius: 9px;
+    -fx-border-color: white;
+    -fx-border-width: 3px;
+}
