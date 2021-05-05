@@ -27,5 +27,6 @@
 
 .cbx, .date{
     -fx-background-color: #F1F2EB;
+    -fx-font-size: 20px;
 }
 

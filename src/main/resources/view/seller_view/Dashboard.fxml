@@ -33,7 +33,7 @@
               </rowConstraints>
                <children>
                   <ComboBox fx:id="cbx_start" prefHeight="51.0" prefWidth="206.0" styleClass="cbx" />
-                  <Button id="btn-swap" fx:id="btn_swap" mnemonicParsing="false" prefHeight="51.0" prefWidth="56.0" styleClass="btn" GridPane.columnIndex="1">
+                  <Button id="btn-swap" fx:id="btn_swap" mnemonicParsing="false" onMouseClicked="#btn_swap_clicked" prefHeight="51.0" prefWidth="56.0" styleClass="btn" GridPane.columnIndex="1">
                      <graphic>
                         <ImageView fitHeight="47.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -47,10 +47,13 @@
                   </Button>
                   <ComboBox fx:id="cbx_dest" prefHeight="51.0" prefWidth="201.0" styleClass="cbx" GridPane.columnIndex="2" />
                   <DatePicker fx:id="datetime" prefHeight="53.0" prefWidth="166.0" style="-fx-background-color: #F1F2EB;" styleClass="date" GridPane.columnIndex="3" />
-                  <Button id="btn-search" fx:id="btn_search" mnemonicParsing="false" prefHeight="56.0" prefWidth="134.0" styleClass="btn" text="Search" GridPane.columnIndex="4">
+                  <Button id="btn-search" fx:id="btn_search" mnemonicParsing="false" onMouseClicked="#btn_search_clicked" prefHeight="56.0" prefWidth="134.0" styleClass="btn" text="Search" GridPane.columnIndex="4">
                      <font>
                         <Font name="Segoe UI Bold" size="19.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="OPEN_HAND" />
+                     </cursor>
                   </Button>
                </children>
             </GridPane>

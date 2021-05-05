@@ -1,6 +1,7 @@
 package Controller.TicketSeller;
 
 import Model.ProvinceEntity;
+import Services.BLL_Admin;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
@@ -17,6 +18,7 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.*;
 import java.util.ResourceBundle;
 
 public class Dashboard implements Initializable {
@@ -36,7 +38,7 @@ public class Dashboard implements Initializable {
     private Button btn_swap;
 
     @FXML
-    private ComboBox<?> cbx_dest;
+    private ComboBox<ProvinceEntity> cbx_dest;
 
     @FXML
     private DatePicker datetime;
@@ -100,11 +102,17 @@ public class Dashboard implements Initializable {
                     jfx_drawer.toFront();
                     jfx_hambur.toFront();
                 }
-
             });
 
-            //Init combobox
+            //Init combobox and datetime
+            BLL_Admin.getInstance().getProvinceName().forEach(type -> {
+                cbx_start.getItems().add(type);
+            });
+            BLL_Admin.getInstance().getProvinceName().forEach(type ->{
+                cbx_dest.getItems().add(type);
+            });
 
+            datetime.setValue(LocalDate.now());
             //done!
 
         } catch (IOException e) {
@@ -117,4 +125,16 @@ public class Dashboard implements Initializable {
         this.rootPane.getChildren().setAll(newPane);
     }
 
+    @FXML
+    void btn_swap_clicked(MouseEvent event) {
+        ProvinceEntity start = cbx_start.getSelectionModel().getSelectedItem();
+        ProvinceEntity dest = cbx_dest.getSelectionModel().getSelectedItem();
+        cbx_start.getSelectionModel().select(dest);
+        cbx_dest.getSelectionModel().select(start);
+    }
+
+    @FXML
+    void btn_search_clicked(MouseEvent event) {
+
+    }
 }

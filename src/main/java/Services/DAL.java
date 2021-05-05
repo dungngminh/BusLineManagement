@@ -276,6 +276,8 @@ public class DAL {
     }
 
     // done Driver ?
+
+    // DAL for Province ??
     public List<ProvinceEntity> getProvinceName(){
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
@@ -302,4 +304,7 @@ public class DAL {
         session.close();
         return result;
     }
+
+
+    // done Province ?
 }

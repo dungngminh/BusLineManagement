@@ -34,10 +34,6 @@ public class BLL_Admin {
         return valid.get();
     }
 
-    //Province
-    public List<ProvinceEntity> getProvinceName(){
-        return DAL.getInstance().getProvinceName();
-    }
 
     public List<TypeOfBusEntity> getListTypeOfBus() {
         return DAL.getInstance().getListTypeOfBus();
@@ -127,7 +123,12 @@ public class BLL_Admin {
     }
     //done Driver ?
 
+    //Province
+    public List<ProvinceEntity> getProvinceName(){
+        return DAL.getInstance().getProvinceName();
+    }
 
+    //done ?
     //Route
     public void addRoute(String startStation, String endStation, int distance) {
         var route = new RouteEntity();
@@ -148,4 +149,6 @@ public class BLL_Admin {
         });
         return data;
     }
+
+    // done ?
 }
