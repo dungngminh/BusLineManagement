@@ -15,11 +15,11 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="frame-1" blendMode="DARKEN" prefHeight="518.0" prefWidth="565.0" style="-fx-background-color: #373E40;" stylesheets="@../../css/style_login.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Admin.LogIn">
+<AnchorPane id="frame-1" blendMode="DARKEN" prefHeight="518.0" prefWidth="565.0" style="-fx-background-color: #373E40;" stylesheets="@../../css/admin_css/style_login.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Admin.LogIn">
    <children>
-      <Pane id="pane" layoutX="50.0" layoutY="36.0" prefHeight="447.0" prefWidth="466.0" stylesheets="@../../css/style_login.css">
+      <Pane id="pane" layoutX="50.0" layoutY="36.0" prefHeight="447.0" prefWidth="466.0" stylesheets="@../../css/admin_css/style_login.css">
          <children>
-            <Label id="lb-wel" layoutX="73.0" layoutY="26.0" prefHeight="45.0" prefWidth="390.0" stylesheets="@../../css/style_login.css" text="BUS MANAGEMENT APPLICATION" textAlignment="CENTER" textFill="#e84855">
+            <Label id="lb-wel" layoutX="73.0" layoutY="26.0" prefHeight="45.0" prefWidth="390.0" stylesheets="@../../css/admin_css/style_login.css" text="BUS MANAGEMENT APPLICATION" textAlignment="CENTER" textFill="#e84855">
                <font>
                   <Font size="15.0" />
                </font>
@@ -36,7 +36,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label id="lb-us-pa" alignment="CENTER_RIGHT" prefHeight="31.0" prefWidth="153.0" stylesheets="@../../css/style_login.css" text="Username" textFill="#1f1e78">
+                  <Label id="lb-us-pa" alignment="CENTER_RIGHT" prefHeight="31.0" prefWidth="153.0" stylesheets="@../../css/admin_css/style_login.css" text="Username" textFill="#1f1e78">
                      <font>
                         <Font name="Arial Black" size="21.0" />
                      </font>
@@ -45,7 +45,7 @@
                      <font>
                         <Font name="Arial" size="18.0" />
                      </font></TextField>
-                  <Label id="lb-us-pa" alignment="CENTER_RIGHT" prefHeight="31.0" prefWidth="152.0" stylesheets="@../../css/style_login.css" text="Password" textFill="#1f1e78" GridPane.rowIndex="1">
+                  <Label id="lb-us-pa" alignment="CENTER_RIGHT" prefHeight="31.0" prefWidth="152.0" stylesheets="@../../css/admin_css/style_login.css" text="Password" textFill="#1f1e78" GridPane.rowIndex="1">
                      <font>
                         <Font name="Arial Black" size="21.0" />
                      </font>
@@ -62,7 +62,7 @@
                         <Insets left="40.0" right="-15.0" />
                      </GridPane.margin>
                   </Hyperlink>
-                  <Button id="blue" mnemonicParsing="false" onMouseClicked="#btn_login_clicked" stylesheets="@../../css/style_login.css" text="Log in" textFill="WHITE" GridPane.rowIndex="3">
+                  <Button id="blue" mnemonicParsing="false" onMouseClicked="#btn_login_clicked" stylesheets="@../../css/admin_css/style_login.css" text="Log in" textFill="WHITE" GridPane.rowIndex="3">
                      <font>
                         <Font size="21.0" />
                      </font>
@@ -74,7 +74,7 @@
                         <String fx:value="animate" />
                      </styleClass>
                   </Button>
-                  <Button id="red" fx:id="btn_cancel" mnemonicParsing="false" onMouseClicked="#btn_cancel_clicked" stylesheets="@../../css/style_login.css" text="Cancel" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <Button id="red" fx:id="btn_cancel" mnemonicParsing="false" onMouseClicked="#btn_cancel_clicked" stylesheets="@../../css/admin_css/style_login.css" text="Cancel" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <font>
                         <Font size="21.0" />
                      </font>

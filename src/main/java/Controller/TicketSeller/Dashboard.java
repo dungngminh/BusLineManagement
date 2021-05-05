@@ -87,14 +87,15 @@ public class Dashboard implements Initializable {
     }
 
     @FXML
-    void btn_search_clicked(MouseEvent event) {
+    void btn_search_clicked(MouseEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/seller_view/FilterRoute.fxml"));
 
+        AnchorPane newPane = loader.load();
+        FilterRoute controller = loader.<FilterRoute>getController();
+        controller.initVariable(cbx_start.getSelectionModel().getSelectedItem(),
+                cbx_dest.getSelectionModel().getSelectedItem(), datetime.getValue());
+
+        this.rootPane.getChildren().setAll(newPane);
     }
 
-    @FXML
-    void btn_start_Action(ActionEvent event) {
-        cbx_start.getItems().clear();
-        cbx_dest.getItems().clear();
-
-    }
 }

@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Sans:wght@500&display=swap');
 #frame-1 {
-    -fx-background-image: url(../images/frame_1_login.jpg);
+    -fx-background-image: url(../../images/frame_1_login.jpg);
     -fx-background-size: 100% 100%;
 }
 

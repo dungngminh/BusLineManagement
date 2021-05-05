@@ -10,7 +10,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
 //        Parent root = FXMLLoader.load(getClass().getResource("view/admin_view/LogIn.fxml"));
 //        Parent root = FXMLLoader.load(getClass().getResource("view/admin_view/MainWindow.fxml"));
-        Parent root = FXMLLoader.load(getClass().getResource("view/admin_view/RoutePage.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("view/seller_view/Dashboard.fxml"));
         primaryStage.setTitle("Log In");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();

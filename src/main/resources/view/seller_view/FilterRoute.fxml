@@ -15,14 +15,14 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootPane" prefHeight="650.0" prefWidth="1166.0" style="-fx-background-color: #AAEFDF;" stylesheets="@../../css/dashboard.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TicketSeller.Dashboard">
+<AnchorPane id="rootpane" fx:id="rootPane" prefHeight="650.0" prefWidth="1166.0" style="-fx-background-color: #D8DAD3;" stylesheets="@../../css/seller_css/filterRoute.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TicketSeller.FilterRoute">
    <children>
       <JFXDrawer fx:id="jfx_drawer" defaultDrawerSize="190.0" layoutX="-2.0" prefHeight="650.0" prefWidth="103.0" />
       <Pane prefHeight="650.0" prefWidth="1166.0">
          <children>
             <GridPane layoutX="69.0" layoutY="25.0" prefHeight="557.0" prefWidth="1069.0">
               <columnConstraints>
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints fx:id="gridpane" halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -73,134 +73,149 @@
                   <ImageView fitHeight="106.0" fitWidth="181.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4" />
                   <ImageView fitHeight="106.0" fitWidth="181.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3" />
                   <ImageView fitHeight="106.0" fitWidth="181.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2" />
-                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Calibri" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Calibri" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Calibri" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Calibri" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Calibri" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Calibri" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Calibri" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Calibri" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Calibri" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Calibri" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Calibri" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Calibri" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Calibri" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Calibri" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Calibri" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Calibri" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Calibri" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Calibri" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Calibri" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Calibri" size="18.0" />
                      </font>
                   </Label>
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="100.0" text="Choose route" GridPane.columnIndex="5" GridPane.rowIndex="1">
+                  <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="130.0" styleClass="btn" stylesheets="@../../css/seller_css/filterRoute.css" text="Choose route" textFill="#2e69ff" GridPane.columnIndex="5" GridPane.rowIndex="1">
                      <font>
-                        <Font name="Segoe UI Bold" size="13.0" />
+                        <Font name="Segoe UI Bold" size="17.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="CLOSED_HAND" />
+                     </cursor>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="100.0" text="Choose route" GridPane.columnIndex="5" GridPane.rowIndex="4">
+                  <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="130.0" styleClass="btn" stylesheets="@../../css/seller_css/filterRoute.css" text="Choose route" textFill="#2e69ff" GridPane.columnIndex="5" GridPane.rowIndex="4">
                      <font>
-                        <Font name="Segoe UI Bold" size="13.0" />
+                        <Font name="Segoe UI Bold" size="17.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="CLOSED_HAND" />
+                     </cursor>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="100.0" text="Choose route" GridPane.columnIndex="5" GridPane.rowIndex="3">
+                  <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="130.0" styleClass="btn" stylesheets="@../../css/seller_css/filterRoute.css" text="Choose route" textFill="#2e69ff" GridPane.columnIndex="5" GridPane.rowIndex="3">
                      <font>
-                        <Font name="Segoe UI Bold" size="13.0" />
+                        <Font name="Segoe UI Bold" size="17.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="CLOSED_HAND" />
+                     </cursor>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="100.0" text="Choose route" GridPane.columnIndex="5" GridPane.rowIndex="2">
+                  <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="130.0" styleClass="btn" stylesheets="@../../css/seller_css/filterRoute.css" text="Choose route" textFill="#2e69ff" GridPane.columnIndex="5" GridPane.rowIndex="2">
                      <font>
-                        <Font name="Segoe UI Bold" size="13.0" />
+                        <Font name="Segoe UI Bold" size="17.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="CLOSED_HAND" />
+                     </cursor>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="100.0" text="Choose route" GridPane.columnIndex="5" GridPane.rowIndex="5">
+                  <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="130.0" styleClass="btn" stylesheets="@../../css/seller_css/filterRoute.css" text="Choose route" textFill="#2e69ff" GridPane.columnIndex="5" GridPane.rowIndex="5">
                      <font>
-                        <Font name="Segoe UI Bold" size="13.0" />
+                        <Font name="Segoe UI Bold" size="17.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="CLOSED_HAND" />
+                     </cursor>
                   </Button>
                </children>
             </GridPane>
-            <ImageView fitHeight="30.0" fitWidth="40.0" layoutX="604.0" layoutY="603.0" pickOnBounds="true" preserveRatio="true" rotate="-180.0">
+            <ImageView fx:id="arrow_right" fitHeight="30.0" fitWidth="40.0" layoutX="604.0" layoutY="603.0" pickOnBounds="true" preserveRatio="true" rotate="-180.0">
                <image>
                   <Image url="@../../images/Icon/arrow.png" />
                </image>
@@ -208,7 +223,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fitHeight="30.0" fitWidth="40.0" layoutX="538.0" layoutY="603.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="arrow_left" fitHeight="30.0" fitWidth="40.0" layoutX="538.0" layoutY="603.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../images/Icon/arrow.png" />
                </image>
@@ -216,7 +231,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <DatePicker layoutX="990.0" layoutY="597.0" prefHeight="36.0" prefWidth="162.0" />
+            <DatePicker fx:id="calendar" layoutX="990.0" layoutY="597.0" prefHeight="36.0" prefWidth="162.0" />
          </children>
       </Pane>
       <JFXHamburger fx:id="jfx_hambur" layoutX="10.0" layoutY="10.0" />
