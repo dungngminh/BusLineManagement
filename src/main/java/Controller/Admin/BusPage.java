@@ -167,18 +167,6 @@ public class BusPage implements Initializable {
         table_view.setItems(listObj);
         table_view.refresh();
     }
-
-    public void showMainPage() throws IOException {
-        AnchorPane newPane = FXMLLoader.load(getClass().getResource("/view/admin_view/MainWindow.fxml"));
-        this.pane.getChildren().setAll(newPane);
-
-    }
-
-    public void showSettingPage() throws IOException {
-        AnchorPane newPane = FXMLLoader.load(getClass().getResource("/view/admin_view/Setting.fxml"));
-        this.pane.getChildren().setAll(newPane);
-    }
-
     @FXML
     void btn_create_clicked(MouseEvent event) {
         CRUDType = "Create";
@@ -292,7 +280,7 @@ public class BusPage implements Initializable {
         txf_platenumber.setEditable(true);
     }
 
-    public void toggleDetail(){
+    private void toggleDetail(){
         if (btn_ok.isVisible()) {
             btn_ok.setVisible(false);
             btn_reset.setVisible(false);

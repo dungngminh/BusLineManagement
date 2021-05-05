@@ -143,7 +143,7 @@ public class DAL {
     public void updateBus(int idBus, String busName, String plateNumber, TypeOfBusEntity tob, int stt) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
-        Query query = session.createQuery("update BusEntity set busName = :busName, plateNumber = :plateNumber, typeOfBusByIdType = :tob, status = :stt" +
+        var query = session.createQuery("update BusEntity set busName = :busName, plateNumber = :plateNumber, typeOfBusByIdType = :tob, status = :stt" +
                 " where idBus = :idBus");
         query.setParameter("busName", busName);
         query.setParameter("plateNumber", plateNumber);
@@ -160,7 +160,7 @@ public class DAL {
     public void deleteBus(int idBus) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
-        Query<BusEntity> query = session.createQuery("update BusEntity set isDelete = :del" +
+        var query = session.createQuery("update BusEntity set isDelete = :del" +
                 " where idBus = :idBus");
         query.setParameter("del", true);
         query.setParameter("idBus", idBus);
@@ -201,7 +201,7 @@ public class DAL {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
 
-        Query<RoleAccountEntity> query = session.createQuery("update RoleAccountEntity set idRole = :idRole " +
+        var query = session.createQuery("update RoleAccountEntity set idRole = :idRole " +
                 "where idUser = :idUser");
 
         query.setParameter("idRole", idRole);
@@ -247,7 +247,7 @@ public class DAL {
     public void updateDriver(int id, String driverName, String phoneNumber, String address, int stt) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
-        Query query = session.createQuery("update DriverEntity set nameDriver = :name, phone = :phoneNumber, address = :address, status = :stt" +
+        var query = session.createQuery("update DriverEntity set nameDriver = :name, phone = :phoneNumber, address = :address, status = :stt" +
                 " where idDriver = :id");
         query.setParameter("name", driverName);
         query.setParameter("phoneNumber", phoneNumber);
@@ -264,7 +264,7 @@ public class DAL {
     public void deleteDriver(int idDriver) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
-        Query<DriverEntity> query = session.createQuery("update DriverEntity set isDelete = :del" +
+        var query = session.createQuery("update DriverEntity set isDelete = :del" +
                 " where idDriver = :idDriver");
         query.setParameter("del", true);
         query.setParameter("idDriver", idDriver);
@@ -287,7 +287,8 @@ public class DAL {
         session.close();
         return result;
     }
-
+    // done Province ?
+    //DAL for Route
     public void insertRoute(RouteEntity route){
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
@@ -304,7 +305,31 @@ public class DAL {
         session.close();
         return result;
     }
-
-
-    // done Province ?
+    public void updateRoute(int idRoute, String startStation, String endStation,String note, int distance, int stt) {
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        session.beginTransaction();
+        var query = session.createQuery("update RouteEntity set startStation=:startStation,endStation =:endStation,note =:note, distance =:distance, status =:stt"+
+                " where idRoute = :idRoute");
+        query.setParameter("startStation", startStation);
+        query.setParameter("endStation", endStation);
+        query.setParameter("distance", distance);
+        query.setParameter("note",note);
+        query.setParameter("stt", stt);
+        query.setParameter("idRoute", idRoute);
+        query.executeUpdate();
+        session.getTransaction().commit();
+        session.close();
+    }
+    public void deleteRoute(int idRoute){
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        session.beginTransaction();
+        var query =  session.createQuery("update RouteEntity set status = :stt" +
+                " where idRoute = :idRoute");
+        query.setParameter("stt",2);
+        query.setParameter("idRoute", idRoute);
+        query.executeUpdate();
+        session.getTransaction().commit();
+        session.close();
+    }
+    //done Route?
 }

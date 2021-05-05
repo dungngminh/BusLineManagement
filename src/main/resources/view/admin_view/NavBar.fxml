@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox id="navbar" alignment="BASELINE_CENTER" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="156.0" stylesheets="@../../css/nav_bar.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Admin.NavBar">
+<VBox id="navbar" alignment="BASELINE_CENTER" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="686.0" prefWidth="156.0" stylesheets="@../../css/nav_bar.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Admin.NavBar">
    <ImageView fitHeight="118.0" fitWidth="121.0" pickOnBounds="true" preserveRatio="true" styleClass="btn">
       <image>
          <Image url="@../../images/Icon/logo.png" />
@@ -63,24 +63,6 @@
          <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
             <image>
                <Image url="@../../images/Icon/route.png" />
-            </image>
-         </ImageView>
-      </graphic>
-      <VBox.margin>
-         <Insets bottom="10.0" />
-      </VBox.margin>
-    </Button>
-    <Button id="ticket" accessibleText="ticket" contentDisplay="TOP" mnemonicParsing="false" prefHeight="50.0" prefWidth="140.0" styleClass="btn" stylesheets="@../../css/nav_bar.css" text="Ticket" textAlignment="JUSTIFY" textFill="WHITE">
-        <font>
-          <Font name="Segoe UI Bold" size="16.0" />
-        </font>
-      <padding>
-         <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
-      </padding>
-      <graphic>
-         <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-               <Image url="@../../images/Icon/ticket.png" />
             </image>
          </ImageView>
       </graphic>

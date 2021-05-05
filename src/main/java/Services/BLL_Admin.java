@@ -116,10 +116,8 @@ public class BLL_Admin {
     }
 
     public void updateDriver(int idDriver, String driverName, String phoneNumber, String address, int stt) {
-
         DAL.getInstance().updateDriver(idDriver, driverName, phoneNumber, address, stt);
     }
-
     public void deleteDriver(int idDriver) {
         DAL.getInstance().deleteDriver(idDriver);
     }
@@ -129,28 +127,32 @@ public class BLL_Admin {
     public List<ProvinceEntity> getProvinceName(){
         return DAL.getInstance().getProvinceName();
     }
-
     //done ?
     //Route
-    public void addRoute(String startStation, String endStation, int distance) {
+    public void addRoute(String startStation, String endStation,String note, int distance) {
         var route = new RouteEntity();
         route.setStartStation(startStation);
         route.setEndStation(endStation);
         route.setDistance(distance);
+        route.setNote(note);
         DAL.getInstance().insertRoute(route);
     }
-    public List<RouteEntity> getRoutes(int status) {
+    //find route using route, start + " end"
+    public List<RouteEntity> getRoutes(int status, String name) {
         List<RouteEntity> data = new ArrayList<>();
         DAL.getInstance().getRoutes().forEach(route ->{
-            if(status == 0){
-                data.add(route);
-            }
-            else if(status == route.getStatus()){
+            String routeName = route.getStartStation() + " " + route.getEndStation();
+            if(status == route.getStatus() && routeName.contains(name)){
                 data.add(route);
             }
         });
         return data;
     }
-
+    public void updateRoute(int idRoute, String startStation, String endStation,String note, int distance, int stt) {
+        DAL.getInstance().updateRoute(idRoute,startStation,endStation,note,distance,stt);
+    }
+    public void deleteRoute(int idRoute){
+        DAL.getInstance().deleteRoute(idRoute);
+    }
     // done ?
 }

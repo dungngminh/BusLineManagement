@@ -15,7 +15,7 @@ public class RouteEntity {
     private Collection<ScheduleEntity> schedulesByIdRoute;
 
     @Id
-
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "idRoute", nullable = false)
     public int getIdRoute() {
         return idRoute;

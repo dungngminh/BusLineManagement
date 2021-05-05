@@ -7,8 +7,11 @@
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitMenuButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -23,10 +26,55 @@
    <children>
       <Pane prefHeight="679.0" prefWidth="1187.0">
          <children>
-            <JFXDrawer fx:id="jfx_drawer" alignment="TOP_LEFT" defaultDrawerSize="190.0" layoutX="-8.0" layoutY="-8.0" overLayVisible="false" prefHeight="690.0" prefWidth="99.0" />
             <Pane layoutX="-3.0" prefHeight="671.0" prefWidth="305.0">
                <children>
-                  <TitledPane animated="false" layoutX="12.0" layoutY="163.0" prefHeight="118.0" prefWidth="282.0" text="Start Station">
+                  <TitledPane animated="false" layoutX="12.0" layoutY="370.0" prefHeight="164.0" prefWidth="282.0" text="Route Information">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="136.0" prefWidth="280.0">
+                           <children>
+                              <GridPane layoutX="10.0" layoutY="12.0" prefHeight="118.0" prefWidth="253.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="172.0" minWidth="10.0" prefWidth="109.0" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="147.0" minWidth="10.0" prefWidth="147.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints maxHeight="43.0" minHeight="10.0" prefHeight="33.0" valignment="BASELINE" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="49.0" minHeight="10.0" prefHeight="47.0" valignment="BASELINE" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="43.0" minHeight="10.0" prefHeight="29.0" valignment="BASELINE" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <Label fx:id="lb_status" alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="107.0" text="Status" textAlignment="CENTER" GridPane.rowIndex="2">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                       <GridPane.margin>
+                                          <Insets bottom="25.0" />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <ComboBox fx:id="cbx_status" onAction="#cbx_status" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                       <GridPane.margin>
+                                          <Insets bottom="25.0" />
+                                       </GridPane.margin>
+                                    </ComboBox>
+                                    <TextField fx:id="tfx_distance" GridPane.columnIndex="1" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="107.0" text="Note" textAlignment="CENTER" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="107.0" text="Distance" textAlignment="CENTER">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <TextArea fx:id="tax_note" prefHeight="5.0" prefWidth="146.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </TitledPane>
+                  <TitledPane animated="false" layoutX="12.0" layoutY="110.0" prefHeight="118.0" prefWidth="282.0" text="Start Station">
                      <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="92.0" prefWidth="285.0">
                            <children>
@@ -64,7 +112,7 @@
                         </AnchorPane>
                      </content>
                   </TitledPane>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="34.0" prefHeight="89.0" prefWidth="247.0" text="Route" textAlignment="CENTER" textFill="WHITE">
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="34.0" prefHeight="89.0" prefWidth="247.0" text="Route" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold" size="36.0" />
                      </font>
@@ -76,7 +124,7 @@
                         <Button fx:id="btn_cancel" minWidth="49.0" mnemonicParsing="false" onMouseClicked="#btn_cancel_clicked" prefHeight="30.0" prefWidth="40.0" text="Cancel" />
                      </buttons>
                   </ButtonBar>
-                  <TitledPane animated="false" layoutX="12.0" layoutY="352.0" prefHeight="118.0" prefWidth="282.0" text="End Station">
+                  <TitledPane animated="false" layoutX="12.0" layoutY="242.0" prefHeight="118.0" prefWidth="282.0" text="End Station">
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="120.0" prefWidth="268.0">
                            <children>
@@ -114,7 +162,6 @@
                         </AnchorPane>
                      </content>
                   </TitledPane>
-                  <JFXHamburger id="hamburger" fx:id="jfx_hambur" alignment="TOP_RIGHT" layoutX="25.0" layoutY="26.0" prefHeight="25.0" prefWidth="31.0" style="-fx-background-color: #;" />
                </children>
             </Pane>
             <Pane layoutX="299.0" prefHeight="671.0" prefWidth="881.0">
@@ -135,9 +182,14 @@
                         <Insets />
                      </opaqueInsets>
                   </TableView>
-                  <ButtonBar fx:id="grp_btn_tbl" layoutX="253.0" layoutY="578.0" prefHeight="32.0" prefWidth="351.0">
+                  <ButtonBar fx:id="grp_btn_tbl" layoutX="219.0" layoutY="578.0" prefHeight="32.0" prefWidth="385.0">
                      <buttons>
-                        <Button fx:id="btn_show" mnemonicParsing="false" onMouseClicked="#btn_show_clicked" prefHeight="30.0" prefWidth="86.0" text="Show" />
+                        <SplitMenuButton fx:id="btn_showmenu" mnemonicParsing="false" onMouseClicked="#btn_showmenu_clicked" prefHeight="32.0" text="Show">
+                          <items>
+                            <MenuItem fx:id="btmenu_avaliable" mnemonicParsing="false" onAction="#onMenuClicked" text="Available" />
+                            <MenuItem fx:id="btmenu_unavaliable" mnemonicParsing="false" onAction="#onMenuClicked" text="Unavailable" />
+                          </items>
+                        </SplitMenuButton>
                         <Button fx:id="btn_create" mnemonicParsing="false" onMouseClicked="#btn_create_clicked" prefHeight="30.0" prefWidth="86.0" text="Create" />
                         <Button fx:id="btn_update" mnemonicParsing="false" onMouseClicked="#btn_update_clicked" prefHeight="30.0" prefWidth="86.0" text="Update" />
                         <Button fx:id="btn_delete" mnemonicParsing="false" onMouseClicked="#btn_delete_clicked" prefHeight="30.0" prefWidth="172.0" text="Delete" />
@@ -145,7 +197,7 @@
                   </ButtonBar>
                   <HBox fx:id="hbox" alignment="CENTER" layoutX="250.0" layoutY="39.0" prefHeight="35.0" prefWidth="405.0">
                      <children>
-                        <Label prefHeight="30.0" prefWidth="114.0" text="Name of route" textFill="WHITE">
+                        <Label prefHeight="30.0" prefWidth="114.0" text="Name of route" textFill="#0a0606">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -153,7 +205,7 @@
                               <Insets bottom="5.0" />
                            </padding>
                         </Label>
-                        <TextField fx:id="txf_search_nameofRoute" prefHeight="25.0" prefWidth="188.0">
+                        <TextField fx:id="txf_search_nameofRoute" onInputMethodTextChanged="#searchTextChanged" prefHeight="25.0" prefWidth="188.0">
                            <HBox.margin>
                               <Insets right="25.0" />
                            </HBox.margin>
@@ -168,5 +220,7 @@
             </Pane>
          </children>
       </Pane>
+      <JFXDrawer fx:id="jfx_drawer" alignment="TOP_LEFT" defaultDrawerSize="190.0" overLayVisible="false" prefHeight="690.0" prefWidth="99.0" />
+      <JFXHamburger id="hamburger" fx:id="jfx_hambur" alignment="TOP_RIGHT" layoutY="20.0" prefHeight="32.0" prefWidth="54.0" style="-fx-background-color: #;" />
    </children>
 </AnchorPane>
