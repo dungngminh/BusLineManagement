@@ -5,7 +5,7 @@ import Model.ViewModel.BusEntity_ViewModel;
 
 import java.sql.SQLException;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class BLL_Admin {
     private static BLL_Admin instance;
@@ -21,20 +21,22 @@ public class BLL_Admin {
         return instance;
     }
 
-    // BLL for BusPage
-    public boolean validate_Account(String username, String password) throws SQLException, ClassNotFoundException {
-        AtomicBoolean valid = new AtomicBoolean(false);
+    // BLL for login
+    public Integer validate_Account(String username, String password) throws SQLException, ClassNotFoundException {
+//        AtomicBoolean valid = new AtomicBoolean(false);
+        AtomicReference<Integer> valid = new AtomicReference<>(0);
         DAL.getInstance().getListAcc().forEach(account -> {
            if(account.getUsername().equals(username) &&
                    account.getPassword().equals(DAL.getInstance().encryptSHA1(password))) {
-               valid.set(true);
-               DAL.getInstance().setCurrent(account);
+                int idRole = ((RoleAccountEntity)account.getRoleAccountsByIdUser().toArray()[0]).getIdRole();
+                valid.set(idRole);
+                DAL.getInstance().setCurrent(account);
            }
         });
         return valid.get();
     }
 
-
+    // BLL for BusPage
     public List<TypeOfBusEntity> getListTypeOfBus() {
         return DAL.getInstance().getListTypeOfBus();
     }

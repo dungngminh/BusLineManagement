@@ -23,72 +23,19 @@ public class MainWindow implements Initializable {
     @FXML
     private JFXHamburger jfx_hambur;
 
-    private boolean flag = false;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            VBox box = FXMLLoader.load(getClass().getResource("/view/admin_view/NavBar.fxml"));
-            jfx_drawer.setSidePane(box);
-            for (Node node: box.getChildren()) {
-                if(node.lookup(".btn").getAccessibleText() != null) {
-                    node.lookup(".btn").addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-                        switch(node.lookup(".btn").getId()) {
-                            case "bus": {
-                                try {
-                                    showBusPage();
-                                } catch (IOException ioException) {
-                                    ioException.printStackTrace();
-                                }
-                                break;
-                            }
-                            case "route": {
-                                try {
-                                    showRoutePage();
-                                } catch (IOException ioException) {
-                                    ioException.printStackTrace();
-                                }
-                                break;
-                            }
-                            case "setting": {
-                                try {
-                                    showSettingPage();
-                                } catch (IOException ioException) {
-                                    ioException.printStackTrace();
-                                }
-                                break;
-                            }
-                            default:
-                                break;
-                        }
-                    });
-                }
-            }
-            HamburgerBackArrowBasicTransition burgerTask = new HamburgerBackArrowBasicTransition(jfx_hambur);
-            jfx_hambur.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-                if(flag)
-                    burgerTask.setRate(burgerTask.getRate() * -1);
-                flag = true;
-                burgerTask.play();
-                if(jfx_drawer.isShown()) {
-                    jfx_drawer.close();
-                }
-                else jfx_drawer.open();
-            });
+            // Init for side bar
+            InitSideBar.getInstance().initializeForNavBar(this.rootPane, this.jfx_drawer, this.jfx_hambur);
+            //done
+
+            // ...
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    public void showBusPage() throws IOException {
-        AnchorPane newPane = FXMLLoader.load(getClass().getResource("/view/admin_view/BusPage.fxml"));
-        this.rootPane.getChildren().setAll(newPane);
-    }
-    public void showRoutePage() throws IOException{
-        AnchorPane newPane = FXMLLoader.load(getClass().getResource("/view/admin_view/RoutePage.fxml"));
-        this.rootPane.getChildren().setAll(newPane);
-    }
-    public void showSettingPage() throws IOException {
-        AnchorPane newPane = FXMLLoader.load(getClass().getResource("/view/admin_view/Setting.fxml"));
-        this.rootPane.getChildren().setAll(newPane);
-    }
+
+    // ...
 
 }

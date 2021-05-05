@@ -36,6 +36,9 @@ public class BusPage implements Initializable {
     private JFXDrawer jfx_drawer;
 
     @FXML
+    private JFXHamburger jfx_hambur;
+
+    @FXML
     private ComboBox<String> cbx_nameoftype;
 
     @FXML
@@ -67,9 +70,6 @@ public class BusPage implements Initializable {
 
     @FXML
     private Button btn_cancel;
-
-    @FXML
-    private JFXHamburger jfx_hambur;
 
     // for tableview
     @FXML
@@ -123,56 +123,12 @@ public class BusPage implements Initializable {
     private static String CRUDType;
     private static int idBus;
     private static boolean flag = false;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            VBox box = FXMLLoader.load(getClass().getResource("/view/admin_view/NavBar.fxml"));
-            jfx_drawer.setSidePane(box);
-
-            for (Node node : box.getChildren()) {
-                if (node.lookup(".btn").getAccessibleText() != null) {
-                    node.lookup(".btn").addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-                        switch (node.lookup(".btn").getId()) {
-                            case "dashboard": {
-                                try {
-                                    showMainPage();
-                                } catch (IOException ioException) {
-                                    ioException.printStackTrace();
-                                }
-                                break;
-                            }
-                            case "setting": {
-                                try {
-                                    showSettingPage();
-                                } catch (IOException ioException) {
-                                    ioException.printStackTrace();
-                                }
-                                break;
-                            }
-                            default:
-                                break;
-                        }
-                    });
-                }
-            }
-
-            // Init navbar transformation
-            HamburgerBackArrowBasicTransition burgerTask = new HamburgerBackArrowBasicTransition(jfx_hambur);
-            jfx_hambur.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-                if (flag)
-                    burgerTask.setRate(burgerTask.getRate() * -1);
-                flag = true;
-                burgerTask.play();
-                if (jfx_drawer.isShown()) {
-                    jfx_drawer.toBack();
-                    jfx_drawer.close();
-                } else {
-                    jfx_drawer.open();
-                    jfx_drawer.toFront();
-                    jfx_hambur.toFront();
-                }
-
-            });
+            // Init for side bar
+            InitSideBar.getInstance().initializeForNavBar(this.pane, this.jfx_drawer, this.jfx_hambur);
             //done
             // Init combobox for type of bus
             BLL_Admin.getInstance().getListTypeOfBus().forEach(type -> {

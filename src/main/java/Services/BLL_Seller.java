@@ -14,5 +14,4 @@ public class BLL_Seller {
         return instance;
     }
 
-
 }

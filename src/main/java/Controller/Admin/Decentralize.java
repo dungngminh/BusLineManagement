@@ -79,61 +79,9 @@ public class Decentralize implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            VBox box = FXMLLoader.load(getClass().getResource("/view/admin_view/NavBar.fxml"));
-            jfx_drawer.setSidePane(box);
-
-            for (Node node : box.getChildren()) {
-                if (node.lookup(".btn").getAccessibleText() != null) {
-                    node.lookup(".btn").addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-                        switch (node.lookup(".btn").getId()) {
-                            case "dashboard": {
-                                try {
-                                    showMainPage();
-                                } catch (IOException ioException) {
-                                    ioException.printStackTrace();
-                                }
-                                break;
-                            }
-                            case "bus": {
-                                try {
-                                    showBusPage();
-                                } catch (IOException ioException) {
-                                    ioException.printStackTrace();
-                                }
-                                break;
-                            }
-                            case "setting": {
-                                try {
-                                    showSettingPage();
-                                } catch (IOException ioException) {
-                                    ioException.printStackTrace();
-                                }
-                                break;
-                            }
-                            default:
-                                break;
-                        }
-                    });
-                }
-            }
-
-            // Init navbar transformation
-            HamburgerBackArrowBasicTransition burgerTask = new HamburgerBackArrowBasicTransition(jfx_hambur);
-            jfx_hambur.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-                if (flag)
-                    burgerTask.setRate(burgerTask.getRate() * -1);
-                flag = true;
-                burgerTask.play();
-                if (jfx_drawer.isShown()) {
-                    jfx_drawer.toBack();
-                    jfx_drawer.close();
-                } else {
-                    jfx_drawer.open();
-                    jfx_drawer.toFront();
-                    jfx_hambur.toFront();
-                }
-
-            });
+            // Init for side bar
+            InitSideBar.getInstance().initializeForNavBar(this.pane, this.jfx_drawer, this.jfx_hambur);
+            //done
 
             //Init role
             cbx_role_add.getItems().add("Admin");
@@ -150,24 +98,6 @@ public class Decentralize implements Initializable {
             e.printStackTrace();
         }
     }
-
-    // Show nav bar pages
-    public void showMainPage() throws IOException {
-        AnchorPane newPane = FXMLLoader.load(getClass().getResource("/view/admin_view/MainWindow.fxml"));
-        this.pane.getChildren().setAll(newPane);
-    }
-
-    public void showBusPage() throws IOException {
-        AnchorPane newPane = FXMLLoader.load(getClass().getResource("/view/admin_view/BusPage.fxml"));
-        this.pane.getChildren().setAll(newPane);
-    }
-
-    public void showSettingPage() throws IOException {
-        AnchorPane newPane = FXMLLoader.load(getClass().getResource("/view/admin_view/Setting.fxml"));
-        this.pane.getChildren().setAll(newPane);
-    }
-
-    //done
 
 
     @FXML

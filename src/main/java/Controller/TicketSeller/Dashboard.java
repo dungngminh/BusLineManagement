@@ -5,6 +5,7 @@ import Services.BLL_Admin;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -47,70 +48,22 @@ public class Dashboard implements Initializable {
     private Button btn_search;
 
     // Var static
-    private static boolean flag = false;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            VBox box = FXMLLoader.load(getClass().getResource("/view/seller_view/NavBar.fxml"));
-            jfx_drawer.setSidePane(box);
-
-            for (Node node : box.getChildren()) {
-                if (node.lookup(".btn").getAccessibleText() != null) {
-                    node.lookup(".btn").addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-                        try {
-                            switch (node.lookup(".btn").getId()) {
-                                case "dashboard": {
-                                    showPage("Dashboard");
-                                    break;
-                                }
-                                case "ticketinfo":{
-                                    showPage("TicketInfo");
-                                    break;
-                                }
-                                case "ticketupdate":{
-                                    showPage("TicketUpdate");
-                                    break;
-                                }
-                                case "setting":{
-                                    showPage("Setting");
-                                    break;
-                                }
-                                default:
-                                    break;
-                            }
-                        } catch (IOException ioException) {
-                            ioException.printStackTrace();
-                        }
-
-                    });
-                }
-            }
-
-            // Init navbar transformation
-            HamburgerBackArrowBasicTransition burgerTask = new HamburgerBackArrowBasicTransition(jfx_hambur);
-            jfx_hambur.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-                if (flag)
-                    burgerTask.setRate(burgerTask.getRate() * -1);
-                flag = true;
-                burgerTask.play();
-                if (jfx_drawer.isShown()) {
-                    jfx_drawer.toBack();
-                    jfx_drawer.close();
-                } else {
-                    jfx_drawer.open();
-                    jfx_drawer.toFront();
-                    jfx_hambur.toFront();
-                }
-            });
+            // Init for side bar
+            InitSideBar.getInstance().initializeForNavBar(this.rootPane, this.jfx_drawer, this.jfx_hambur);
+            //done
 
             //Init combobox and datetime
-            BLL_Admin.getInstance().getProvinceName().forEach(type -> {
-                cbx_start.getItems().add(type);
-            });
-            BLL_Admin.getInstance().getProvinceName().forEach(type ->{
-                cbx_dest.getItems().add(type);
-            });
+            cbx_start.getItems().addAll(BLL_Admin.getInstance().getProvinceName());
+            cbx_dest.getItems().addAll(BLL_Admin.getInstance().getProvinceName());
+            cbx_start.getSelectionModel().selectFirst();
+            cbx_dest.getSelectionModel().selectFirst();
+//            BLL_Admin.getInstance().getProvinceName().forEach(type ->{
+//                cbx_dest.getItems().add(type);
+//            });
 
             datetime.setValue(LocalDate.now());
             //done!
@@ -135,6 +88,13 @@ public class Dashboard implements Initializable {
 
     @FXML
     void btn_search_clicked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void btn_start_Action(ActionEvent event) {
+        cbx_start.getItems().clear();
+        cbx_dest.getItems().clear();
 
     }
 }
