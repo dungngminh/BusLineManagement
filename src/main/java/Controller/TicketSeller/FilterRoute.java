@@ -8,6 +8,7 @@ import com.jfoenix.controls.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -20,6 +21,8 @@ import javafx.scene.layout.GridPane;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -123,6 +126,24 @@ public class FilterRoute implements Initializable {
     @FXML
     private Label lbl45;
 
+    @FXML
+    private Button btn1;
+
+    @FXML
+    private Button btn4;
+
+    @FXML
+    private Button btn3;
+
+    @FXML
+    private Button btn2;
+
+    @FXML
+    private Button btn5;
+
+    @FXML
+    private Label lbIndex;
+
     // Attributes
 
     ProvinceEntity startProvince;
@@ -137,6 +158,7 @@ public class FilterRoute implements Initializable {
         this.startProvince = startProvince;
         this.endProvince = endProvince;
         this.date = date;
+
     }
 
     @Override
@@ -147,8 +169,9 @@ public class FilterRoute implements Initializable {
             //done
 
             // Init gridpane
-            listRoute.addAll(BLL_Seller.getInstance().setUpFilterRouteView(startProvince, endProvince));
             calendar.setValue(date);
+            listRoute.addAll(BLL_Seller.getInstance().setUpFilterRouteView(startProvince, endProvince, java.sql.Date.valueOf(calendar.getValue())));
+            lbIndex.setText("1");
             reloadTable();
             //
         } catch (IOException e) {
@@ -156,65 +179,145 @@ public class FilterRoute implements Initializable {
         }
     }
 
-    public void initVariable(ProvinceEntity startProvince, ProvinceEntity endProvince, LocalDate date) {
-        this.startProvince = startProvince;
-        this.endProvince = endProvince;
-        this.date = date;
+    @FXML
+    void btn1_clicked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void btn2_clicked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void btn3_clicked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void btn4_clicked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void btn5_clicked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void btn_arrow_left_clicked(MouseEvent event) {
+        if(beginIndex - 5 > 0) {
+            beginIndex -= 5;
+            lbIndex.setText(String.valueOf(Integer.parseInt(lbIndex.getText()) - 1));
+            setGridpaneUnvisible();
+            reloadTable();
+        }
+        else {
+            new Alert(Alert.AlertType.WARNING, "Out of data!").showAndWait();
+        }
+    }
+
+    @FXML
+    void btn_arrow_right_clicked(MouseEvent event) {
+        if(beginIndex + 5 <= listRoute.size()) {
+            beginIndex += 5;
+            lbIndex.setText(String.valueOf(Integer.parseInt(lbIndex.getText()) + 1));
+            setGridpaneUnvisible();
+            reloadTable();
+        }
+        else {
+            new Alert(Alert.AlertType.WARNING, "Out of data!").showAndWait();
+        }
     }
 
     public void reloadTable() {
-        new Alert(Alert.AlertType.WARNING, String.valueOf(listRoute.size())).showAndWait();
+//        new Alert(Alert.AlertType.WARNING, String.valueOf(listRoute.size())).showAndWait();
         for(int i = beginIndex; i < beginIndex + 5; ++i) {
             if (i > listRoute.size()) break;
             switch (i - beginIndex + 1) {
                 case 1: {
-                    Image img = new Image(new ByteArrayInputStream(listRoute.get(i - beginIndex).getPicture()));
+                    img01.setVisible(true);
+                    lbl11.setVisible(true);
+                    lbl21.setVisible(true);
+                    lbl31.setVisible(true);
+                    lbl41.setVisible(true);
+                    btn1.setVisible(true);
+                    Image img = new Image(new ByteArrayInputStream(listRoute.get(beginIndex - 1).getPicture()));
                     img01.setImage(img);
-                    lbl11.setText(listRoute.get(i - beginIndex).getTypeName());
-                    lbl21.setText(listRoute.get(i - beginIndex).getStartStation());
-                    lbl31.setText(listRoute.get(i - beginIndex).getDestStation());
-                    lbl41.setText(listRoute.get(i - beginIndex).getDepartTime().toString() + "\nDuration: " +
-                            String.valueOf(listRoute.get(i - beginIndex).getDuration()));
+                    lbl11.setText(listRoute.get(beginIndex - 1).getTypeName());
+                    lbl21.setText(listRoute.get(beginIndex - 1).getStartStation());
+                    lbl31.setText(listRoute.get(beginIndex - 1).getDestStation());
+                    String time = new SimpleDateFormat("HH:mm:ss").format(listRoute.get(beginIndex - 1).getDepartTime());
+                    lbl41.setText(time + "\nDuration: " +
+                            listRoute.get(beginIndex - 1).getDuration() + "h");
                     break;
                 }
                 case 2: {
-                    Image img = new Image(new ByteArrayInputStream(listRoute.get(i - beginIndex).getPicture()));
+                    img02.setVisible(true);
+                    lbl12.setVisible(true);
+                    lbl22.setVisible(true);
+                    lbl32.setVisible(true);
+                    lbl42.setVisible(true);
+                    btn2.setVisible(true);
+                    Image img = new Image(new ByteArrayInputStream(listRoute.get(beginIndex).getPicture()));
                     img02.setImage(img);
-                    lbl12.setText(listRoute.get(i - beginIndex).getTypeName());
-                    lbl22.setText(listRoute.get(i - beginIndex).getStartStation());
-                    lbl32.setText(listRoute.get(i - beginIndex).getDestStation());
-                    lbl42.setText(listRoute.get(i - beginIndex).getDepartTime().toString() + "\nDuration: " +
-                            String.valueOf(listRoute.get(i - beginIndex).getDuration()));
+                    lbl12.setText(listRoute.get(beginIndex).getTypeName());
+                    lbl22.setText(listRoute.get(beginIndex).getStartStation());
+                    lbl32.setText(listRoute.get(beginIndex).getDestStation());
+                    String time = new SimpleDateFormat("HH:mm:ss").format(listRoute.get(beginIndex).getDepartTime());
+                    lbl42.setText(time + "\nDuration: " +
+                            listRoute.get(beginIndex).getDuration() + "h");
                     break;
                 }
                 case 3: {
-                    Image img = new Image(new ByteArrayInputStream(listRoute.get(i - beginIndex).getPicture()));
+                    img03.setVisible(true);
+                    lbl13.setVisible(true);
+                    lbl23.setVisible(true);
+                    lbl33.setVisible(true);
+                    lbl43.setVisible(true);
+                    btn3.setVisible(true);
+                    Image img = new Image(new ByteArrayInputStream(listRoute.get(beginIndex + 1).getPicture()));
                     img03.setImage(img);
-                    lbl13.setText(listRoute.get(i - beginIndex).getTypeName());
-                    lbl23.setText(listRoute.get(i - beginIndex).getStartStation());
-                    lbl33.setText(listRoute.get(i - beginIndex).getDestStation());
-                    lbl43.setText(listRoute.get(i - beginIndex).getDepartTime().toString() + "\nDuration: " +
-                            String.valueOf(listRoute.get(i - beginIndex).getDuration()));
+                    lbl13.setText(listRoute.get(beginIndex + 1).getTypeName());
+                    lbl23.setText(listRoute.get(beginIndex + 1).getStartStation());
+                    lbl33.setText(listRoute.get(beginIndex + 1).getDestStation());
+                    String time = new SimpleDateFormat("HH:mm:ss").format(listRoute.get(beginIndex + 1).getDepartTime());
+                    lbl43.setText(time + "\nDuration: " +
+                            listRoute.get(beginIndex + 1).getDuration() + "h");
                     break;
                 }
                 case 4: {
-                    Image img = new Image(new ByteArrayInputStream(listRoute.get(i - beginIndex).getPicture()));
+                    img04.setVisible(true);
+                    lbl14.setVisible(true);
+                    lbl24.setVisible(true);
+                    lbl34.setVisible(true);
+                    lbl44.setVisible(true);
+                    btn4.setVisible(true);
+                    Image img = new Image(new ByteArrayInputStream(listRoute.get(beginIndex + 2).getPicture()));
                     img04.setImage(img);
-                    lbl14.setText(listRoute.get(i - beginIndex).getTypeName());
-                    lbl24.setText(listRoute.get(i - beginIndex).getStartStation());
-                    lbl34.setText(listRoute.get(i - beginIndex).getDestStation());
-                    lbl44.setText(listRoute.get(i - beginIndex).getDepartTime().toString() + "\nDuration: " +
-                            String.valueOf(listRoute.get(i - beginIndex).getDuration()));
+                    lbl14.setText(listRoute.get(beginIndex + 2).getTypeName());
+                    lbl24.setText(listRoute.get(beginIndex + 2).getStartStation());
+                    lbl34.setText(listRoute.get(beginIndex + 2).getDestStation());
+                    String time = new SimpleDateFormat("HH:mm:ss").format(listRoute.get(beginIndex + 2).getDepartTime());
+                    lbl44.setText(time + "\nDuration: " +
+                            listRoute.get(beginIndex + 2).getDuration() + "h");
                     break;
                 }
                 case 5: {
-                    Image img = new Image(new ByteArrayInputStream(listRoute.get(i - beginIndex).getPicture()));
+                    img05.setVisible(true);
+                    lbl15.setVisible(true);
+                    lbl25.setVisible(true);
+                    lbl35.setVisible(true);
+                    lbl45.setVisible(true);
+                    btn5.setVisible(true);
+                    Image img = new Image(new ByteArrayInputStream(listRoute.get(beginIndex + 3).getPicture()));
                     img05.setImage(img);
-                    lbl15.setText(listRoute.get(i - beginIndex).getTypeName());
-                    lbl25.setText(listRoute.get(i - beginIndex).getStartStation());
-                    lbl35.setText(listRoute.get(i - beginIndex).getDestStation());
-                    lbl45.setText(listRoute.get(i - beginIndex).getDepartTime().toString() + "\nDuration: " +
-                            String.valueOf(listRoute.get(i - beginIndex).getDuration()));
+                    lbl15.setText(listRoute.get(beginIndex + 3).getTypeName());
+                    lbl25.setText(listRoute.get(beginIndex + 3).getStartStation());
+                    lbl35.setText(listRoute.get(beginIndex + 3).getDestStation());
+                    String time = new SimpleDateFormat("HH:mm:ss").format(listRoute.get(beginIndex + 3).getDepartTime());
+                    lbl45.setText(time + "\nDuration: " +
+                            listRoute.get(beginIndex + 3).getDuration() + "h");
                     break;
                 }
 
@@ -226,9 +329,36 @@ public class FilterRoute implements Initializable {
         }
     }
 
-    @FXML
-    void btn_arrow_right_clicked(MouseEvent event) {
-
+    public void setGridpaneUnvisible() {
+        img01.setVisible(false);
+        img02.setVisible(false);
+        img03.setVisible(false);
+        img04.setVisible(false);
+        img05.setVisible(false);
+        lbl11.setVisible(false);
+        lbl21.setVisible(false);
+        lbl31.setVisible(false);
+        lbl41.setVisible(false);
+        lbl12.setVisible(false);
+        lbl22.setVisible(false);
+        lbl32.setVisible(false);
+        lbl42.setVisible(false);
+        lbl13.setVisible(false);
+        lbl23.setVisible(false);
+        lbl33.setVisible(false);
+        lbl43.setVisible(false);
+        lbl14.setVisible(false);
+        lbl24.setVisible(false);
+        lbl34.setVisible(false);
+        lbl44.setVisible(false);
+        lbl15.setVisible(false);
+        lbl25.setVisible(false);
+        lbl35.setVisible(false);
+        lbl45.setVisible(false);
+        btn1.setVisible(false);
+        btn2.setVisible(false);
+        btn3.setVisible(false);
+        btn4.setVisible(false);
+        btn5.setVisible(false);
     }
-
 }

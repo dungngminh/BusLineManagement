@@ -3,7 +3,7 @@ package Model.ViewModel;
 import java.util.Date;
 
 public class FilterRoute_ViewModel {
-    private Integer idFilter;
+    private Integer idTrip;
     private byte[] picture;
     private String typeName;
     private String startStation;
@@ -12,14 +12,12 @@ public class FilterRoute_ViewModel {
     private int duration;
 
 
-
-
-    public Integer getIdFilter() {
-        return idFilter;
+    public Integer getIdTrip() {
+        return idTrip;
     }
 
-    public void setIdFilter(Integer idFilter) {
-        this.idFilter = idFilter;
+    public void setIdTrip(Integer idTrip) {
+        this.idTrip = idTrip;
     }
 
     public byte[] getPicture() {
@@ -72,8 +70,8 @@ public class FilterRoute_ViewModel {
 
 
 
-    public FilterRoute_ViewModel(Integer idFilter, byte[] picture, String typeName, String startStation, String destStation, Date departTime, int duration) {
-        this.idFilter = idFilter;
+    public FilterRoute_ViewModel(Integer idTrip, byte[] picture, String typeName, String startStation, String destStation, Date departTime, int duration) {
+        this.idTrip = idTrip;
         this.picture = picture;
         this.typeName = typeName;
         this.startStation = startStation;

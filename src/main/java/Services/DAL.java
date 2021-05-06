@@ -351,6 +351,7 @@ public class DAL {
             query.setParameter("stStat", x.get(0));
             query.setParameter("enStat", x.get(1));
 
+//            System.out.println(query.getResultList().size());
             result.addAll(query.getResultList());
             session.getTransaction().commit();
 
@@ -367,17 +368,23 @@ public class DAL {
 
         for(RouteEntity x: listRoute) {
             session.beginTransaction();
-            Query<TripInformationEntity> query = session.createQuery("SELECT TRIP FROM  TripInformationEntity TRIP, ScheduleEntity SCH " +
-                    "WHERE TRIP.idSchedule = SCH.idSchedule AND SCH.isDelete = false AND SCH.idRoute = :idRoute",
-                    TripInformationEntity.class );
+            Query<TripInformationEntity> query = session.createQuery("SELECT TRIP FROM  TripInformationEntity TRIP, " +
+                            "ScheduleEntity SCH, RouteEntity ROU, BusEntity BUS, TypeOfBusEntity TYPE, DriverEntity DRI " +
+                            "WHERE TRIP.idSchedule = SCH.idSchedule AND SCH.isDelete = false AND SCH.idRoute = :idRoute " +
+                            "AND ROU.status = 0 AND TRIP.idDriver = DRI.idDriver AND DRI.status = 0 AND DRI.isDelete = false " +
+                            "AND SCH.idBus = BUS.idBus AND BUS.isDelete = false " +
+                            "AND BUS.status = 0 AND BUS.idType = TYPE.idType AND TYPE.isDelete = false",
+                            TripInformationEntity.class );
             query.setParameter("idRoute", x.getIdRoute());
-
-            result.addAll(query.getResultList());
+            System.out.println(x.getIdRoute());
+            query.getResultList().forEach(qr ->{
+               if(!result.contains(qr)) result.add(qr);
+            });
             session.getTransaction().commit();
 
         }
 
-
+//        System.out.println(result.size());
         session.close();
         return result;
     }

@@ -37,40 +37,35 @@ public class BLL_Seller {
         for(Object s1: list1) {
             for(Object s2: list2) {
                 res.add(Arrays.asList(((StationEntity)s1).getStationName(), ((StationEntity)s2).getStationName()));
+                System.out.println(((StationEntity)s1).getStationName() + " " + ((StationEntity)s2).getStationName());
+
             }
         }
 
         return res;
     }
 
-    public List<FilterRoute_ViewModel> setUpFilterRouteView(ProvinceEntity startPro, ProvinceEntity endPro) {
+    public List<FilterRoute_ViewModel> setUpFilterRouteView(ProvinceEntity startPro, ProvinceEntity endPro, Date departDate) {
         List<RouteEntity> listRoute = DAL.getInstance().getFilterRoute(getPairStationFromTwoProvince(startPro, endPro));
+
         List<TripInformationEntity> listTrip = DAL.getInstance().getFilterTrip(listRoute);
         List<FilterRoute_ViewModel> result = new ArrayList<>();
 
-        AtomicInteger id = new AtomicInteger(1);
         listTrip.forEach(trip ->{
-            byte[] picture = trip.getScheduleByIdSchedule().getBusByIdBus().getTypeOfBusByIdType().getPicture();
-            String typeName = trip.getScheduleByIdSchedule().getBusByIdBus().getTypeOfBusByIdType().getTypeName();
-            String startStation = trip.getScheduleByIdSchedule().getRouteByIdRoute().getStartStation();
-            String destStation = trip.getScheduleByIdSchedule().getRouteByIdRoute().getEndStation();
-            Date departTime = trip.getScheduleByIdSchedule().getDepartTime();
-            int duration = trip.getScheduleByIdSchedule().getDuration();
+            if(trip.getDepartDate().compareTo(departDate) == 0) {
+                byte[] picture = trip.getScheduleByIdSchedule().getBusByIdBus().getTypeOfBusByIdType().getPicture();
+                String typeName = trip.getScheduleByIdSchedule().getBusByIdBus().getTypeOfBusByIdType().getTypeName();
+                String startStation = trip.getScheduleByIdSchedule().getRouteByIdRoute().getStartStation();
+                String destStation = trip.getScheduleByIdSchedule().getRouteByIdRoute().getEndStation();
+                Date departTime = trip.getScheduleByIdSchedule().getDepartTime();
+                int duration = trip.getScheduleByIdSchedule().getDuration();
 
-            result.add(new FilterRoute_ViewModel(id.get(), picture, typeName, startStation, destStation, departTime, duration));
-            id.addAndGet(1);
+                result.add(new FilterRoute_ViewModel(trip.getIdTrip(), picture, typeName, startStation, destStation, departTime, duration));
+            }
+
         });
 
         return result;
-    }
-
-    public Node getNodeByCoordinate(Integer row, Integer column, GridPane grid) {
-        for (Node node : grid.getChildren()) {
-            if(GridPane.getColumnIndex(node) == row && GridPane.getColumnIndex(node) == column){
-                return node;
-            }
-        }
-        return null;
     }
 
 }
