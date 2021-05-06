@@ -60,7 +60,7 @@ public class BLL_Seller {
                 Date departTime = trip.getScheduleByIdSchedule().getDepartTime();
                 int duration = trip.getScheduleByIdSchedule().getDuration();
 
-                result.add(new FilterRoute_ViewModel(trip.getIdTrip(), picture, typeName, startStation, destStation, departTime, duration));
+                result.add(new FilterRoute_ViewModel(trip, picture, typeName, startStation, destStation, departTime, duration));
             }
 
         });

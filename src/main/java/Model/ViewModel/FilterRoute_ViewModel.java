@@ -1,9 +1,12 @@
 package Model.ViewModel;
 
+import Model.TripInformationEntity;
+
 import java.util.Date;
 
 public class FilterRoute_ViewModel {
-    private Integer idTrip;
+
+    private TripInformationEntity modelTrip;
     private byte[] picture;
     private String typeName;
     private String startStation;
@@ -11,13 +14,12 @@ public class FilterRoute_ViewModel {
     private Date departTime;
     private int duration;
 
-
-    public Integer getIdTrip() {
-        return idTrip;
+    public TripInformationEntity getModelTrip() {
+        return modelTrip;
     }
 
-    public void setIdTrip(Integer idTrip) {
-        this.idTrip = idTrip;
+    public void setModelTrip(TripInformationEntity modelTrip) {
+        this.modelTrip = modelTrip;
     }
 
     public byte[] getPicture() {
@@ -70,8 +72,8 @@ public class FilterRoute_ViewModel {
 
 
 
-    public FilterRoute_ViewModel(Integer idTrip, byte[] picture, String typeName, String startStation, String destStation, Date departTime, int duration) {
-        this.idTrip = idTrip;
+    public FilterRoute_ViewModel(TripInformationEntity modelTrip, byte[] picture, String typeName, String startStation, String destStation, Date departTime, int duration) {
+        this.modelTrip = modelTrip;
         this.picture = picture;
         this.typeName = typeName;
         this.startStation = startStation;

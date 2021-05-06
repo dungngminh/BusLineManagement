@@ -16,3 +16,8 @@
     -fx-border-color: white;
     -fx-border-width: 3px;
 }
+
+.date {
+    -fx-background-color: #F1F2EB;
+    -fx-font-size: 20px;
+}

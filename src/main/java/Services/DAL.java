@@ -376,7 +376,7 @@ public class DAL {
                             "AND BUS.status = 0 AND BUS.idType = TYPE.idType AND TYPE.isDelete = false",
                             TripInformationEntity.class );
             query.setParameter("idRoute", x.getIdRoute());
-            System.out.println(x.getIdRoute());
+//            System.out.println(x.getIdRoute());
             query.getResultList().forEach(qr ->{
                if(!result.contains(qr)) result.add(qr);
             });

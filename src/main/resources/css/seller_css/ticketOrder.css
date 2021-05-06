@@ -1,0 +1,15 @@
+.pane {
+    -fx-background-image: url(../../images/pane_login.jpg);
+    -fx-background-size: 100% 100%;
+}
+
+.cbx {
+    -fx-background-color: #F1F2EB;
+    -fx-font-size: 20px;
+}
+
+#pane1 {
+    -fx-background-color: #D8DBE2;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+}
