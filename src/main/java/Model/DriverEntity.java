@@ -36,7 +36,7 @@ public class DriverEntity {
     }
 
     @Basic
-    @Column(name = "phone", nullable = false, length = 10)
+    @Column(name = "phone", nullable = false, unique = true, length = 10)
     public String getPhone() {
         return phone;
     }

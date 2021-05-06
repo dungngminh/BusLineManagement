@@ -37,7 +37,7 @@ public class BusEntity {
     }
 
     @Basic
-    @Column(name = "plateNumber", nullable = false, length = 10)
+    @Column(name = "plateNumber", nullable = false, unique = true, length = 10)
     public String getPlateNumber() {
         return plateNumber;
     }

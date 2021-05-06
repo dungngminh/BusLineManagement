@@ -90,11 +90,13 @@ public class Dashboard implements Initializable {
     void btn_search_clicked(MouseEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/seller_view/FilterRoute.fxml"));
 
-        AnchorPane newPane = loader.load();
-        FilterRoute controller = loader.<FilterRoute>getController();
-        controller.initVariable(cbx_start.getSelectionModel().getSelectedItem(),
-                cbx_dest.getSelectionModel().getSelectedItem(), datetime.getValue());
 
+        FilterRoute controller = new FilterRoute(cbx_start.getSelectionModel().getSelectedItem(),
+                cbx_dest.getSelectionModel().getSelectedItem(), datetime.getValue());
+        loader.setController(controller);
+//        controller.initVariable(cbx_start.getSelectionModel().getSelectedItem(),
+//                cbx_dest.getSelectionModel().getSelectedItem(), datetime.getValue());
+        AnchorPane newPane = loader.load();
         this.rootPane.getChildren().setAll(newPane);
     }
 

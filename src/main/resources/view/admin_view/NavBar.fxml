@@ -17,7 +17,7 @@
          <Insets top="5.0" />
       </VBox.margin>
    </ImageView>
-    <Button id="dashboard" accessibleText="dashboard" contentDisplay="TOP" mnemonicParsing="false" prefHeight="75.0" prefWidth="140.0" styleClass="btn" stylesheets="@../../css/nav_bar.css" text="Dashboard" textAlignment="JUSTIFY" textFill="WHITE">
+    <Button id="dashboard" accessibleText="dashboard" contentDisplay="TOP" mnemonicParsing="false" prefHeight="75.0" prefWidth="160.0" styleClass="btn" stylesheets="@../../css/nav_bar.css" text="Dashboard" textAlignment="JUSTIFY" textFill="WHITE">
         <font>
           <Font name="Segoe UI Bold" size="16.0" />
         </font>
@@ -38,10 +38,10 @@
          <Insets bottom="10.0" />
       </VBox.margin>
       <cursor>
-         <Cursor fx:constant="DEFAULT" />
+         <Cursor fx:constant="HAND" />
       </cursor>
     </Button>
-    <Button id="bus" accessibleText="bus" contentDisplay="TOP" mnemonicParsing="false" prefHeight="70.0" prefWidth="140.0" styleClass="btn" stylesheets="@../../css/nav_bar.css" text="Bus" textAlignment="JUSTIFY" textFill="WHITE">
+    <Button id="bus" accessibleText="bus" contentDisplay="TOP" mnemonicParsing="false" prefHeight="70.0" prefWidth="160.0" styleClass="btn" stylesheets="@../../css/nav_bar.css" text="Bus" textAlignment="JUSTIFY" textFill="WHITE">
         <font>
           <Font name="Segoe UI Bold" size="16.0" />
         </font>
@@ -59,10 +59,10 @@
          <Insets bottom="10.0" />
       </VBox.margin>
       <cursor>
-         <Cursor fx:constant="DEFAULT" />
+         <Cursor fx:constant="HAND" />
       </cursor>
     </Button>
-    <Button id="route" accessibleText="route" contentDisplay="TOP" mnemonicParsing="false" prefHeight="50.0" prefWidth="140.0" styleClass="btn" stylesheets="@../../css/nav_bar.css" text="Route" textAlignment="JUSTIFY" textFill="WHITE">
+    <Button id="route" accessibleText="route" contentDisplay="TOP" mnemonicParsing="false" prefHeight="50.0" prefWidth="160.0" styleClass="btn" stylesheets="@../../css/nav_bar.css" text="Route" textAlignment="JUSTIFY" textFill="WHITE">
         <font>
           <Font name="Segoe UI Bold" size="16.0" />
         </font>
@@ -80,10 +80,10 @@
          <Insets bottom="10.0" />
       </VBox.margin>
       <cursor>
-         <Cursor fx:constant="DEFAULT" />
+         <Cursor fx:constant="HAND" />
       </cursor>
     </Button>
-    <Button id="trip" accessibleText="trip" contentDisplay="TOP" mnemonicParsing="false" prefHeight="50.0" prefWidth="140.0" styleClass="btn" stylesheets="@../../css/nav_bar.css" text="Trip" textAlignment="JUSTIFY" textFill="WHITE">
+    <Button id="trip" accessibleText="trip" contentDisplay="TOP" mnemonicParsing="false" prefHeight="50.0" prefWidth="160.0" styleClass="btn" stylesheets="@../../css/nav_bar.css" text="Trip" textAlignment="JUSTIFY" textFill="WHITE">
         <font>
           <Font name="Segoe UI Bold" size="16.0" />
         </font>
@@ -101,10 +101,10 @@
          <Insets bottom="10.0" />
       </VBox.margin>
       <cursor>
-         <Cursor fx:constant="DEFAULT" />
+         <Cursor fx:constant="HAND" />
       </cursor>
     </Button>
-    <Button id="setting" accessibleText="decen" contentDisplay="TOP" mnemonicParsing="false" prefHeight="50.0" prefWidth="140.0" styleClass="btn" stylesheets="@../../css/nav_bar.css" text="Setting" textAlignment="JUSTIFY" textFill="WHITE">
+    <Button id="setting" accessibleText="decen" contentDisplay="TOP" mnemonicParsing="false" prefHeight="50.0" prefWidth="160.0" styleClass="btn" stylesheets="@../../css/nav_bar.css" text="Setting" textAlignment="JUSTIFY" textFill="WHITE">
         <font>
           <Font name="Segoe UI Bold" size="16.0" />
         </font>
@@ -122,7 +122,7 @@
          <Insets bottom="10.0" />
       </VBox.margin>
       <cursor>
-         <Cursor fx:constant="DEFAULT" />
+         <Cursor fx:constant="HAND" />
       </cursor>
     </Button>
    <padding>

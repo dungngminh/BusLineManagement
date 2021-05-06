@@ -13,7 +13,7 @@
     -fx-background-radius: 9px 9px 9px 9px;
     -fx-border-radius: 7px 7px 7px 7px;
     -fx-border-color: white;
-    -fx-border-width: 3px;
+    -fx-border-width: 0px;
 }
 
 .subbtn {
@@ -26,5 +26,5 @@
     -fx-background-radius: 9px 9px 9px 9px;
     -fx-border-radius: 7px 7px 7px 7px;
     -fx-border-color: white;
-    -fx-border-width: 3px;
+    /*-fx-border-width: -2px;*/
 }

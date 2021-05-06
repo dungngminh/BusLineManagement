@@ -342,9 +342,9 @@ public class DAL {
         List<RouteEntity> result = new ArrayList<>();
 
         Session session = HibernateUtils.getSessionFactory().openSession();
-        session.beginTransaction();
-        for(List<String> x: listPairStation) {
 
+        for(List<String> x: listPairStation) {
+            session.beginTransaction();
             Query<RouteEntity> query = session.createQuery("FROM RouteEntity ROU" +
                     " WHERE ROU.startStation = :stStat and ROU.endStation = :enStat", RouteEntity.class);
 
@@ -352,29 +352,33 @@ public class DAL {
             query.setParameter("enStat", x.get(1));
 
             result.addAll(query.getResultList());
+            session.getTransaction().commit();
+
 
         }
-        session.getTransaction().commit();
         session.close();
 
         return result;
     }
 
-    public List<ScheduleEntity> getFilterSchedule(List<RouteEntity> listRoute) {
-        List<ScheduleEntity> result = new ArrayList<>();
+    public List<TripInformationEntity> getFilterTrip(List<RouteEntity> listRoute) {
+        List<TripInformationEntity> result = new ArrayList<>();
         Session session = HibernateUtils.getSessionFactory().openSession();
-        session.beginTransaction();
+
         for(RouteEntity x: listRoute) {
-            Query<ScheduleEntity> query = session.createQuery("FROM ScheduleEntity SCH" +
-                    " WHERE SCH.idRoute = :idRoute" );
+            session.beginTransaction();
+            Query<TripInformationEntity> query = session.createQuery("SELECT TRIP FROM  TripInformationEntity TRIP, ScheduleEntity SCH " +
+                    "WHERE TRIP.idSchedule = SCH.idSchedule AND SCH.isDelete = false AND SCH.idRoute = :idRoute",
+                    TripInformationEntity.class );
             query.setParameter("idRoute", x.getIdRoute());
 
             result.addAll(query.getResultList());
+            session.getTransaction().commit();
+
         }
 
-        session.getTransaction().commit();
-        session.close();
 
+        session.close();
         return result;
     }
 

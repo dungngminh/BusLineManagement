@@ -20,9 +20,9 @@
       <JFXDrawer fx:id="jfx_drawer" defaultDrawerSize="190.0" layoutX="-2.0" prefHeight="650.0" prefWidth="103.0" />
       <Pane prefHeight="650.0" prefWidth="1166.0">
          <children>
-            <GridPane layoutX="69.0" layoutY="25.0" prefHeight="557.0" prefWidth="1069.0">
+            <GridPane fx:id="gridpane" layoutX="69.0" layoutY="25.0" prefHeight="557.0" prefWidth="1069.0">
               <columnConstraints>
-                <ColumnConstraints fx:id="gridpane" halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -68,107 +68,107 @@
                         <Font name="Calibri Bold" size="18.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="106.0" fitWidth="181.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" />
-                  <ImageView fitHeight="106.0" fitWidth="181.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="5" />
-                  <ImageView fitHeight="106.0" fitWidth="181.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4" />
-                  <ImageView fitHeight="106.0" fitWidth="181.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3" />
-                  <ImageView fitHeight="106.0" fitWidth="181.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2" />
-                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                  <ImageView fx:id="img01" fitHeight="106.0" fitWidth="181.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" />
+                  <ImageView fx:id="img02" fitHeight="106.0" fitWidth="181.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2" />
+                  <ImageView fx:id="img03" fitHeight="106.0" fitWidth="181.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3" />
+                  <ImageView fx:id="img04" fitHeight="106.0" fitWidth="181.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4" />
+                  <ImageView fx:id="img05" fitHeight="106.0" fitWidth="181.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="5" />
+                  <Label fx:id="lbl11" alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Calibri" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                  <Label fx:id="lbl21" alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Calibri" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                  <Label fx:id="lbl31" alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Calibri" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                  <Label fx:id="lbl41" alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Calibri" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                  <Label fx:id="lbl12" alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Calibri" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                  <Label fx:id="lbl22" alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Calibri" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                  <Label fx:id="lbl32" alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Calibri" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                  <Label fx:id="lbl42" alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Calibri" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+                  <Label fx:id="lbl13" alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Calibri" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                  <Label fx:id="lbl23" alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Calibri" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                  <Label fx:id="lbl33" alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Calibri" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                  <Label fx:id="lbl43" alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Calibri" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                  <Label fx:id="lbl14" alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Calibri" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+                  <Label fx:id="lbl24" alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Calibri" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+                  <Label fx:id="lbl34" alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Calibri" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+                  <Label fx:id="lbl44" alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Calibri" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+                  <Label fx:id="lbl15" alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Calibri" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+                  <Label fx:id="lbl25" alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Calibri" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+                  <Label fx:id="lbl35" alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Calibri" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+                  <Label fx:id="lbl45" alignment="CENTER" prefHeight="105.0" prefWidth="178.0" text="Label" wrapText="true" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Calibri" size="18.0" />
                      </font>
@@ -215,7 +215,7 @@
                   </Button>
                </children>
             </GridPane>
-            <ImageView fx:id="arrow_right" fitHeight="30.0" fitWidth="40.0" layoutX="604.0" layoutY="603.0" pickOnBounds="true" preserveRatio="true" rotate="-180.0">
+            <ImageView fx:id="arrow_right" fitHeight="30.0" fitWidth="40.0" layoutX="604.0" layoutY="603.0" onMouseClicked="#btn_arrow_right_clicked" pickOnBounds="true" preserveRatio="true" rotate="-180.0">
                <image>
                   <Image url="@../../images/Icon/arrow.png" />
                </image>
