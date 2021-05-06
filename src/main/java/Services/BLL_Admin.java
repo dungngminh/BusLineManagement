@@ -2,7 +2,14 @@ package Services;
 
 import Model.*;
 import Model.ViewModel.BusEntity_ViewModel;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.hssf.util.CellReference;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
 
+import java.io.*;
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
@@ -26,12 +33,12 @@ public class BLL_Admin {
 //        AtomicBoolean valid = new AtomicBoolean(false);
         AtomicReference<Integer> valid = new AtomicReference<>(0);
         DAL.getInstance().getListAcc().forEach(account -> {
-           if(account.getUsername().equals(username) &&
-                   account.getPassword().equals(DAL.getInstance().encryptSHA1(password))) {
-                int idRole = ((RoleAccountEntity)account.getRoleAccountsByIdUser().toArray()[0]).getIdRole();
+            if (account.getUsername().equals(username) &&
+                    account.getPassword().equals(DAL.getInstance().encryptSHA1(password))) {
+                int idRole = ((RoleAccountEntity) account.getRoleAccountsByIdUser().toArray()[0]).getIdRole();
                 valid.set(idRole);
                 DAL.getInstance().setCurrent(account);
-           }
+            }
         });
         return valid.get();
     }
@@ -58,9 +65,9 @@ public class BLL_Admin {
     public List<BusEntity_ViewModel> updateTableBusPage(int slot, String name) {
         List<BusEntity_ViewModel> list = new ArrayList<BusEntity_ViewModel>();
         DAL.getInstance().getDataForBusPage().forEach(b -> {
-            if(slot == 0 && b.getBusName().contains(name))
+            if (slot == 0 && b.getBusName().contains(name))
                 list.add(new BusEntity_ViewModel(b.getIdBus(), b.getBusName(), b.getPlateNumber(), b.getTypeOfBusByIdType().getTypeName(), b.getTypeOfBusByIdType().getBrandName(), b.getTypeOfBusByIdType().getSlot(), b.getStatus()));
-            else if(slot == b.getTypeOfBusByIdType().getSlot() && b.getBusName().contains(name)) {
+            else if (slot == b.getTypeOfBusByIdType().getSlot() && b.getBusName().contains(name)) {
                 list.add(new BusEntity_ViewModel(b.getIdBus(), b.getBusName(), b.getPlateNumber(), b.getTypeOfBusByIdType().getTypeName(), b.getTypeOfBusByIdType().getBrandName(), b.getTypeOfBusByIdType().getSlot(), b.getStatus()));
             }
         });
@@ -78,7 +85,7 @@ public class BLL_Admin {
 
     // BLL for Decentralize Page
     public List<AccountEntity> getListAcc() throws SQLException, ClassNotFoundException {
-        return  DAL.getInstance().getListAcc();
+        return DAL.getInstance().getListAcc();
     }
 
     public void addUserToAccount(String username, String password, int idRole) {
@@ -95,12 +102,11 @@ public class BLL_Admin {
     public List<DriverEntity> getListDriver(int status, String name) {
         List<DriverEntity> data = new ArrayList<>();
         DAL.getInstance().getListDriver().forEach(driver -> {
-           if(status == -1 && driver.getNameDriver().contains(name)) {
-               data.add(driver);
-           }
-           else if(status == driver.getStatus() && driver.getNameDriver().contains(name)) {
-               data.add(driver);
-           }
+            if (status == -1 && driver.getNameDriver().contains(name)) {
+                data.add(driver);
+            } else if (status == driver.getStatus() && driver.getNameDriver().contains(name)) {
+                data.add(driver);
+            }
         });
         return data;
     }
@@ -118,18 +124,20 @@ public class BLL_Admin {
     public void updateDriver(int idDriver, String driverName, String phoneNumber, String address, int stt) {
         DAL.getInstance().updateDriver(idDriver, driverName, phoneNumber, address, stt);
     }
+
     public void deleteDriver(int idDriver) {
         DAL.getInstance().deleteDriver(idDriver);
     }
     //done Driver ?
 
     //Province
-    public List<ProvinceEntity> getProvinceName(){
+    public List<ProvinceEntity> getProvinceName() {
         return DAL.getInstance().getProvinceName();
     }
+
     //done ?
     //Route
-    public void addRoute(String startStation, String endStation,String note, int distance) {
+    public void addRoute(String startStation, String endStation, String note, int distance) {
         var route = new RouteEntity();
         route.setStartStation(startStation);
         route.setEndStation(endStation);
@@ -137,25 +145,37 @@ public class BLL_Admin {
         route.setNote(note);
         DAL.getInstance().insertRoute(route);
     }
+
     //find route using route, start + " end"
     public List<RouteEntity> getRoutes(int status, String name) {
         List<RouteEntity> data = new ArrayList<>();
-        DAL.getInstance().getRoutes().forEach(route ->{
+        DAL.getInstance().getRoutes().forEach(route -> {
             String routeName = route.getStartStation() + " " + route.getEndStation();
-            if(status == route.getStatus() && routeName.contains(name)){
+            if (status == route.getStatus() && routeName.contains(name)) {
                 data.add(route);
             }
         });
         return data;
     }
-    public void updateRoute(int idRoute, String startStation, String endStation,String note, int distance, int stt) {
-        DAL.getInstance().updateRoute(idRoute,startStation,endStation,note,distance,stt);
+
+    public void updateRoute(int idRoute, String startStation, String endStation, String note, int distance, int stt) {
+        DAL.getInstance().updateRoute(idRoute, startStation, endStation, note, distance, stt);
     }
-    public void deleteRoute(int idRoute){
+
+    public void deleteRoute(int idRoute) {
         DAL.getInstance().deleteRoute(idRoute);
     }
 
-    public void getStationName() {
+    public int getDistance(int startProvinceIndex, int endProvinceIndex) throws IOException {
+        // cell B - Q  = 2 - 17
+        String[] cells = {"B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "N", "O", "P", "Q"};
+        String[] rowIndex = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17"};
+        HSSFWorkbook wb = new HSSFWorkbook(getClass().getResourceAsStream("/util/Distance.xls"));
+        HSSFSheet sheet = wb.getSheetAt(0);
+        CellReference cellReference = new CellReference(cells[startProvinceIndex] + rowIndex[endProvinceIndex]);
+        Row row = sheet.getRow(cellReference.getRow());
+        Cell cell = row.getCell(cellReference.getCol());
+        return Integer.parseInt(Double.toString(cell.getNumericCellValue()).replace(".0",""));
     }
     // done ?
 }

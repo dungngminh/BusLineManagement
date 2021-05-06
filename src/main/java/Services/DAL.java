@@ -308,7 +308,7 @@ public class DAL {
         return result;
     }
 
-    public void updateRoute(int idRoute, String startStation, String endStation,String note, int distance, int stt) {
+    public void updateRoute(int idRoute, String startStation, String endStation,String note, double distance, int stt) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
         var query = session.createQuery("update RouteEntity set startStation=:startStation,endStation =:endStation,note =:note, distance =:distance, status =:stt"+

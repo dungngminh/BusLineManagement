@@ -27,6 +27,144 @@
       <JFXDrawer fx:id="jfx_drawer" alignment="TOP_LEFT" defaultDrawerSize="190.0" overLayVisible="false" prefHeight="690.0" prefWidth="99.0" />
       <Pane prefHeight="679.0" prefWidth="1187.0">
          <children>
+            <Pane layoutX="-3.0" prefHeight="671.0" prefWidth="305.0">
+               <children>
+                  <TitledPane animated="false" layoutX="12.0" layoutY="370.0" prefHeight="164.0" prefWidth="282.0" text="Route Information">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="136.0" prefWidth="280.0">
+                           <children>
+                              <GridPane layoutX="10.0" layoutY="12.0" prefHeight="118.0" prefWidth="253.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="172.0" minWidth="10.0" prefWidth="109.0" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="147.0" minWidth="10.0" prefWidth="147.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints maxHeight="43.0" minHeight="10.0" prefHeight="33.0" valignment="BASELINE" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="49.0" minHeight="10.0" prefHeight="47.0" valignment="BASELINE" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="43.0" minHeight="10.0" prefHeight="29.0" valignment="BASELINE" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <Label fx:id="lb_status" alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="107.0" text="Status" textAlignment="CENTER" GridPane.rowIndex="2">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                       <GridPane.margin>
+                                          <Insets bottom="25.0" />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <ComboBox fx:id="cbx_status" onAction="#cbx_status" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                       <GridPane.margin>
+                                          <Insets bottom="25.0" />
+                                       </GridPane.margin>
+                                    </ComboBox>
+                                    <TextField fx:id="tfx_distance" GridPane.columnIndex="1" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="107.0" text="Note" textAlignment="CENTER" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="107.0" text="Distance" textAlignment="CENTER">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <TextArea fx:id="tax_note" prefHeight="5.0" prefWidth="146.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </TitledPane>
+                  <TitledPane animated="false" layoutX="12.0" layoutY="101.0" prefHeight="118.0" prefWidth="282.0" text="Start Station">
+                     <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="92.0" prefWidth="285.0">
+                           <children>
+                              <GridPane layoutX="10.0" layoutY="14.0" prefHeight="86.0" prefWidth="253.0">
+                                <columnConstraints>
+                                  <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="172.0" minWidth="10.0" prefWidth="109.0" />
+                                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="147.0" minWidth="10.0" prefWidth="147.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="BASELINE" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="BASELINE" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="55.0" prefWidth="148.0" text="Province" textAlignment="RIGHT">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                       <padding>
+                                          <Insets bottom="25.0" />
+                                       </padding>
+                                    </Label>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="55.0" prefWidth="143.0" text="Station" textAlignment="CENTER" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                       <padding>
+                                          <Insets bottom="25.0" />
+                                       </padding>
+                                    </Label>
+                                    <ComboBox fx:id="cbx_provinceStart" onAction="#cbx_provinceStartAction" prefWidth="150.0" GridPane.columnIndex="1" />
+                                    <ComboBox fx:id="cbx_startstation" onAction="#cbx_stationStart_Action" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </TitledPane>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="76.0" layoutY="1.0" prefHeight="89.0" prefWidth="187.0" text="Route" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="36.0" />
+                     </font>
+                  </Label>
+                  <ButtonBar buttonMinWidth="60.0" layoutX="43.0" layoutY="565.0" prefHeight="32.0" prefWidth="206.0">
+                     <buttons>
+                        <Button fx:id="btn_ok" minWidth="67.0" mnemonicParsing="false" onMouseClicked="#btn_ok_clicked" prefHeight="30.0" prefWidth="40.0" text="Add" />
+                        <Button fx:id="btn_reset" minWidth="53.0" mnemonicParsing="false" onMouseClicked="#btn_reset_clicked" prefHeight="30.0" prefWidth="40.0" text="Reset" />
+                        <Button fx:id="btn_cancel" minWidth="49.0" mnemonicParsing="false" onMouseClicked="#btn_cancel_clicked" prefHeight="30.0" prefWidth="40.0" text="Cancel" />
+                     </buttons>
+                  </ButtonBar>
+                  <TitledPane animated="false" layoutX="12.0" layoutY="235.0" prefHeight="118.0" prefWidth="282.0" text="End Station">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="120.0" prefWidth="268.0">
+                           <children>
+                              <GridPane layoutX="10.0" layoutY="14.0" prefHeight="86.0" prefWidth="253.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="172.0" minWidth="10.0" prefWidth="109.0" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="147.0" minWidth="10.0" prefWidth="147.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="BASELINE" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="BASELINE" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="55.0" prefWidth="148.0" text="Province" textAlignment="RIGHT">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                       <padding>
+                                          <Insets bottom="25.0" />
+                                       </padding>
+                                    </Label>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="55.0" prefWidth="143.0" text="Station" textAlignment="CENTER" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                       <padding>
+                                          <Insets bottom="25.0" />
+                                       </padding>
+                                    </Label>
+                                    <ComboBox fx:id="cbx_provinceEnd" onAction="#cbx_provinceEndAction" prefWidth="150.0" GridPane.columnIndex="1" />
+                                    <ComboBox fx:id="cbx_endstation" onAction="#cbx_StationEnd_Action" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </TitledPane>
+               </children>
+            </Pane>
             <Pane layoutX="299.0" prefHeight="671.0" prefWidth="881.0">
                <children>
                   <TableView fx:id="table_view" layoutY="100.0" prefHeight="435.0" prefWidth="887.0">
@@ -81,146 +219,8 @@
                   </HBox>
                </children>
             </Pane>
-            <Pane layoutX="-3.0" prefHeight="671.0" prefWidth="305.0">
-               <children>
-                  <TitledPane animated="false" layoutX="12.0" layoutY="370.0" prefHeight="164.0" prefWidth="282.0" text="Route Information">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="136.0" prefWidth="280.0">
-                           <children>
-                              <GridPane layoutX="10.0" layoutY="12.0" prefHeight="118.0" prefWidth="253.0">
-                                 <columnConstraints>
-                                    <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="172.0" minWidth="10.0" prefWidth="109.0" />
-                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="147.0" minWidth="10.0" prefWidth="147.0" />
-                                 </columnConstraints>
-                                 <rowConstraints>
-                                    <RowConstraints maxHeight="43.0" minHeight="10.0" prefHeight="33.0" valignment="BASELINE" vgrow="SOMETIMES" />
-                                    <RowConstraints maxHeight="49.0" minHeight="10.0" prefHeight="47.0" valignment="BASELINE" vgrow="SOMETIMES" />
-                                    <RowConstraints maxHeight="43.0" minHeight="10.0" prefHeight="29.0" valignment="BASELINE" vgrow="SOMETIMES" />
-                                 </rowConstraints>
-                                 <children>
-                                    <Label fx:id="lb_status" alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="107.0" text="Status" textAlignment="CENTER" GridPane.rowIndex="2">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                       <GridPane.margin>
-                                          <Insets bottom="25.0" />
-                                       </GridPane.margin>
-                                    </Label>
-                                    <ComboBox fx:id="cbx_status" onAction="#cbx_status" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                       <GridPane.margin>
-                                          <Insets bottom="25.0" />
-                                       </GridPane.margin>
-                                    </ComboBox>
-                                    <TextField fx:id="tfx_distance" GridPane.columnIndex="1" />
-                                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="107.0" text="Note" textAlignment="CENTER" GridPane.rowIndex="1">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                    </Label>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="107.0" text="Distance" textAlignment="CENTER">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                    </Label>
-                                    <TextArea fx:id="tax_note" prefHeight="5.0" prefWidth="146.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                 </children>
-                              </GridPane>
-                           </children>
-                        </AnchorPane>
-                     </content>
-                  </TitledPane>
-                  <TitledPane animated="false" layoutX="12.0" layoutY="110.0" prefHeight="118.0" prefWidth="282.0" text="Start Station">
-                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="92.0" prefWidth="285.0">
-                           <children>
-                              <GridPane layoutX="10.0" layoutY="14.0" prefHeight="86.0" prefWidth="253.0">
-                                <columnConstraints>
-                                  <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="172.0" minWidth="10.0" prefWidth="109.0" />
-                                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="147.0" minWidth="10.0" prefWidth="147.0" />
-                                </columnConstraints>
-                                <rowConstraints>
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="BASELINE" vgrow="SOMETIMES" />
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="BASELINE" vgrow="SOMETIMES" />
-                                </rowConstraints>
-                                 <children>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="55.0" prefWidth="148.0" text="Province" textAlignment="RIGHT">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                       <padding>
-                                          <Insets bottom="25.0" />
-                                       </padding>
-                                    </Label>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="55.0" prefWidth="143.0" text="Station" textAlignment="CENTER" GridPane.rowIndex="1">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                       <padding>
-                                          <Insets bottom="25.0" />
-                                       </padding>
-                                    </Label>
-                                    <ComboBox fx:id="cbx_provinceStart" onAction="#cbx_provinceStartAction" prefWidth="150.0" GridPane.columnIndex="1" />
-                                    <ComboBox fx:id="cbx_startstation" onAction="#cbx_stationStart_Action" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                 </children>
-                              </GridPane>
-                           </children>
-                        </AnchorPane>
-                     </content>
-                  </TitledPane>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="34.0" prefHeight="89.0" prefWidth="247.0" text="Route" textAlignment="CENTER">
-                     <font>
-                        <Font name="System Bold" size="36.0" />
-                     </font>
-                  </Label>
-                  <ButtonBar buttonMinWidth="60.0" layoutX="43.0" layoutY="565.0" prefHeight="32.0" prefWidth="206.0">
-                     <buttons>
-                        <Button fx:id="btn_ok" minWidth="67.0" mnemonicParsing="false" onMouseClicked="#btn_ok_clicked" prefHeight="30.0" prefWidth="40.0" text="Add" />
-                        <Button fx:id="btn_reset" minWidth="53.0" mnemonicParsing="false" onMouseClicked="#btn_reset_clicked" prefHeight="30.0" prefWidth="40.0" text="Reset" />
-                        <Button fx:id="btn_cancel" minWidth="49.0" mnemonicParsing="false" onMouseClicked="#btn_cancel_clicked" prefHeight="30.0" prefWidth="40.0" text="Cancel" />
-                     </buttons>
-                  </ButtonBar>
-                  <TitledPane animated="false" layoutX="12.0" layoutY="242.0" prefHeight="118.0" prefWidth="282.0" text="End Station">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="120.0" prefWidth="268.0">
-                           <children>
-                              <GridPane layoutX="10.0" layoutY="14.0" prefHeight="86.0" prefWidth="253.0">
-                                 <columnConstraints>
-                                    <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="172.0" minWidth="10.0" prefWidth="109.0" />
-                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="147.0" minWidth="10.0" prefWidth="147.0" />
-                                 </columnConstraints>
-                                 <rowConstraints>
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="BASELINE" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="BASELINE" vgrow="SOMETIMES" />
-                                 </rowConstraints>
-                                 <children>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="55.0" prefWidth="148.0" text="Province" textAlignment="RIGHT">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                       <padding>
-                                          <Insets bottom="25.0" />
-                                       </padding>
-                                    </Label>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="55.0" prefWidth="143.0" text="Station" textAlignment="CENTER" GridPane.rowIndex="1">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                       <padding>
-                                          <Insets bottom="25.0" />
-                                       </padding>
-                                    </Label>
-                                    <ComboBox fx:id="cbx_provinceEnd" onAction="#cbx_provinceEndAction" prefWidth="150.0" GridPane.columnIndex="1" />
-                                    <ComboBox fx:id="cbx_endstation" onAction="#cbx_StationEnd_Action" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                 </children>
-                              </GridPane>
-                           </children>
-                        </AnchorPane>
-                     </content>
-                  </TitledPane>
-               </children>
-            </Pane>
          </children>
       </Pane>
-      <JFXHamburger id="hamburger" fx:id="jfx_hambur" alignment="TOP_RIGHT" layoutY="20.0" prefHeight="32.0" prefWidth="54.0" style="-fx-background-color: #FFFFFF;" />
+      <JFXHamburger fx:id="jfx_hambur" alignment="TOP_RIGHT" layoutX="20.0" layoutY="20.0" prefHeight="25.0" prefWidth="32.0" />
    </children>
 </AnchorPane>

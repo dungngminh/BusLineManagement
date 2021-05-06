@@ -145,6 +145,7 @@ public class RoutePage implements Initializable {
     }
     @FXML
     void btn_create_clicked(MouseEvent event) {
+        btn_ok.setText("Add");
         CRUDType = "Create";
         lb_status.setVisible(false);
         cbx_status.setVisible(false);
@@ -194,6 +195,10 @@ public class RoutePage implements Initializable {
     void btn_reset_clicked(MouseEvent event) {
         tfx_distance.setText("");
         tax_note.setText("");
+        cbx_provinceStart.getSelectionModel().select(null);
+        cbx_provinceEnd.getSelectionModel().select(null);
+        cbx_startstation.getSelectionModel().select(null);
+        cbx_endstation.getSelectionModel().select(null);
     }
 
     @FXML
@@ -208,6 +213,7 @@ public class RoutePage implements Initializable {
 
     @FXML
     void btn_update_clicked(MouseEvent event) {
+        btn_ok.setText("Ok");
         try {
             RouteEntity routeEntity = table_view.getSelectionModel().getSelectedItem();
             idRoute = routeEntity.getIdRoute();
@@ -216,9 +222,7 @@ public class RoutePage implements Initializable {
             List<ProvinceEntity> listProvinces = BLL_Admin.getInstance().getProvinceName();
             listProvinces.forEach(province ->{
                 List<Object> list = Arrays.asList(province.getStationsByIdProvince().toArray());
-                list.forEach(station -> {
-                    listStation.add((StationEntity)station);
-                });
+                list.forEach(station -> listStation.add((StationEntity)station));
             });
             listStation.forEach(station -> {
                 if(routeEntity.getStartStation().equals(station.getStationName())){
@@ -230,7 +234,7 @@ public class RoutePage implements Initializable {
                     cbx_provinceEnd.getSelectionModel().select(station.getProvinceByIdProvince());
                 }
             });
-            tfx_distance.setText(routeEntity.getDistance().toString());
+            //tfx_distance.setText(routeEntity.getDistance().toString());
             tax_note.setText(routeEntity.getNote().toString());
             if(routeEntity.getStatus() == 0) cbx_status.getSelectionModel().selectFirst();
             else cbx_status.getSelectionModel().selectLast();
@@ -244,8 +248,8 @@ public class RoutePage implements Initializable {
     }
 
     @FXML
-    void cbx_StationEnd_Action(ActionEvent event) {
-        //TODO đổ dữ liệu distance
+    void cbx_StationEnd_Action(ActionEvent event) throws IOException {
+        tfx_distance.setText(Integer.toString(BLL_Admin.getInstance().getDistance(cbx_provinceStart.getSelectionModel().getSelectedIndex(), cbx_provinceEnd.getSelectionModel().getSelectedIndex())));
     }
 
     @FXML
@@ -265,6 +269,7 @@ public class RoutePage implements Initializable {
 
     @FXML
     void cbx_provinceEndAction(ActionEvent event) {
+        cbx_endstation.getItems().clear();
         Object[] list = cbx_provinceEnd.getSelectionModel().getSelectedItem().getStationsByIdProvince().toArray();
         List<Object> listToCBBEnd = Arrays.asList(list);
         listToCBBEnd.forEach(station -> cbx_endstation.getItems().add((StationEntity) station));
@@ -308,6 +313,7 @@ public class RoutePage implements Initializable {
             });
             cbx_status.getItems().add("Available");
             cbx_status.getItems().add("Unavailable");
+            tfx_distance.setEditable(false);
 
             show(0, "");
             toggleDetail();
@@ -337,7 +343,7 @@ public class RoutePage implements Initializable {
             grp_btn_tbl.setVisible(true);
             table_view.setLayoutX(-290);
             table_view.setPrefWidth(1165);
-            hbox.setLayoutX(0);
+            hbox.setLayoutX(80);
             grp_btn_tbl.setLayoutX(85);
             table_view.toFront();
         } else {

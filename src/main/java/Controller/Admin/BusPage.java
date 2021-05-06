@@ -210,12 +210,12 @@ public class BusPage implements Initializable {
         }
         switch(CRUDType) {
             case "Create": {
-                BLL_Admin.getInstance().addBus(name_of_bus, plate_number,  type, false, 1);
+                BLL_Admin.getInstance().addBus(name_of_bus, plate_number,  type, false, 0);
                 show(0, "");
                 break;
             }
             case "Update": {
-                int stt = cbx_status.getSelectionModel().getSelectedItem().equals("Available") ? 1 : 0;
+                int stt = cbx_status.getSelectionModel().getSelectedItem().equals("Available") ? 0 : 1;
                 BLL_Admin.getInstance().updateBus(idBus, name_of_bus, plate_number, type, stt);
                 show(0, "");
                 break;
@@ -259,7 +259,7 @@ public class BusPage implements Initializable {
             txf_slots.setText(String.valueOf(tbl.getSlot()));
             txf_nameofbus.setText(tbl.getBusName());
             txf_platenumber.setText(tbl.getPlateNumber());
-            cbx_status.getSelectionModel().select(tbl.getStatus() == 1 ? "Available" : "Unavailable");
+            cbx_status.getSelectionModel().select(tbl.getStatus() == 0 ? "Available" : "Unavailable");
             cbx_status.setVisible(true);
             lbl_status.setVisible(true);
             CRUDType = "Update";

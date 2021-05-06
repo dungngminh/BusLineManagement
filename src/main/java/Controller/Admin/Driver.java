@@ -107,7 +107,6 @@ public class Driver implements Initializable {
     // Var static
     private static String CRUDType;
     private static Integer idDriver;
-    private static boolean flag = false;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -188,12 +187,12 @@ public class Driver implements Initializable {
         }
         switch(CRUDType) {
             case "Create": {
-                BLL_Admin.getInstance().addDriver(name_of_driver, phonenumber,  address, 1);
+                BLL_Admin.getInstance().addDriver(name_of_driver, phonenumber,  address, 0);
                 show(-1, "");
                 break;
             }
             case "Update": {
-                int stt = cbx_status.getSelectionModel().getSelectedItem().equals("Available") ? 1 : 0;
+                int stt = cbx_status.getSelectionModel().getSelectedItem().equals("Available") ? 0 : 1;
                 BLL_Admin.getInstance().updateDriver(idDriver, name_of_driver, phonenumber, address, stt);
                 show(-1, "");
                 break;
@@ -233,7 +232,7 @@ public class Driver implements Initializable {
             txf_nameofdriver.setText(tbl.getNameDriver());
             txf_phonenumber.setText(tbl.getPhone());
             txf_address.setText(tbl.getAddress());
-            cbx_status.getSelectionModel().select(tbl.getStatus() == 1 ? "Available" : "Unavailable");
+            cbx_status.getSelectionModel().select(tbl.getStatus() == 0 ? "Available" : "Unavailable");
             cbx_status.setVisible(true);
             lbl_status.setVisible(true);
             CRUDType = "Update";
