@@ -133,19 +133,21 @@ public class RoutePage implements Initializable {
     void btn_cancel_clicked(MouseEvent event) {
         tfx_distance.setText("");
         tax_note.setText("");
-        cbx_provinceStart.getSelectionModel().select(null);
-        cbx_provinceEnd.getSelectionModel().select(null);
-        cbx_startstation.getSelectionModel().select(null);
-        cbx_endstation.getSelectionModel().select(null);
+
         if (CRUDType.equals("Update")) {
             cbx_status.setVisible(false);
             lb_status.setVisible(false);
         }
         toggleDetail();
     }
+
     @FXML
     void btn_create_clicked(MouseEvent event) {
         btn_ok.setText("Add");
+        cbx_provinceStart.getSelectionModel().select(null);
+        cbx_provinceEnd.getSelectionModel().select(null);
+        cbx_startstation.getSelectionModel().select(null);
+        cbx_endstation.getSelectionModel().select(null);
         CRUDType = "Create";
         lb_status.setVisible(false);
         cbx_status.setVisible(false);
@@ -166,28 +168,31 @@ public class RoutePage implements Initializable {
         try {
             String startStation = cbx_startstation.getSelectionModel().getSelectedItem().toString();
             String endStation = cbx_endstation.getSelectionModel().getSelectedItem().toString();
-            int distance = Integer.parseInt(tfx_distance.getText());
-            String note = tax_note.getText().trim();
-            if (cbx_startstation.getSelectionModel().getSelectedItem() == null || cbx_endstation.getSelectionModel().getSelectedItem() == null) {
-                new Alert(Alert.AlertType.ERROR, "Please choose station!").showAndWait();
+            if(startStation.equals(endStation)) new Alert(Alert.AlertType.ERROR,"Duplicate Station, please re fill!").showAndWait();
+            else {
+                int distance = Integer.parseInt(tfx_distance.getText());
+                String note = tax_note.getText().trim();
+                if (cbx_startstation.getSelectionModel().getSelectedItem() == null || cbx_endstation.getSelectionModel().getSelectedItem() == null) {
+                    new Alert(Alert.AlertType.ERROR, "Please choose station!").showAndWait();
+                }
+                switch (CRUDType) {
+                    case "Create":
+                        BLL_Admin.getInstance().addRoute(startStation, endStation, note, distance);
+                        new Alert(Alert.AlertType.INFORMATION, "Add route successful!").showAndWait();
+                        show(0, "");
+                        break;
+                    case "Update":
+                        int stt = cbx_status.getSelectionModel().getSelectedItem().equals("Available") ? 0 : 1;
+                        BLL_Admin.getInstance().updateRoute(idRoute, startStation, endStation, note, distance, stt);
+                        new Alert(Alert.AlertType.INFORMATION, "Update route successful!").showAndWait();
+                        show(0, "");
+                        break;
+                    default:
+                        break;
+                }
             }
-            switch (CRUDType) {
-                case "Create":
-                    BLL_Admin.getInstance().addRoute(startStation, endStation, note, distance);
-                    new Alert(Alert.AlertType.INFORMATION, "Add route successful!").showAndWait();
-                    show(0, "");
-                    break;
-                case "Update":
-                    int stt = cbx_status.getSelectionModel().getSelectedItem().equals("Available") ? 0 : 1;
-                    BLL_Admin.getInstance().updateRoute(idRoute, startStation, endStation, note, distance, stt);
-                    new Alert(Alert.AlertType.INFORMATION, "Update route successful!").showAndWait();
-                    show(0, "");
-                    break;
-                default:
-                    break;
-            }
-        }catch(Exception ee){
-            new Alert(Alert.AlertType.ERROR,"Please fill information!").showAndWait();
+        } catch (Exception ee) {
+            new Alert(Alert.AlertType.ERROR, "Please fill information!").showAndWait();
         }
     }
 
@@ -220,23 +225,27 @@ public class RoutePage implements Initializable {
             // cbx start station // end station
             List<StationEntity> listStation = new ArrayList<>();
             List<ProvinceEntity> listProvinces = BLL_Admin.getInstance().getProvinceName();
-            listProvinces.forEach(province ->{
+            listProvinces.forEach(province -> {
                 List<Object> list = Arrays.asList(province.getStationsByIdProvince().toArray());
-                list.forEach(station -> listStation.add((StationEntity)station));
+                list.forEach(station -> listStation.add((StationEntity) station));
             });
             listStation.forEach(station -> {
-                if(routeEntity.getStartStation().equals(station.getStationName())){
+                if (routeEntity.getStartStation().equals(station.getStationName())) {
                     cbx_startstation.getSelectionModel().select(station);
                     cbx_provinceStart.getSelectionModel().select(station.getProvinceByIdProvince());
                 }
-                if(routeEntity.getEndStation().equals(station.getStationName())){
+                if (routeEntity.getEndStation().equals(station.getStationName())) {
                     cbx_endstation.getSelectionModel().select(station);
                     cbx_provinceEnd.getSelectionModel().select(station.getProvinceByIdProvince());
                 }
             });
-            //tfx_distance.setText(routeEntity.getDistance().toString());
-            tax_note.setText(routeEntity.getNote().toString());
-            if(routeEntity.getStatus() == 0) cbx_status.getSelectionModel().selectFirst();
+            System.out.println(cbx_provinceStart.getSelectionModel().getSelectedIndex());
+            System.out.println(cbx_provinceEnd.getSelectionModel().getSelectedIndex());
+            System.out.println(cbx_startstation.getSelectionModel().getSelectedIndex());
+            System.out.println(cbx_endstation.getSelectionModel().getSelectedIndex());
+            tfx_distance.setText(Integer.toString(BLL_Admin.getInstance().getDistance(cbx_provinceStart.getSelectionModel().getSelectedIndex(), cbx_provinceEnd.getSelectionModel().getSelectedIndex())));
+            tax_note.setText(routeEntity.getNote());
+            if (routeEntity.getStatus() == 0) cbx_status.getSelectionModel().selectFirst();
             else cbx_status.getSelectionModel().selectLast();
             CRUDType = "Update";
             lb_status.setVisible(true);
@@ -248,8 +257,7 @@ public class RoutePage implements Initializable {
     }
 
     @FXML
-    void cbx_StationEnd_Action(ActionEvent event) throws IOException {
-        tfx_distance.setText(Integer.toString(BLL_Admin.getInstance().getDistance(cbx_provinceStart.getSelectionModel().getSelectedIndex(), cbx_provinceEnd.getSelectionModel().getSelectedIndex())));
+    void cbx_StationEnd_Action(ActionEvent event) {
     }
 
     @FXML
@@ -268,12 +276,12 @@ public class RoutePage implements Initializable {
     }
 
     @FXML
-    void cbx_provinceEndAction(ActionEvent event) {
+    void cbx_provinceEndAction(ActionEvent event) throws IOException {
         cbx_endstation.getItems().clear();
         Object[] list = cbx_provinceEnd.getSelectionModel().getSelectedItem().getStationsByIdProvince().toArray();
         List<Object> listToCBBEnd = Arrays.asList(list);
         listToCBBEnd.forEach(station -> cbx_endstation.getItems().add((StationEntity) station));
-        cbx_endstation.getItems().remove(cbx_startstation.getSelectionModel().getSelectedItem());
+        tfx_distance.setText(Integer.toString(BLL_Admin.getInstance().getDistance(cbx_provinceStart.getSelectionModel().getSelectedIndex(), cbx_provinceEnd.getSelectionModel().getSelectedIndex())));
     }
 
     @FXML
@@ -286,14 +294,13 @@ public class RoutePage implements Initializable {
 
     @FXML
     void cbx_stationStart_Action(ActionEvent event) {
-        if (cbx_endstation.getSelectionModel().getSelectedItem() != null) {
-            cbx_endstation.getItems().clear();
-            Object[] list = cbx_provinceEnd.getSelectionModel().getSelectedItem().getStationsByIdProvince().toArray();
-            List<Object> listToCBBEnd = Arrays.asList(list);
-            listToCBBEnd.forEach(station -> cbx_endstation.getItems().add((StationEntity) station));
-            cbx_endstation.getItems().remove(cbx_startstation.getSelectionModel().getSelectedItem());
-        }
+//        cbx_endstation.getItems().clear();
+//        Object[] list = cbx_provinceEnd.getSelectionModel().getSelectedItem().getStationsByIdProvince().toArray();
+//        List<Object> listToCBBEnd = Arrays.asList(list);
+//        listToCBBEnd.forEach(station -> cbx_endstation.getItems().add((StationEntity) station));
+//        cbx_endstation.getItems().remove(cbx_startstation.getSelectionModel().getSelectedItem());
     }
+
     @FXML
     void searchTextChanged(InputMethodEvent event) {
         //TODO realtime textchanged
