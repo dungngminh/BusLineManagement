@@ -17,7 +17,7 @@
 
 <AnchorPane id="pane" fx:id="rootPane" prefHeight="650.0" prefWidth="1166.0" style="-fx-background-color: #AAEFDF;" stylesheets="@../../css/seller_css/dashboard.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TicketSeller.Dashboard">
    <children>
-      <JFXDrawer fx:id="jfx_drawer" defaultDrawerSize="190.0" layoutX="-2.0" prefHeight="650.0" prefWidth="103.0" />
+      <JFXDrawer fx:id="jfx_drawer" defaultDrawerSize="190.0" prefHeight="650.0" prefWidth="103.0" />
       <Pane prefHeight="650.0" prefWidth="1166.0">
          <children>
             <GridPane layoutX="212.0" layoutY="267.0" prefHeight="65.0" prefWidth="787.0">

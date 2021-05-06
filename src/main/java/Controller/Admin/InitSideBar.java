@@ -5,9 +5,12 @@ import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -52,6 +55,20 @@ public class InitSideBar {
                             }
                             case "setting": {
                                 showPage(rootPane, "Setting");
+                                break;
+                            }
+                            case "logout": {
+                                FXMLLoader main_Page = new FXMLLoader();
+                                main_Page.setLocation(getClass().getResource("/view/admin_view/LogIn.fxml"));
+
+                                Scene scene = new Scene(main_Page.load());
+                                Stage stage = new Stage();
+                                stage.setTitle("Bus Management");
+                                stage.setScene(scene);
+                                stage.show();
+
+                                Stage cl = (Stage) node.lookup(".btn").getScene().getWindow();
+                                cl.close();
                                 break;
                             }
                             default:

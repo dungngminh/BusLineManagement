@@ -231,7 +231,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <DatePicker fx:id="calendar" layoutX="960.0" layoutY="601.0" prefHeight="36.0" prefWidth="178.0" />
+            <DatePicker fx:id="calendar" layoutX="960.0" layoutY="601.0" prefHeight="36.0" prefWidth="178.0" styleClass="date" stylesheets="@../../css/seller_css/filterRoute.css" />
             <Label fx:id="lbIndex" alignment="CENTER" layoutX="582.0" layoutY="608.0" prefHeight="20.0" prefWidth="28.0" text="Label" />
          </children>
       </Pane>

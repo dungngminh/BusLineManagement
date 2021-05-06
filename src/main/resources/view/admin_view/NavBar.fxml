@@ -125,6 +125,27 @@
          <Cursor fx:constant="HAND" />
       </cursor>
     </Button>
+   <Button id="logout" accessibleText="decen" contentDisplay="RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="156.0" styleClass="btn" stylesheets="@../../css/nav_bar.css" text="Log out" textAlignment="JUSTIFY" textFill="WHITE">
+      <font>
+         <Font name="Segoe UI Bold" size="16.0" />
+      </font>
+      <padding>
+         <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+      </padding>
+      <graphic>
+         <ImageView fitHeight="32.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../../images/Icon/log-out.png" />
+            </image>
+         </ImageView>
+      </graphic>
+      <cursor>
+         <Cursor fx:constant="HAND" />
+      </cursor>
+      <VBox.margin>
+         <Insets top="62.0" />
+      </VBox.margin>
+   </Button>
    <padding>
       <Insets top="10.0" />
    </padding>
