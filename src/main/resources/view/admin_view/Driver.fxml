@@ -19,10 +19,10 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="pane" fx:id="pane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1166.0" stylesheets="@../../css/admin_css/driver.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Admin.Driver">
+<AnchorPane id="pane" fx:id="pane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="686.0" prefWidth="1166.0" stylesheets="@../../css/admin_css/driver.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Admin.Driver">
    <children>
-      <JFXDrawer fx:id="jfx_drawer" defaultDrawerSize="195.0" layoutX="-3.0" layoutY="-5.0" prefHeight="683.0" prefWidth="90.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1076.0" AnchorPane.topAnchor="0.0" />
-      <Pane prefHeight="650.0" prefWidth="1166.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <JFXDrawer fx:id="jfx_drawer" defaultDrawerSize="195.0" prefHeight="686.0" prefWidth="90.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1076.0" AnchorPane.topAnchor="0.0" />
+      <Pane prefHeight="686.0" prefWidth="1166.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Pane prefHeight="650.0" prefWidth="1166.0">
                <children>
@@ -41,12 +41,24 @@
                         <Insets />
                      </opaqueInsets>
                   </TableView>
-                  <ButtonBar fx:id="grp_btn_tbl" layoutX="423.0" layoutY="558.0" prefHeight="35.0" prefWidth="562.0">
+                  <ButtonBar fx:id="grp_btn_tbl" layoutX="422.0" layoutY="592.0" prefHeight="35.0" prefWidth="562.0">
                      <buttons>
-                        <Button fx:id="btn_show" mnemonicParsing="false" onMouseClicked="#btn_show_clicked" prefHeight="30.0" prefWidth="86.0" text="Show" />
-                        <Button fx:id="btn_create" mnemonicParsing="false" onMouseClicked="#btn_create_clicked" prefHeight="30.0" prefWidth="86.0" text="Create" />
-                        <Button fx:id="btn_update" mnemonicParsing="false" onMouseClicked="#btn_update_clicked" prefHeight="30.0" prefWidth="86.0" text="Update" />
-                        <Button fx:id="btn_delete" mnemonicParsing="false" onMouseClicked="#btn_delete_clicked" prefHeight="30.0" prefWidth="172.0" text="Delete" />
+                        <Button fx:id="btn_show" mnemonicParsing="false" onMouseClicked="#btn_show_clicked" prefHeight="30.0" prefWidth="86.0" styleClass="btn" stylesheets="@../../css/admin_css/setting.css" text="Show">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Button>
+                        <Button fx:id="btn_create" mnemonicParsing="false" onMouseClicked="#btn_create_clicked" prefHeight="30.0" prefWidth="86.0" styleClass="btn" stylesheets="@../../css/admin_css/setting.css" text="Create">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Button>
+                        <Button fx:id="btn_update" mnemonicParsing="false" onMouseClicked="#btn_update_clicked" prefHeight="30.0" prefWidth="86.0" styleClass="btn" stylesheets="@../../css/admin_css/setting.css" text="Update">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Button>
+                        <Button fx:id="btn_delete" mnemonicParsing="false" onMouseClicked="#btn_delete_clicked" prefHeight="30.0" prefWidth="172.0" styleClass="btn" stylesheets="@../../css/admin_css/setting.css" text="Delete">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Button>
                      </buttons>
                   </ButtonBar>
                   <HBox fx:id="hbox" alignment="CENTER" layoutX="343.0" layoutY="14.0" prefHeight="48.0" prefWidth="641.0">
@@ -62,7 +74,7 @@
                               <Insets right="10.0" />
                            </HBox.margin>
                         </Label>
-                        <ComboBox fx:id="cbx_search_status" prefHeight="31.0" prefWidth="150.0" />
+                        <ComboBox fx:id="cbx_search_status" minHeight="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="150.0" styleClass="cbx" stylesheets="@../../css/admin_css/setting.css" />
                         <Label alignment="CENTER" prefHeight="30.0" prefWidth="121.0" text="Name of driver" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
@@ -71,14 +83,14 @@
                               <Insets bottom="5.0" />
                            </padding>
                         </Label>
-                        <TextField fx:id="txf_search_nameofdriver" prefHeight="36.0" prefWidth="184.0">
+                        <TextField fx:id="txf_search_nameofdriver" prefHeight="32.0" prefWidth="184.0">
                            <HBox.margin>
                               <Insets right="25.0" />
                            </HBox.margin>
                         </TextField>
-                        <Button fx:id="btn_search" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#btn_search_clicked" prefHeight="38.0" prefWidth="86.0" text="Search">
+                        <Button fx:id="btn_search" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#btn_search_clicked" prefHeight="38.0" prefWidth="86.0" styleClass="search" stylesheets="@../../css/admin_css/setting.css" text="Search" textFill="WHITE">
                            <HBox.margin>
-                              <Insets bottom="10.0" />
+                              <Insets bottom="10.0" top="10.0" />
                            </HBox.margin>
                         </Button>
                      </children>
@@ -162,11 +174,20 @@
                         </AnchorPane>
                      </content>
                   </TitledPane>
-                  <ButtonBar buttonMinWidth="60.0" layoutX="16.0" layoutY="558.0" prefHeight="35.0" prefWidth="229.0">
+                  <ButtonBar buttonMinWidth="60.0" layoutX="21.0" layoutY="592.0" prefHeight="35.0" prefWidth="229.0">
                      <buttons>
-                        <Button fx:id="btn_ok" minWidth="67.0" mnemonicParsing="false" onMouseClicked="#btn_ok_clicked" prefHeight="30.0" prefWidth="40.0" text="OK" />
-                        <Button fx:id="btn_reset" minWidth="53.0" mnemonicParsing="false" onMouseClicked="#btn_reset_clicked" prefHeight="30.0" prefWidth="40.0" text="Reset" />
-                        <Button fx:id="btn_cancel" minWidth="49.0" mnemonicParsing="false" onMouseClicked="#btn_cancel_clicked" prefHeight="30.0" prefWidth="40.0" text="Cancel" />
+                        <Button fx:id="btn_ok" minWidth="67.0" mnemonicParsing="false" onMouseClicked="#btn_ok_clicked" prefHeight="30.0" prefWidth="40.0" styleClass="btn" stylesheets="@../../css/admin_css/setting.css" text="OK">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Button>
+                        <Button fx:id="btn_reset" minWidth="53.0" mnemonicParsing="false" onMouseClicked="#btn_reset_clicked" prefHeight="30.0" prefWidth="40.0" styleClass="btn" stylesheets="@../../css/admin_css/setting.css" text="Reset">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Button>
+                        <Button fx:id="btn_cancel" minWidth="49.0" mnemonicParsing="false" onMouseClicked="#btn_cancel_clicked" prefHeight="30.0" prefWidth="40.0" styleClass="btn" stylesheets="@../../css/admin_css/setting.css" text="Cancel">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Button>
                      </buttons>
                   </ButtonBar>
                </children>

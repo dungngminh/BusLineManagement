@@ -4,13 +4,13 @@
 }
 
 #btn-search {
-    -fx-background-color: #9cc5f5;
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #4dc9e6, #210cae);
     -fx-background-radius: 15px;
     -fx-border-radius: 15px;
 }
 
 #btn-search:hover {
-    -fx-background-color: #1E96FC;
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #95f9c3, #0b3866);
     -fx-background-radius: 15px;
     -fx-border-color: #ffcfcf;
     -fx-border-width: 0px;
@@ -26,7 +26,7 @@
 }
 
 .cbx, .date{
-    -fx-background-color: #F1F2EB;
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #ebf4f5, #b5c6e0);
     -fx-font-size: 20px;
 }
 

@@ -40,6 +40,9 @@
          <VBox.margin>
             <Insets bottom="10.0" top="15.0" />
          </VBox.margin>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <MenuButton id="ticket" alignment="CENTER_RIGHT" contentDisplay="TOP" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" popupSide="RIGHT" prefHeight="85.0" prefWidth="156.0" styleClass="btn" stylesheets="@../../css/nav_bar.css" text="Ticket" textFill="#eeeeee">
         <items>
@@ -57,11 +60,14 @@
             <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
          </padding>
          <VBox.margin>
-            <Insets bottom="10.0" top="15.0" />
+            <Insets bottom="10.0" top="17.0" />
          </VBox.margin>
          <font>
             <Font name="Segoe UI Bold" size="16.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </MenuButton>
       <Button id="setting" fx:id="btn_decen" accessibleText="decen" contentDisplay="TOP" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="85.0" prefWidth="156.0" styleClass="btn" stylesheets="@../../css/nav_bar.css" text="Setting" textAlignment="JUSTIFY" textFill="WHITE">
          <font>
@@ -78,8 +84,11 @@
             </ImageView>
          </graphic>
          <VBox.margin>
-            <Insets bottom="10.0" top="15.0" />
+            <Insets bottom="10.0" top="8.0" />
          </VBox.margin>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Button id="logout" accessibleText="decen" contentDisplay="RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="156.0" styleClass="btn" stylesheets="@../../css/nav_bar.css" text="Log out" textAlignment="JUSTIFY" textFill="WHITE">
          <font>
@@ -99,7 +108,7 @@
             </ImageView>
          </graphic>
          <VBox.margin>
-            <Insets top="112.0" />
+            <Insets top="118.0" />
          </VBox.margin>
       </Button>
    </children>

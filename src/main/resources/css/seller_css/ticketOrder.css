@@ -4,12 +4,31 @@
 }
 
 .cbx {
-    -fx-background-color: #F1F2EB;
-    -fx-font-size: 20px;
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #ebf4f5, #b5c6e0);
+    -fx-font-size: 16px;
 }
 
-#pane1 {
-    -fx-background-color: #D8DBE2;
+.pane1 {
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #45cde9, #7a8fd3);
     -fx-background-radius: 8px;
     -fx-border-radius: 8px;
+}
+
+.pane2 {
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #ccf7f4, #d8ded6);
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+}
+
+.btn {
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #57ebde, #aefb2a);
+    -fx-background-radius: 13px;
+    -fx-border-radius: 10px;
+}
+
+.btn:hover {
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #e9b7ce, #d3f3f1);
+    -fx-background-radius: 13px;
+    -fx-border-radius: 10px;
+    -fx-border-width: 0px;
 }

@@ -4,17 +4,16 @@
 }
 
 .btn {
-    -fx-background-color: #FFC43D !important;
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #f7a2a1, #ffed00);
     -fx-background-radius: 9px;
     -fx-border-radius: 7px;
 }
 
 .btn:hover {
-    -fx-background-color: #FFCF99 !important;
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #ffed00, #f7a2a1);
     -fx-background-radius: 11px;
     -fx-border-radius: 9px;
-    -fx-border-color: white;
-    -fx-border-width: 3px;
+    -fx-border-width: 0px;
 }
 
 .date {

@@ -24,10 +24,10 @@
 
 <AnchorPane id="route_page" fx:id="pane" prefHeight="627.0" prefWidth="1166.0" style="-fx-background-color: #EDB183;" stylesheets="@../../css/admin_css/RoutePage.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Admin.RoutePage">
    <children>
-      <JFXDrawer fx:id="jfx_drawer" alignment="TOP_LEFT" defaultDrawerSize="190.0" overLayVisible="false" prefHeight="690.0" prefWidth="99.0" />
-      <Pane prefHeight="679.0" prefWidth="1187.0">
+      <JFXDrawer fx:id="jfx_drawer" alignment="TOP_LEFT" defaultDrawerSize="190.0" overLayVisible="false" prefHeight="686.0" prefWidth="99.0" />
+      <Pane prefHeight="686.0" prefWidth="1187.0">
          <children>
-            <Pane layoutX="-3.0" prefHeight="671.0" prefWidth="305.0">
+            <Pane layoutX="-3.0" prefHeight="686.0" prefWidth="305.0">
                <children>
                   <TitledPane animated="false" layoutX="12.0" layoutY="370.0" prefHeight="164.0" prefWidth="282.0" text="Route Information">
                      <content>
@@ -52,9 +52,9 @@
                                           <Insets bottom="25.0" />
                                        </GridPane.margin>
                                     </Label>
-                                    <ComboBox fx:id="cbx_status" onAction="#cbx_status" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                    <ComboBox fx:id="cbx_status" minHeight="-Infinity" minWidth="-Infinity" onAction="#cbx_status" prefHeight="30.0" prefWidth="146.0" styleClass="cbx" stylesheets="@../../css/admin_css/setting.css" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                        <GridPane.margin>
-                                          <Insets bottom="25.0" />
+                                          <Insets bottom="25.0" top="5.0" />
                                        </GridPane.margin>
                                     </ComboBox>
                                     <TextField fx:id="tfx_distance" GridPane.columnIndex="1" />
@@ -75,7 +75,7 @@
                         </AnchorPane>
                      </content>
                   </TitledPane>
-                  <TitledPane animated="false" layoutX="12.0" layoutY="101.0" prefHeight="118.0" prefWidth="282.0" text="Start Station">
+                  <TitledPane animated="false" layoutX="12.0" layoutY="101.0" prefHeight="126.0" prefWidth="282.0" text="Start Station">
                      <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="92.0" prefWidth="285.0">
                            <children>
@@ -105,27 +105,36 @@
                                           <Insets bottom="25.0" />
                                        </padding>
                                     </Label>
-                                    <ComboBox fx:id="cbx_provinceStart" onAction="#cbx_provinceStartAction" prefWidth="150.0" GridPane.columnIndex="1" />
-                                    <ComboBox fx:id="cbx_startstation" onAction="#cbx_stationStart_Action" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <ComboBox fx:id="cbx_provinceStart" onAction="#cbx_provinceStartAction" prefWidth="150.0" styleClass="cbx" stylesheets="@../../css/admin_css/setting.css" GridPane.columnIndex="1" />
+                                    <ComboBox fx:id="cbx_startstation" onAction="#cbx_stationStart_Action" prefWidth="150.0" styleClass="cbx" stylesheets="@../../css/admin_css/setting.css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                  </children>
                               </GridPane>
                            </children>
                         </AnchorPane>
                      </content>
                   </TitledPane>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="76.0" layoutY="1.0" prefHeight="89.0" prefWidth="187.0" text="Route" textAlignment="CENTER">
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="76.0" layoutY="1.0" prefHeight="57.0" prefWidth="162.0" text="Route" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold" size="36.0" />
                      </font>
                   </Label>
-                  <ButtonBar buttonMinWidth="60.0" layoutX="43.0" layoutY="565.0" prefHeight="32.0" prefWidth="206.0">
+                  <ButtonBar buttonMinWidth="60.0" layoutX="43.0" layoutY="578.0" prefHeight="32.0" prefWidth="206.0">
                      <buttons>
-                        <Button fx:id="btn_ok" minWidth="67.0" mnemonicParsing="false" onMouseClicked="#btn_ok_clicked" prefHeight="30.0" prefWidth="40.0" text="Add" />
-                        <Button fx:id="btn_reset" minWidth="53.0" mnemonicParsing="false" onMouseClicked="#btn_reset_clicked" prefHeight="30.0" prefWidth="40.0" text="Reset" />
-                        <Button fx:id="btn_cancel" minWidth="49.0" mnemonicParsing="false" onMouseClicked="#btn_cancel_clicked" prefHeight="30.0" prefWidth="40.0" text="Cancel" />
+                        <Button fx:id="btn_ok" minWidth="67.0" mnemonicParsing="false" onMouseClicked="#btn_ok_clicked" prefHeight="30.0" prefWidth="40.0" styleClass="btn" stylesheets="@../../css/admin_css/setting.css" text="Add">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Button>
+                        <Button fx:id="btn_reset" minWidth="53.0" mnemonicParsing="false" onMouseClicked="#btn_reset_clicked" prefHeight="30.0" prefWidth="40.0" styleClass="btn" stylesheets="@../../css/admin_css/setting.css" text="Reset">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Button>
+                        <Button fx:id="btn_cancel" minWidth="49.0" mnemonicParsing="false" onMouseClicked="#btn_cancel_clicked" prefHeight="30.0" prefWidth="40.0" styleClass="btn" stylesheets="@../../css/admin_css/setting.css" text="Cancel">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Button>
                      </buttons>
                   </ButtonBar>
-                  <TitledPane animated="false" layoutX="12.0" layoutY="235.0" prefHeight="118.0" prefWidth="282.0" text="End Station">
+                  <TitledPane animated="false" layoutX="12.0" layoutY="235.0" prefHeight="126.0" prefWidth="282.0" text="End Station">
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="120.0" prefWidth="268.0">
                            <children>
@@ -155,8 +164,8 @@
                                           <Insets bottom="25.0" />
                                        </padding>
                                     </Label>
-                                    <ComboBox fx:id="cbx_provinceEnd" onAction="#cbx_provinceEndAction" prefWidth="150.0" GridPane.columnIndex="1" />
-                                    <ComboBox fx:id="cbx_endstation" onAction="#cbx_StationEnd_Action" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <ComboBox fx:id="cbx_provinceEnd" onAction="#cbx_provinceEndAction" prefWidth="150.0" styleClass="cbx" stylesheets="@../../css/admin_css/setting.css" GridPane.columnIndex="1" />
+                                    <ComboBox fx:id="cbx_endstation" onAction="#cbx_StationEnd_Action" prefWidth="150.0" styleClass="cbx" stylesheets="@../../css/admin_css/setting.css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                  </children>
                               </GridPane>
                            </children>
@@ -183,17 +192,26 @@
                         <Insets />
                      </opaqueInsets>
                   </TableView>
-                  <ButtonBar fx:id="grp_btn_tbl" layoutX="219.0" layoutY="578.0" prefHeight="32.0" prefWidth="385.0">
+                  <ButtonBar fx:id="grp_btn_tbl" layoutX="169.0" layoutY="578.0" prefHeight="35.0" prefWidth="435.0">
                      <buttons>
-                        <SplitMenuButton fx:id="btn_showmenu" mnemonicParsing="false" onMouseClicked="#btn_showmenu_clicked" prefHeight="32.0" text="Show">
+                        <SplitMenuButton fx:id="btn_showmenu" mnemonicParsing="false" onMouseClicked="#btn_showmenu_clicked" prefHeight="32.0" styleClass="cbx" stylesheets="@../../css/admin_css/setting.css" text="Show">
                           <items>
                             <MenuItem fx:id="btmenu_avaliable" mnemonicParsing="false" onAction="#onMenuClicked" text="Available" />
                             <MenuItem fx:id="btmenu_unavaliable" mnemonicParsing="false" onAction="#onMenuClicked" text="Unavailable" />
                           </items>
                         </SplitMenuButton>
-                        <Button fx:id="btn_create" mnemonicParsing="false" onMouseClicked="#btn_create_clicked" prefHeight="30.0" prefWidth="86.0" text="Create" />
-                        <Button fx:id="btn_update" mnemonicParsing="false" onMouseClicked="#btn_update_clicked" prefHeight="30.0" prefWidth="86.0" text="Update" />
-                        <Button fx:id="btn_delete" mnemonicParsing="false" onMouseClicked="#btn_delete_clicked" prefHeight="30.0" prefWidth="172.0" text="Delete" />
+                        <Button fx:id="btn_create" mnemonicParsing="false" onMouseClicked="#btn_create_clicked" prefHeight="30.0" prefWidth="86.0" styleClass="btn" stylesheets="@../../css/admin_css/setting.css" text="Create">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Button>
+                        <Button fx:id="btn_update" mnemonicParsing="false" onMouseClicked="#btn_update_clicked" prefHeight="30.0" prefWidth="86.0" styleClass="btn" stylesheets="@../../css/admin_css/setting.css" text="Update">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Button>
+                        <Button fx:id="btn_delete" mnemonicParsing="false" onMouseClicked="#btn_delete_clicked" prefHeight="30.0" prefWidth="172.0" styleClass="btn" stylesheets="@../../css/admin_css/setting.css" text="Delete">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Button>
                      </buttons>
                   </ButtonBar>
                   <HBox fx:id="hbox" alignment="CENTER" layoutX="250.0" layoutY="39.0" prefHeight="35.0" prefWidth="405.0">
@@ -206,12 +224,12 @@
                               <Insets bottom="5.0" />
                            </padding>
                         </Label>
-                        <TextField fx:id="txf_search_nameofRoute" onInputMethodTextChanged="#searchTextChanged" prefHeight="25.0" prefWidth="188.0">
+                        <TextField fx:id="txf_search_nameofRoute" onInputMethodTextChanged="#searchTextChanged" prefHeight="35.0" prefWidth="188.0">
                            <HBox.margin>
                               <Insets right="25.0" />
                            </HBox.margin>
                         </TextField>
-                        <Button fx:id="btn_search" mnemonicParsing="false" onMouseClicked="#btn_search_clicked" prefHeight="25.0" prefWidth="82.0" text="Search" />
+                        <Button fx:id="btn_search" mnemonicParsing="false" onMouseClicked="#btn_search_clicked" prefHeight="25.0" prefWidth="82.0" styleClass="search" stylesheets="@../../css/admin_css/setting.css" text="Search" textFill="WHITE" />
                      </children>
                      <opaqueInsets>
                         <Insets right="25.0" />
