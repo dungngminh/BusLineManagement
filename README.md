@@ -61,7 +61,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+![Product Name Screen Shot](https://user-images.githubusercontent.com/55595623/117468868-52cff580-af7f-11eb-9db8-ea0f64c5910f.png)
 
 Bus Line Management is an app that will help many transportation companies to Manage activities, Calculate income, Sell ticket and Manage Staff, Bus, Route. 
 
