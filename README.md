@@ -189,16 +189,15 @@ Project Link: [Bus Lines Management](https://github.com/dungngminh/QuanLyNhaXe_M
 
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
-* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-* [Img Shields](https://shields.io)
-* [Choose an Open Source License](https://choosealicense.com)
-* [GitHub Pages](https://pages.github.com)
-* [Animate.css](https://daneden.github.io/animate.css)
+* [StackoverFlow](https://www.webpagefx.com/tools/emoji-cheat-sheet)
+* [Java Docs](https://shields.io)
+* [JDBC Docs](https://choosealicense.com)
+* [Asynchronous booking ticket](https://pages.github.com)
+* [CSS in JavaFX](https://daneden.github.io/animate.css)
 * [Loaders.css](https://connoratherton.com/loaders)
-* [Slick Carousel](https://kenwheeler.github.io/slick)
-* [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
-* [Sticky Kit](http://leafo.net/sticky-kit)
-* [JVectorMap](http://jvectormap.com)
+* [JFoenix](https://kenwheeler.github.io/slick)
+* [Hibernate docs](https://github.com/cferdinandi/smooth-scroll)
+* [Encrypt SHA-1](http://jvectormap.com)
 * [Font Awesome](https://fontawesome.com)
 
 
