@@ -29,8 +29,6 @@ public class InitSideBar {
         return instance;
     }
 
-    // Var static
-    private static boolean flag = false;
 
     public void initializeForNavBar(AnchorPane rootPane, JFXDrawer jfx_drawer, JFXHamburger jfx_hambur) throws IOException {
         VBox box = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/seller_view/NavBar.fxml")));
@@ -66,7 +64,6 @@ public class InitSideBar {
                                 stage.setTitle("Bus Management");
                                 stage.setScene(scene);
                                 stage.show();
-                                Button btn_cancel = new Button();
 
                                 Stage cl = (Stage) node.lookup(".btn").getScene().getWindow();
                                 cl.close();
@@ -84,10 +81,9 @@ public class InitSideBar {
 
         // Init navbar transformation
         HamburgerBackArrowBasicTransition burgerTask = new HamburgerBackArrowBasicTransition(jfx_hambur);
+        burgerTask.setRate(-1);
         jfx_hambur.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-            if (flag)
-                burgerTask.setRate(burgerTask.getRate() * -1);
-            flag = true;
+            burgerTask.setRate(burgerTask.getRate() * -1);
             burgerTask.play();
             if (jfx_drawer.isShown()) {
                 jfx_drawer.toBack();

@@ -5,14 +5,14 @@
 
 .btn {
     -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #57ebde, #aefb2a);
-    -fx-background-radius: 13px;
-    -fx-border-radius: 10px;
+    -fx-background-radius: 9px;
+    -fx-border-radius: 7px;
 }
 
 .btn:hover {
     -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #e9b7ce, #d3f3f1);
-    -fx-background-radius: 13px;
-    -fx-border-radius: 10px;
+    -fx-background-radius: 9px;
+    -fx-border-radius: 7px;
     -fx-border-width: 0px;
 }
 
@@ -23,14 +23,14 @@
 
 .search {
     -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #4dc9e6, #210cae);
-    -fx-background-radius: 13px;
-    -fx-border-radius: 10px;
+    -fx-background-radius: 9px;
+    -fx-border-radius: 7px;
     -fx-font-size: 16px;
 }
 
 .search:hover {
     -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #95f9c3, #0b3866);
-    -fx-background-radius: 13px;
-    -fx-border-radius: 10px;
+    -fx-background-radius: 9px;
+    -fx-border-radius: 7px;
     -fx-border-width: 0px;
 }

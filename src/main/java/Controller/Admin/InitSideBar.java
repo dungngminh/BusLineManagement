@@ -3,13 +3,13 @@ package Controller.Admin;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
+import com.jfoenix.transitions.hamburger.HamburgerBasicCloseTransition;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -28,9 +28,6 @@ public class InitSideBar {
         }
         return instance;
     }
-
-    // Var static
-    private static boolean flag = false;
 
     public void initializeForNavBar(AnchorPane rootPane, JFXDrawer jfx_drawer, JFXHamburger jfx_hambur) throws IOException {
         VBox box = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/admin_view/NavBar.fxml")));
@@ -83,14 +80,15 @@ public class InitSideBar {
 
         // Init navbar transformation
         HamburgerBackArrowBasicTransition burgerTask = new HamburgerBackArrowBasicTransition(jfx_hambur);
+//        HamburgerBasicCloseTransition burgerTask = new HamburgerBasicCloseTransition(jfx_hambur);
+        burgerTask.setRate(-1);
         jfx_hambur.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-            if (flag)
-                burgerTask.setRate(burgerTask.getRate() * -1);
-            flag = true;
+            burgerTask.setRate(burgerTask.getRate() * -1);
             burgerTask.play();
             if (jfx_drawer.isShown()) {
                 jfx_drawer.toBack();
                 jfx_drawer.close();
+
             } else {
                 jfx_drawer.open();
                 jfx_drawer.toFront();

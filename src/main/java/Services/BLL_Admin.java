@@ -35,9 +35,11 @@ public class BLL_Admin {
         DAL.getInstance().getListAcc().forEach(account -> {
             if (account.getUsername().equals(username) &&
                     account.getPassword().equals(DAL.getInstance().encryptSHA1(password))) {
+
                 int idRole = ((RoleAccountEntity) account.getRoleAccountsByIdUser().toArray()[0]).getIdRole();
                 valid.set(idRole);
                 DAL.getInstance().setCurrent(account);
+
             }
         });
         return valid.get();

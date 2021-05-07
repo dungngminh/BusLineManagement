@@ -6,7 +6,7 @@
 }
 
 #pane {
-    -fx-background-color: #EBF5EE;
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #1ed7b5, #f0f9a7);
     /*-fx-background-size: 100% 100%;*/
     -fx-background-radius:20px;
     -fx-border-radius: 20px;
@@ -15,50 +15,31 @@
 
 
 #lb-wel {
-    -fx-font-color: #283044;
+    -fx-font-color: #295270;
     -fx-font-family: 'Anton', sans-serif;
     -fx-font-size: 30px;
 }
 
-.animate
-{
-    -fx-transition: all 0.1s;
-    -fx-webkit-transition: all 0.1s;
+.blue {
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #456fe8, #19b0ec);
+    -fx-background-radius: 9px;
+    -fx-border-radius: 7px;
 }
 
-.action-button
-{
-    -fx-position: relative;
-    -fx-padding: 10px 40px;
-    -fx-margin: 0px 10px 10px 0px;
-    -fx-float: left;
-    -fx-border-radius: 10px;
-    -fx-font-family: 'Pacifico', cursive;
-    -fx-font-size: 18px;
-    -fx-font-color: #FFF;
-    -fx-text-decoration: none;
+.blue:hover{
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #19b0ec, #456fe8);
+    -fx-background-radius: 9px;
+    -fx-border-radius: 7px;
 }
 
-#blue
-{
-    -fx-background-color: #3498DB;
-    -fx-border-bottom: 5px solid #2980B9;
-    -fx-text-shadow: 0px -2px #2980B9;
+.red {
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #f28367, #ff5282);
+    -fx-background-radius: 9px;
+    -fx-border-radius: 7px;
 }
 
-#red
-{
-    -fx-background-color: #E74C3C;
-    -fx-border-bottom: 5px solid #BD3E31;
-    -fx-text-shadow: 0px -2px #BD3E31;
-}
-
-.action-button:hover {
-    -fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
-    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
-    -fx-background-radius: 3px, 3px, 2px, 1px;
-    -fx-padding: 0.333333em 0.666667em 0.333333em 0.666667em; /* 4 8 4 8 */
-    -fx-text-fill: -fx-text-base-color;
-    -fx-alignment: CENTER;
-    -fx-content-display: LEFT;
+.red:hover{
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #ff5282, #f28367);
+    -fx-background-radius: 9px;
+    -fx-border-radius: 7px;
 }

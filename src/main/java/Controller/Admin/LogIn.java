@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.*;
 
@@ -52,6 +53,7 @@ public class LogIn {
         Stage stage = new Stage();
         stage.setTitle("Bus Management");
         stage.setScene(scene);
+        stage.getIcons().add(new Image("/images/Icon/favicon.png"));
         stage.show();
         Stage cl = (Stage) btn_cancel.getScene().getWindow();
         cl.close();
