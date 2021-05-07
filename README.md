@@ -145,7 +145,12 @@ There are some screenshots about this app, and the sequence of using the app.
     <br/>
     ![image_route2](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/route2.jpg)
     
-**5. Driver**
+**5. Route List**
+    <br/>
+    <br/>
+    ![image_ticket2](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/routebydate.jpg)
+    
+**6. Driver**
     <br/>
     <br/>
     ![image_driver1](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/driver1.jpg)
@@ -153,7 +158,7 @@ There are some screenshots about this app, and the sequence of using the app.
      <br/>
     ![image_driver2](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/driver2.jpg)
 
-**6. Decentralize**
+**7. Decentralize**
     <br/>
     <br/>
     ![image_acc1](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/acc1.jpg)
@@ -161,15 +166,12 @@ There are some screenshots about this app, and the sequence of using the app.
     <br/>
     ![image_acc2](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/acc2.jpg)
     
-**7. Ticket Detail**
+**8. Ticket Detail**
     <br/>
     <br/>
     ![image_ticket1](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/ticketdetail.jpg)
 
-**8. Route List**
-    <br/>
-    <br/>
-    ![image_ticket2](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/routebydate.jpg)
+
     
     
     
