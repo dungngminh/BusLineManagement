@@ -181,7 +181,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-DUT Team (GitFake company) - [Facebook](https://facebook.com/thinhquocle1002) - quocthinhle2001@gmail.com
+DUT Team (GitFake company) - [Facebook](https://facebook.com/thinhquocle1002) - dut.teamwork@gmail.com
 
 Project Link: [Bus Lines Management](https://github.com/dungngminh/QuanLyNhaXe_Maven)
 
