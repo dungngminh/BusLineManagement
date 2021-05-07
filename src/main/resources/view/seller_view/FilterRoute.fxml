@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="rootpane" fx:id="rootPane" prefHeight="650.0" prefWidth="1166.0" style="-fx-background-color: #D8DAD3;" stylesheets="@../../css/seller_css/filterRoute.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="rootpane" fx:id="rootPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1166.0" style="-fx-background-color: #D8DAD3;" stylesheets="@../../css/seller_css/filterRoute.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <JFXDrawer fx:id="jfx_drawer" defaultDrawerSize="190.0" prefHeight="650.0" prefWidth="103.0" />
       <Pane prefHeight="650.0" prefWidth="1166.0">
@@ -174,7 +174,7 @@
                         <Font name="Calibri" size="18.0" />
                      </font>
                   </Label>
-                  <Button fx:id="btn1" mnemonicParsing="false" onMouseClicked="#btn1_clicked" prefHeight="60.0" prefWidth="130.0" styleClass="btn" stylesheets="@../../css/seller_css/filterRoute.css" text="Choose route" textFill="#2e69ff" GridPane.columnIndex="5" GridPane.rowIndex="1">
+                  <Button fx:id="btn1" mnemonicParsing="false" onMouseClicked="#btn1_clicked" prefHeight="60.0" prefWidth="130.0" styleClass="btn" stylesheets="@../../css/seller_css/filterRoute.css" text="Choose route" textFill="#2e69ff" visible="false" GridPane.columnIndex="5" GridPane.rowIndex="1">
                      <font>
                         <Font name="Segoe UI Bold" size="17.0" />
                      </font>
@@ -182,7 +182,7 @@
                         <Cursor fx:constant="CLOSED_HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="btn4" mnemonicParsing="false" onMouseClicked="#btn4_clicked" prefHeight="60.0" prefWidth="130.0" styleClass="btn" stylesheets="@../../css/seller_css/filterRoute.css" text="Choose route" textFill="#2e69ff" GridPane.columnIndex="5" GridPane.rowIndex="4">
+                  <Button fx:id="btn4" mnemonicParsing="false" onMouseClicked="#btn4_clicked" prefHeight="60.0" prefWidth="130.0" styleClass="btn" stylesheets="@../../css/seller_css/filterRoute.css" text="Choose route" textFill="#2e69ff" visible="false" GridPane.columnIndex="5" GridPane.rowIndex="4">
                      <font>
                         <Font name="Segoe UI Bold" size="17.0" />
                      </font>
@@ -190,7 +190,7 @@
                         <Cursor fx:constant="CLOSED_HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="btn3" mnemonicParsing="false" onMouseClicked="#btn3_clicked" prefHeight="60.0" prefWidth="130.0" styleClass="btn" stylesheets="@../../css/seller_css/filterRoute.css" text="Choose route" textFill="#2e69ff" GridPane.columnIndex="5" GridPane.rowIndex="3">
+                  <Button fx:id="btn3" mnemonicParsing="false" onMouseClicked="#btn3_clicked" prefHeight="60.0" prefWidth="130.0" styleClass="btn" stylesheets="@../../css/seller_css/filterRoute.css" text="Choose route" textFill="#2e69ff" visible="false" GridPane.columnIndex="5" GridPane.rowIndex="3">
                      <font>
                         <Font name="Segoe UI Bold" size="17.0" />
                      </font>
@@ -198,7 +198,7 @@
                         <Cursor fx:constant="CLOSED_HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="btn2" mnemonicParsing="false" onMouseClicked="#btn2_clicked" prefHeight="60.0" prefWidth="130.0" styleClass="btn" stylesheets="@../../css/seller_css/filterRoute.css" text="Choose route" textFill="#2e69ff" GridPane.columnIndex="5" GridPane.rowIndex="2">
+                  <Button fx:id="btn2" mnemonicParsing="false" onMouseClicked="#btn2_clicked" prefHeight="60.0" prefWidth="130.0" styleClass="btn" stylesheets="@../../css/seller_css/filterRoute.css" text="Choose route" textFill="#2e69ff" visible="false" GridPane.columnIndex="5" GridPane.rowIndex="2">
                      <font>
                         <Font name="Segoe UI Bold" size="17.0" />
                      </font>
@@ -206,7 +206,7 @@
                         <Cursor fx:constant="CLOSED_HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="btn5" mnemonicParsing="false" onMouseClicked="#btn5_clicked" prefHeight="60.0" prefWidth="130.0" styleClass="btn" stylesheets="@../../css/seller_css/filterRoute.css" text="Choose route" textFill="#2e69ff" GridPane.columnIndex="5" GridPane.rowIndex="5">
+                  <Button fx:id="btn5" mnemonicParsing="false" onMouseClicked="#btn5_clicked" prefHeight="60.0" prefWidth="130.0" styleClass="btn" stylesheets="@../../css/seller_css/filterRoute.css" text="Choose route" textFill="#2e69ff" visible="false" GridPane.columnIndex="5" GridPane.rowIndex="5">
                      <font>
                         <Font name="Segoe UI Bold" size="17.0" />
                      </font>

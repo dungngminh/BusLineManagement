@@ -9,9 +9,11 @@ import com.jfoenix.controls.JFXHamburger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
@@ -71,6 +73,8 @@ public class TicketOrder implements Initializable {
 
     private TripInformationEntity modelTrip;
     private LocalDate date;
+
+    Pane pane;
 
     public TicketOrder(TripInformationEntity modelTrip, LocalDate date) {
         this.modelTrip = modelTrip;
@@ -136,6 +140,16 @@ public class TicketOrder implements Initializable {
             lb_price.setText("0đ");
             //done!
 
+            // Event for slot
+            String floor1 = "9162935";
+            if(floor1.contains(String.valueOf(modelTrip.getScheduleByIdSchedule().getBusByIdBus().
+                    getTypeOfBusByIdType().getSlot())))
+                eventHandle_OneFloor();
+            else
+                eventHandle_TwoFloors();
+
+            // done
+
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -143,8 +157,34 @@ public class TicketOrder implements Initializable {
     }
 
     public void showFigureOfBusType(String path) throws IOException {
-        Pane newPane = FXMLLoader.load(getClass().getResource("/view/bus_type/" + path + ".fxml"));
-        pane2.getChildren().setAll(newPane);
+        this.pane = FXMLLoader.load(getClass().getResource("/view/bus_type/" + path + ".fxml"));
+        pane2.getChildren().setAll(this.pane);
+    }
+
+    public void eventHandle_OneFloor() {
+        for (Node node : this.pane.lookupAll(".slot")) {
+            node.lookup(".slot").addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, (e) ->{
+                System.out.println(node.lookup(".slot").getId());
+            });
+        }
+    }
+
+    public void eventHandle_TwoFloors() {
+        TabPane newTabPane = (TabPane)this.pane.lookup(".tabpane");
+        Pane pane1 = (Pane)newTabPane.lookup(".floor1");
+        Pane pane2 = (Pane)newTabPane.lookup(".floor2");
+
+        for (Node node : pane1.lookupAll(".slot")) {
+            node.lookup(".slot").addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, (e) ->{
+                System.out.println(node.lookup(".slot").getId());
+            });
+        }
+
+        for (Node node : pane2.lookupAll(".slot")) {
+            node.lookup(".slot").addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, (e) ->{
+                System.out.println(node.lookup(".slot").getId());
+            });
+        }
     }
 
 }
