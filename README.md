@@ -124,7 +124,6 @@ There are some screenshots about this app, and the sequence of using the app.
     ![image_login](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/login1.jpg)
     
 **2. Main Page**
-
     ![image_main](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/ticketseller_dashboard1.jpg)
 
 **3. Bus Page**
