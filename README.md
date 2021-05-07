@@ -119,39 +119,39 @@ You still need to install these things first:
 
 There are some screenshots about this app, and the sequence of using the app.
 
-1. Login
+**1. Login**
 
     ![image_login](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/login1.jpg)
     
-2. Main Page
+**2. Main Page**
 
     ![image_main](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/ticketseller_dashboard1.jpg)
 
-3. Bus Page
+**3. Bus Page**
 
     ![image_bus1](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/bus.jpg)
     
     ![imgae_bus2](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/bus1.jpg)
 
-4. Route
+**4. Route**
   
     ![image_route1](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/route1.jpg)
     
     ![image_route2](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/route2.jpg)
     
-5. Driver
+**5. Driver**
 
     ![image_driver1](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/driver1.jpg)
     
     ![image_driver2](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/driver2.jpg)
 
-6. Decentralize
+**6. Decentralize**
 
     ![image_acc1](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/acc1.jpg)
     
     ![image_acc2](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/acc2.jpg)
     
- 7. Ticket Detail
+ **7. Ticket Detail**
  
     ![image_ticket1](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/ticketdetail.jpg)
     
