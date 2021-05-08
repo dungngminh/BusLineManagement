@@ -12,6 +12,7 @@ public class RoleAccountEntity {
     private RoleEntity roleByIdRole;
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "stt", nullable = false)
     public int getStt() {
         return stt;

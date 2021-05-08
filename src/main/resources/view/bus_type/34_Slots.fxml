@@ -7,62 +7,66 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="564.0" prefWidth="317.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Bus_Type.Bus34Bed">
-  <tabs>
-    <Tab text="Tầng 1">
-         <content>
-            <Pane prefHeight="558.0" prefWidth="317.0">
-               <children>
-                  <Button fx:id="a3" layoutX="14.0" layoutY="81.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="A3" />
-                  <Button fx:id="a4" layoutX="14.0" layoutY="160.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="A4" />
-                  <Button fx:id="a9" layoutX="14.0" layoutY="235.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="A9" />
-                  <Button fx:id="a2" layoutX="124.0" layoutY="81.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="A2" />
-                  <Button fx:id="a7" layoutX="233.0" layoutY="235.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="A7" />
-                  <Button fx:id="a8" layoutX="124.0" layoutY="235.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="A8" />
-                  <Button fx:id="a5" layoutX="124.0" layoutY="160.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="A5" />
-                  <Button fx:id="a6" layoutX="233.0" layoutY="160.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="A6" />
-                  <Button fx:id="a1" layoutX="233.0" layoutY="81.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="A1" />
-                  <Button fx:id="a10" layoutX="14.0" layoutY="310.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="A10" />
-                  <Button fx:id="a11" layoutX="124.0" layoutY="310.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="A11" />
-                  <Button fx:id="a12" layoutX="233.0" layoutY="310.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="A12" />
-                  <Button fx:id="a15" layoutX="14.0" layoutY="384.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="A15" />
-                  <Button fx:id="a14" layoutX="124.0" layoutY="384.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="A14" />
-                  <Button fx:id="a13" layoutX="233.0" layoutY="384.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="A13" />
-                  <Button fx:id="a16" layoutX="73.0" layoutY="467.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="A16" />
-                  <Button fx:id="a17" layoutX="179.0" layoutY="467.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="A17" />
-                  <Label layoutX="240.0" layoutY="37.0" text="Đường lên">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
-         </content>
-    </Tab>
-    <Tab text="Tầng 2">
-         <content>
-            <Pane prefHeight="558.0" prefWidth="317.0">
-               <children>
-                  <Button fx:id="b3" layoutX="14.0" layoutY="81.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="B3" />
-                  <Button fx:id="b4" layoutX="14.0" layoutY="160.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="B4" />
-                  <Button layoutX="14.0" layoutY="235.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="B9" />
-                  <Button fx:id="b2" layoutX="124.0" layoutY="81.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="B2" />
-                  <Button fx:id="b7" layoutX="233.0" layoutY="235.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="B7" />
-                  <Button layoutX="124.0" layoutY="235.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="B8" />
-                  <Button fx:id="b5" layoutX="124.0" layoutY="160.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="B5" />
-                  <Button fx:id="b6" layoutX="233.0" layoutY="160.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="B6" />
-                  <Button fx:id="b1" layoutX="233.0" layoutY="81.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="B1" />
-                  <Button layoutX="14.0" layoutY="310.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="B10" />
-                  <Button layoutX="124.0" layoutY="310.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="B11" />
-                  <Button layoutX="233.0" layoutY="310.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="B12" />
-                  <Button layoutX="14.0" layoutY="384.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="B15" />
-                  <Button fx:id="b14" layoutX="124.0" layoutY="384.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="B14" />
-                  <Button fx:id="b13" layoutX="233.0" layoutY="384.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="B13" />
-                  <Button fx:id="b16" layoutX="71.0" layoutY="467.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="B16" />
-                  <Button fx:id="b17" layoutX="176.0" layoutY="467.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" text="B17" />
-               </children>
-            </Pane>
-         </content>
-    </Tab>
-  </tabs>
-</TabPane>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="558.0" prefWidth="336.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Bus_Type.Bus34Bed">
+   <children>
+      <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="555.0" prefWidth="336.0" styleClass="tabpane" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab text="Tầng 1">
+               <content>
+                  <Pane prefHeight="525.0" prefWidth="305.0" styleClass="floor1">
+                     <children>
+                        <Button id="A3" fx:id="a3" layoutX="14.0" layoutY="81.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="A3" />
+                        <Button id="A4" fx:id="a4" layoutX="14.0" layoutY="160.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="A4" />
+                        <Button id="A9" fx:id="a9" layoutX="14.0" layoutY="235.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="A9" />
+                        <Button id="A2" fx:id="a2" layoutX="124.0" layoutY="81.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="A2" />
+                        <Button id="A7" fx:id="a7" layoutX="233.0" layoutY="235.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="A7" />
+                        <Button id="A8" fx:id="a8" layoutX="124.0" layoutY="235.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="A8" />
+                        <Button id="A5" fx:id="a5" layoutX="124.0" layoutY="160.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="A5" />
+                        <Button id="A6" fx:id="a6" layoutX="233.0" layoutY="160.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="A6" />
+                        <Button id="A1" fx:id="a1" layoutX="233.0" layoutY="81.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="A1" />
+                        <Button id="A10" fx:id="a10" layoutX="14.0" layoutY="310.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="A10" />
+                        <Button id="A11" fx:id="a11" layoutX="124.0" layoutY="310.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="A11" />
+                        <Button id="A12" fx:id="a12" layoutX="233.0" layoutY="310.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="A12" />
+                        <Button id="A15" fx:id="a15" layoutX="14.0" layoutY="384.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="A15" />
+                        <Button id="A14" fx:id="a14" layoutX="124.0" layoutY="384.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="A14" />
+                        <Button id="A13" fx:id="a13" layoutX="233.0" layoutY="384.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="A13" />
+                        <Button id="A16" fx:id="a16" layoutX="73.0" layoutY="467.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="A16" />
+                        <Button id="A17" fx:id="a17" layoutX="179.0" layoutY="467.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="A17" />
+                        <Label layoutX="240.0" layoutY="37.0" text="Đường lên">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+               </content>
+            </Tab>
+            <Tab text="Tầng 2">
+               <content>
+                  <Pane prefHeight="558.0" prefWidth="317.0" styleClass="floor2">
+                     <children>
+                        <Button id="B3" fx:id="b3" layoutX="14.0" layoutY="81.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="B3" />
+                        <Button id="B4" fx:id="b4" layoutX="14.0" layoutY="160.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="B4" />
+                        <Button id="B9" layoutX="14.0" layoutY="235.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="B9" />
+                        <Button id="B2" fx:id="b2" layoutX="124.0" layoutY="81.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="B2" />
+                        <Button id="B7" fx:id="b7" layoutX="233.0" layoutY="235.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="B7" />
+                        <Button id="B8" layoutX="124.0" layoutY="235.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="B8" />
+                        <Button id="B5" fx:id="b5" layoutX="124.0" layoutY="160.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="B5" />
+                        <Button id="B6" fx:id="b6" layoutX="233.0" layoutY="160.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="B6" />
+                        <Button id="B1" fx:id="b1" layoutX="233.0" layoutY="81.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="B1" />
+                        <Button id="B10" layoutX="14.0" layoutY="310.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="B10" />
+                        <Button id="B11" layoutX="124.0" layoutY="310.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="B11" />
+                        <Button id="B12" layoutX="233.0" layoutY="310.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="B12" />
+                        <Button id="B15" layoutX="14.0" layoutY="384.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="B15" />
+                        <Button id="B14" fx:id="b14" layoutX="124.0" layoutY="384.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="B14" />
+                        <Button id="B13" fx:id="b13" layoutX="233.0" layoutY="384.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="B13" />
+                        <Button id="B16" fx:id="b16" layoutX="71.0" layoutY="467.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="B16" />
+                        <Button id="B17" fx:id="b17" layoutX="176.0" layoutY="467.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="B17" />
+                     </children>
+                  </Pane>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+   </children>
+</Pane>

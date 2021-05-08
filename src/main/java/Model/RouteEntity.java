@@ -11,11 +11,11 @@ public class RouteEntity {
     private String endStation;
     private Integer distance;
     private String note;
-    private Boolean isDelete;
     private int status;
     private Collection<ScheduleEntity> schedulesByIdRoute;
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "idRoute", nullable = false)
     public int getIdRoute() {
         return idRoute;
@@ -65,15 +65,6 @@ public class RouteEntity {
         this.note = note;
     }
 
-    @Basic
-    @Column(name = "isDelete", nullable = true)
-    public Boolean getDelete() {
-        return isDelete;
-    }
-
-    public void setDelete(Boolean delete) {
-        isDelete = delete;
-    }
 
     @Basic
     @Column(name = "status", nullable = false)
@@ -98,7 +89,6 @@ public class RouteEntity {
         if (endStation != null ? !endStation.equals(that.endStation) : that.endStation != null) return false;
         if (distance != null ? !distance.equals(that.distance) : that.distance != null) return false;
         if (note != null ? !note.equals(that.note) : that.note != null) return false;
-        if (isDelete != null ? !isDelete.equals(that.isDelete) : that.isDelete != null) return false;
 
         return true;
     }
@@ -110,7 +100,6 @@ public class RouteEntity {
         result = 31 * result + (endStation != null ? endStation.hashCode() : 0);
         result = 31 * result + (distance != null ? distance.hashCode() : 0);
         result = 31 * result + (note != null ? note.hashCode() : 0);
-        result = 31 * result + (isDelete != null ? isDelete.hashCode() : 0);
         result = 31 * result + status;
         return result;
     }

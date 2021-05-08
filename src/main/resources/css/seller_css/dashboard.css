@@ -1,0 +1,32 @@
+#pane {
+    -fx-background-image: url(../../images/dashboard.jpg);
+    -fx-background-size: 100% 100%;
+}
+
+#btn-search {
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #4dc9e6, #210cae);
+    -fx-background-radius: 15px;
+    -fx-border-radius: 15px;
+}
+
+#btn-search:hover {
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #95f9c3, #0b3866);
+    -fx-background-radius: 15px;
+    -fx-border-color: #ffcfcf;
+    -fx-border-width: 0px;
+    -fx-border-radius: 15px;
+}
+
+#btn-swap {
+    -fx-background-color: transparent !important;
+}
+
+#btn-swap:hover {
+    -fx-opacity: 0.5;
+}
+
+.cbx, .date{
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #ebf4f5, #b5c6e0);
+    -fx-font-size: 20px;
+}
+

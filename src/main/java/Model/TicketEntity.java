@@ -19,6 +19,7 @@ public class TicketEntity {
     private TripInformationEntity tripInformationByIdTrip;
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "idTicket", nullable = false)
     public int getIdTicket() {
         return idTicket;
@@ -70,12 +71,12 @@ public class TicketEntity {
 
     @Basic
     @Column(name = "isDelete", nullable = true)
-    public Boolean getDelete() {
+    public Boolean getIsDelete() {
         return isDelete;
     }
 
-    public void setDelete(Boolean delete) {
-        isDelete = delete;
+    public void setIsDelete(Boolean delete) {
+        this.isDelete = delete;
     }
 
     @Basic

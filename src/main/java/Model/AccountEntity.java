@@ -1,5 +1,12 @@
 package Model;
 
+import Services.DAL;
+import org.apache.commons.codec.digest.DigestUtils;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -13,17 +20,18 @@ public class AccountEntity {
     private Collection<TicketEntity> ticketsByIdUser;
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "idUser", nullable = false)
-    public int getIdUser() {
+    public Integer getIdUser() {
         return idUser;
     }
 
-    public void setIdUser(int idUser) {
+    public void setIdUser(Integer idUser) {
         this.idUser = idUser;
     }
 
     @Basic
-    @Column(name = "Username", nullable = false, length = 50)
+    @Column(name = "Username", nullable = false, length = 50, unique = true)
     public String getUsername() {
         return username;
     }
@@ -64,7 +72,13 @@ public class AccountEntity {
         return result;
     }
 
-    @OneToMany(mappedBy = "accountByIdUser")
+    @Override
+    public String toString() {
+        return this.getUsername();
+    }
+
+    @OneToMany(mappedBy = "accountByIdUser", fetch = FetchType.EAGER )
+    @Fetch(value = FetchMode.SUBSELECT)
     public Collection<RoleAccountEntity> getRoleAccountsByIdUser() {
         return roleAccountsByIdUser;
     }
@@ -73,7 +87,8 @@ public class AccountEntity {
         this.roleAccountsByIdUser = roleAccountsByIdUser;
     }
 
-    @OneToMany(mappedBy = "accountByIdUser")
+    @OneToMany(mappedBy = "accountByIdUser", fetch = FetchType.LAZY )
+    @Fetch(value = FetchMode.SUBSELECT)
     public Collection<TicketEntity> getTicketsByIdUser() {
         return ticketsByIdUser;
     }

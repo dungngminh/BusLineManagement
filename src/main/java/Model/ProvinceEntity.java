@@ -1,5 +1,8 @@
 package Model;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -11,6 +14,7 @@ public class ProvinceEntity {
     private Collection<StationEntity> stationsByIdProvince;
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "idProvince", nullable = false)
     public int getIdProvince() {
         return idProvince;
@@ -50,12 +54,16 @@ public class ProvinceEntity {
         return result;
     }
 
-    @OneToMany(mappedBy = "provinceByIdProvince")
+    @OneToMany(mappedBy = "provinceByIdProvince", fetch = FetchType.EAGER )
+    @Fetch(value = FetchMode.SUBSELECT)
     public Collection<StationEntity> getStationsByIdProvince() {
         return stationsByIdProvince;
     }
 
     public void setStationsByIdProvince(Collection<StationEntity> stationsByIdProvince) {
         this.stationsByIdProvince = stationsByIdProvince;
+    }
+    public String toString() {
+        return this.getProvinceName();
     }
 }

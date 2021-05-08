@@ -11,6 +11,7 @@ public class RoleEntity {
     private Collection<RoleAccountEntity> roleAccountsByIdRole;
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "idRole", nullable = false)
     public int getIdRole() {
         return idRole;

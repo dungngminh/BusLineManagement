@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.JFXHamburger?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane fx:id="rootPane" prefHeight="650.0" prefWidth="1166.0" style="-fx-background-color: #D8DAD3;" stylesheets="@../../css/seller_css/dashboard.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TicketSeller.Setting">
+   <children>
+      <JFXDrawer fx:id="jfx_drawer" defaultDrawerSize="190.0" layoutX="-2.0" prefHeight="650.0" prefWidth="103.0" />
+      <Pane prefHeight="650.0" prefWidth="1166.0" />
+      <JFXHamburger fx:id="jfx_hambur" layoutX="10.0" layoutY="10.0" />
+   </children>
+</AnchorPane>

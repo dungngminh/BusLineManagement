@@ -12,10 +12,11 @@ public class TypeOfBusEntity {
     private String brandName;
     private int slot;
     private byte[] picture;
-    private boolean isDelete;
+    private Boolean isDelete;
     private Collection<BusEntity> busesByIdType;
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "idType", nullable = false)
     public int getIdType() {
         return idType;
@@ -67,12 +68,12 @@ public class TypeOfBusEntity {
 
     @Basic
     @Column(name = "isDelete", nullable = false)
-    public boolean isDelete() {
+    public Boolean getIsDelete() {
         return isDelete;
     }
 
-    public void setDelete(boolean delete) {
-        isDelete = delete;
+    public void setIsDelete(Boolean delete) {
+        this.isDelete = delete;
     }
 
     @Override
@@ -103,7 +104,7 @@ public class TypeOfBusEntity {
         return result;
     }
 
-    @OneToMany(mappedBy = "typeOfBusByIdType")
+    @OneToMany(targetEntity = BusEntity.class, mappedBy = "typeOfBusByIdType", fetch = FetchType.LAZY)
     public Collection<BusEntity> getBusesByIdType() {
         return busesByIdType;
     }
@@ -111,4 +112,5 @@ public class TypeOfBusEntity {
     public void setBusesByIdType(Collection<BusEntity> busesByIdType) {
         this.busesByIdType = busesByIdType;
     }
+
 }

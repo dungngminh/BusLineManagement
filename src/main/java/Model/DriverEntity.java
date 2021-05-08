@@ -11,10 +11,11 @@ public class DriverEntity {
     private String phone;
     private String address;
     private int status;
-    private boolean isDelete;
+    private Boolean isDelete;
     private Collection<TripInformationEntity> tripInformationsByIdDriver;
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "idDriver", nullable = false)
     public int getIdDriver() {
         return idDriver;
@@ -35,7 +36,7 @@ public class DriverEntity {
     }
 
     @Basic
-    @Column(name = "phone", nullable = false, length = 10)
+    @Column(name = "phone", nullable = false, unique = true, length = 10)
     public String getPhone() {
         return phone;
     }
@@ -66,12 +67,12 @@ public class DriverEntity {
 
     @Basic
     @Column(name = "isDelete", nullable = false)
-    public boolean isDelete() {
+    public Boolean getIsDelete() {
         return isDelete;
     }
 
-    public void setDelete(boolean delete) {
-        isDelete = delete;
+    public void setIsDelete(Boolean delete) {
+        this.isDelete = delete;
     }
 
     @Override
