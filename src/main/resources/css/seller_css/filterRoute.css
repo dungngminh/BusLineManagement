@@ -1,0 +1,22 @@
+#rootpane {
+    -fx-background-image: url(../../images/filterroute.jpg);
+    -fx-background-size: 100% 100%;
+}
+
+.btn {
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #f7a2a1, #ffed00);
+    -fx-background-radius: 9px;
+    -fx-border-radius: 7px;
+}
+
+.btn:hover {
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #ffed00, #f7a2a1);
+    -fx-background-radius: 11px;
+    -fx-border-radius: 9px;
+    -fx-border-width: 0px;
+}
+
+.date {
+    -fx-background-color: #F1F2EB;
+    -fx-font-size: 20px;
+}

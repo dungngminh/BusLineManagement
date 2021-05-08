@@ -17,6 +17,7 @@ public class TripInformationEntity {
     private DriverEntity driverByIdDriver;
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "idTrip", nullable = false)
     public int getIdTrip() {
         return idTrip;

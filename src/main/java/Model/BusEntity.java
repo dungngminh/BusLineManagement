@@ -16,6 +16,7 @@ public class BusEntity {
     private Collection<ScheduleEntity> schedulesByIdBus;
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "idBus", nullable = false)
     public int getIdBus() {
         return idBus;
@@ -36,7 +37,7 @@ public class BusEntity {
     }
 
     @Basic
-    @Column(name = "plateNumber", nullable = false, length = 10)
+    @Column(name = "plateNumber", nullable = false, unique = true, length = 10)
     public String getPlateNumber() {
         return plateNumber;
     }
@@ -57,12 +58,12 @@ public class BusEntity {
 
     @Basic
     @Column(name = "isDelete", nullable = true)
-    public Boolean getDelete() {
+    public Boolean getIsDelete() {
         return isDelete;
     }
 
-    public void setDelete(Boolean delete) {
-        isDelete = delete;
+    public void setIsDelete(Boolean isDelete) {
+        this.isDelete = isDelete;
     }
 
     @Basic
@@ -104,8 +105,8 @@ public class BusEntity {
         return result;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "idType", referencedColumnName = "idType", nullable = false)
+    @ManyToOne(targetEntity = TypeOfBusEntity.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "idType")
     public TypeOfBusEntity getTypeOfBusByIdType() {
         return typeOfBusByIdType;
     }
@@ -114,7 +115,7 @@ public class BusEntity {
         this.typeOfBusByIdType = typeOfBusByIdType;
     }
 
-    @OneToMany(mappedBy = "busByIdBus")
+    @OneToMany(mappedBy = "busByIdBus", fetch = FetchType.LAZY)
     public Collection<ScheduleEntity> getSchedulesByIdBus() {
         return schedulesByIdBus;
     }

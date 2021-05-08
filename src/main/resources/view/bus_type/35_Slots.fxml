@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="313.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Bus_Type.Bus35">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="313.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Bus_Type.Bus35">
    <children>
       <GridPane layoutX="8.0" layoutY="66.0" prefHeight="463.0" prefWidth="104.0">
          <columnConstraints>
@@ -24,22 +24,22 @@
             <RowConstraints maxHeight="53.666656494140625" minHeight="10.0" prefHeight="53.666656494140625" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Button fx:id="seat1" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" text="1" />
-            <Button fx:id="seat2" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" text="2" GridPane.columnIndex="1" />
-            <Button fx:id="seat8" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" text="8" GridPane.rowIndex="1" />
-            <Button fx:id="seat7" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" text="7" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Button fx:id="seat9" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" text="9" GridPane.rowIndex="2" />
-            <Button fx:id="seat10" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" text="10" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button fx:id="seat16" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" text="16" GridPane.rowIndex="3" />
-            <Button fx:id="seat15" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" text="15" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Button fx:id="seat17" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" text="17" GridPane.rowIndex="4" />
-            <Button fx:id="seat18" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" text="18" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Button fx:id="seat24" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" text="24" GridPane.rowIndex="5" />
-            <Button fx:id="seat23" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" text="23" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <Button fx:id="seat25" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" text="25" GridPane.rowIndex="6" />
-            <Button fx:id="seat26" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" text="26" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <Button fx:id="seat31" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" text="31" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-            <Button fx:id="seat32" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" text="32" GridPane.rowIndex="7" />
+            <Button id="1" fx:id="seat1" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" styleClass="slot" text="1" />
+            <Button id="2" fx:id="seat2" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" styleClass="slot" text="2" GridPane.columnIndex="1" />
+            <Button id="8" fx:id="seat8" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" styleClass="slot" text="8" GridPane.rowIndex="1" />
+            <Button id="7" fx:id="seat7" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" styleClass="slot" text="7" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button id="9" fx:id="seat9" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" styleClass="slot" text="9" GridPane.rowIndex="2" />
+            <Button id="10" fx:id="seat10" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" styleClass="slot" text="10" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button id="16" fx:id="seat16" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" styleClass="slot" text="16" GridPane.rowIndex="3" />
+            <Button id="15" fx:id="seat15" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" styleClass="slot" text="15" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Button id="17" fx:id="seat17" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" styleClass="slot" text="17" GridPane.rowIndex="4" />
+            <Button id="18" fx:id="seat18" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" styleClass="slot" text="18" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Button id="24" fx:id="seat24" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" styleClass="slot" text="24" GridPane.rowIndex="5" />
+            <Button id="23" fx:id="seat23" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" styleClass="slot" text="23" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Button id="25" fx:id="seat25" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" styleClass="slot" text="25" GridPane.rowIndex="6" />
+            <Button id="26" fx:id="seat26" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" styleClass="slot" text="26" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <Button id="31" fx:id="seat31" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" styleClass="slot" text="31" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <Button id="32" fx:id="seat32" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" styleClass="slot" text="32" GridPane.rowIndex="7" />
          </children>
       </GridPane>
       <GridPane layoutX="203.0" layoutY="69.0" prefHeight="457.0" prefWidth="104.0">
@@ -58,22 +58,22 @@
             <RowConstraints maxHeight="49.0" minHeight="10.0" prefHeight="49.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Button fx:id="seat3" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" text="3" />
-            <Button fx:id="seat4" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" text="4" GridPane.columnIndex="1" />
-            <Button fx:id="seat6" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" text="6" GridPane.rowIndex="1" />
-            <Button fx:id="seat5" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" text="5" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Button fx:id="seat11" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" text="11" GridPane.rowIndex="2" />
-            <Button fx:id="seat12" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" text="12" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button fx:id="seat14" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" text="14" GridPane.rowIndex="3" />
-            <Button fx:id="seat13" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" text="13" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Button fx:id="seat19" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" text="19" GridPane.rowIndex="4" />
-            <Button fx:id="seat20" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" text="20" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Button fx:id="seat22" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" text="22" GridPane.rowIndex="5" />
-            <Button fx:id="seat21" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" text="21" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <Button fx:id="seat27" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" text="27" GridPane.rowIndex="6" />
-            <Button fx:id="seat28" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" text="28" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <Button fx:id="seat29" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" text="29" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-            <Button fx:id="seat30" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" text="30" GridPane.rowIndex="7" />
+            <Button id="3" fx:id="seat3" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" styleClass="slot" text="3" />
+            <Button id="4" fx:id="seat4" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" styleClass="slot" text="4" GridPane.columnIndex="1" />
+            <Button id="6" fx:id="seat6" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" styleClass="slot" text="6" GridPane.rowIndex="1" />
+            <Button id="5" fx:id="seat5" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" styleClass="slot" text="5" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button id="11" fx:id="seat11" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" styleClass="slot" text="11" GridPane.rowIndex="2" />
+            <Button id="12" fx:id="seat12" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" styleClass="slot" text="12" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button id="14" fx:id="seat14" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" styleClass="slot" text="14" GridPane.rowIndex="3" />
+            <Button id="13" fx:id="seat13" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" styleClass="slot" text="13" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Button id="19" fx:id="seat19" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" styleClass="slot" text="19" GridPane.rowIndex="4" />
+            <Button id="20" fx:id="seat20" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" styleClass="slot" text="20" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Button id="22" fx:id="seat22" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" styleClass="slot" text="22" GridPane.rowIndex="5" />
+            <Button id="21" fx:id="seat21" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" styleClass="slot" text="21" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Button id="27" fx:id="seat27" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" styleClass="slot" text="27" GridPane.rowIndex="6" />
+            <Button id="28" fx:id="seat28" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" styleClass="slot" text="28" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <Button id="29" fx:id="seat29" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" styleClass="slot" text="29" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <Button id="30" fx:id="seat30" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" styleClass="slot" text="30" GridPane.rowIndex="7" />
          </children>
       </GridPane>
       <GridPane layoutX="62.0" layoutY="550.0" prefHeight="46.0" prefWidth="210.0">
@@ -86,9 +86,9 @@
             <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Button fx:id="seat33" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" text="33" />
-            <Button fx:id="seat34" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" text="34" GridPane.columnIndex="1" />
-            <Button fx:id="seat35" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" text="35" GridPane.columnIndex="2" />
+            <Button id="33" fx:id="seat33" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" styleClass="slot" text="33" />
+            <Button id="34" fx:id="seat34" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" styleClass="slot" text="34" GridPane.columnIndex="1" />
+            <Button id="35" fx:id="seat35" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="46.0" prefWidth="52.0" styleClass="slot" text="35" GridPane.columnIndex="2" />
          </children>
       </GridPane>
    </children>

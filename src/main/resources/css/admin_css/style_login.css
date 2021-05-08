@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Sans:wght@500&display=swap');
+#frame-1 {
+    -fx-background-image: url(../../images/frame_1_login.jpg);
+    -fx-background-size: 100% 100%;
+}
+
+#pane {
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #1ed7b5, #f0f9a7);
+    /*-fx-background-size: 100% 100%;*/
+    -fx-background-radius:20px;
+    -fx-border-radius: 20px;
+
+}
+
+
+#lb-wel {
+    -fx-font-color: #295270;
+    -fx-font-family: 'Anton', sans-serif;
+    -fx-font-size: 30px;
+}
+
+.blue {
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #456fe8, #19b0ec);
+    -fx-background-radius: 9px;
+    -fx-border-radius: 7px;
+}
+
+.blue:hover{
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #19b0ec, #456fe8);
+    -fx-background-radius: 9px;
+    -fx-border-radius: 7px;
+}
+
+.red {
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #f28367, #ff5282);
+    -fx-background-radius: 9px;
+    -fx-border-radius: 7px;
+}
+
+.red:hover{
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #ff5282, #f28367);
+    -fx-background-radius: 9px;
+    -fx-border-radius: 7px;
+}

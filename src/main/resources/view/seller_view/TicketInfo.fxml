@@ -11,9 +11,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="642.0" prefWidth="1065.0" style="-fx-background-color: #AAEFDF;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Java.Controller.BusPage">
+<AnchorPane prefHeight="642.0" prefWidth="1065.0" style="-fx-background-color: #AAEFDF;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TicketSeller.TicketInfo">
    <children>
-      <SplitPane id="splitpane" dividerPositions="0.2521166509877705" layoutX="18.0" layoutY="15.0" prefHeight="612.0" prefWidth="1030.0" stylesheets="@QuanLyNhaXe/Bus_Management_JavaFX/src/Resources/css/BusPage.css">
+      <SplitPane id="splitpane" dividerPositions="0.2521166509877705" layoutX="18.0" layoutY="15.0" prefHeight="612.0" prefWidth="1030.0" stylesheets="/css/admin_css/BusPage.css">
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="690.0" prefWidth="350.0" style="-fx-background-color: #FFF8E8;">
                <children>
