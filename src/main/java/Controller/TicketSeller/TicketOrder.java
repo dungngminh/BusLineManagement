@@ -236,9 +236,7 @@ public class TicketOrder implements Initializable {
     // NOTICE Init assign all slots into arr_Slots(One time called)
     public void assignSlot_OneFloor() {
         for (Node node : this.pane.lookupAll(".slot")) {
-            node.lookup(".slot").addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, (e) ->{
-                set_Slots.add(node.lookup(".btn"));
-            });
+            set_Slots.add(node.lookup(".slot"));
         }
     }
 
@@ -248,16 +246,11 @@ public class TicketOrder implements Initializable {
         Pane pane2 = (Pane)newTabPane.lookup(".floor2");
 
         for (Node node : pane1.lookupAll(".slot")) {
-            node.lookup(".slot").addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, (e) ->{
-
-                set_Slots.add(node.lookup(".btn"));
-            });
+            set_Slots.add(node.lookup(".slot"));
         }
 
         for (Node node : pane2.lookupAll(".slot")) {
-            node.lookup(".slot").addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, (e) ->{
-                set_Slots.add(node.lookup(".btn"));
-            });
+            set_Slots.add(node.lookup(".slot"));
         }
     }
     /// DONE
@@ -353,6 +346,8 @@ public class TicketOrder implements Initializable {
 
 
             tmp_Slots.forEach(slot -> {
+                if(!slot.getStyle().equals("-fx-background-color: #4cc9f0;"))
+                    slot.setStyle("");
                 slot.setDisable(false);
             });
 
