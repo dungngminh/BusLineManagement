@@ -83,6 +83,9 @@ public class TicketOrder implements Initializable {
     private static ProvinceEntity startProvince;
     private static ProvinceEntity endProvince;
 
+    // this set contain all slot in bus
+    private static Set<Node> set_Slots = new HashSet<>();
+
 
     Pane pane;
 
@@ -158,14 +161,19 @@ public class TicketOrder implements Initializable {
             // Event for slot
             String floor1 = "9162935";
             if(floor1.contains(String.valueOf(modelTrip.getScheduleByIdSchedule().getBusByIdBus().
-                    getTypeOfBusByIdType().getSlot())))
+                    getTypeOfBusByIdType().getSlot()))) {
+                assignSlot_OneFloor();
                 eventHandle_OneFloor();
-            else
+            }
+
+            else {
+                assignSlot_TwoFloors();
                 eventHandle_TwoFloors();
+            }
 
-            // done
+            // DONE
 
-
+            pane2.hoverProperty().addListener((event)->refreshTicketForSLots());
 
 
         } catch (IOException e) {
@@ -217,16 +225,42 @@ public class TicketOrder implements Initializable {
             new Alert(Alert.AlertType.WARNING, "Unknown Error").showAndWait();
         }
 
-
-
-
-
     }
 
     public void showFigureOfBusType(String path) throws IOException {
         this.pane = FXMLLoader.load(getClass().getResource("/view/bus_type/" + path + ".fxml"));
         pane2.getChildren().setAll(this.pane);
     }
+
+
+    // NOTICE Init assign all slots into arr_Slots(One time called)
+    public void assignSlot_OneFloor() {
+        for (Node node : this.pane.lookupAll(".slot")) {
+            node.lookup(".slot").addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, (e) ->{
+                set_Slots.add(node.lookup(".btn"));
+            });
+        }
+    }
+
+    public void assignSlot_TwoFloors() {
+        TabPane newTabPane = (TabPane)this.pane.lookup(".tabpane");
+        Pane pane1 = (Pane)newTabPane.lookup(".floor1");
+        Pane pane2 = (Pane)newTabPane.lookup(".floor2");
+
+        for (Node node : pane1.lookupAll(".slot")) {
+            node.lookup(".slot").addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, (e) ->{
+
+                set_Slots.add(node.lookup(".btn"));
+            });
+        }
+
+        for (Node node : pane2.lookupAll(".slot")) {
+            node.lookup(".slot").addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, (e) ->{
+                set_Slots.add(node.lookup(".btn"));
+            });
+        }
+    }
+    /// DONE
 
     // Handle event here
     public void eventHandle_OneFloor() {
@@ -244,7 +278,6 @@ public class TicketOrder implements Initializable {
 
         for (Node node : pane1.lookupAll(".slot")) {
             node.lookup(".slot").addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, (e) ->{
-
                 toggleEventHandle(node.lookup(".slot"));
             });
         }
@@ -260,21 +293,23 @@ public class TicketOrder implements Initializable {
         List<TicketEntity> listTicket = Arrays.stream((modelTrip.getTicketsByIdTrip()
                 .toArray())).map(element-> (TicketEntity)element).collect(Collectors.toList());
         if(!listTicket.isEmpty()) {
-
+            Set<Node> tmp_Slots = set_Slots;
             List<String> slotOrdered = BLL_Seller.getInstance().getOrderedTicket(modelTrip.getIdTrip());
 
-            List<String> slotPending = BLL_Seller.getInstance().getPendingTicket(modelTrip.getIdTrip(), currentTicket);
+            List<String> slotPending = BLL_Seller.getInstance().getPendingTicket(modelTrip.getIdTrip(), currentTicket.getIdTicket());
 
             String floor1 = "9162935";
             if(floor1.contains(String.valueOf(modelTrip.getScheduleByIdSchedule().getBusByIdBus().
                     getTypeOfBusByIdType().getSlot()))) {
                 for (Node node : this.pane.lookupAll(".slot")) {
                     if(slotOrdered.contains(node.lookup(".slot").getId())) {
+                        tmp_Slots.remove(node.lookup(".slot"));
                         node.lookup(".slot").setStyle("-fx-background-color: #8C271E;");
                         node.lookup(".slot").setDisable(true);
                     }
 
                     if(slotPending.contains(node.lookup(".slot").getId())) {
+                        tmp_Slots.remove(node.lookup(".slot"));
                         node.lookup(".slot").setStyle("-fx-background-color: #F1D302;");
                         node.lookup(".slot").setDisable(true);
                     }
@@ -289,11 +324,13 @@ public class TicketOrder implements Initializable {
 
                 for (Node node : pane1.lookupAll(".slot")) {
                     if(slotOrdered.contains(node.lookup(".slot").getId())) {
+                        tmp_Slots.remove(node.lookup(".slot"));
                         node.lookup(".slot").setStyle("-fx-background-color: #8C271E;");
                         node.lookup(".slot").setDisable(true);
                     }
 
                     if(slotPending.contains(node.lookup(".slot").getId())) {
+                        tmp_Slots.remove(node.lookup(".slot"));
                         node.lookup(".slot").setStyle("-fx-background-color: #F1D302;");
                         node.lookup(".slot").setDisable(true);
                     }
@@ -301,16 +338,23 @@ public class TicketOrder implements Initializable {
 
                 for (Node node : pane2.lookupAll(".slot")) {
                     if(slotOrdered.contains(node.lookup(".slot").getId())) {
+                        tmp_Slots.remove(node.lookup(".slot"));
                         node.lookup(".slot").setStyle("-fx-background-color: #8C271E;");
                         node.lookup(".slot").setDisable(true);
                     }
 
                     if(slotPending.contains(node.lookup(".slot").getId())) {
+                        tmp_Slots.remove(node.lookup(".slot"));
                         node.lookup(".slot").setStyle("-fx-background-color: #F1D302;");
                         node.lookup(".slot").setDisable(true);
                     }
                 }
             }
+
+
+            tmp_Slots.forEach(slot -> {
+                slot.setDisable(false);
+            });
 
         }
 
@@ -319,25 +363,27 @@ public class TicketOrder implements Initializable {
     public void toggleEventHandle(Node node) {
         if(node.getStyle().equals("")) {
             refreshTicketForSLots();
-            // After refresh slot
-            node.setStyle("-fx-background-color: #4cc9f0;");
+            if(!node.getStyle().equals("-fx-background-color: #F1D302;")) {
+                // After refresh slot
+                node.setStyle("-fx-background-color: #4cc9f0;");
 
-            if(lb_code.getText().equals("Choose your slots!"))
-                lb_code.setText("");
-            // Set text for label code ticket
-            String name = lb_code.getText() + "-" + node.getId();
-            if(name.charAt(0) == '-')
-                name = name.substring(1);
-            lb_code.setText(name);
-            //
-            // Send Sync to DB
-            BLL_Seller.getInstance().updateCurrentTicket(currentTicket, lb_code.getText() ,txf_namecustomer.getText(),
-                    txf_phonecustomer.getText(), 0);
-            //
+                if(lb_code.getText().equals("Choose your slots!"))
+                    lb_code.setText("");
+                // Set text for label code ticket
+                String name = lb_code.getText() + "-" + node.getId();
+                if(name.charAt(0) == '-')
+                    name = name.substring(1);
+                lb_code.setText(name);
+                //
+                // Send Sync to DB
+                BLL_Seller.getInstance().updateCurrentTicket(currentTicket, lb_code.getText() ,txf_namecustomer.getText(),
+                        txf_phonecustomer.getText(), 0);
+                //
+            }
 
         }
-        else {
-            refreshTicketForSLots();
+        else if(node.getStyle().equals("-fx-background-color: #4cc9f0;")){
+//            refreshTicketForSLots();
             // After refresh slot
             node.setStyle("");
             // Set text for label code ticket

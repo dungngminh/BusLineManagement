@@ -89,11 +89,11 @@ public class BLL_Seller {
         return ans;
     }
 
-    public List<String> getPendingTicket(Integer idTrip, TicketEntity crr) {
+    public List<String> getPendingTicket(Integer idTrip, Integer crrId) {
         List<String> ans = new ArrayList<String>();
 
         DAL.getInstance().getListTicket(idTrip).forEach(ticket -> {
-            if(ticket.getStatus() == 0 && !ticket.equals(crr)) {
+            if(ticket.getStatus() == 0 && !crrId.equals(ticket.getIdTicket())) {
                 ans.addAll(Arrays.asList(ticket.getNameTicket().split("-")));
             }
         });
