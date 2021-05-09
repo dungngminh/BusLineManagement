@@ -283,10 +283,6 @@ public class TicketOrder implements Initializable {
     }
 
     public void refreshTicketForSLots() {
-        List<TicketEntity> listTicket = Arrays.stream((modelTrip.getTicketsByIdTrip()
-                .toArray())).map(element-> (TicketEntity)element).collect(Collectors.toList());
-        if(!listTicket.isEmpty()) {
-            Set<Node> tmp_Slots = set_Slots;
             List<String> slotOrdered = BLL_Seller.getInstance().getOrderedTicket(modelTrip.getIdTrip());
 
             List<String> slotPending = BLL_Seller.getInstance().getPendingTicket(modelTrip.getIdTrip(), currentTicket.getIdTicket());
@@ -295,15 +291,14 @@ public class TicketOrder implements Initializable {
             if(floor1.contains(String.valueOf(modelTrip.getScheduleByIdSchedule().getBusByIdBus().
                     getTypeOfBusByIdType().getSlot()))) {
                 for (Node node : this.pane.lookupAll(".slot")) {
-                    if(slotOrdered.contains(node.lookup(".slot").getId())) {
-                        tmp_Slots.remove(node.lookup(".slot"));
+
+                    if(!slotOrdered.isEmpty() && slotOrdered.contains(node.lookup(".slot").getId())) {
                         node.lookup(".slot").setStyle("-fx-background-color: #8C271E;");
                         node.lookup(".slot").setDisable(true);
                         continue;
                     }
 
-                    if(slotPending.contains(node.lookup(".slot").getId())) {
-                        tmp_Slots.remove(node.lookup(".slot"));
+                    if(!slotPending.isEmpty() && slotPending.contains(node.lookup(".slot").getId())) {
                         node.lookup(".slot").setStyle("-fx-background-color: #F1D302;");
                         node.lookup(".slot").setDisable(true);
                         continue;
@@ -322,15 +317,13 @@ public class TicketOrder implements Initializable {
                 Pane pane2 = (Pane)newTabPane.lookup(".floor2");
 
                 for (Node node : pane1.lookupAll(".slot")) {
-                    if(slotOrdered.contains(node.lookup(".slot").getId())) {
-                        tmp_Slots.remove(node.lookup(".slot"));
+                    if(!slotOrdered.isEmpty() && slotOrdered.contains(node.lookup(".slot").getId())) {
                         node.lookup(".slot").setStyle("-fx-background-color: #8C271E;");
                         node.lookup(".slot").setDisable(true);
                         continue;
                     }
 
-                    if(slotPending.contains(node.lookup(".slot").getId())) {
-                        tmp_Slots.remove(node.lookup(".slot"));
+                    if(!slotPending.isEmpty() && slotPending.contains(node.lookup(".slot").getId())) {
                         node.lookup(".slot").setStyle("-fx-background-color: #F1D302;");
                         node.lookup(".slot").setDisable(true);
                         continue;
@@ -342,15 +335,13 @@ public class TicketOrder implements Initializable {
                 }
 
                 for (Node node : pane2.lookupAll(".slot")) {
-                    if(slotOrdered.contains(node.lookup(".slot").getId())) {
-                        tmp_Slots.remove(node.lookup(".slot"));
+                    if(!slotOrdered.isEmpty() && slotOrdered.contains(node.lookup(".slot").getId())) {
                         node.lookup(".slot").setStyle("-fx-background-color: #8C271E;");
                         node.lookup(".slot").setDisable(true);
                         continue;
                     }
 
-                    if(slotPending.contains(node.lookup(".slot").getId())) {
-                        tmp_Slots.remove(node.lookup(".slot"));
+                    if(!slotPending.isEmpty() && slotPending.contains(node.lookup(".slot").getId())) {
                         node.lookup(".slot").setStyle("-fx-background-color: #F1D302;");
                         node.lookup(".slot").setDisable(true);
                         continue;
@@ -362,8 +353,6 @@ public class TicketOrder implements Initializable {
 
                 }
             }
-
-        }
 
     }
 

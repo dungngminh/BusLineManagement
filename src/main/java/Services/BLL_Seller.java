@@ -72,7 +72,7 @@ public class BLL_Seller {
 
     // done FilterRoute ?
 
-    // BLL for TickeOrder ?
+    // NOTICE BLL for TickeOrder ?
     public TicketEntity pendingTicketOrderToTicket(TripInformationEntity trip) {
         return DAL.getInstance().pendingTicketOrderToTicket(DAL.getInstance().getCurrent(), trip);
     }
