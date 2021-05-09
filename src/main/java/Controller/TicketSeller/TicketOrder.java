@@ -82,6 +82,7 @@ public class TicketOrder implements Initializable {
     private static LocalDate date;
     private static ProvinceEntity startProvince;
     private static ProvinceEntity endProvince;
+    private static Integer price;
 
 
     Pane pane;
@@ -136,7 +137,7 @@ public class TicketOrder implements Initializable {
             }
             // done
 
-            // Init ticket detail
+            // IMPORTANT Init ticket detail
             lb_code.setText("Choose your slots!");
             lb_type.setText(modelTrip.getScheduleByIdSchedule().getBusByIdBus().getTypeOfBusByIdType().getTypeName());
             lb_departdate.setText(date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + "\n" +
@@ -144,27 +145,29 @@ public class TicketOrder implements Initializable {
             lb_startstation.setText(modelTrip.getScheduleByIdSchedule().getRouteByIdRoute().getStartStation());
             lb_destination.setText(modelTrip.getScheduleByIdSchedule().getRouteByIdRoute().getEndStation());
             lb_phone.setText(modelTrip.getDriverByIdDriver().getPhone());
-            lb_price.setText(modelTrip.getScheduleByIdSchedule().getPrice() + "đ");
+            lb_price.setText("0đ");
             cbx_payment.getItems().add("Paid");
             cbx_payment.getItems().add("Unpaid");
             cbx_payment.getSelectionModel().selectFirst();
-            //done!
+            // Save price to var
+            price = modelTrip.getScheduleByIdSchedule().getPrice();
+            // DONE
 
-            // InitTicketSlot
+            // IMPORTANT InitTicketSlot
             currentTicket = BLL_Seller.getInstance().pendingTicketOrderToTicket(modelTrip);
             refreshTicketForSLots();
 
-            // done
-            // Event for slot
+            // DONE
+
+            // IMPORTANT Event for slot
             String floor1 = "9162935";
             if(floor1.contains(String.valueOf(modelTrip.getScheduleByIdSchedule().getBusByIdBus().
                     getTypeOfBusByIdType().getSlot()))) {
                 eventHandle_OneFloor();
             }
 
-            else {
-                eventHandle_TwoFloors();
-            }
+            else eventHandle_TwoFloors();
+
 
             // DONE
 
@@ -176,6 +179,7 @@ public class TicketOrder implements Initializable {
         }
     }
 
+    // NOTICE event for cancel and confirm ticket
     @FXML
     void btn_cancel_clicked(MouseEvent event) throws IOException {
         BLL_Seller.getInstance().deleteCurrentTicket(currentTicket.getIdTicket());
@@ -210,7 +214,9 @@ public class TicketOrder implements Initializable {
 
                 if (result.orElse(den) == acc) {
                     BLL_Seller.getInstance().updateCurrentTicket(currentTicket, lb_code.getText() ,txf_namecustomer.getText(),
-                            txf_phonecustomer.getText(), 1);
+                            txf_phonecustomer.getText(), 1,
+                            Integer.parseInt(lb_price.getText().substring(0, lb_price.getText().length() - 1)),
+                            cbx_payment.getSelectionModel().getSelectedItem().equals("Paid"));
 
                     AnchorPane newPane = FXMLLoader.load(getClass().getResource("/view/seller_view/Dashboard.fxml"));
                     rootPane.getChildren().setAll(newPane);
@@ -221,13 +227,15 @@ public class TicketOrder implements Initializable {
         }
 
     }
+    // DONE
 
+    // IMPORTANT add component to pane2
     public void showFigureOfBusType(String path) throws IOException {
         this.pane = FXMLLoader.load(getClass().getResource("/view/bus_type/" + path + ".fxml"));
         pane2.getChildren().setAll(this.pane);
     }
 
-    // Handle event here
+    // NOTICE Handle for 2 floors event here
     public void eventHandle_OneFloor() {
         for (Node node : this.pane.lookupAll(".slot")) {
             node.lookup(".slot").addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, (e) ->{
@@ -253,7 +261,9 @@ public class TicketOrder implements Initializable {
             });
         }
     }
+    // DONE
 
+    // IMPORTANT refresh, update for current status of Slots
     public void refreshTicketForSLots() {
             List<String> slotOrdered = BLL_Seller.getInstance().getOrderedTicket(modelTrip.getIdTrip());
 
@@ -264,18 +274,21 @@ public class TicketOrder implements Initializable {
                     getTypeOfBusByIdType().getSlot()))) {
                 for (Node node : this.pane.lookupAll(".slot")) {
 
+                    // If this slot was ordered, disable it
                     if(!slotOrdered.isEmpty() && slotOrdered.contains(node.lookup(".slot").getId())) {
                         node.lookup(".slot").setStyle("-fx-background-color: #8C271E;");
                         node.lookup(".slot").setDisable(true);
                         continue;
                     }
 
+                    // If this slot is pending, disable it
                     if(!slotPending.isEmpty() && slotPending.contains(node.lookup(".slot").getId())) {
                         node.lookup(".slot").setStyle("-fx-background-color: #F1D302;");
                         node.lookup(".slot").setDisable(true);
                         continue;
                     }
 
+                    // update remaining slot
                     if(!node.lookup(".slot").getStyle().equals("-fx-background-color: #4cc9f0;"))
                         node.lookup(".slot").setStyle("");
                     node.lookup(".slot").setDisable(false);
@@ -283,6 +296,7 @@ public class TicketOrder implements Initializable {
 
             }
 
+            // Below is the same
             else {
                 TabPane newTabPane = (TabPane)this.pane.lookup(".tabpane");
                 Pane pane1 = (Pane)newTabPane.lookup(".floor1");
@@ -328,7 +342,10 @@ public class TicketOrder implements Initializable {
 
     }
 
+    // IMPORTANT handle event in order to select and unselected slots
     public void toggleEventHandle(Node node) {
+
+        // In case this slot is unselected
         if(node.getStyle().equals("")) {
             refreshTicketForSLots();
             if(!node.getStyle().equals("-fx-background-color: #F1D302;")) {
@@ -342,26 +359,36 @@ public class TicketOrder implements Initializable {
                 if(name.charAt(0) == '-')
                     name = name.substring(1);
                 lb_code.setText(name);
+
+                String val_price = lb_price.getText().substring(0, lb_price.getText().length() - 1);
+                lb_price.setText((Integer.parseInt(val_price) + price) + "đ");
                 //
                 // Send Sync to DB
                 BLL_Seller.getInstance().updateCurrentTicket(currentTicket, lb_code.getText() ,txf_namecustomer.getText(),
-                        txf_phonecustomer.getText(), 0);
+                        txf_phonecustomer.getText(), 0,
+                        Integer.parseInt(lb_price.getText().substring(0, lb_price.getText().length() - 1)),
+                        cbx_payment.getSelectionModel().getSelectedItem().equals("Paid"));
                 //
             }
 
         }
+
+        // In case this slot is selected
         else if(node.getStyle().equals("-fx-background-color: #4cc9f0;")){
-//            refreshTicketForSLots();
             // After refresh slot
             node.setStyle("");
             // Set text for label code ticket
             List<String> listSlot = new ArrayList<>(Arrays.asList(lb_code.getText().split("-")));
             listSlot.remove(node.getId());
+
             lb_code.setText(String.join("-", listSlot));
+            lb_price.setText(price * listSlot.size() + "đ");
             ///
             // Send sync to DB
             BLL_Seller.getInstance().updateCurrentTicket(currentTicket, lb_code.getText() ,txf_namecustomer.getText(),
-                    txf_phonecustomer.getText(), 0);
+                    txf_phonecustomer.getText(), 0,
+                    Integer.parseInt(lb_price.getText().substring(0, lb_price.getText().length() - 1)),
+                    cbx_payment.getSelectionModel().getSelectedItem().equals("Paid"));
             ///
 
         }

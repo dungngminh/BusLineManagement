@@ -19,6 +19,7 @@ public class AccountEntity {
     private Collection<RoleAccountEntity> roleAccountsByIdUser;
     private Collection<TicketEntity> ticketsByIdUser;
 
+
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "idUser", nullable = false)

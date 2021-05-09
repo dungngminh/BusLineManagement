@@ -29,7 +29,7 @@ public class BLL_Seller {
         return instance;
     }
 
-    // BLL for FilterRout
+    // NOTICE BLL for FilterRout
     public List<List<String>> getPairStationFromTwoProvince(ProvinceEntity startPro, ProvinceEntity endPro) {
         List<List<String>> res = new ArrayList<List<String>>();
 
@@ -70,7 +70,7 @@ public class BLL_Seller {
         return result;
     }
 
-    // done FilterRoute ?
+    // DONE FilterRoute ?
 
     // NOTICE BLL for TickeOrder ?
     public TicketEntity pendingTicketOrderToTicket(TripInformationEntity trip) {
@@ -100,17 +100,20 @@ public class BLL_Seller {
         return ans;
     }
 
-    public void updateCurrentTicket(TicketEntity ticket, String nameTicket, String nameCustomer, String phone, Integer stt) {
+    public void updateCurrentTicket(TicketEntity ticket, String nameTicket, String nameCustomer, String phone,
+                                    Integer stt, Integer price, Boolean isPaid) {
         ticket.setNameTicket(nameTicket);
         ticket.setNameCustomer(nameCustomer);
         ticket.setPhoneNumber(phone);
         ticket.setStatus(stt);
+        ticket.setPrice(price);
+        ticket.setIsPaid(isPaid);
         DAL.getInstance().updateCurrentTicket(ticket);
     }
 
     public void deleteCurrentTicket(Integer idTicket) {
         DAL.getInstance().deleteCurrentTicket(idTicket);
     }
-    // done for TicketOrder
+    // DONE for TicketOrder
 
 }

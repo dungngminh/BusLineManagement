@@ -403,6 +403,8 @@ public class DAL {
         ticket.setAccountByIdUser(acc);
         ticket.setTripInformationByIdTrip(trip);
         ticket.setIsDelete(false);
+        ticket.setIsPaid(false);
+        ticket.setPrice(0);
         // Pending: 0 || Ordered: 1
         ticket.setStatus(0);
 
@@ -432,11 +434,13 @@ public class DAL {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
         Query query = session.createQuery("update TicketEntity set nameTicket = :nameTicket, nameCustomer = :nameCustomer" +
-                ", phoneNumber = :phone, status = :stt where idTicket = :idTicket");
+                ", phoneNumber = :phone, status = :stt, isPaid = :isPaid, price = :price where idTicket = :idTicket");
         query.setParameter("nameTicket", ticket.getNameTicket());
         query.setParameter("nameCustomer", ticket.getNameCustomer());
         query.setParameter("phone", ticket.getPhoneNumber());
         query.setParameter("stt", ticket.getStatus());
+        query.setParameter("isPaid", ticket.getIsPaid());
+        query.setParameter("price", ticket.getPrice());
         query.setParameter("idTicket", ticket.getIdTicket());
         int result = query.executeUpdate();
 
