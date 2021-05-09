@@ -1,5 +1,6 @@
 package Services;
 
+import Controller.TicketSeller.TicketOrder;
 import Model.*;
 import Util.HibernateUtils;
 import org.hibernate.Session;
@@ -16,7 +17,7 @@ import java.util.List;
 public class DAL {
     private static DAL instance;
 
-    private AccountEntity current;
+    public static AccountEntity current;
 
     private DAL() {
 
@@ -30,11 +31,11 @@ public class DAL {
     }
 
     public AccountEntity getCurrent() {
-        return this.current;
+        return current;
     }
 
-    public void setCurrent(AccountEntity current) {
-        this.current = current;
+    public void setCurrent(AccountEntity crr) {
+        current = crr;
     }
 
     public String encryptSHA1(String input) {
@@ -132,7 +133,7 @@ public class DAL {
         bus.setIsDelete(false);
         bus.setStatus(1);
         bus.setTypeOfBusByIdType(tob);
-        //Save the employee in database
+        //Save the BusEntity in database
         session.save(bus);
 
         //Commit the transaction
@@ -390,4 +391,73 @@ public class DAL {
     }
 
     // done FilterRoute ?
+
+    // DAL for TicketOrder ?
+    public TicketEntity pendingTicketOrderToTicket(AccountEntity acc, TripInformationEntity trip) {
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        session.beginTransaction();
+        TicketEntity ticket= new TicketEntity();
+        ticket.setNameTicket("");
+        ticket.setIdUser(acc.getIdUser());
+        ticket.setIdTrip(trip.getIdTrip());
+        ticket.setAccountByIdUser(acc);
+        ticket.setTripInformationByIdTrip(trip);
+        ticket.setIsDelete(false);
+        // Pending: 0 || Ordered: 1
+        ticket.setStatus(0);
+
+        session.save(ticket);
+
+        //Commit the transaction
+        session.getTransaction().commit();
+        session.close();
+
+        return ticket;
+    }
+
+    public List<TicketEntity> getListTicket(Integer idTrip) {
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query<TicketEntity> query = session.createQuery("From TicketEntity WHERE TicketEntity.idTrip = :idTrip",
+                TicketEntity.class);
+        query.setParameter("idTrip", idTrip);
+        List<TicketEntity> result = query.getResultList();
+        session.getTransaction().commit();
+        session.close();
+        return result;
+    }
+
+    public void updateCurrentTicket(TicketEntity ticket) {
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query query = session.createQuery("update TicketEntity set nameTicket = :nameTicket, nameCustomer = :nameCustomer" +
+                ", phoneNumber = :phone, status = :stt where idTicket = :idTicket");
+        query.setParameter("nameTicket", ticket.getNameTicket());
+        query.setParameter("nameCustomer", ticket.getNameCustomer());
+        query.setParameter("phone", ticket.getPhoneNumber());
+        query.setParameter("stt", ticket.getStatus());
+        query.setParameter("idTicket", ticket.getIdTicket());
+        int result = query.executeUpdate();
+
+        //Commit the transaction
+        session.getTransaction().commit();
+        session.close();
+    }
+
+    public void deleteCurrentTicket(Integer idTicket) {
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        Query query = session.createQuery("DELETE FROM TicketEntity WHERE idTicket = :idTicket");
+
+        query.setParameter("idTicket", idTicket);
+        int result = query.executeUpdate();
+
+        //Commit the transaction
+        session.getTransaction().commit();
+        session.close();
+
+    }
+
+    // done TicketOrder ?
 }

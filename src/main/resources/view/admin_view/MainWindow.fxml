@@ -3,10 +3,12 @@
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 
-<AnchorPane fx:id="rootPane" prefHeight="627.0" prefWidth="1166.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Admin.MainWindow">
+<AnchorPane fx:id="rootPane" prefHeight="627.0" prefWidth="1166.0" styleClass="rootPane" stylesheets="@../../css/admin_css/main_window.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Admin.MainWindow">
    <children>
       <JFXDrawer fx:id="jfx_drawer" defaultDrawerSize="190.0" prefHeight="627.0" prefWidth="88.0" />
       <JFXHamburger fx:id="jfx_hambur" layoutX="14.0" layoutY="14.0" />
+      <Pane layoutX="373.0" layoutY="235.0" prefHeight="157.0" prefWidth="421.0" styleClass="pane" stylesheets="@../../css/admin_css/main_window.css" />
    </children>
 </AnchorPane>

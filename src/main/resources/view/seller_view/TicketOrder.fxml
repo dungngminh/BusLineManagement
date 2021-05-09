@@ -130,14 +130,14 @@
                            </font>
                         </Label>
                         <TextField fx:id="txf_namecustomer" prefHeight="40.0" prefWidth="192.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                        <TextField prefHeight="40.0" prefWidth="192.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                        <TextField fx:id="txf_phonecustomer" prefHeight="40.0" prefWidth="192.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                      </children>
                   </GridPane>
-                  <Button fx:id="btn_submit" layoutX="73.0" layoutY="501.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="87.0" styleClass="btn" stylesheets="@../../css/seller_css/ticketOrder.css" text="Submit">
+                  <Button fx:id="btn_confirm" layoutX="73.0" layoutY="501.0" mnemonicParsing="false" onMouseClicked="#btn_confirm_clicked" prefHeight="40.0" prefWidth="87.0" styleClass="btn" stylesheets="@../../css/seller_css/ticketOrder.css" text="Submit">
                      <font>
                         <Font size="15.0" />
                      </font></Button>
-                  <Button fx:id="btn_cancel" layoutX="223.0" layoutY="501.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="87.0" styleClass="btn" stylesheets="@../../css/seller_css/ticketOrder.css" text="Cancel">
+                  <Button fx:id="btn_cancel" layoutX="223.0" layoutY="501.0" mnemonicParsing="false" onMouseClicked="#btn_cancel_clicked" prefHeight="40.0" prefWidth="87.0" styleClass="btn" stylesheets="@../../css/seller_css/ticketOrder.css" text="Cancel">
                      <font>
                         <Font size="15.0" />
                      </font></Button>

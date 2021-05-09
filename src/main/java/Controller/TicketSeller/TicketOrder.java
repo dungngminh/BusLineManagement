@@ -1,6 +1,7 @@
 package Controller.TicketSeller;
 
 import Model.ProvinceEntity;
+import Model.TicketEntity;
 import Model.TripInformationEntity;
 import Model.ViewModel.FilterRoute_ViewModel;
 import Services.BLL_Seller;
@@ -10,21 +11,20 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TabPane;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import org.apache.commons.codec.language.bm.Rule;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class TicketOrder implements Initializable {
     @FXML
@@ -64,30 +64,39 @@ public class TicketOrder implements Initializable {
     private ComboBox<String> cbx_payment;
 
     @FXML
-    private Button btn_submit;
+    private TextField txf_namecustomer;
+
+    @FXML
+    private TextField txf_phonecustomer;
+
+    @FXML
+    private Button btn_confirm;
 
     @FXML
     private Button btn_cancel;
 
     // Attributes
 
-    private TripInformationEntity modelTrip;
-    private LocalDate date;
+    private static TripInformationEntity modelTrip;
+    private static TicketEntity currentTicket;
+    private static LocalDate date;
+    private static ProvinceEntity startProvince;
+    private static ProvinceEntity endProvince;
+
 
     Pane pane;
 
-    public TicketOrder(TripInformationEntity modelTrip, LocalDate date) {
-        this.modelTrip = modelTrip;
-        this.date = date;
+    public TicketOrder(TripInformationEntity trip, LocalDate arg_date, ProvinceEntity arg_startProvince,
+                       ProvinceEntity arg_endProvince) {
+        modelTrip = trip;
+        date = arg_date;
+        startProvince = arg_startProvince;
+        endProvince = arg_endProvince;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            // Init for side bar
-            InitSideBar.getInstance().initializeForNavBar(this.rootPane, this.jfx_drawer, this.jfx_hambur);
-            //done
-
             // Init Figure Of Bus Type
             switch(modelTrip.getScheduleByIdSchedule().getBusByIdBus().getTypeOfBusByIdType().getIdType()) {
                 case 1: {
@@ -130,16 +139,22 @@ public class TicketOrder implements Initializable {
             // Init ticket detail
             lb_code.setText("Choose your slots!");
             lb_type.setText(modelTrip.getScheduleByIdSchedule().getBusByIdBus().getTypeOfBusByIdType().getTypeName());
-            lb_departdate.setText(date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+            lb_departdate.setText(date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + "\n" +
+                    new SimpleDateFormat("HH:mm:ss").format(modelTrip.getScheduleByIdSchedule().getDepartTime()));
             lb_startstation.setText(modelTrip.getScheduleByIdSchedule().getRouteByIdRoute().getStartStation());
             lb_destination.setText(modelTrip.getScheduleByIdSchedule().getRouteByIdRoute().getEndStation());
             lb_phone.setText(modelTrip.getDriverByIdDriver().getPhone());
+            lb_price.setText(modelTrip.getScheduleByIdSchedule().getPrice() + "đ");
             cbx_payment.getItems().add("Paid");
             cbx_payment.getItems().add("Unpaid");
             cbx_payment.getSelectionModel().selectFirst();
-            lb_price.setText("0đ");
             //done!
 
+            // InitTicketSlot
+            currentTicket = BLL_Seller.getInstance().pendingTicketOrderToTicket(modelTrip);
+            refreshTicketForSLots();
+
+            // done
             // Event for slot
             String floor1 = "9162935";
             if(floor1.contains(String.valueOf(modelTrip.getScheduleByIdSchedule().getBusByIdBus().
@@ -151,9 +166,61 @@ public class TicketOrder implements Initializable {
             // done
 
 
+
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    void btn_cancel_clicked(MouseEvent event) throws IOException {
+        BLL_Seller.getInstance().deleteCurrentTicket(currentTicket.getIdTicket());
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/seller_view/FilterRoute.fxml"));
+
+        FilterRoute controller = new FilterRoute(startProvince, endProvince, date);
+        loader.setController(controller);
+
+        AnchorPane newPane = loader.load();
+        this.rootPane.getChildren().setAll(newPane);
+    }
+
+    @FXML
+    void btn_confirm_clicked(MouseEvent event) throws IOException {
+        try {
+            if(txf_namecustomer.getText().equals("") || txf_phonecustomer.getText().equals("")) {
+                new Alert(Alert.AlertType.WARNING, "Fill all field!").showAndWait();
+            } else if(!Pattern.matches("((\\+84)|09|03|07|08|05|[2|5|7|8|9])+([0-9]{8})\\b", txf_phonecustomer.getText())) {
+                new Alert(Alert.AlertType.WARNING, "Phone customer is incorrect!").showAndWait();
+            } else if(lb_code.getText().equals("") || lb_code.getText().equals("Choose your slots!")) {
+                new Alert(Alert.AlertType.WARNING, "You did not order any slot!").showAndWait();
+            } else {
+                ButtonType acc = new ButtonType("Confirm", ButtonBar.ButtonData.OK_DONE);
+                ButtonType den = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION,
+                        "Are you sure you want to confirm your booking?",
+                        acc, den);
+
+                alert.setTitle("Confirm your booking!");
+                Optional<ButtonType> result = alert.showAndWait();
+
+                if (result.orElse(acc) == den) {
+                    BLL_Seller.getInstance().updateCurrentTicket(currentTicket, lb_code.getText() ,txf_namecustomer.getText(),
+                            txf_phonecustomer.getText(), 1);
+
+                    AnchorPane newPane = FXMLLoader.load(getClass().getResource("/view/seller_view/Dashboard.fxml.fxml"));
+                    rootPane.getChildren().setAll(newPane);
+                }
+            }
+        } catch (Exception err) {
+            new Alert(Alert.AlertType.WARNING, "Unknown Error").showAndWait();
+        }
+
+
+
+
+
     }
 
     public void showFigureOfBusType(String path) throws IOException {
@@ -161,10 +228,11 @@ public class TicketOrder implements Initializable {
         pane2.getChildren().setAll(this.pane);
     }
 
+    // Handle event here
     public void eventHandle_OneFloor() {
         for (Node node : this.pane.lookupAll(".slot")) {
             node.lookup(".slot").addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, (e) ->{
-                System.out.println(node.lookup(".slot").getId());
+                toggleEventHandle(node.lookup(".slot"));
             });
         }
     }
@@ -176,14 +244,112 @@ public class TicketOrder implements Initializable {
 
         for (Node node : pane1.lookupAll(".slot")) {
             node.lookup(".slot").addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, (e) ->{
-                System.out.println(node.lookup(".slot").getId());
+
+                toggleEventHandle(node.lookup(".slot"));
             });
         }
 
         for (Node node : pane2.lookupAll(".slot")) {
             node.lookup(".slot").addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, (e) ->{
-                System.out.println(node.lookup(".slot").getId());
+                toggleEventHandle(node.lookup(".slot"));
             });
+        }
+    }
+
+    public void refreshTicketForSLots() {
+        List<TicketEntity> listTicket = Arrays.stream((modelTrip.getTicketsByIdTrip()
+                .toArray())).map(element-> (TicketEntity)element).collect(Collectors.toList());
+        if(!listTicket.isEmpty()) {
+
+            List<String> slotOrdered = BLL_Seller.getInstance().getOrderedTicket(listTicket);
+
+            List<String> slotPending = BLL_Seller.getInstance().getPendingTicket(listTicket, currentTicket);
+
+            String floor1 = "9162935";
+            if(floor1.contains(String.valueOf(modelTrip.getScheduleByIdSchedule().getBusByIdBus().
+                    getTypeOfBusByIdType().getSlot()))) {
+                for (Node node : this.pane.lookupAll(".slot")) {
+                    if(slotOrdered.contains(node.lookup(".slot").getId())) {
+                        node.lookup(".slot").setStyle("-fx-background-color: #8C271E;");
+                        node.lookup(".slot").setDisable(true);
+                    }
+
+                    if(slotPending.contains(node.lookup(".slot").getId())) {
+                        node.lookup(".slot").setStyle("-fx-background-color: #F1D302;");
+                        node.lookup(".slot").setDisable(true);
+                    }
+                }
+
+            }
+
+            else {
+                TabPane newTabPane = (TabPane)this.pane.lookup(".tabpane");
+                Pane pane1 = (Pane)newTabPane.lookup(".floor1");
+                Pane pane2 = (Pane)newTabPane.lookup(".floor2");
+
+                for (Node node : pane1.lookupAll(".slot")) {
+                    if(slotOrdered.contains(node.lookup(".slot").getId())) {
+                        node.lookup(".slot").setStyle("-fx-background-color: #8C271E;");
+                        node.lookup(".slot").setDisable(true);
+                    }
+
+                    if(slotPending.contains(node.lookup(".slot").getId())) {
+                        node.lookup(".slot").setStyle("-fx-background-color: #F1D302;");
+                        node.lookup(".slot").setDisable(true);
+                    }
+                }
+
+                for (Node node : pane2.lookupAll(".slot")) {
+                    if(slotOrdered.contains(node.lookup(".slot").getId())) {
+                        node.lookup(".slot").setStyle("-fx-background-color: #8C271E;");
+                        node.lookup(".slot").setDisable(true);
+                    }
+
+                    if(slotPending.contains(node.lookup(".slot").getId())) {
+                        node.lookup(".slot").setStyle("-fx-background-color: #F1D302;");
+                        node.lookup(".slot").setDisable(true);
+                    }
+                }
+            }
+
+        }
+
+    }
+
+    public void toggleEventHandle(Node node) {
+        if(node.getStyle().equals("")) {
+            refreshTicketForSLots();
+            // After refresh slot
+            node.setStyle("-fx-background-color: #4cc9f0;");
+
+            if(lb_code.getText().equals("Choose your slots!"))
+                lb_code.setText("");
+            // Set text for label code ticket
+            String name = lb_code.getText() + "-" + node.getId();
+            if(name.charAt(0) == '-')
+                name = name.substring(1);
+            lb_code.setText(name);
+            //
+            // Send Sync to DB
+            BLL_Seller.getInstance().updateCurrentTicket(currentTicket, lb_code.getText() ,txf_namecustomer.getText(),
+                    txf_phonecustomer.getText(), 0);
+            //
+
+        }
+        else {
+            refreshTicketForSLots();
+            // After refresh slot
+            node.setStyle("");
+            // Set text for label code ticket
+            List<String> listSlot = new ArrayList<>(Arrays.asList(lb_code.getText().split("-")));
+            listSlot.remove(node.getId());
+            lb_code.setText(String.join("-", listSlot));
+            ///
+            // Send sync to DB
+            BLL_Seller.getInstance().updateCurrentTicket(currentTicket, lb_code.getText() ,txf_namecustomer.getText(),
+                    txf_phonecustomer.getText(), 0);
+            ///
+
         }
     }
 
