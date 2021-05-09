@@ -1,15 +1,19 @@
 package Model.ViewModel;
 
+
 import java.util.Date;
+
 
 public class ScheduleEntity_ViewModel {
     private int idSchedule;
     private String routeName;
     private String busName;
     private String typeOfBus;
+
     private String departTime;
     private int price;
     private boolean isDeleted;
+
 
     public int getIdSchedule() {
         return idSchedule;
@@ -38,6 +42,7 @@ public class ScheduleEntity_ViewModel {
     public void setPrice(int price) {
         this.price = price;
     }
+
 
     public void setBusName(String busName) {
         this.busName = busName;
@@ -69,12 +74,15 @@ public class ScheduleEntity_ViewModel {
 
 
     public ScheduleEntity_ViewModel(int idSchedule, String routeName, String busName, String typeOfBus, String departTime, int price, boolean isDeleted) {
+
         this.idSchedule = idSchedule;
         this.routeName = routeName;
         this.busName = busName;
         this.typeOfBus = typeOfBus;
         this.departTime = departTime;
+
         this.price = price;
         this.isDeleted = isDeleted;
+
     }
 }

@@ -7,16 +7,20 @@ import javax.persistence.*;
 @Entity
 @Table(name = "Ticket", schema = "dbo", catalog = "QuanLyNhaXeKhach")
 public class TicketEntity {
+
     private Integer idTicket;
     private String nameTicket;
     private Integer idUser;
     private Integer idTrip;
     private Boolean isDelete;
+    private Boolean isPaid;
+    private Integer price;
     private String phoneNumber;
     private String nameCustomer;
     private Integer status;
     private AccountEntity accountByIdUser;
     private TripInformationEntity tripInformationByIdTrip;
+
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -30,7 +34,7 @@ public class TicketEntity {
     }
 
     @Basic
-    @Column(name = "nameTicket", nullable = true, length = 50)
+    @Column(name = "nameTicket", nullable = true, length = 200)
     public String getNameTicket() {
         return nameTicket;
     }
@@ -68,6 +72,24 @@ public class TicketEntity {
 
     public void setIsDelete(Boolean delete) {
         this.isDelete = delete;
+    }
+
+    @Column(name = "isPaid", nullable = false, unique = false)
+    public Boolean getIsPaid() {
+        return isPaid;
+    }
+    public void setIsPaid(Boolean isPaid) {
+        this.isPaid = isPaid;
+    }
+
+    @Basic
+    @Column(name = "price", nullable = false)
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
     }
 
     @Basic
@@ -113,6 +135,8 @@ public class TicketEntity {
         if (idUser != null ? !idUser.equals(that.idUser) : that.idUser != null) return false;
         if (idTrip != null ? !idTrip.equals(that.idTrip) : that.idTrip != null) return false;
         if (isDelete != null ? !isDelete.equals(that.isDelete) : that.isDelete != null) return false;
+        if (isPaid != null ? !isPaid.equals(that.isPaid) : that.isPaid != null) return false;
+        if (!price.equals(that.price)) return false;
         if (phoneNumber != null ? !phoneNumber.equals(that.phoneNumber) : that.phoneNumber != null) return false;
         if (nameCustomer != null ? !nameCustomer.equals(that.nameCustomer) : that.nameCustomer != null) return false;
         if (status != null ? !status.equals(that.status) : that.status != null) return false;
@@ -127,9 +151,12 @@ public class TicketEntity {
         result = 31 * result + (idUser != null ? idUser.hashCode() : 0);
         result = 31 * result + (idTrip != null ? idTrip.hashCode() : 0);
         result = 31 * result + (isDelete != null ? isDelete.hashCode() : 0);
+        result = 31 * result + (isPaid != null ? isPaid.hashCode() : 0);
+        result = 31 * result + price;
         result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
         result = 31 * result + (nameCustomer != null ? nameCustomer.hashCode() : 0);
         result = 31 * result + (status != null ? status.hashCode() : 0);
+
         return result;
     }
 

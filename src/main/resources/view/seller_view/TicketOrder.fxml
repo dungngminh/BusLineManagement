@@ -133,7 +133,7 @@
                         <TextField fx:id="txf_phonecustomer" prefHeight="40.0" prefWidth="192.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                      </children>
                   </GridPane>
-                  <Button fx:id="btn_confirm" layoutX="73.0" layoutY="501.0" mnemonicParsing="false" onMouseClicked="#btn_confirm_clicked" prefHeight="40.0" prefWidth="87.0" styleClass="btn" stylesheets="@../../css/seller_css/ticketOrder.css" text="Submit">
+                  <Button fx:id="btn_confirm" layoutX="73.0" layoutY="501.0" mnemonicParsing="false" onMouseClicked="#btn_confirm_clicked" prefHeight="40.0" prefWidth="87.0" styleClass="btn" stylesheets="@../../css/seller_css/ticketOrder.css" text="Confirm">
                      <font>
                         <Font size="15.0" />
                      </font></Button>
