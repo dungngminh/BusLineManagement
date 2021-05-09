@@ -7,6 +7,7 @@ import java.util.*;
 @Entity
 @Table(name = "Schedule", schema = "dbo", catalog = "QuanLyNhaXeKhach")
 public class ScheduleEntity {
+
     private int idSchedule;
     private int idRoute;
     private int idBus;
