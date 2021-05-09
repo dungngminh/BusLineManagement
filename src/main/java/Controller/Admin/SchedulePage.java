@@ -1,9 +1,16 @@
 package Controller.Admin;
 
+
+import Model.BusEntity;
+
 import Model.ViewModel.ScheduleEntity_ViewModel;
 import Services.BLL_Admin;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,12 +22,19 @@ import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+
+import javafx.scene.control.cell.PropertyValueFactory;
+
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 
 import java.io.IOException;
 import java.net.URL;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import java.util.ResourceBundle;
 
 public class SchedulePage implements Initializable {
@@ -32,10 +46,11 @@ public class SchedulePage implements Initializable {
     private JFXDrawer jfx_drawer;
 
     @FXML
-    private ComboBox<?> cbx_route;
+    private ComboBox<String> cbx_route;
 
     @FXML
-    private ComboBox<?> cbx_bus;
+    private ComboBox<BusEntity> cbx_bus;
+
 
     @FXML
     private TextField tfx_typeofbus;
@@ -104,10 +119,12 @@ public class SchedulePage implements Initializable {
     private TableColumn<ScheduleEntity_ViewModel, String> col_typeofbus;
 
     @FXML
-    private TableColumn<ScheduleEntity_ViewModel, Integer> col_departTime;
+    private TableColumn<ScheduleEntity_ViewModel, Integer> col_price;
 
     @FXML
-    private TableColumn<ScheduleEntity_ViewModel, Integer> col_status;
+    private TableColumn<ScheduleEntity_ViewModel, Integer> col_departTime;
+
+
 
     @FXML
     private JFXHamburger jfx_hambur;
@@ -154,6 +171,9 @@ public class SchedulePage implements Initializable {
 
     @FXML
     void onBusCBBAction(ActionEvent event) {
+        Object[] objs = BLL_Admin.getInstance().getAllBus().toArray();
+        List<Object> objsList = new ArrayList<Object>();
+        tfx_typeofbus.setText(cbx_bus.getSelectionModel().getSelectedItem().getTypeOfBusByIdType().getTypeName());
 
     }
 
@@ -167,17 +187,36 @@ public class SchedulePage implements Initializable {
         try {
             // Init for side bar
             InitSideBar.getInstance().initializeForNavBar(this.pane, this.jfx_drawer, this.jfx_hambur);
-            // Init combobox for
+
+            // Init combobox for bus and route
+
+            BLL_Admin.getInstance().getAllBus().forEach(bus -> cbx_bus.getItems().add(bus));
+            BLL_Admin.getInstance().getRoutes(0,"").forEach(route -> cbx_route.getItems().add(route.getStartStation()+ " - " + route.getEndStation()));
 
 
             tfx_typeofbus.setEditable(false);
 
 
-//            show(0, "");
+
+            show("");
+
             toggleDetail();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void show(String name){
+        ObservableList<ScheduleEntity_ViewModel> listObj = FXCollections.observableArrayList(BLL_Admin.getInstance().updateTableSchedulePage(name));
+        col_id.setCellValueFactory(new PropertyValueFactory<>("idSchedule"));
+        col_routename.setCellValueFactory(new PropertyValueFactory<>("routeName"));
+        col_busname.setCellValueFactory(new PropertyValueFactory<>("busName"));
+        col_typeofbus.setCellValueFactory(new PropertyValueFactory<>("typeOfBus"));
+        col_price.setCellValueFactory(new PropertyValueFactory<>("price"));
+        col_departTime.setCellValueFactory(new PropertyValueFactory<>("departTime"));
+
+        table_view.setItems(listObj);
+        table_view.refresh();
     }
 
     private void toggleDetail() {
@@ -186,8 +225,10 @@ public class SchedulePage implements Initializable {
             btn_reset.setVisible(false);
             btn_cancel.setVisible(false);
             grp_btn_tbl.setVisible(true);
-            table_view.setLayoutX(-290);
-            table_view.setPrefWidth(1165);
+
+            table_view.setLayoutX(-275);
+            table_view.setPrefWidth(1150);
+
             hbox.setLayoutX(80);
             grp_btn_tbl.setLayoutX(85);
             table_view.toFront();

@@ -182,8 +182,8 @@
                       <TableColumn fx:id="col_routename" prefWidth="75.0" text="Route Name" />
                       <TableColumn fx:id="col_busname" prefWidth="75.0" text="Bus Name" />
                         <TableColumn fx:id="col_typeofbus" prefWidth="75.0" text="Type of Bus" />
+                        <TableColumn fx:id="col_price" prefWidth="75.0" text="Price" />
                         <TableColumn fx:id="col_departTime" prefWidth="75.0" text="Depart Time" />
-                        <TableColumn fx:id="col_status" prefWidth="75.0" text="Status" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
