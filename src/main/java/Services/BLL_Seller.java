@@ -77,11 +77,11 @@ public class BLL_Seller {
         return DAL.getInstance().pendingTicketOrderToTicket(DAL.getInstance().getCurrent(), trip);
     }
 
-    public List<String> getOrderedTicket(List<TicketEntity> list) {
+    public List<String> getOrderedTicket(Integer idTrip) {
         List<String> ans = new ArrayList<>();
 
 
-        list.forEach(ticket -> {
+        DAL.getInstance().getListTicket(idTrip).forEach(ticket -> {
             if(ticket.getStatus() == 1) {
                 ans.addAll(Arrays.asList(ticket.getNameTicket().split("-")));
             }
@@ -89,10 +89,10 @@ public class BLL_Seller {
         return ans;
     }
 
-    public List<String> getPendingTicket(List<TicketEntity> list, TicketEntity crr) {
+    public List<String> getPendingTicket(Integer idTrip, TicketEntity crr) {
         List<String> ans = new ArrayList<String>();
 
-        list.forEach(ticket -> {
+        DAL.getInstance().getListTicket(idTrip).forEach(ticket -> {
             if(ticket.getStatus() == 0 && !ticket.equals(crr)) {
                 ans.addAll(Arrays.asList(ticket.getNameTicket().split("-")));
             }

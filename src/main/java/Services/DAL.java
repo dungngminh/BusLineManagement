@@ -418,10 +418,11 @@ public class DAL {
     public List<TicketEntity> getListTicket(Integer idTrip) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
-        Query<TicketEntity> query = session.createQuery("From TicketEntity WHERE TicketEntity.idTrip = :idTrip",
-                TicketEntity.class);
+        Query<TicketEntity> query = session.createQuery("From TicketEntity WHERE idTrip = :idTrip", TicketEntity.class);
         query.setParameter("idTrip", idTrip);
+
         List<TicketEntity> result = query.getResultList();
+
         session.getTransaction().commit();
         session.close();
         return result;

@@ -261,9 +261,9 @@ public class TicketOrder implements Initializable {
                 .toArray())).map(element-> (TicketEntity)element).collect(Collectors.toList());
         if(!listTicket.isEmpty()) {
 
-            List<String> slotOrdered = BLL_Seller.getInstance().getOrderedTicket(listTicket);
+            List<String> slotOrdered = BLL_Seller.getInstance().getOrderedTicket(modelTrip.getIdTrip());
 
-            List<String> slotPending = BLL_Seller.getInstance().getPendingTicket(listTicket, currentTicket);
+            List<String> slotPending = BLL_Seller.getInstance().getPendingTicket(modelTrip.getIdTrip(), currentTicket);
 
             String floor1 = "9162935";
             if(floor1.contains(String.valueOf(modelTrip.getScheduleByIdSchedule().getBusByIdBus().
