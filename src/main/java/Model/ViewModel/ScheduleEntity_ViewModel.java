@@ -1,12 +1,15 @@
 package Model.ViewModel;
 
+import java.util.Date;
+
 public class ScheduleEntity_ViewModel {
     private int idSchedule;
     private String routeName;
     private String busName;
     private String typeOfBus;
-    private int departTime;
-    private int status;
+    private String departTime;
+    private int price;
+    private boolean isDeleted;
 
     public int getIdSchedule() {
         return idSchedule;
@@ -28,6 +31,14 @@ public class ScheduleEntity_ViewModel {
         return busName;
     }
 
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
     public void setBusName(String busName) {
         this.busName = busName;
     }
@@ -40,28 +51,30 @@ public class ScheduleEntity_ViewModel {
         this.typeOfBus = typeOfBus;
     }
 
-    public int getDepartTime() {
+    public String getDepartTime() {
         return departTime;
     }
 
-    public void setDepartTime(int departTime) {
+    public void setDepartTime(String departTime) {
         this.departTime = departTime;
     }
 
-    public int getStatus() {
-        return status;
+    public boolean isDeleted() {
+        return isDeleted;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
     }
 
-    public ScheduleEntity_ViewModel(int idSchedule, String routeName, String busName, String typeOfBus, int departTime, int status) {
+
+    public ScheduleEntity_ViewModel(int idSchedule, String routeName, String busName, String typeOfBus, String departTime, int price, boolean isDeleted) {
         this.idSchedule = idSchedule;
         this.routeName = routeName;
         this.busName = busName;
         this.typeOfBus = typeOfBus;
         this.departTime = departTime;
-        this.status = status;
+        this.price = price;
+        this.isDeleted = isDeleted;
     }
 }

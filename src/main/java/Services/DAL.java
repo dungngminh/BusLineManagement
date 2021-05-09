@@ -121,6 +121,7 @@ public class DAL {
             return list;
         }
     }
+
     public void insertBus(String busName, String plateNumber, TypeOfBusEntity tob, boolean del, int stt) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
@@ -278,7 +279,7 @@ public class DAL {
     // done Driver ?
 
     // DAL for Province ??
-    public List<ProvinceEntity> getProvinceName(){
+    public List<ProvinceEntity> getProvinceName() {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
         Query<ProvinceEntity> query = session.createQuery("From ProvinceEntity ", ProvinceEntity.class);
@@ -290,44 +291,46 @@ public class DAL {
     // done Province ?
 
     //DAL for Route
-    public void insertRoute(RouteEntity route){
+    public void insertRoute(RouteEntity route) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
         session.save(route);
         session.getTransaction().commit();
         session.close();
     }
-    public List<RouteEntity> getRoutes(){
+
+    public List<RouteEntity> getRoutes() {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
-        Query<RouteEntity> query = session.createQuery("From RouteEntity",RouteEntity.class);
+        Query<RouteEntity> query = session.createQuery("From RouteEntity", RouteEntity.class);
         List<RouteEntity> result = query.getResultList();
         session.getTransaction().commit();
         session.close();
         return result;
     }
 
-    public void updateRoute(int idRoute, String startStation, String endStation,String note, int distance, int stt) {
+    public void updateRoute(int idRoute, String startStation, String endStation, String note, int distance, int stt) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
-        var query = session.createQuery("update RouteEntity set startStation=:startStation,endStation =:endStation,note =:note, distance =:distance, status =:stt"+
+        var query = session.createQuery("update RouteEntity set startStation=:startStation,endStation =:endStation,note =:note, distance =:distance, status =:stt" +
                 " where idRoute = :idRoute");
         query.setParameter("startStation", startStation);
         query.setParameter("endStation", endStation);
         query.setParameter("distance", distance);
-        query.setParameter("note",note);
+        query.setParameter("note", note);
         query.setParameter("stt", stt);
         query.setParameter("idRoute", idRoute);
         query.executeUpdate();
         session.getTransaction().commit();
         session.close();
     }
-    public void deleteRoute(int idRoute){
+
+    public void deleteRoute(int idRoute) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
-        var query =  session.createQuery("update RouteEntity set status = :stt" +
+        var query = session.createQuery("update RouteEntity set status = :stt" +
                 " where idRoute = :idRoute");
-        query.setParameter("stt",2);
+        query.setParameter("stt", 2);
         query.setParameter("idRoute", idRoute);
         query.executeUpdate();
         session.getTransaction().commit();
@@ -342,7 +345,7 @@ public class DAL {
 
         Session session = HibernateUtils.getSessionFactory().openSession();
 
-        for(List<String> x: listPairStation) {
+        for (List<String> x : listPairStation) {
             session.beginTransaction();
             Query<RouteEntity> query = session.createQuery("FROM RouteEntity ROU" +
                     " WHERE ROU.startStation = :stStat and ROU.endStation = :enStat", RouteEntity.class);
@@ -361,11 +364,23 @@ public class DAL {
         return result;
     }
 
+    public List<ScheduleEntity> getScheduleData() {
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query<ScheduleEntity> query = session.createQuery("select SCH FROM ScheduleEntity SCH, RouteEntity ROU, " +
+                " BusEntity BUS, TypeOfBusEntity TYPE WHERE  SCH.idRoute = ROU.idRoute AND ROU.status = 0 AND SCH.idBus = BUS.idBus" +
+                " AND BUS.status = 0 AND BUS.isDelete = false AND BUS.idType = TYPE.idType",ScheduleEntity.class);
+        List<ScheduleEntity> list = query.getResultList();
+        session.getTransaction().commit();
+        session.close();
+        return list;
+    }
+
     public List<TripInformationEntity> getFilterTrip(List<RouteEntity> listRoute) {
         List<TripInformationEntity> result = new ArrayList<>();
         Session session = HibernateUtils.getSessionFactory().openSession();
 
-        for(RouteEntity x: listRoute) {
+        for (RouteEntity x : listRoute) {
             session.beginTransaction();
             Query<TripInformationEntity> query = session.createQuery("SELECT TRIP FROM  TripInformationEntity TRIP, " +
                             "ScheduleEntity SCH, RouteEntity ROU, BusEntity BUS, TypeOfBusEntity TYPE, DriverEntity DRI " +
@@ -373,11 +388,11 @@ public class DAL {
                             "AND ROU.status = 0 AND TRIP.idDriver = DRI.idDriver AND DRI.status = 0 AND DRI.isDelete = false " +
                             "AND SCH.idBus = BUS.idBus AND BUS.isDelete = false " +
                             "AND BUS.status = 0 AND BUS.idType = TYPE.idType AND TYPE.isDelete = false",
-                            TripInformationEntity.class );
+                    TripInformationEntity.class);
             query.setParameter("idRoute", x.getIdRoute());
 //            System.out.println(x.getIdRoute());
-            query.getResultList().forEach(qr ->{
-               if(!result.contains(qr)) result.add(qr);
+            query.getResultList().forEach(qr -> {
+                if (!result.contains(qr)) result.add(qr);
             });
             session.getTransaction().commit();
 
@@ -387,6 +402,5 @@ public class DAL {
         session.close();
         return result;
     }
-
     // done FilterRoute ?
 }
