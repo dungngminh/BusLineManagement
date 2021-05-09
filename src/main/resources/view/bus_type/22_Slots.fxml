@@ -20,7 +20,7 @@
                         <Button id="A6" fx:id="a6" layoutX="226.0" layoutY="236.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="58.0" prefWidth="67.0" styleClass="slot" text="A6" />
                         <Button id="A11" fx:id="a11" layoutX="91.0" layoutY="477.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="58.0" prefWidth="67.0" styleClass="slot" text="A11" />
                         <Button id="A2" fx:id="a2" layoutX="226.0" layoutY="81.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="58.0" prefWidth="67.0" styleClass="slot" text="A2" />
-                        <Button id="A8" fx:id="a9" layoutX="24.0" layoutY="389.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="58.0" prefWidth="67.0" styleClass="slot" text="A9" />
+                        <Button id="A9" fx:id="a9" layoutX="24.0" layoutY="389.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="58.0" prefWidth="67.0" styleClass="slot" text="A9" />
                         <Button id="A8" fx:id="a8" layoutX="24.0" layoutY="314.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="58.0" prefWidth="67.0" styleClass="slot" text="A8" />
                         <Button id="A10" fx:id="a10" layoutX="226.0" layoutY="389.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="58.0" prefWidth="67.0" styleClass="slot" text="A10" />
                         <Button id="A1" fx:id="a1" layoutX="24.0" layoutY="81.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="58.0" prefWidth="67.0" styleClass="slot" text="A1" />

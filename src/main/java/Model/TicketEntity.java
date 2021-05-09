@@ -30,7 +30,7 @@ public class TicketEntity {
     }
 
     @Basic
-    @Column(name = "nameTicket", nullable = true, length = 50)
+    @Column(name = "nameTicket", nullable = true, length = 200)
     public String getNameTicket() {
         return nameTicket;
     }

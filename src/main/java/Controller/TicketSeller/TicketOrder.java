@@ -83,9 +83,6 @@ public class TicketOrder implements Initializable {
     private static ProvinceEntity startProvince;
     private static ProvinceEntity endProvince;
 
-    // this set contain all slot in bus
-    private static Set<Node> set_Slots = new HashSet<>();
-
 
     Pane pane;
 
@@ -162,12 +159,10 @@ public class TicketOrder implements Initializable {
             String floor1 = "9162935";
             if(floor1.contains(String.valueOf(modelTrip.getScheduleByIdSchedule().getBusByIdBus().
                     getTypeOfBusByIdType().getSlot()))) {
-                assignSlot_OneFloor();
                 eventHandle_OneFloor();
             }
 
             else {
-                assignSlot_TwoFloors();
                 eventHandle_TwoFloors();
             }
 
@@ -213,11 +208,11 @@ public class TicketOrder implements Initializable {
                 alert.setTitle("Confirm your booking!");
                 Optional<ButtonType> result = alert.showAndWait();
 
-                if (result.orElse(acc) == den) {
+                if (result.orElse(den) == acc) {
                     BLL_Seller.getInstance().updateCurrentTicket(currentTicket, lb_code.getText() ,txf_namecustomer.getText(),
                             txf_phonecustomer.getText(), 1);
 
-                    AnchorPane newPane = FXMLLoader.load(getClass().getResource("/view/seller_view/Dashboard.fxml.fxml"));
+                    AnchorPane newPane = FXMLLoader.load(getClass().getResource("/view/seller_view/Dashboard.fxml"));
                     rootPane.getChildren().setAll(newPane);
                 }
             }
@@ -231,29 +226,6 @@ public class TicketOrder implements Initializable {
         this.pane = FXMLLoader.load(getClass().getResource("/view/bus_type/" + path + ".fxml"));
         pane2.getChildren().setAll(this.pane);
     }
-
-
-    // NOTICE Init assign all slots into arr_Slots(One time called)
-    public void assignSlot_OneFloor() {
-        for (Node node : this.pane.lookupAll(".slot")) {
-            set_Slots.add(node.lookup(".slot"));
-        }
-    }
-
-    public void assignSlot_TwoFloors() {
-        TabPane newTabPane = (TabPane)this.pane.lookup(".tabpane");
-        Pane pane1 = (Pane)newTabPane.lookup(".floor1");
-        Pane pane2 = (Pane)newTabPane.lookup(".floor2");
-
-        for (Node node : pane1.lookupAll(".slot")) {
-            set_Slots.add(node.lookup(".slot"));
-        }
-
-        for (Node node : pane2.lookupAll(".slot")) {
-            set_Slots.add(node.lookup(".slot"));
-        }
-    }
-    /// DONE
 
     // Handle event here
     public void eventHandle_OneFloor() {
