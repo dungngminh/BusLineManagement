@@ -59,7 +59,9 @@ public class BLL_Admin {
         }
         return null;
     }
-
+    public List<BusEntity> getAllBus(){
+        return DAL>
+    }
     public void addBus(String busName, String plateNumber, TypeOfBusEntity tob, boolean del, int stt) {
         DAL.getInstance().insertBus(busName, plateNumber, tob, del, stt);
     }

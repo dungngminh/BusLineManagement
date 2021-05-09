@@ -121,7 +121,14 @@ public class DAL {
             return list;
         }
     }
-
+    public List<BusEntity> getAllBus(){
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        session.beginTransaction();
+        var list = session.createQuery("FROM BusEntity where isDelete = false and status = 0", BusEntity.class).getResultList();
+        session.getTransaction().commit();
+        session.close();
+        return list;
+    }
     public void insertBus(String busName, String plateNumber, TypeOfBusEntity tob, boolean del, int stt) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
