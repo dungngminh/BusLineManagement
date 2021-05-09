@@ -1,5 +1,6 @@
 package Controller.Admin;
 
+import Model.BusEntity;
 import Model.ViewModel.ScheduleEntity_ViewModel;
 import Services.BLL_Admin;
 import com.jfoenix.controls.JFXDrawer;
@@ -21,6 +22,8 @@ import javafx.scene.layout.HBox;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class SchedulePage implements Initializable {
@@ -32,10 +35,10 @@ public class SchedulePage implements Initializable {
     private JFXDrawer jfx_drawer;
 
     @FXML
-    private ComboBox<?> cbx_route;
+    private ComboBox<String> cbx_route;
 
     @FXML
-    private ComboBox<?> cbx_bus;
+    private ComboBox<String> cbx_bus;
 
     @FXML
     private TextField tfx_typeofbus;
@@ -154,6 +157,8 @@ public class SchedulePage implements Initializable {
 
     @FXML
     void onBusCBBAction(ActionEvent event) {
+        Object[] objs = BLL_Admin.getInstance().getAllBus().toArray();
+        List<Object> objsList = new ArrayList<Object>();
 
     }
 
@@ -167,8 +172,10 @@ public class SchedulePage implements Initializable {
         try {
             // Init for side bar
             InitSideBar.getInstance().initializeForNavBar(this.pane, this.jfx_drawer, this.jfx_hambur);
-            // Init combobox for
+            // Init combobox for bus and route
 
+            BLL_Admin.getInstance().getAllBus().forEach(bus -> cbx_bus.getItems().add(bus.getBusName()));
+            BLL_Admin.getInstance().getRoutes(0,"").forEach(route -> cbx_route.getItems().add(route.getStartStation()+ " - " + route.getEndStation()));
 
             tfx_typeofbus.setEditable(false);
 
