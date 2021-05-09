@@ -299,13 +299,19 @@ public class TicketOrder implements Initializable {
                         tmp_Slots.remove(node.lookup(".slot"));
                         node.lookup(".slot").setStyle("-fx-background-color: #8C271E;");
                         node.lookup(".slot").setDisable(true);
+                        continue;
                     }
 
                     if(slotPending.contains(node.lookup(".slot").getId())) {
                         tmp_Slots.remove(node.lookup(".slot"));
                         node.lookup(".slot").setStyle("-fx-background-color: #F1D302;");
                         node.lookup(".slot").setDisable(true);
+                        continue;
                     }
+
+                    if(!node.lookup(".slot").getStyle().equals("-fx-background-color: #4cc9f0;"))
+                        node.lookup(".slot").setStyle("");
+                    node.lookup(".slot").setDisable(false);
                 }
 
             }
@@ -320,13 +326,19 @@ public class TicketOrder implements Initializable {
                         tmp_Slots.remove(node.lookup(".slot"));
                         node.lookup(".slot").setStyle("-fx-background-color: #8C271E;");
                         node.lookup(".slot").setDisable(true);
+                        continue;
                     }
 
                     if(slotPending.contains(node.lookup(".slot").getId())) {
                         tmp_Slots.remove(node.lookup(".slot"));
                         node.lookup(".slot").setStyle("-fx-background-color: #F1D302;");
                         node.lookup(".slot").setDisable(true);
+                        continue;
                     }
+
+                    if(!node.lookup(".slot").getStyle().equals("-fx-background-color: #4cc9f0;"))
+                        node.lookup(".slot").setStyle("");
+                    node.lookup(".slot").setDisable(false);
                 }
 
                 for (Node node : pane2.lookupAll(".slot")) {
@@ -334,22 +346,22 @@ public class TicketOrder implements Initializable {
                         tmp_Slots.remove(node.lookup(".slot"));
                         node.lookup(".slot").setStyle("-fx-background-color: #8C271E;");
                         node.lookup(".slot").setDisable(true);
+                        continue;
                     }
 
                     if(slotPending.contains(node.lookup(".slot").getId())) {
                         tmp_Slots.remove(node.lookup(".slot"));
                         node.lookup(".slot").setStyle("-fx-background-color: #F1D302;");
                         node.lookup(".slot").setDisable(true);
+                        continue;
                     }
+
+                    if(!node.lookup(".slot").getStyle().equals("-fx-background-color: #4cc9f0;"))
+                        node.lookup(".slot").setStyle("");
+                    node.lookup(".slot").setDisable(false);
+
                 }
             }
-
-
-            tmp_Slots.forEach(slot -> {
-                if(!slot.getStyle().equals("-fx-background-color: #4cc9f0;"))
-                    slot.setStyle("");
-                slot.setDisable(false);
-            });
 
         }
 
