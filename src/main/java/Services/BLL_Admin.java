@@ -39,6 +39,7 @@ public class BLL_Admin {
                 int idRole = ((RoleAccountEntity) account.getRoleAccountsByIdUser().toArray()[0]).getIdRole();
                 valid.set(idRole);
                 DAL.getInstance().setCurrent(account);
+                System.out.println(DAL.getInstance().getCurrent().getUsername());
 
             }
         });

@@ -13,6 +13,7 @@ public class ScheduleEntity {
     private Date departTime;
     private int duration;
     private Boolean isDelete;
+    private Integer price;
     private RouteEntity routeByIdRoute;
     private BusEntity busByIdBus;
     private Collection<TripInformationEntity> tripInformationsByIdSchedule;
@@ -78,6 +79,16 @@ public class ScheduleEntity {
         this.isDelete = delete;
     }
 
+    @Basic
+    @Column(name = "Price", nullable = false)
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -90,6 +101,7 @@ public class ScheduleEntity {
         if (idBus != that.idBus) return false;
         if (duration != that.duration) return false;
         if (isDelete != that.isDelete) return false;
+        if (!price.equals(that.price)) return false;
         if (departTime != null ? !departTime.equals(that.departTime) : that.departTime != null) return false;
 
         return true;
@@ -103,6 +115,7 @@ public class ScheduleEntity {
         result = 31 * result + (departTime != null ? departTime.hashCode() : 0);
         result = 31 * result + duration;
         result = 31 * result + (isDelete ? 1 : 0);
+        result = 31 * result + price;
         return result;
     }
 

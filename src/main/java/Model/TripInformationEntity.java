@@ -10,7 +10,6 @@ public class TripInformationEntity {
     private int idTrip;
     private Timestamp departDate;
     private Integer idSchedule;
-    private Integer avaliableSlot;
     private int idDriver;
     private Collection<TicketEntity> ticketsByIdTrip;
     private ScheduleEntity scheduleByIdSchedule;
@@ -48,16 +47,6 @@ public class TripInformationEntity {
     }
 
     @Basic
-    @Column(name = "avaliableSlot", nullable = true)
-    public Integer getAvaliableSlot() {
-        return avaliableSlot;
-    }
-
-    public void setAvaliableSlot(Integer avaliableSlot) {
-        this.avaliableSlot = avaliableSlot;
-    }
-
-    @Basic
     @Column(name = "idDriver", nullable = false, insertable = false, updatable = false)
     public int getIdDriver() {
         return idDriver;
@@ -78,8 +67,6 @@ public class TripInformationEntity {
         if (idDriver != that.idDriver) return false;
         if (departDate != null ? !departDate.equals(that.departDate) : that.departDate != null) return false;
         if (idSchedule != null ? !idSchedule.equals(that.idSchedule) : that.idSchedule != null) return false;
-        if (avaliableSlot != null ? !avaliableSlot.equals(that.avaliableSlot) : that.avaliableSlot != null)
-            return false;
 
         return true;
     }
@@ -89,12 +76,11 @@ public class TripInformationEntity {
         int result = idTrip;
         result = 31 * result + (departDate != null ? departDate.hashCode() : 0);
         result = 31 * result + (idSchedule != null ? idSchedule.hashCode() : 0);
-        result = 31 * result + (avaliableSlot != null ? avaliableSlot.hashCode() : 0);
         result = 31 * result + idDriver;
         return result;
     }
 
-    @OneToMany(mappedBy = "tripInformationByIdTrip")
+    @OneToMany(mappedBy = "tripInformationByIdTrip", fetch = FetchType.EAGER)
     public Collection<TicketEntity> getTicketsByIdTrip() {
         return ticketsByIdTrip;
     }

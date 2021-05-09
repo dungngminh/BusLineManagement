@@ -1,12 +1,13 @@
 package Services;
 
-import Model.ProvinceEntity;
-import Model.RouteEntity;
-import Model.StationEntity;
-import Model.TripInformationEntity;
+import Controller.TicketSeller.TicketOrder;
+import Model.*;
 import Model.ViewModel.FilterRoute_ViewModel;
+import Util.HibernateUtils;
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
+import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import java.util.Date;
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ public class BLL_Seller {
         return instance;
     }
 
+    // BLL for FilterRout
     public List<List<String>> getPairStationFromTwoProvince(ProvinceEntity startPro, ProvinceEntity endPro) {
         List<List<String>> res = new ArrayList<List<String>>();
 
@@ -67,5 +69,48 @@ public class BLL_Seller {
 
         return result;
     }
+
+    // done FilterRoute ?
+
+    // BLL for TickeOrder ?
+    public TicketEntity pendingTicketOrderToTicket(TripInformationEntity trip) {
+        return DAL.getInstance().pendingTicketOrderToTicket(DAL.getInstance().getCurrent(), trip);
+    }
+
+    public List<String> getOrderedTicket(List<TicketEntity> list) {
+        List<String> ans = new ArrayList<>();
+
+
+        list.forEach(ticket -> {
+            if(ticket.getStatus() == 1) {
+                ans.addAll(Arrays.asList(ticket.getNameTicket().split("-")));
+            }
+        });
+        return ans;
+    }
+
+    public List<String> getPendingTicket(List<TicketEntity> list, TicketEntity crr) {
+        List<String> ans = new ArrayList<String>();
+
+        list.forEach(ticket -> {
+            if(ticket.getStatus() == 0 && !ticket.equals(crr)) {
+                ans.addAll(Arrays.asList(ticket.getNameTicket().split("-")));
+            }
+        });
+        return ans;
+    }
+
+    public void updateCurrentTicket(TicketEntity ticket, String nameTicket, String nameCustomer, String phone, Integer stt) {
+        ticket.setNameTicket(nameTicket);
+        ticket.setNameCustomer(nameCustomer);
+        ticket.setPhoneNumber(phone);
+        ticket.setStatus(stt);
+        DAL.getInstance().updateCurrentTicket(ticket);
+    }
+
+    public void deleteCurrentTicket(Integer idTicket) {
+        DAL.getInstance().deleteCurrentTicket(idTicket);
+    }
+    // done for TicketOrder
 
 }

@@ -1,19 +1,19 @@
 package Model;
 
+import org.hibernate.annotations.ColumnDefault;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "Ticket", schema = "dbo", catalog = "QuanLyNhaXeKhach")
 public class TicketEntity {
-    private int idTicket;
+    private Integer idTicket;
     private String nameTicket;
-    private int price;
     private Integer idUser;
     private Integer idTrip;
     private Boolean isDelete;
     private String phoneNumber;
     private String nameCustomer;
-    private int destination;
     private Integer status;
     private AccountEntity accountByIdUser;
     private TripInformationEntity tripInformationByIdTrip;
@@ -21,11 +21,11 @@ public class TicketEntity {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "idTicket", nullable = false)
-    public int getIdTicket() {
+    public Integer getIdTicket() {
         return idTicket;
     }
 
-    public void setIdTicket(int idTicket) {
+    public void setIdTicket(Integer idTicket) {
         this.idTicket = idTicket;
     }
 
@@ -37,16 +37,6 @@ public class TicketEntity {
 
     public void setNameTicket(String nameTicket) {
         this.nameTicket = nameTicket;
-    }
-
-    @Basic
-    @Column(name = "Price", nullable = false)
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
     }
 
     @Basic
@@ -70,7 +60,8 @@ public class TicketEntity {
     }
 
     @Basic
-    @Column(name = "isDelete", nullable = true)
+    @Column(name = "isDelete", nullable = false)
+    @ColumnDefault(value = "false")
     public Boolean getIsDelete() {
         return isDelete;
     }
@@ -80,7 +71,7 @@ public class TicketEntity {
     }
 
     @Basic
-    @Column(name = "phoneNumber", nullable = false, length = 10)
+    @Column(name = "phoneNumber", nullable = true, length = 10)
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -90,7 +81,7 @@ public class TicketEntity {
     }
 
     @Basic
-    @Column(name = "nameCustomer", nullable = false, length = 50)
+    @Column(name = "nameCustomer", nullable = true, length = 50)
     public String getNameCustomer() {
         return nameCustomer;
     }
@@ -100,17 +91,8 @@ public class TicketEntity {
     }
 
     @Basic
-    @Column(name = "destination", nullable = false)
-    public int getDestination() {
-        return destination;
-    }
-
-    public void setDestination(int destination) {
-        this.destination = destination;
-    }
-
-    @Basic
-    @Column(name = "status", nullable = true)
+    @Column(name = "status", nullable = false)
+    @ColumnDefault(value = "0")
     public Integer getStatus() {
         return status;
     }
@@ -127,8 +109,6 @@ public class TicketEntity {
         TicketEntity that = (TicketEntity) o;
 
         if (idTicket != that.idTicket) return false;
-        if (price != that.price) return false;
-        if (destination != that.destination) return false;
         if (nameTicket != null ? !nameTicket.equals(that.nameTicket) : that.nameTicket != null) return false;
         if (idUser != null ? !idUser.equals(that.idUser) : that.idUser != null) return false;
         if (idTrip != null ? !idTrip.equals(that.idTrip) : that.idTrip != null) return false;
@@ -144,13 +124,11 @@ public class TicketEntity {
     public int hashCode() {
         int result = idTicket;
         result = 31 * result + (nameTicket != null ? nameTicket.hashCode() : 0);
-        result = 31 * result + price;
         result = 31 * result + (idUser != null ? idUser.hashCode() : 0);
         result = 31 * result + (idTrip != null ? idTrip.hashCode() : 0);
         result = 31 * result + (isDelete != null ? isDelete.hashCode() : 0);
         result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
         result = 31 * result + (nameCustomer != null ? nameCustomer.hashCode() : 0);
-        result = 31 * result + destination;
         result = 31 * result + (status != null ? status.hashCode() : 0);
         return result;
     }

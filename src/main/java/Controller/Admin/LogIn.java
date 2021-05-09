@@ -53,6 +53,7 @@ public class LogIn {
         Stage stage = new Stage();
         stage.setTitle("Bus Management");
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.getIcons().add(new Image("/images/Icon/favicon.png"));
         stage.show();
         Stage cl = (Stage) btn_cancel.getScene().getWindow();
