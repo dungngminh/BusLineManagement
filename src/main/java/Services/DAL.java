@@ -12,6 +12,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DAL {
@@ -373,6 +374,17 @@ public class DAL {
     }
     //done Route?
 
+    //DAL for Schedule
+
+    public void insertSchedule(ScheduleEntity schedule) {
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        session.beginTransaction();
+        session.save(schedule);
+        session.getTransaction().commit();
+        session.close();
+    }
+
+    //DAL for Ticket Seller
     // DAL for FilterRoute ?
     /// This method: Get route have start station and end station from two province have been known
     public List<RouteEntity> getFilterRoute(List<List<String>> listPairStation) {
@@ -403,8 +415,8 @@ public class DAL {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
         Query<ScheduleEntity> query = session.createQuery("select SCH FROM ScheduleEntity SCH, RouteEntity ROU, " +
-                " BusEntity BUS, TypeOfBusEntity TYPE WHERE  SCH.idRoute = ROU.idRoute AND ROU.status = 0 AND SCH.idBus = BUS.idBus" +
-                " AND BUS.status = 0 AND BUS.isDelete = false AND BUS.idType = TYPE.idType",ScheduleEntity.class);
+                " BusEntity BUS, TypeOfBusEntity TYPE WHERE  SCH.idRoute = ROU.idRoute AND SCH.isDelete = false AND ROU.status = 0 AND SCH.idBus = BUS.idBus" +
+                " AND BUS.status = 0 AND BUS.isDelete = false AND BUS.idType = TYPE.idType", ScheduleEntity.class);
         List<ScheduleEntity> list = query.getResultList();
         session.getTransaction().commit();
         session.close();
@@ -443,7 +455,7 @@ public class DAL {
     public TicketEntity pendingTicketOrderToTicket(AccountEntity acc, TripInformationEntity trip) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
-        TicketEntity ticket= new TicketEntity();
+        TicketEntity ticket = new TicketEntity();
         ticket.setNameTicket("");
         ticket.setIdUser(acc.getIdUser());
         ticket.setIdTrip(trip.getIdTrip());
@@ -509,6 +521,35 @@ public class DAL {
         session.getTransaction().commit();
         session.close();
 
+    }
+
+    public void removeSchedule(int idSchedule) {
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query query = session.createQuery("update ScheduleEntity set isDelete = :del" +
+                " where idSchedule = :id");
+        query.setParameter("del", true);
+        query.setParameter("id", idSchedule);
+        query.executeUpdate();
+        session.getTransaction().commit();
+        session.close();
+    }
+
+    public void updateSchedule(int idSchedule, RouteEntity routeSelected, BusEntity busSelected, Date departTimeInput, int durationInput, int durationInput1, int priceInput, int dprInput) {
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        session.beginTransaction();
+        //TODO Query update Schedule
+        Query query = session.createQuery("Update ScheduleEntity set idRoute = :idRoute, idBus = :idBus, departTime = :departTime" +
+                ", price = :price, dpr = :dpr where idSchedule = :idSchedule");
+        query.setParameter("idRoute", routeSelected.getIdRoute());
+        query.setParameter("idBus", busSelected.getIdBus());
+        query.setParameter("departTime", departTimeInput);
+        query.setParameter("price", priceInput);
+        query.setParameter("dpr", dprInput);
+        query.setParameter("idSchedule", idSchedule);
+        query.executeUpdate();
+        session.getTransaction().commit();
+        session.close();
     }
 
     // done TicketOrder ?

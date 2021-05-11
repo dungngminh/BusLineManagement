@@ -133,7 +133,7 @@ public class ScheduleEntity {
         return result;
     }
 
-    @ManyToOne
+    @ManyToOne(targetEntity = RouteEntity.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "idRoute", referencedColumnName = "idRoute", nullable = false)
     public RouteEntity getRouteByIdRoute() {
         return routeByIdRoute;
@@ -143,7 +143,7 @@ public class ScheduleEntity {
         this.routeByIdRoute = routeByIdRoute;
     }
 
-    @ManyToOne
+    @ManyToOne(targetEntity = BusEntity.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "idBus", referencedColumnName = "idBus", nullable = false)
     public BusEntity getBusByIdBus() {
         return busByIdBus;

@@ -72,7 +72,7 @@ public class BLL_Admin {
     }
 
     public List<BusEntity_ViewModel> updateTableBusPage(int slot, String name) {
-        List<BusEntity_ViewModel> list = new ArrayList<BusEntity_ViewModel>();
+        List<BusEntity_ViewModel> list = new ArrayList<>();
         DAL.getInstance().getDataForBusPage().forEach(b -> {
             if (slot == 0 && b.getBusName().contains(name))
                 list.add(new BusEntity_ViewModel(b.getIdBus(), b.getBusName(), b.getPlateNumber(), b.getTypeOfBusByIdType().getTypeName(), b.getTypeOfBusByIdType().getBrandName(), b.getTypeOfBusByIdType().getSlot(), b.getStatus()));
@@ -82,17 +82,7 @@ public class BLL_Admin {
         });
         return list;
     }
-    public List<ScheduleEntity_ViewModel> updateTableSchedulePage(String name){
-        List<ScheduleEntity_ViewModel> list = new ArrayList<>();
-        DAL.getInstance().getScheduleData().forEach(data -> {
-            if((data.getRouteByIdRoute().getEndStation() + " " + data.getRouteByIdRoute().getEndStation()).contains(name))
-                list.add(new ScheduleEntity_ViewModel(data.getIdSchedule(), (data.getRouteByIdRoute().getStartStation() + " - " + data.getRouteByIdRoute().getEndStation()),data.getBusByIdBus().getBusName(),data.getBusByIdBus().getTypeOfBusByIdType().getTypeName(),new SimpleDateFormat("HH:mm:ss").format(data.getDepartTime()),data.getPrice(),data.getIsDelete()));
-            else
-                list.add(new ScheduleEntity_ViewModel(data.getIdSchedule(), (data.getRouteByIdRoute().getStartStation() + " - " + data.getRouteByIdRoute().getEndStation()),data.getBusByIdBus().getBusName(),data.getBusByIdBus().getTypeOfBusByIdType().getTypeName(),new SimpleDateFormat("HH:mm:ss").format(data.getDepartTime()),data.getPrice(),data.getIsDelete()));
-        });
 
-        return list;
-    }
     public void updateBus(int idBus, String busName, String plateNumber, TypeOfBusEntity tob, int stt) {
         DAL.getInstance().updateBus(idBus, busName, plateNumber, tob, stt);
     }
@@ -206,4 +196,39 @@ public class BLL_Admin {
         return Integer.parseInt(Double.toString(cell.getNumericCellValue()).replace(".0", ""));
     }
     // done ?
+
+    //BLL for Schedule
+    public List<ScheduleEntity_ViewModel> updateTableSchedulePage(String name){
+        List<ScheduleEntity_ViewModel> list = new ArrayList<>();
+        DAL.getInstance().getScheduleData().forEach(data -> {
+            if((data.getRouteByIdRoute().getEndStation() + " " + data.getRouteByIdRoute().getEndStation()).contains(name))
+                list.add(new ScheduleEntity_ViewModel(data.getIdSchedule(), (data.getRouteByIdRoute().getStartStation() + " - " + data.getRouteByIdRoute().getEndStation()),data.getBusByIdBus().getBusName(),data.getBusByIdBus().getTypeOfBusByIdType().getTypeName(),new SimpleDateFormat("HH:mm:ss").format(data.getDepartTime()),data.getPrice(),data.getDpr(),data.getDuration(),data.getIsDelete()));
+            else
+                list.add(new ScheduleEntity_ViewModel(data.getIdSchedule(), (data.getRouteByIdRoute().getStartStation() + " - " + data.getRouteByIdRoute().getEndStation()),data.getBusByIdBus().getBusName(),data.getBusByIdBus().getTypeOfBusByIdType().getTypeName(),new SimpleDateFormat("HH:mm:ss").format(data.getDepartTime()),data.getPrice(),data.getDpr(),data.getDuration(),data.getIsDelete()));
+        });
+
+        return list;
+    }
+
+    public void addSchedule(RouteEntity Route, BusEntity Bus, Date departTimeInput, int durationInput, int priceInput, int dprInput) {
+        ScheduleEntity schedule = new ScheduleEntity();
+        schedule.setIdRoute(Route.getIdRoute());
+        schedule.setIdBus(Bus.getIdBus());
+        schedule.setDepartTime(departTimeInput);
+        schedule.setDpr(dprInput);
+        schedule.setPrice(priceInput);
+        schedule.setBusByIdBus(Bus);
+        schedule.setRouteByIdRoute(Route);
+        schedule.setDuration(durationInput);
+        schedule.setIsDelete(false);
+        DAL.getInstance().insertSchedule(schedule);
+    }
+    public void deleteSchedule(int idSchedule){
+        DAL.getInstance().removeSchedule(idSchedule);
+    }
+
+    public void updateSchedule(int idSchedule, RouteEntity routeSelected, BusEntity busSelected, Date departTimeInput, int durationInput, int priceInput, int dprInput) {
+        DAL.getInstance().updateSchedule(idSchedule, routeSelected, busSelected, departTimeInput, durationInput, durationInput, priceInput, dprInput);
+    }
+//    public void addSchedule(int idRoute, int idBus, int )
 }
