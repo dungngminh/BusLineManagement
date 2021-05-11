@@ -112,4 +112,7 @@ public class RouteEntity {
     public void setSchedulesByIdRoute(Collection<ScheduleEntity> schedulesByIdRoute) {
         this.schedulesByIdRoute = schedulesByIdRoute;
     }
+    public String toString() {
+        return this.getStartStation() + " - " + this.getEndStation();
+    }
 }

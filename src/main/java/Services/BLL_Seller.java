@@ -1,12 +1,15 @@
 package Services;
 
-import Model.ProvinceEntity;
-import Model.RouteEntity;
-import Model.StationEntity;
-import Model.TripInformationEntity;
+
+import Controller.TicketSeller.TicketOrder;
+import Model.*;
 import Model.ViewModel.FilterRoute_ViewModel;
+import Util.HibernateUtils;
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
+import org.hibernate.Session;
+import org.hibernate.query.Query;
+
 
 import java.util.Date;
 import java.util.ArrayList;
@@ -28,6 +31,8 @@ public class BLL_Seller {
         return instance;
     }
 
+
+    // NOTICE BLL for FilterRout
     public List<List<String>> getPairStationFromTwoProvince(ProvinceEntity startPro, ProvinceEntity endPro) {
         List<List<String>> res = new ArrayList<List<String>>();
 
@@ -67,5 +72,53 @@ public class BLL_Seller {
 
         return result;
     }
+
+
+    // DONE FilterRoute ?
+
+    // NOTICE BLL for TickeOrder ?
+    public TicketEntity pendingTicketOrderToTicket(TripInformationEntity trip) {
+        return DAL.getInstance().pendingTicketOrderToTicket(DAL.getInstance().getCurrent(), trip);
+    }
+
+    public List<String> getOrderedTicket(Integer idTrip) {
+        List<String> ans = new ArrayList<>();
+
+
+        DAL.getInstance().getListTicket(idTrip).forEach(ticket -> {
+            if(ticket.getStatus() == 1) {
+                ans.addAll(Arrays.asList(ticket.getNameTicket().split("-")));
+            }
+        });
+        return ans;
+    }
+
+    public List<String> getPendingTicket(Integer idTrip, Integer crrId) {
+        List<String> ans = new ArrayList<String>();
+
+        DAL.getInstance().getListTicket(idTrip).forEach(ticket -> {
+            if(ticket.getStatus() == 0 && !crrId.equals(ticket.getIdTicket())) {
+                ans.addAll(Arrays.asList(ticket.getNameTicket().split("-")));
+            }
+        });
+        return ans;
+    }
+
+    public void updateCurrentTicket(TicketEntity ticket, String nameTicket, String nameCustomer, String phone,
+                                    Integer stt, Integer price, Boolean isPaid) {
+        ticket.setNameTicket(nameTicket);
+        ticket.setNameCustomer(nameCustomer);
+        ticket.setPhoneNumber(phone);
+        ticket.setStatus(stt);
+        ticket.setPrice(price);
+        ticket.setIsPaid(isPaid);
+        DAL.getInstance().updateCurrentTicket(ticket);
+    }
+
+    public void deleteCurrentTicket(Integer idTicket) {
+        DAL.getInstance().deleteCurrentTicket(idTicket);
+    }
+    // DONE for TicketOrder
+
 
 }

@@ -6,6 +6,7 @@ import java.util.Collection;
 @Entity
 @Table(name = "Bus", schema = "dbo", catalog = "QuanLyNhaXeKhach")
 public class BusEntity {
+
     private int idBus;
     private String busName;
     private String plateNumber;
@@ -122,5 +123,8 @@ public class BusEntity {
 
     public void setSchedulesByIdBus(Collection<ScheduleEntity> schedulesByIdBus) {
         this.schedulesByIdBus = schedulesByIdBus;
+    }
+    public String toString() {
+        return this.getBusName();
     }
 }

@@ -158,7 +158,7 @@ public class RoutePage implements Initializable {
     void btn_delete_clicked(MouseEvent event) {
         RouteEntity routeEntity = table_view.getSelectionModel().getSelectedItem();
         idRoute = routeEntity.getIdRoute();
-        System.out.println(idRoute);
+
         BLL_Admin.getInstance().deleteRoute(idRoute);
         show(0, "");
     }
@@ -168,27 +168,32 @@ public class RoutePage implements Initializable {
         try {
             String startStation = cbx_startstation.getSelectionModel().getSelectedItem().toString();
             String endStation = cbx_endstation.getSelectionModel().getSelectedItem().toString();
-            if(startStation.equals(endStation)) new Alert(Alert.AlertType.ERROR,"Duplicate Station, please re fill!").showAndWait();
+
+            if (startStation.equals(endStation))
+                new Alert(Alert.AlertType.ERROR, "Duplicate Station, please re fill!").showAndWait();
+
             else {
                 int distance = Integer.parseInt(tfx_distance.getText());
                 String note = tax_note.getText().trim();
                 if (cbx_startstation.getSelectionModel().getSelectedItem() == null || cbx_endstation.getSelectionModel().getSelectedItem() == null) {
                     new Alert(Alert.AlertType.ERROR, "Please choose station!").showAndWait();
-                }
-                switch (CRUDType) {
-                    case "Create":
-                        BLL_Admin.getInstance().addRoute(startStation, endStation, note, distance);
-                        new Alert(Alert.AlertType.INFORMATION, "Add route successful!").showAndWait();
-                        show(0, "");
-                        break;
-                    case "Update":
-                        int stt = cbx_status.getSelectionModel().getSelectedItem().equals("Available") ? 0 : 1;
-                        BLL_Admin.getInstance().updateRoute(idRoute, startStation, endStation, note, distance, stt);
-                        new Alert(Alert.AlertType.INFORMATION, "Update route successful!").showAndWait();
-                        show(0, "");
-                        break;
-                    default:
-                        break;
+                } else {
+                    switch (CRUDType) {
+                        case "Create":
+                            BLL_Admin.getInstance().addRoute(startStation, endStation, note, distance);
+                            new Alert(Alert.AlertType.INFORMATION, "Add route successful!").showAndWait();
+                            show(0, "");
+                            break;
+                        case "Update":
+                            int stt = cbx_status.getSelectionModel().getSelectedItem().equals("Available") ? 0 : 1;
+                            BLL_Admin.getInstance().updateRoute(idRoute, startStation, endStation, note, distance, stt);
+                            new Alert(Alert.AlertType.INFORMATION, "Update route successful!").showAndWait();
+                            show(0, "");
+                            break;
+                        default:
+                            break;
+                    }
+
                 }
             }
         } catch (Exception ee) {

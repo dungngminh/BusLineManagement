@@ -2,6 +2,8 @@ package Services;
 
 import Model.*;
 import Model.ViewModel.BusEntity_ViewModel;
+import Model.ViewModel.ScheduleEntity_ViewModel;
+
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.CellReference;
@@ -11,6 +13,7 @@ import org.apache.poi.ss.usermodel.Row;
 import java.io.*;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -39,6 +42,8 @@ public class BLL_Admin {
                 int idRole = ((RoleAccountEntity) account.getRoleAccountsByIdUser().toArray()[0]).getIdRole();
                 valid.set(idRole);
                 DAL.getInstance().setCurrent(account);
+                System.out.println(DAL.getInstance().getCurrent().getUsername());
+
 
             }
         });
@@ -48,6 +53,7 @@ public class BLL_Admin {
     // BLL for BusPage
     public List<TypeOfBusEntity> getListTypeOfBus() {
         return DAL.getInstance().getListTypeOfBus();
+
     }
 
     public TypeOfBusEntity getTypeOfBusObj(int idType) {
@@ -60,12 +66,16 @@ public class BLL_Admin {
         return null;
     }
 
+    public List<BusEntity> getAllBus() {
+        return DAL.getInstance().getDataForBusPage();
+    }
+
     public void addBus(String busName, String plateNumber, TypeOfBusEntity tob, boolean del, int stt) {
         DAL.getInstance().insertBus(busName, plateNumber, tob, del, stt);
     }
 
     public List<BusEntity_ViewModel> updateTableBusPage(int slot, String name) {
-        List<BusEntity_ViewModel> list = new ArrayList<BusEntity_ViewModel>();
+        List<BusEntity_ViewModel> list = new ArrayList<>();
         DAL.getInstance().getDataForBusPage().forEach(b -> {
             if (slot == 0 && b.getBusName().contains(name))
                 list.add(new BusEntity_ViewModel(b.getIdBus(), b.getBusName(), b.getPlateNumber(), b.getTypeOfBusByIdType().getTypeName(), b.getTypeOfBusByIdType().getBrandName(), b.getTypeOfBusByIdType().getSlot(), b.getStatus()));
@@ -97,6 +107,16 @@ public class BLL_Admin {
 
     public void updateRole(AccountEntity acc, int idRole) {
         DAL.getInstance().updateRole(acc, idRole);
+    }
+
+    public void updateAccount(AccountEntity acc, String newPassword) {
+        acc.setPassword(DAL.getInstance().encryptSHA1(newPassword));
+        DAL.getInstance().updateAccount(acc);
+    }
+
+    public void deleteUser(AccountEntity acc) {
+        DAL.getInstance().deleteUser(acc);
+
     }
     //done Decentralize Page
 
@@ -177,7 +197,43 @@ public class BLL_Admin {
         CellReference cellReference = new CellReference(cells[startProvinceIndex] + rowIndex[endProvinceIndex]);
         Row row = sheet.getRow(cellReference.getRow());
         Cell cell = row.getCell(cellReference.getCol());
-        return Integer.parseInt(Double.toString(cell.getNumericCellValue()).replace(".0",""));
+        return Integer.parseInt(Double.toString(cell.getNumericCellValue()).replace(".0", ""));
     }
     // done ?
+
+    //BLL for Schedule
+    public List<ScheduleEntity_ViewModel> updateTableSchedulePage(String name){
+        List<ScheduleEntity_ViewModel> list = new ArrayList<>();
+        DAL.getInstance().getScheduleData().forEach(data -> {
+            if((data.getRouteByIdRoute().getEndStation() + " " + data.getRouteByIdRoute().getEndStation()).contains(name))
+                list.add(new ScheduleEntity_ViewModel(data.getIdSchedule(), (data.getRouteByIdRoute().getStartStation() + " - " + data.getRouteByIdRoute().getEndStation()),data.getBusByIdBus().getBusName(),data.getBusByIdBus().getTypeOfBusByIdType().getTypeName(),new SimpleDateFormat("HH:mm:ss").format(data.getDepartTime()),data.getPrice(),data.getDpr(),data.getDuration(),data.getIsDelete()));
+            else
+                list.add(new ScheduleEntity_ViewModel(data.getIdSchedule(), (data.getRouteByIdRoute().getStartStation() + " - " + data.getRouteByIdRoute().getEndStation()),data.getBusByIdBus().getBusName(),data.getBusByIdBus().getTypeOfBusByIdType().getTypeName(),new SimpleDateFormat("HH:mm:ss").format(data.getDepartTime()),data.getPrice(),data.getDpr(),data.getDuration(),data.getIsDelete()));
+        });
+
+        return list;
+    }
+
+    public void addSchedule(RouteEntity Route, BusEntity Bus, Date departTimeInput, int durationInput, int priceInput, int dprInput) {
+        ScheduleEntity schedule = new ScheduleEntity();
+        schedule.setIdRoute(Route.getIdRoute());
+        schedule.setIdBus(Bus.getIdBus());
+        schedule.setDepartTime(departTimeInput);
+        schedule.setDpr(dprInput);
+        schedule.setPrice(priceInput);
+        schedule.setBusByIdBus(Bus);
+        schedule.setRouteByIdRoute(Route);
+        schedule.setDuration(durationInput);
+        schedule.setIsDelete(false);
+        DAL.getInstance().insertSchedule(schedule);
+    }
+    public void deleteSchedule(int idSchedule){
+        DAL.getInstance().removeSchedule(idSchedule);
+    }
+
+    public void updateSchedule(int idSchedule, RouteEntity routeSelected, BusEntity busSelected, Date departTimeInput, int durationInput, int priceInput, int dprInput) {
+        DAL.getInstance().updateSchedule(idSchedule, routeSelected, busSelected, departTimeInput, durationInput, durationInput, priceInput, dprInput);
+    }
+
+
 }
