@@ -218,8 +218,8 @@ public class BLL_Admin {
         DAL.getInstance().removeSchedule(idSchedule);
     }
 
-    public void updateSchedule(RouteEntity routeSelected, BusEntity busSelected, Date departTimeInput, int durationInput, int priceInput, int dprInput) {
-        DAL.getInstance().updateSchedule(routeSelected, busSelected, departTimeInput, durationInput, durationInput, priceInput, dprInput);
+    public void updateSchedule(int idSchedule, RouteEntity routeSelected, BusEntity busSelected, Date departTimeInput, int durationInput, int priceInput, int dprInput) {
+        DAL.getInstance().updateSchedule(idSchedule, routeSelected, busSelected, departTimeInput, durationInput, durationInput, priceInput, dprInput);
     }
 //    public void addSchedule(int idRoute, int idBus, int )
 }

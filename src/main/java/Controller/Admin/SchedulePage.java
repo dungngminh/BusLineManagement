@@ -145,11 +145,13 @@ public class SchedulePage implements Initializable {
 
     @FXML
     void btn_cancel_clicked(MouseEvent event) {
+
         toggleDetail();
     }
 
     @FXML
     void btn_create_clicked(MouseEvent event) {
+        btn_ok.setText("Add");
         CRUDType = "Create";
         toggleDetail();
     }
@@ -176,11 +178,12 @@ public class SchedulePage implements Initializable {
             } else {
                 switch (CRUDType) {
                     case "Create":
-                        BLL_Admin.getInstance().addSchedule(routeSelected, busSelected, departTimeInput, durationInput,priceInput,dprInput);
+                        BLL_Admin.getInstance().addSchedule(routeSelected, busSelected, departTimeInput, durationInput, priceInput, dprInput);
                         show("");
                         break;
                     case "Update":
-                        BLL_Admin.getInstance().updateSchedule(routeSelected, busSelected, departTimeInput, durationInput,priceInput,dprInput);
+                        BLL_Admin.getInstance().updateSchedule(idSchedule, routeSelected, busSelected, departTimeInput, durationInput, priceInput, dprInput);
+                        show("");
                     default:
                         break;
                 }
@@ -198,6 +201,8 @@ public class SchedulePage implements Initializable {
         cbx_bus.getSelectionModel().select(null);
         tfx_typeofbus.setText("");
         tfx_price.setText("");
+        spn_timepickerH.getValueFactory().setValue(0);
+        spn_timepickerM.getValueFactory().setValue(0);
         spn_timepickerS.getValueFactory().setValue(0);
         tfx_day_per_route.setText("");
     }
@@ -215,6 +220,41 @@ public class SchedulePage implements Initializable {
     @FXML
     void btn_update_clicked(MouseEvent event) {
         CRUDType = "Update";
+        btn_ok.setText("OK");
+        try {
+            ScheduleEntity_ViewModel scheduleEntity_viewModel = table_view.getSelectionModel().getSelectedItem();
+            idSchedule = scheduleEntity_viewModel.getIdSchedule();
+            List<RouteEntity> routeEntity = BLL_Admin.getInstance().getRoutes(0, "");
+
+            routeEntity.forEach(route -> {
+                if (route.toString().equals(scheduleEntity_viewModel.getRouteName())) {
+                    System.out.println(route);
+                    cbx_route.getSelectionModel().select(route);
+                }
+            });
+
+            List<BusEntity> busEntity = BLL_Admin.getInstance().getAllBus();
+            busEntity.forEach(bus -> {
+                if (bus.getBusName().equals(scheduleEntity_viewModel.getBusName())) {
+                    cbx_bus.getSelectionModel().select(bus);
+                }
+            });
+
+            tfx_price.setText(Integer.toString(scheduleEntity_viewModel.getPrice()));
+            int hour = Integer.parseInt(scheduleEntity_viewModel.getDepartTime().split(":")[0]);
+            int minute = Integer.parseInt(scheduleEntity_viewModel.getDepartTime().split(":")[1]);
+            int second = Integer.parseInt(scheduleEntity_viewModel.getDepartTime().split(":")[2]);
+
+            spn_timepickerH.getValueFactory().setValue(hour);
+            spn_timepickerM.getValueFactory().setValue(minute);
+            spn_timepickerS.getValueFactory().setValue(second);
+
+            tfx_day_per_route.setText(Integer.toString(scheduleEntity_viewModel.getDpr()));
+            tfx_duration.setText(Integer.toString(scheduleEntity_viewModel.getDuration()));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         //TODO : show data text feild ft. combo box
         toggleDetail();
     }
@@ -223,7 +263,9 @@ public class SchedulePage implements Initializable {
     void onBusCBBAction(ActionEvent event) {
         Object[] objs = BLL_Admin.getInstance().getAllBus().toArray();
         List<Object> objsList = new ArrayList<Object>();
-        tfx_typeofbus.setText(cbx_bus.getSelectionModel().getSelectedItem().getTypeOfBusByIdType().getTypeName());
+        if(cbx_bus.getSelectionModel().getSelectedItem() != null)
+            tfx_typeofbus.setText(cbx_bus.getSelectionModel().getSelectedItem().getTypeOfBusByIdType().getTypeName());
+        else System.out.println("null");
     }
 
     @FXML
@@ -241,7 +283,6 @@ public class SchedulePage implements Initializable {
 
             BLL_Admin.getInstance().getAllBus().forEach(bus -> cbx_bus.getItems().add(bus));
             BLL_Admin.getInstance().getRoutes(0, "").forEach(route -> cbx_route.getItems().add(route));
-
 
             tfx_typeofbus.setEditable(false);
 

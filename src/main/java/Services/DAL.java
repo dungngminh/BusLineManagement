@@ -382,7 +382,7 @@ public class DAL {
         session.beginTransaction();
         Query<ScheduleEntity> query = session.createQuery("select SCH FROM ScheduleEntity SCH, RouteEntity ROU, " +
                 " BusEntity BUS, TypeOfBusEntity TYPE WHERE  SCH.idRoute = ROU.idRoute AND SCH.isDelete = false AND ROU.status = 0 AND SCH.idBus = BUS.idBus" +
-                " AND BUS.status = 0 AND BUS.isDelete = false AND BUS.idType = TYPE.idType",ScheduleEntity.class);
+                " AND BUS.status = 0 AND BUS.isDelete = false AND BUS.idType = TYPE.idType", ScheduleEntity.class);
         List<ScheduleEntity> list = query.getResultList();
         session.getTransaction().commit();
         session.close();
@@ -421,7 +421,7 @@ public class DAL {
     public TicketEntity pendingTicketOrderToTicket(AccountEntity acc, TripInformationEntity trip) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
-        TicketEntity ticket= new TicketEntity();
+        TicketEntity ticket = new TicketEntity();
         ticket.setNameTicket("");
         ticket.setIdUser(acc.getIdUser());
         ticket.setIdTrip(trip.getIdTrip());
@@ -495,17 +495,24 @@ public class DAL {
         Query query = session.createQuery("update ScheduleEntity set isDelete = :del" +
                 " where idSchedule = :id");
         query.setParameter("del", true);
-        query.setParameter("id",idSchedule);
+        query.setParameter("id", idSchedule);
         query.executeUpdate();
         session.getTransaction().commit();
         session.close();
     }
 
-    public void updateSchedule(RouteEntity routeSelected, BusEntity busSelected, Date departTimeInput, int durationInput, int durationInput1, int priceInput, int dprInput) {
+    public void updateSchedule(int idSchedule, RouteEntity routeSelected, BusEntity busSelected, Date departTimeInput, int durationInput, int durationInput1, int priceInput, int dprInput) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
         //TODO Query update Schedule
-
+        Query query = session.createQuery("Update ScheduleEntity set idRoute = :idRoute, idBus = :idBus, departTime = :departTime" +
+                ", price = :price, dpr = :dpr where idSchedule = :idSchedule");
+        query.setParameter("idRoute", routeSelected.getIdRoute());
+        query.setParameter("idBus", busSelected.getIdBus());
+        query.setParameter("departTime", departTimeInput);
+        query.setParameter("price", priceInput);
+        query.setParameter("dpr", dprInput);
+        query.setParameter("idSchedule", idSchedule);
         query.executeUpdate();
         session.getTransaction().commit();
         session.close();
