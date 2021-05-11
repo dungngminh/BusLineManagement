@@ -105,6 +105,15 @@ public class BLL_Admin {
     public void updateRole(AccountEntity acc, int idRole) {
         DAL.getInstance().updateRole(acc, idRole);
     }
+
+    public void updateAccount(AccountEntity acc, String newPassword) {
+        acc.setPassword(DAL.getInstance().encryptSHA1(newPassword));
+        DAL.getInstance().updateAccount(acc);
+    }
+
+    public void deleteUser(AccountEntity acc) {
+        DAL.getInstance().deleteUser(acc);
+    }
     //done Decentralize Page
 
     // BLL for Driver ?

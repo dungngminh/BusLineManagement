@@ -229,6 +229,11 @@ public class TicketOrder implements Initializable {
     }
     // DONE
 
+    @FXML
+    void btn_reload_onClicked(MouseEvent event) {
+        refreshTicketForSLots();
+    }
+
     // IMPORTANT add component to pane2
     public void showFigureOfBusType(String path) throws IOException {
         this.pane = FXMLLoader.load(getClass().getResource("/view/bus_type/" + path + ".fxml"));
@@ -390,8 +395,6 @@ public class TicketOrder implements Initializable {
                     Integer.parseInt(lb_price.getText().substring(0, lb_price.getText().length() - 1)),
                     cbx_payment.getSelectionModel().getSelectedItem().equals("Paid"));
             ///
-
         }
     }
-
 }

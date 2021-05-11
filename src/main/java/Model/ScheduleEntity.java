@@ -21,7 +21,7 @@ public class ScheduleEntity {
     private Collection<TripInformationEntity> tripInformationsByIdSchedule;
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idSchedule", nullable = false)
     public int getIdSchedule() {
         return idSchedule;

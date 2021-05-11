@@ -6,6 +6,8 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -147,6 +149,11 @@
             <Button layoutX="470.0" layoutY="43.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="66.0" style="-fx-background-color: #8C271E;" text="Ordered" textFill="WHITE" />
             <Button layoutX="470.0" layoutY="110.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="66.0" style="-fx-background-color: #F1D302;" text="Pending" />
             <Button layoutX="470.0" layoutY="178.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="66.0" text="Ready" />
+            <ImageView fitHeight="40.0" fitWidth="46.0" layoutX="712.0" layoutY="40.0" onMouseClicked="#btn_reload_onClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/Icon/circular-arrow.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
       <JFXHamburger fx:id="jfx_hambur" layoutX="10.0" layoutY="10.0" />
