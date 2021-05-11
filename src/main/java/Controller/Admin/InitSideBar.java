@@ -50,10 +50,12 @@ public class InitSideBar {
                                 showPage(rootPane, "RoutePage");
                                 break;
                             }
+
                             case "schedule":{
                                 showPage(rootPane, "SchedulePage");
                                 break;
                             }
+
                             case "setting": {
                                 showPage(rootPane, "Setting");
                                 break;

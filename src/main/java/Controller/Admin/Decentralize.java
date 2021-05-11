@@ -3,20 +3,26 @@ package Controller.Admin;
 import Model.AccountEntity;
 import Model.RoleAccountEntity;
 import Services.BLL_Admin;
+
 import Services.DAL;
+
 import Util.HibernateUtils;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
+
 import javafx.application.Platform;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -26,10 +32,12 @@ import org.hibernate.Session;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
+
 
 public class Decentralize implements Initializable {
     @FXML
@@ -42,6 +50,7 @@ public class Decentralize implements Initializable {
     private JFXHamburger jfx_hambur;
 
     @FXML
+
     private TextField txf_username;
 
     @FXML
@@ -53,6 +62,7 @@ public class Decentralize implements Initializable {
     @FXML
     private PasswordField txf_newpassword_confirm;
 
+
     @FXML
     private PasswordField txf_password;
 
@@ -60,6 +70,7 @@ public class Decentralize implements Initializable {
     private PasswordField txf_password_confirm;
 
     @FXML
+
     private ComboBox<AccountEntity> cbx_user_delete;
 
 
@@ -73,6 +84,7 @@ public class Decentralize implements Initializable {
     private ComboBox<String> cbx_role_add;
 
     @FXML
+
     private Tab tab_adduser;
 
     @FXML
@@ -84,6 +96,7 @@ public class Decentralize implements Initializable {
     // Var static
     private static AccountEntity currentAccount;
 
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
@@ -92,6 +105,7 @@ public class Decentralize implements Initializable {
             //done
 
             //Init role
+
             currentAccount = DAL.getInstance().getCurrent();
             int idRole = ((RoleAccountEntity)DAL.getInstance().getCurrent().getRoleAccountsByIdUser().toArray()[0]).getIdRole();
             if(idRole == 3) {
@@ -152,6 +166,7 @@ public class Decentralize implements Initializable {
         }
     }
 
+
     public void showDialog(String type, Integer idRole, AccountEntity acc) {
         // Create the custom dialog.
         Dialog<String> dialog = new Dialog<>();
@@ -205,6 +220,7 @@ public class Decentralize implements Initializable {
         String userName = txf_username.getText().trim();
         String passWord = txf_password.getText().trim();
         String confirm_password = txf_password_confirm.getText().trim();
+
         int role = cbx_role_add.getSelectionModel().getSelectedItem().equals("Ticket Seller") ? 2 : 1;
         if(userName.equals("") || passWord.equals("") || confirm_password.equals("")) {
             new Alert(Alert.AlertType.WARNING, "Fill all field!").showAndWait();
@@ -248,6 +264,7 @@ public class Decentralize implements Initializable {
 
     @FXML
     void btn_confirm_clicked(MouseEvent event) {
+
         try {
             String userName = String.valueOf(cbx_user.getSelectionModel().getSelectedItem());
             int idRole = cbx_role.getSelectionModel().getSelectedItem().equals("Ticket Seller") ? 2 : 1;
@@ -260,6 +277,7 @@ public class Decentralize implements Initializable {
             showDialog("changerole", idRole, null);
         } catch (Exception err) {
             System.out.println(err.getMessage());
+
             new Alert(Alert.AlertType.WARNING, "Error occurred, Check again!").showAndWait();
         }
     }
@@ -302,5 +320,6 @@ public class Decentralize implements Initializable {
             }
         }
     }
+
     //
 }

@@ -1,6 +1,8 @@
 package Services;
 
+
 import Controller.TicketSeller.TicketOrder;
+
 import Model.*;
 import Util.HibernateUtils;
 import org.hibernate.Session;
@@ -12,13 +14,17 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
 import java.util.Date;
+
 import java.util.List;
 
 public class DAL {
     private static DAL instance;
 
+
     public static AccountEntity current;
+
 
     private DAL() {
 
@@ -134,7 +140,9 @@ public class DAL {
         bus.setIsDelete(false);
         bus.setStatus(1);
         bus.setTypeOfBusByIdType(tob);
+
         //Save the BusEntity in database
+
         session.save(bus);
 
         //Commit the transaction
@@ -315,6 +323,7 @@ public class DAL {
     // done Driver ?
 
     // DAL for Province ??
+
     public List<ProvinceEntity> getProvinceName() {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
@@ -345,6 +354,7 @@ public class DAL {
         return result;
     }
 
+
     public void updateRoute(int idRoute, String startStation, String endStation, String note, int distance, int stt) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
@@ -353,7 +363,9 @@ public class DAL {
         query.setParameter("startStation", startStation);
         query.setParameter("endStation", endStation);
         query.setParameter("distance", distance);
+
         query.setParameter("note", note);
+
         query.setParameter("stt", stt);
         query.setParameter("idRoute", idRoute);
         query.executeUpdate();
@@ -367,12 +379,14 @@ public class DAL {
         var query = session.createQuery("update RouteEntity set status = :stt" +
                 " where idRoute = :idRoute");
         query.setParameter("stt", 2);
+
         query.setParameter("idRoute", idRoute);
         query.executeUpdate();
         session.getTransaction().commit();
         session.close();
     }
     //done Route?
+
 
     //DAL for Schedule
 
@@ -392,7 +406,9 @@ public class DAL {
 
         Session session = HibernateUtils.getSessionFactory().openSession();
 
+
         for (List<String> x : listPairStation) {
+
             session.beginTransaction();
             Query<RouteEntity> query = session.createQuery("FROM RouteEntity ROU" +
                     " WHERE ROU.startStation = :stStat and ROU.endStation = :enStat", RouteEntity.class);
@@ -411,6 +427,7 @@ public class DAL {
         return result;
     }
 
+
     public List<ScheduleEntity> getScheduleData() {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
@@ -423,9 +440,11 @@ public class DAL {
         return list;
     }
 
+
     public List<TripInformationEntity> getFilterTrip(List<RouteEntity> listRoute) {
         List<TripInformationEntity> result = new ArrayList<>();
         Session session = HibernateUtils.getSessionFactory().openSession();
+
 
         for (RouteEntity x : listRoute) {
             session.beginTransaction();
@@ -440,6 +459,7 @@ public class DAL {
 //            System.out.println(x.getIdRoute());
             query.getResultList().forEach(qr -> {
                 if (!result.contains(qr)) result.add(qr);
+
             });
             session.getTransaction().commit();
 
@@ -449,6 +469,7 @@ public class DAL {
         session.close();
         return result;
     }
+
     // done FilterRoute ?
 
     // DAL for TicketOrder ?

@@ -52,6 +52,7 @@
 }
 
 .subbtn {
+
     -fx-background-color: linear-gradient(from 50% 50% to 100% 100%, #0e1c26, #243748);
     -fx-font-size: 16px;
 }

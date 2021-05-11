@@ -158,6 +158,7 @@ public class RoutePage implements Initializable {
     void btn_delete_clicked(MouseEvent event) {
         RouteEntity routeEntity = table_view.getSelectionModel().getSelectedItem();
         idRoute = routeEntity.getIdRoute();
+
         BLL_Admin.getInstance().deleteRoute(idRoute);
         show(0, "");
     }
@@ -167,8 +168,10 @@ public class RoutePage implements Initializable {
         try {
             String startStation = cbx_startstation.getSelectionModel().getSelectedItem().toString();
             String endStation = cbx_endstation.getSelectionModel().getSelectedItem().toString();
+
             if (startStation.equals(endStation))
                 new Alert(Alert.AlertType.ERROR, "Duplicate Station, please re fill!").showAndWait();
+
             else {
                 int distance = Integer.parseInt(tfx_distance.getText());
                 String note = tax_note.getText().trim();
@@ -190,6 +193,7 @@ public class RoutePage implements Initializable {
                         default:
                             break;
                     }
+
                 }
             }
         } catch (Exception ee) {

@@ -7,6 +7,7 @@
   <!-- Database connection settings -->
   <property name="connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
 
+
   <property name="connection.url">jdbc:sqlserver://103.95.197.121:9696;database=QuanLyNhaXeKhach</property>
   <property name = "hibernate.connection.username">DACNPM</property>
   <property name = "hibernate.connection.password">khoa19@itf</property>
@@ -19,15 +20,18 @@
 <!--  <property name = "hibernate.connection.username">sqlserver</property>-->
 <!--  <property name = "hibernate.connection.password">123456</property>-->
 
+
   <property name="hibernate.connection.release_mode">auto</property>
   <property name="hibernate.connection.autoReconnect">true</property>
   <property name="hibernate.connection.autocommit">true</property>
+
 
   <property name="hibernate.connection.CharSet">utf8</property>
   <property name="hibernate.connection.characterEncoding">utf8</property>
   <property name="hibernate.connection.useUnicode">true</property>
 <!--  &lt;!&ndash; JDBC connection pool (use the built-in) &ndash;&gt;-->
 <!--  <property name="connection.pool_size">10</property>-->
+
 
 <!--  &lt;!&ndash; SQL dialect &ndash;&gt;-->
   <property name="dialect">org.hibernate.dialect.SQLServerDialect</property>

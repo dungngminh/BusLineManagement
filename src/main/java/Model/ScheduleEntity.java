@@ -14,8 +14,10 @@ public class ScheduleEntity {
     private Date departTime;
     private int duration;
     private Boolean isDelete;
+
     private Integer price;
     private Integer dpr;
+
     private RouteEntity routeByIdRoute;
     private BusEntity busByIdBus;
     private Collection<TripInformationEntity> tripInformationsByIdSchedule;

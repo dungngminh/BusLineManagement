@@ -184,7 +184,9 @@ public class FilterRoute implements Initializable {
     void btn1_clicked(MouseEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/seller_view/TicketOrder.fxml"));
 
+
         TicketOrder controller = new TicketOrder(listRoute.get(beginIndex - 1).getModelTrip(), date, startProvince, endProvince);
+
         loader.setController(controller);
         AnchorPane newPane = loader.load();
         this.rootPane.getChildren().setAll(newPane);
@@ -194,7 +196,9 @@ public class FilterRoute implements Initializable {
     void btn2_clicked(MouseEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/seller_view/TicketOrder.fxml"));
 
+
         TicketOrder controller = new TicketOrder(listRoute.get(beginIndex).getModelTrip(), date, startProvince, endProvince);
+
         loader.setController(controller);
         AnchorPane newPane = loader.load();
         this.rootPane.getChildren().setAll(newPane);
@@ -204,7 +208,9 @@ public class FilterRoute implements Initializable {
     void btn3_clicked(MouseEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/seller_view/TicketOrder.fxml"));
 
+
         TicketOrder controller = new TicketOrder(listRoute.get(beginIndex + 1).getModelTrip(), date, startProvince, endProvince);
+
         loader.setController(controller);
         AnchorPane newPane = loader.load();
         this.rootPane.getChildren().setAll(newPane);
@@ -214,7 +220,9 @@ public class FilterRoute implements Initializable {
     void btn4_clicked(MouseEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/seller_view/TicketOrder.fxml"));
 
+
         TicketOrder controller = new TicketOrder(listRoute.get(beginIndex + 2).getModelTrip(), date, startProvince, endProvince);
+
         loader.setController(controller);
         AnchorPane newPane = loader.load();
         this.rootPane.getChildren().setAll(newPane);
@@ -224,7 +232,9 @@ public class FilterRoute implements Initializable {
     void btn5_clicked(MouseEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/seller_view/TicketOrder.fxml"));
 
+
         TicketOrder controller = new TicketOrder(listRoute.get(beginIndex + 3).getModelTrip(), date, startProvince, endProvince);
+
         loader.setController(controller);
         AnchorPane newPane = loader.load();
         this.rootPane.getChildren().setAll(newPane);
@@ -350,7 +360,6 @@ public class FilterRoute implements Initializable {
                 default:
                     break;
             }
-
         }
     }
 
