@@ -28,7 +28,7 @@ public class LogIn {
         String password = txf_password.getText();
         try {
             int res = BLL_Admin.getInstance().validate_Account(username, password);
-            if(res == 1) {
+            if(res == 1 || res == 3) {
 //                  new Alert(Alert.AlertType.INFORMATION, "Successful!").showAndWait();
                 showHomePage("admin_view/MainWindow");
             }

@@ -15,12 +15,13 @@ public class ScheduleEntity {
     private int duration;
     private Boolean isDelete;
     private Integer price;
+    private Integer dpr;
     private RouteEntity routeByIdRoute;
     private BusEntity busByIdBus;
     private Collection<TripInformationEntity> tripInformationsByIdSchedule;
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idSchedule", nullable = false)
     public int getIdSchedule() {
         return idSchedule;
@@ -90,6 +91,16 @@ public class ScheduleEntity {
         this.price = price;
     }
 
+    @Basic
+    @Column(name = "dpr", nullable = false)
+    public Integer getDpr() {
+        return dpr;
+    }
+
+    public void setDpr(Integer dpr) {
+        this.dpr = dpr;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -102,6 +113,7 @@ public class ScheduleEntity {
         if (idBus != that.idBus) return false;
         if (duration != that.duration) return false;
         if (isDelete != that.isDelete) return false;
+        if (!dpr.equals(that.dpr)) return false;
         if (!price.equals(that.price)) return false;
         if (departTime != null ? !departTime.equals(that.departTime) : that.departTime != null) return false;
 
@@ -115,6 +127,7 @@ public class ScheduleEntity {
         result = 31 * result + idBus;
         result = 31 * result + (departTime != null ? departTime.hashCode() : 0);
         result = 31 * result + duration;
+        result = 31 * result + dpr;
         result = 31 * result + (isDelete ? 1 : 0);
         result = 31 * result + price;
         return result;
