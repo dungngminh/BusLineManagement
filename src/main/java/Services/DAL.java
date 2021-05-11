@@ -216,6 +216,40 @@ public class DAL {
         session.close();
     }
 
+    public void updateAccount(AccountEntity acc) {
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        Query<RoleAccountEntity> query = session.createQuery("update AccountEntity set password = :password " +
+                "where idUser = :idUser");
+
+        query.setParameter("password", acc.getPassword());
+        query.setParameter("idUser", acc.getIdUser());
+
+        int result = query.executeUpdate();
+
+        //Commit the transaction
+        session.getTransaction().commit();
+        session.close();
+    }
+
+    public void deleteUser(AccountEntity acc) {
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query query1 = session.createQuery("DELETE FROM RoleAccountEntity WHERE idUser = :idUser");
+        query1.setParameter("idUser", acc.getIdUser());
+
+        Query query2 = session.createQuery("DELETE FROM AccountEntity WHERE idUser = :idUser");
+        query2.setParameter("idUser", acc.getIdUser());
+
+        query1.executeUpdate();
+        query2.executeUpdate();
+
+        //Commit the transaction
+        session.getTransaction().commit();
+        session.close();
+    }
+
     // Done Decentralize here ?
 
     // DAL for Driver ?
