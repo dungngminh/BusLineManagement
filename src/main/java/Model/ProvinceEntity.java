@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
-@Table(name = "Province", schema = "dbo", catalog = "QuanLyNhaXeKhach")
+@Table(name = "Province", schema = "dbo", catalog = "N2_19N12B")
 public class ProvinceEntity {
     private int idProvince;
     private String provinceName;

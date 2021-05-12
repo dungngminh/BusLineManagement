@@ -5,7 +5,7 @@ import org.hibernate.annotations.ColumnDefault;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Ticket", schema = "dbo", catalog = "QuanLyNhaXeKhach")
+@Table(name = "Ticket", schema = "dbo", catalog = "N2_19N12B")
 public class TicketEntity {
 
     private Integer idTicket;

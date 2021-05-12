@@ -11,7 +11,7 @@ import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
-@Table(name = "Account", schema = "dbo", catalog = "QuanLyNhaXeKhach")
+@Table(name = "Account", schema = "dbo", catalog = "N2_19N12B")
 public class AccountEntity {
     private Integer idUser;
     private String username;

@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
-@Table(name = "Route", schema = "dbo", catalog = "QuanLyNhaXeKhach")
+@Table(name = "Route", schema = "dbo", catalog = "N2_19N12B")
 public class RouteEntity {
     private int idRoute;
     private String startStation;
