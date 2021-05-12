@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Collection;
 
 @Entity
-@Table(name = "TypeOfBus", schema = "dbo", catalog = "QuanLyNhaXeKhach")
+@Table(name = "TypeOfBus", schema = "dbo", catalog = "N2_19N12B")
 public class TypeOfBusEntity {
     private int idType;
     private String typeName;

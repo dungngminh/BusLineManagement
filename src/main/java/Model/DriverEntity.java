@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
-@Table(name = "Driver", schema = "dbo", catalog = "QuanLyNhaXeKhach")
+@Table(name = "Driver", schema = "dbo", catalog = "N2_19N12B")
 public class DriverEntity {
     private int idDriver;
     private String nameDriver;
