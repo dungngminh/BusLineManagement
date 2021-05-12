@@ -433,6 +433,7 @@ public class TicketOrder implements Initializable {
                     Integer.parseInt(lb_price.getText().substring(0, lb_price.getText().length() - 1)),
                     cbx_payment.getSelectionModel().getSelectedItem().equals("Paid"));
             ///
+
         }
     }
 }

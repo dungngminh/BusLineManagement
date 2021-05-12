@@ -49,5 +49,62 @@
     -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #7a8fd3, #45cde9);
     -fx-background-radius: 4px;
     -fx-border-radius: 2px;
+}
 
+.table-view {
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #ebf4f5, #b5c6e0);
+    -fx-background-radius: 5px;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #ebf4f5, #b5c6e0);
+    -fx-background-radius: 0px;
+    -fx-background-insets: 0 0 5px 0;
+    -fx-effect: dropshadow(two-pass-box, #224e54, 5, 0.0, 0.1, 2);
+}
+
+.table-view .column-header, .table-view .filter {
+    -fx-size: 45;
+    -fx-border-width: 0 0 10px 0;
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: #181821;
+    -fx-font-size: 15px;
+    -fx-alignment: center;
+}
+
+.table-row-cell {
+    -fx-background-color: transparent;
+    -fx-font-size: 14px;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #60696b;
+}
+
+.titled-pane {
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #b5c6e0, #ebf4f5);
+    -fx-background-radius: 5px;
+}
+
+.titled-pane > .title {
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #b5c6e0, #ebf4f5);
+    -fx-background-radius: 5px;
+    -fx-background-insets: 0 0 5px 0;
+    -fx-effect: dropshadow(two-pass-box, #224e54, 5, 0.0, 0.1, 2);
+}
+
+.titled-pane > *.content
+{
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #b5c6e0, #ebf4f5);
+    -fx-background-insets: 0, 0 1 1 1;
+    -fx-padding: 0.167em;
+}
+
+.date-picker > .text-field {
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #ebf4f5, #b5c6e0);
+    -fx-background-insets: 1 0 1 1;
+    -fx-background-radius: 2 0 0 2;
 }

@@ -8,9 +8,6 @@
   <property name="connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
 
   <property name="connection.url">jdbc:sqlserver://103.95.197.121:9696;database=N2_19N12B</property>
-
-
-
   <property name = "hibernate.connection.username">DACNPM</property>
   <property name = "hibernate.connection.password">khoa19@itf</property>
 

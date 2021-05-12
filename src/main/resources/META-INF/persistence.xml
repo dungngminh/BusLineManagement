@@ -22,9 +22,9 @@
       <property name="org.hibernate.SQL" value="debug"/>
       <property name="org.hibernate.type.descriptor.sql.BasicBinder" value="debug"/>
       <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
-      <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://34.87.114.154;database=QuanLyNhaXeKhach" />
-      <property name="javax.persistence.jdbc.user" value="sqlserver" />
-      <property name="javax.persistence.jdbc.password" value="123456" />
+      <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://103.95.197.121:9696;database=N2_19N12B" />
+      <property name="javax.persistence.jdbc.user" value="DACNPM" />
+      <property name="javax.persistence.jdbc.password" value="khoa19@itf" />
     </properties>
   </persistence-unit>
 

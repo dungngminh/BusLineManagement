@@ -43,12 +43,8 @@ public class InitSideBar {
                                 showPage(rootPane,"Dashboard");
                                 break;
                             }
-                            case "ticketinfo":{
-                                showPage(rootPane,"TicketInfo");
-                                break;
-                            }
-                            case "ticketupdate":{
-                                showPage(rootPane,"TicketUpdate");
+                            case "ticket":{
+                                showPage(rootPane,"Ticket");
                                 break;
                             }
                             case "setting":{
