@@ -1,7 +1,9 @@
 package Controller.TicketSeller;
 
 import Model.ProvinceEntity;
+
 import Model.TicketEntity;
+
 import Model.TripInformationEntity;
 import Model.ViewModel.FilterRoute_ViewModel;
 import Services.BLL_Seller;
@@ -11,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -25,6 +28,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
 
 public class TicketOrder implements Initializable {
     @FXML
@@ -64,6 +68,7 @@ public class TicketOrder implements Initializable {
     private ComboBox<String> cbx_payment;
 
     @FXML
+
     private TextField txf_namecustomer;
 
     @FXML
@@ -72,10 +77,12 @@ public class TicketOrder implements Initializable {
     @FXML
     private Button btn_confirm;
 
+
     @FXML
     private Button btn_cancel;
 
     // Attributes
+
 
     private static TripInformationEntity modelTrip;
     private static TicketEntity currentTicket;
@@ -98,6 +105,12 @@ public class TicketOrder implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
+
+            // Init for side bar
+            InitSideBar.getInstance().initializeForNavBar(this.rootPane, this.jfx_drawer, this.jfx_hambur);
+            //done
+
+
             // Init Figure Of Bus Type
             switch(modelTrip.getScheduleByIdSchedule().getBusByIdBus().getTypeOfBusByIdType().getIdType()) {
                 case 1: {
@@ -137,6 +150,7 @@ public class TicketOrder implements Initializable {
             }
             // done
 
+
             // IMPORTANT Init ticket detail
             lb_code.setText("Choose your slots!");
             lb_type.setText(modelTrip.getScheduleByIdSchedule().getBusByIdBus().getTypeOfBusByIdType().getTypeName());
@@ -172,6 +186,29 @@ public class TicketOrder implements Initializable {
             // DONE
 
             pane2.hoverProperty().addListener((event)->refreshTicketForSLots());
+
+            // Init ticket detail
+            lb_code.setText("Choose your slots!");
+            lb_type.setText(modelTrip.getScheduleByIdSchedule().getBusByIdBus().getTypeOfBusByIdType().getTypeName());
+            lb_departdate.setText(date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+            lb_startstation.setText(modelTrip.getScheduleByIdSchedule().getRouteByIdRoute().getStartStation());
+            lb_destination.setText(modelTrip.getScheduleByIdSchedule().getRouteByIdRoute().getEndStation());
+            lb_phone.setText(modelTrip.getDriverByIdDriver().getPhone());
+            cbx_payment.getItems().add("Paid");
+            cbx_payment.getItems().add("Unpaid");
+            cbx_payment.getSelectionModel().selectFirst();
+            lb_price.setText("0đ");
+            //done!
+
+            // Event for slot
+            String floor1 = "9162935";
+            if(floor1.contains(String.valueOf(modelTrip.getScheduleByIdSchedule().getBusByIdBus().
+                    getTypeOfBusByIdType().getSlot())))
+                eventHandle_OneFloor();
+            else
+                eventHandle_TwoFloors();
+
+            // done
 
 
         } catch (IOException e) {
@@ -239,6 +276,7 @@ public class TicketOrder implements Initializable {
         this.pane = FXMLLoader.load(getClass().getResource("/view/bus_type/" + path + ".fxml"));
         pane2.getChildren().setAll(this.pane);
     }
+
 
     // NOTICE Handle for 2 floors event here
     public void eventHandle_OneFloor() {

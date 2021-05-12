@@ -3,6 +3,7 @@ package Services;
 import Model.*;
 import Model.ViewModel.BusEntity_ViewModel;
 import Model.ViewModel.ScheduleEntity_ViewModel;
+
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.CellReference;
@@ -43,6 +44,7 @@ public class BLL_Admin {
                 DAL.getInstance().setCurrent(account);
                 System.out.println(DAL.getInstance().getCurrent().getUsername());
 
+
             }
         });
         return valid.get();
@@ -51,6 +53,7 @@ public class BLL_Admin {
     // BLL for BusPage
     public List<TypeOfBusEntity> getListTypeOfBus() {
         return DAL.getInstance().getListTypeOfBus();
+
     }
 
     public TypeOfBusEntity getTypeOfBusObj(int idType) {
@@ -113,6 +116,7 @@ public class BLL_Admin {
 
     public void deleteUser(AccountEntity acc) {
         DAL.getInstance().deleteUser(acc);
+
     }
     //done Decentralize Page
 
@@ -230,5 +234,6 @@ public class BLL_Admin {
     public void updateSchedule(int idSchedule, RouteEntity routeSelected, BusEntity busSelected, Date departTimeInput, int durationInput, int priceInput, int dprInput) {
         DAL.getInstance().updateSchedule(idSchedule, routeSelected, busSelected, departTimeInput, durationInput, durationInput, priceInput, dprInput);
     }
-//    public void addSchedule(int idRoute, int idBus, int )
+
+
 }

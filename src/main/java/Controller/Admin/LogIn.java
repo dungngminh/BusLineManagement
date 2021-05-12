@@ -28,7 +28,9 @@ public class LogIn {
         String password = txf_password.getText();
 //        try {
             int res = BLL_Admin.getInstance().validate_Account(username, password);
+
             if(res == 1 || res == 3) {
+
 //                  new Alert(Alert.AlertType.INFORMATION, "Successful!").showAndWait();
                 showHomePage("admin_view/MainWindow");
             }
@@ -53,7 +55,9 @@ public class LogIn {
         Stage stage = new Stage();
         stage.setTitle("Bus Management");
         stage.setScene(scene);
+
         stage.setResizable(false);
+
         stage.getIcons().add(new Image("/images/Icon/favicon.png"));
         stage.show();
         Stage cl = (Stage) btn_cancel.getScene().getWindow();

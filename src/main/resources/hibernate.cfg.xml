@@ -15,19 +15,17 @@
 <!--  <property name = "hibernate.connection.username">dung</property>-->
 <!--  <property name = "hibernate.connection.password">Kminhdung123</property>-->
 
-<!--  <property name="connection.url">jdbc:sqlserver://34.87.114.154</property>-->
-<!--  <property name = "hibernate.connection.username">sqlserver</property>-->
-<!--  <property name = "hibernate.connection.password">123456</property>-->
-
   <property name="hibernate.connection.release_mode">auto</property>
   <property name="hibernate.connection.autoReconnect">true</property>
   <property name="hibernate.connection.autocommit">true</property>
+
 
   <property name="hibernate.connection.CharSet">utf8</property>
   <property name="hibernate.connection.characterEncoding">utf8</property>
   <property name="hibernate.connection.useUnicode">true</property>
 <!--  &lt;!&ndash; JDBC connection pool (use the built-in) &ndash;&gt;-->
 <!--  <property name="connection.pool_size">10</property>-->
+
 
 <!--  &lt;!&ndash; SQL dialect &ndash;&gt;-->
   <property name="dialect">org.hibernate.dialect.SQLServerDialect</property>

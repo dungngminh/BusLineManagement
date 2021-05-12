@@ -1,6 +1,7 @@
 package Controller.Admin;
 
 
+
 import Model.BusEntity;
 
 import Model.RouteEntity;
@@ -145,7 +146,14 @@ public class SchedulePage implements Initializable {
 
     @FXML
     void btn_cancel_clicked(MouseEvent event) {
-
+        cbx_route.getSelectionModel().select(null);
+        cbx_bus.getSelectionModel().select(null);
+        tfx_typeofbus.setText("");
+        tfx_price.setText("");
+        spn_timepickerH.getValueFactory().setValue(0);
+        spn_timepickerM.getValueFactory().setValue(0);
+        spn_timepickerS.getValueFactory().setValue(0);
+        tfx_day_per_route.setText("");
         toggleDetail();
     }
 
@@ -179,11 +187,9 @@ public class SchedulePage implements Initializable {
                 switch (CRUDType) {
                     case "Create":
                         BLL_Admin.getInstance().addSchedule(routeSelected, busSelected, departTimeInput, durationInput, priceInput, dprInput);
-                        show("");
                         break;
                     case "Update":
                         BLL_Admin.getInstance().updateSchedule(idSchedule, routeSelected, busSelected, departTimeInput, durationInput, priceInput, dprInput);
-                        show("");
                     default:
                         break;
                 }
@@ -197,8 +203,6 @@ public class SchedulePage implements Initializable {
 
     @FXML
     void btn_reset_clicked(MouseEvent event) {
-        cbx_route.getSelectionModel().select(null);
-        cbx_bus.getSelectionModel().select(null);
         tfx_typeofbus.setText("");
         tfx_price.setText("");
         spn_timepickerH.getValueFactory().setValue(0);
@@ -340,6 +344,7 @@ public class SchedulePage implements Initializable {
         jfx_hambur.toFront();
 
     }
+
 
 
 }
