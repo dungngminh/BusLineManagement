@@ -33,7 +33,6 @@
     -fx-background-radius: 9px;
     -fx-border-radius: 7px;
     -fx-border-width: 0px;
-
 }
 
 .tab {
@@ -50,4 +49,5 @@
     -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #7a8fd3, #45cde9);
     -fx-background-radius: 4px;
     -fx-border-radius: 2px;
+
 }

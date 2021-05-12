@@ -1,5 +1,6 @@
 package Services;
 
+
 import Controller.TicketSeller.TicketOrder;
 import Model.*;
 import Model.ViewModel.FilterRoute_ViewModel;
@@ -8,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+
 
 import java.util.Date;
 import java.util.ArrayList;
@@ -28,6 +30,7 @@ public class BLL_Seller {
         }
         return instance;
     }
+
 
     // NOTICE BLL for FilterRout
     public List<List<String>> getPairStationFromTwoProvince(ProvinceEntity startPro, ProvinceEntity endPro) {
@@ -69,6 +72,7 @@ public class BLL_Seller {
 
         return result;
     }
+
 
     // DONE FilterRoute ?
 
@@ -115,5 +119,6 @@ public class BLL_Seller {
         DAL.getInstance().deleteCurrentTicket(idTicket);
     }
     // DONE for TicketOrder
+
 
 }
