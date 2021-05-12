@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.*;
 
 @Entity
-@Table(name = "Schedule", schema = "dbo", catalog = "QuanLyNhaXeKhach")
+@Table(name = "Schedule", schema = "dbo", catalog = "N2_19N12B")
 public class ScheduleEntity {
 
     private int idSchedule;

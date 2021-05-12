@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 import java.util.Collection;
 
 @Entity
-@Table(name = "TripInformation", schema = "dbo", catalog = "QuanLyNhaXeKhach")
+@Table(name = "TripInformation", schema = "dbo", catalog = "N2_19N12B")
 public class TripInformationEntity {
     private int idTrip;
     private Timestamp departDate;

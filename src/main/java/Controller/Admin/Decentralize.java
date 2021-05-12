@@ -223,6 +223,7 @@ public class Decentralize implements Initializable {
         } else {
             try {
                 BLL_Admin.getInstance().addUserToAccount(userName, passWord, role);
+                new Alert(Alert.AlertType.INFORMATION, "User added!").showAndWait();
             } catch (Exception err) {
                 new Alert(Alert.AlertType.WARNING, "Maybe username was exist, Check again!").showAndWait();
             }
@@ -272,7 +273,7 @@ public class Decentralize implements Initializable {
     }
 
     @FXML
-    void btn_changepassword_confirn_clicked(MouseEvent event) {
+    void btn_changepassword_confirm_clicked(MouseEvent event) {
         String oldPassword = txf_oldpassword.getText().trim();
         String newPassword = txf_newpassword.getText().trim();
         String newPasswordConfirm = txf_newpassword_confirm.getText().trim();
@@ -297,10 +298,18 @@ public class Decentralize implements Initializable {
 
             try {
                 BLL_Admin.getInstance().updateAccount(currentAccount, newPassword);
+                new Alert(Alert.AlertType.INFORMATION, "Password was changed!").showAndWait();
             } catch (Exception err) {
                 new Alert(Alert.AlertType.WARNING, "Maybe username was exist, Check again!").showAndWait();
             }
         }
+    }
+
+    @FXML
+    void changepassword_reset_onClicked(MouseEvent event) {
+        txf_oldpassword.setText("");
+        txf_newpassword.setText("");
+        txf_newpassword_confirm.setText("");
     }
     //
 }

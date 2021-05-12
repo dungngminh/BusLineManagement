@@ -1,5 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Coda:wght@800&family=Staatliches&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Sans:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap');
+
 #frame-1 {
     -fx-background-image: url(../../images/frame_1_login.jpg);
     -fx-background-size: 100% 100%;
@@ -12,12 +14,10 @@
     -fx-border-radius: 20px;
 
 }
-
-
 #lb-wel {
     -fx-font-color: #295270;
-    -fx-font-family: 'Anton', sans-serif;
-    -fx-font-size: 30px;
+    -fx-font-family: 'Fjalla One', sans-serif;
+    -fx-font-size: 35px;
 }
 
 .blue {

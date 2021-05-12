@@ -3,7 +3,7 @@ package Model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "RoleAccount", schema = "dbo", catalog = "QuanLyNhaXeKhach")
+@Table(name = "RoleAccount", schema = "dbo", catalog = "N2_19N12B")
 public class RoleAccountEntity {
     private int stt;
     private Integer idUser;

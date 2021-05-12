@@ -62,7 +62,7 @@
                               </PasswordField>
                               <ButtonBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="55.0" prefWidth="194.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                                  <buttons>
-                                    <Button mnemonicParsing="false" onMouseClicked="#btn_changepassword_confirn_clicked" prefHeight="43.0" prefWidth="100.0" styleClass="btn" stylesheets="@../../css/admin_css/setting.css" text="Confirm">
+                                    <Button mnemonicParsing="false" onMouseClicked="#btn_changepassword_confirm_clicked" prefHeight="43.0" prefWidth="100.0" styleClass="btn" stylesheets="@../../css/admin_css/setting.css" text="Confirm">
                                        <cursor>
                                           <Cursor fx:constant="DEFAULT" />
                                        </cursor>
@@ -70,7 +70,7 @@
                                           <Font name="Segoe UI" size="15.0" />
                                        </font>
                                     </Button>
-                                    <Button fx:id="btn_changepassword_reset" mnemonicParsing="false" onMouseClicked="#btn_reset_clicked" prefHeight="43.0" prefWidth="80.0" styleClass="btn" stylesheets="@../../css/admin_css/setting.css" text="Reset">
+                                    <Button mnemonicParsing="false" onMouseClicked="#changepassword_reset_onClicked" prefHeight="43.0" prefWidth="80.0" styleClass="btn" stylesheets="@../../css/admin_css/setting.css" text="Reset">
                                        <cursor>
                                           <Cursor fx:constant="DEFAULT" />
                                        </cursor>

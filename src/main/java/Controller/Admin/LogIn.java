@@ -23,10 +23,10 @@ public class LogIn {
     private Button btn_cancel;
 
     @FXML
-    void btn_login_clicked(MouseEvent event) throws SQLException, ClassNotFoundException {
+    void btn_login_clicked(MouseEvent event) throws SQLException, ClassNotFoundException, IOException {
         String username = txf_username.getText();
         String password = txf_password.getText();
-        try {
+//        try {
             int res = BLL_Admin.getInstance().validate_Account(username, password);
             if(res == 1 || res == 3) {
 //                  new Alert(Alert.AlertType.INFORMATION, "Successful!").showAndWait();
@@ -38,11 +38,11 @@ public class LogIn {
             else {
                 new Alert(Alert.AlertType.WARNING, "Your username or password was wrong!").showAndWait();
             }
-        }
-        catch (Exception err) {
-//              new Alert(Alert.AlertType.ERROR, "Connect to Internet and try again!").showAndWait();
-            new Alert(Alert.AlertType.ERROR, err.getMessage()).showAndWait();
-        }
+//        }
+//        catch (Exception err) {
+////              new Alert(Alert.AlertType.ERROR, "Connect to Internet and try again!").showAndWait();
+//            new Alert(Alert.AlertType.ERROR, err.getMessage()).showAndWait();
+//        }
     }
 
     public void showHomePage(String path) throws IOException {
@@ -66,8 +66,5 @@ public class LogIn {
         stage.close();
 
     }
-
-
-
 
 }

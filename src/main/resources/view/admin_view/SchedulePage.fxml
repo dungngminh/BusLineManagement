@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
@@ -23,7 +24,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="schedule_page" fx:id="pane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="686.0" prefWidth="1166.0" style="-fx-background-color: #EDB183;" stylesheets="@../../css/admin_css/SchedulePage.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Admin.SchedulePage">
+<AnchorPane id="schedule_page" fx:id="pane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="686.0" prefWidth="1166.0" style="-fx-background-color: #EDB183;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Admin.SchedulePage">
    <children>
       <JFXDrawer fx:id="jfx_drawer" alignment="TOP_LEFT" defaultDrawerSize="190.0" minHeight="-Infinity" minWidth="-Infinity" overLayVisible="false" prefHeight="686.0" prefWidth="99.0" />
       <Pane prefHeight="686.0" prefWidth="1166.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -215,4 +216,8 @@
       </Pane>
       <JFXHamburger fx:id="jfx_hambur" alignment="TOP_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="32.0" />
    </children>
+   <stylesheets>
+      <URL value="@../../css/admin_css/SchedulePage.css" />
+      <URL value="@../../css/admin_css/setting.css" />
+   </stylesheets>
 </AnchorPane>
