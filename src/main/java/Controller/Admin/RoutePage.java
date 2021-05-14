@@ -323,6 +323,7 @@ public class RoutePage implements Initializable {
             BLL_Admin.getInstance().getProvinceName().forEach(type -> {
                 cbx_provinceEnd.getItems().add(type);
             });
+
             cbx_status.getItems().add("Available");
             cbx_status.getItems().add("Unavailable");
             tfx_distance.setEditable(false);

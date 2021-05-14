@@ -237,6 +237,6 @@
    </children>
    <stylesheets>
       <URL value="@../../css/admin_css/BusPage.css" />
-      <URL value="@../../css/admin_css/setting.css" />
+      <URL value="@../../css/general.css" />
    </stylesheets>
 </AnchorPane>

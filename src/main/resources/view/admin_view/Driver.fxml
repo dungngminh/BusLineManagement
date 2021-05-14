@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
@@ -19,7 +20,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="pane" fx:id="pane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="686.0" prefWidth="1166.0" stylesheets="@../../css/admin_css/driver.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Admin.Driver">
+<AnchorPane id="pane" fx:id="pane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="686.0" prefWidth="1166.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Admin.Driver">
    <children>
       <JFXDrawer fx:id="jfx_drawer" defaultDrawerSize="195.0" prefHeight="686.0" prefWidth="90.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1076.0" AnchorPane.topAnchor="0.0" />
       <Pane prefHeight="686.0" prefWidth="1166.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -111,10 +112,10 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <GridPane layoutX="1.0" layoutY="14.0" prefHeight="185.0" prefWidth="264.0">
+                              <GridPane layoutX="1.0" layoutY="14.0" prefHeight="185.0" prefWidth="257.0">
                                  <columnConstraints>
-                                    <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="131.0" minWidth="10.0" prefWidth="124.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="135.0" minWidth="10.0" prefWidth="125.0" />
+                                    <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="131.0" minWidth="10.0" prefWidth="120.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="143.0" minWidth="10.0" prefWidth="137.0" />
                                  </columnConstraints>
                                  <rowConstraints>
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="BASELINE" vgrow="SOMETIMES" />
@@ -196,4 +197,8 @@
       </Pane>
       <JFXHamburger fx:id="jfx_hambur" layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="30.0" />
    </children>
+   <stylesheets>
+      <URL value="@../../css/admin_css/driver.css" />
+      <URL value="@../../css/general.css" />
+   </stylesheets>
 </AnchorPane>

@@ -94,11 +94,13 @@ public class InitSideBar {
             if (jfx_drawer.isShown()) {
                 jfx_drawer.toBack();
                 jfx_drawer.close();
+                jfx_hambur.setId("");
 
             } else {
                 jfx_drawer.open();
                 jfx_drawer.toFront();
                 jfx_hambur.toFront();
+                jfx_hambur.setId("hamburger");
             }
 
         });

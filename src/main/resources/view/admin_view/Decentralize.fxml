@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -9,20 +10,16 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
-
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
-
-
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pane" prefHeight="627.0" prefWidth="1166.0" styleClass="pane" stylesheets="@../../css/admin_css/setting.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Admin.Decentralize">
+<AnchorPane fx:id="pane" prefHeight="627.0" prefWidth="1166.0" styleClass="pane" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Admin.Decentralize">
    <children>
       <JFXDrawer fx:id="jfx_drawer" defaultDrawerSize="195.0" prefHeight="641.0" prefWidth="101.0" />
       <JFXHamburger fx:id="jfx_hambur" layoutX="14.0" layoutY="20.0" />
@@ -262,4 +259,8 @@
         </tabs>
       </TabPane>
    </children>
+   <stylesheets>
+      <URL value="@../../css/admin_css/setting.css" />
+      <URL value="@../../css/general.css" />
+   </stylesheets>
 </AnchorPane>
