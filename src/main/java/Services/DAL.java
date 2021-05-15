@@ -576,6 +576,31 @@ public class DAL {
     // done TicketOrder ?
 
     // NOTICE DAL ticket
+    public void setPaidTicket(Integer idTicket) {
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        Query query = session.createQuery("Update TicketEntity set isPaid = true WHERE idTicket = :idTicket");
+        query.setParameter("idTicket", idTicket);
+        query.executeUpdate();
+
+        session.getTransaction().commit();
+        session.close();
+    }
+
+    public TicketEntity getOneTicket(Integer idTicket) {
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query<TicketEntity> query = session.createQuery("From TicketEntity WHERE idTicket = :idTicket", TicketEntity.class);
+        query.setParameter("idTicket", idTicket);
+
+        TicketEntity result = query.getResultList().get(0);
+
+        session.getTransaction().commit();
+        session.close();
+        return result;
+    }
+
 
 
     // DONE

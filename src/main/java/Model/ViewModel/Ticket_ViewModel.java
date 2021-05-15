@@ -1,13 +1,24 @@
 package Model.ViewModel;
 
 public class Ticket_ViewModel {
+
+
+    private Integer idTicket;
     private String nameTicket;
     private String route;
     private String departTime;
     private String nameCustomer;
     private String phoneCustomer;
     private String isPaid;
-    private Integer price;
+    private String price;
+
+    public Integer getIdTicket() {
+        return idTicket;
+    }
+
+    public void setIdTicket(Integer idTicket) {
+        this.idTicket = idTicket;
+    }
 
     public String getNameTicket() {
         return nameTicket;
@@ -57,15 +68,16 @@ public class Ticket_ViewModel {
         this.isPaid = isPaid;
     }
 
-    public Integer getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
-    public Ticket_ViewModel(String nameTicket, String route, String departTime, String nameCustomer, String phoneCustomer, String isPaid, Integer price) {
+    public Ticket_ViewModel(Integer idTicket, String nameTicket, String route, String departTime, String nameCustomer, String phoneCustomer, String isPaid, String price) {
+        this.idTicket = idTicket;
         this.nameTicket = nameTicket;
         this.route = route;
         this.departTime = departTime;

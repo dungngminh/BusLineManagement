@@ -12,11 +12,9 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class BLL_Seller {
@@ -123,8 +121,9 @@ public class BLL_Seller {
     // DONE for TicketOrder
 
     // NOTICE BLL for TicketPage
-    public List<Ticket_ViewModel> getAllTicket(ProvinceEntity fromProvince, ProvinceEntity toProvince, Date departDate, String nameCustomer,
-                                               String phoneCustomer) {
+
+    public List<Ticket_ViewModel> getAllTicket(ProvinceEntity fromProvince, ProvinceEntity toProvince, Date departDate
+            , String pay, String nameCustomer, String phoneCustomer) {
         List<RouteEntity> listRoute = DAL.getInstance().getFilterRoute(getPairStationFromTwoProvince(fromProvince, toProvince));
 
         List<TripInformationEntity> listTrip = DAL.getInstance().getFilterTrip(listRoute);
@@ -138,27 +137,41 @@ public class BLL_Seller {
         });
         List<Ticket_ViewModel> result = new ArrayList<>();
         listTicket.forEach(ticket -> {
-           if(ticket.getTripInformationByIdTrip().getDepartDate().compareTo(departDate) == 0
-                   && ticket.getNameCustomer().toLowerCase().contains(nameCustomer.toLowerCase()) &&
-                   ticket.getPhoneNumber().contains(phoneCustomer)) {
-               String nameTicket = ticket.getNameTicket();
-               String route = ticket.getTripInformationByIdTrip().getScheduleByIdSchedule().getRouteByIdRoute().getStartStation() +
-                       "-" + ticket.getTripInformationByIdTrip().getScheduleByIdSchedule().getRouteByIdRoute().getEndStation();
-               String departTime = new SimpleDateFormat("HH:mm:ss").format(ticket.getTripInformationByIdTrip()
-                       .getScheduleByIdSchedule().getDepartTime());
-               String name = ticket.getNameCustomer();
-               String phone = ticket.getPhoneNumber();
-               String isPaid = ticket.getIsPaid() ? "Paid" : "Unpaid";
-               Integer price = ticket.getPrice();
+            String nameTicket = ticket.getNameTicket();
+            String route = ticket.getTripInformationByIdTrip().getScheduleByIdSchedule().getRouteByIdRoute().getStartStation() +
+                    "-" + ticket.getTripInformationByIdTrip().getScheduleByIdSchedule().getRouteByIdRoute().getEndStation();
+            String departTime = new SimpleDateFormat("HH:mm:ss").format(ticket.getTripInformationByIdTrip()
+                    .getScheduleByIdSchedule().getDepartTime());
+            String name = ticket.getNameCustomer();
+            String phone = ticket.getPhoneNumber();
+            String isPaid = ticket.getIsPaid() ? "Paid" : "Unpaid";
 
-               result.add(new Ticket_ViewModel(nameTicket, route, departTime, name, phone, isPaid, price));
+            // Format VNĐ
+            Locale localeVN = new Locale("vi", "VN");
+            NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
+            String price = currencyVN.format(ticket.getPrice());
+            //
+           if(pay.equals("All") && ticket.getNameCustomer().toLowerCase().contains(nameCustomer.toLowerCase()) &&
+                   ticket.getPhoneNumber().contains(phoneCustomer)) {
+
+               result.add(new Ticket_ViewModel(ticket.getIdTicket(), nameTicket, route, departTime, name, phone, isPaid, price));
+           } else if(ticket.getIsPaid() == pay.equals("Paid") && ticket.getNameCustomer().toLowerCase().contains(nameCustomer.toLowerCase()) &&
+                   ticket.getPhoneNumber().contains(phoneCustomer)) {
+
+               result.add(new Ticket_ViewModel(ticket.getIdTicket(), nameTicket, route, departTime, name, phone, isPaid, price));
            }
 
         });
-
         return result;
     }
 
+    public void setPaidTicket(Integer idTicket) {
+        DAL.getInstance().setPaidTicket(idTicket);
+    }
+
+    public TicketEntity getOneTicket(Integer idTicket) {
+        return DAL.getInstance().getOneTicket(idTicket);
+    }
 
     //DONE for TicketPage
 
