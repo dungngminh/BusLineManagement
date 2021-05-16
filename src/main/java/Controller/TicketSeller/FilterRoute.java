@@ -8,6 +8,7 @@ import com.jfoenix.controls.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -189,7 +190,10 @@ public class FilterRoute implements Initializable {
 
         loader.setController(controller);
         AnchorPane newPane = loader.load();
-        this.rootPane.getChildren().setAll(newPane);
+        newPane.requestLayout();
+//        rootPane.getChildren().setAll(newPane);
+        Scene scene= rootPane.getScene();
+        scene.setRoot(newPane);
     }
 
     @FXML
@@ -201,7 +205,10 @@ public class FilterRoute implements Initializable {
 
         loader.setController(controller);
         AnchorPane newPane = loader.load();
-        this.rootPane.getChildren().setAll(newPane);
+        newPane.requestLayout();
+//        rootPane.getChildren().setAll(newPane);
+        Scene scene= rootPane.getScene();
+        scene.setRoot(newPane);
     }
 
     @FXML
@@ -213,7 +220,10 @@ public class FilterRoute implements Initializable {
 
         loader.setController(controller);
         AnchorPane newPane = loader.load();
-        this.rootPane.getChildren().setAll(newPane);
+        newPane.requestLayout();
+//        rootPane.getChildren().setAll(newPane);
+        Scene scene= rootPane.getScene();
+        scene.setRoot(newPane);
     }
 
     @FXML
@@ -225,7 +235,10 @@ public class FilterRoute implements Initializable {
 
         loader.setController(controller);
         AnchorPane newPane = loader.load();
-        this.rootPane.getChildren().setAll(newPane);
+        newPane.requestLayout();
+//        rootPane.getChildren().setAll(newPane);
+        Scene scene= rootPane.getScene();
+        scene.setRoot(newPane);
     }
 
     @FXML
@@ -237,7 +250,10 @@ public class FilterRoute implements Initializable {
 
         loader.setController(controller);
         AnchorPane newPane = loader.load();
-        this.rootPane.getChildren().setAll(newPane);
+        newPane.requestLayout();
+//        rootPane.getChildren().setAll(newPane);
+        Scene scene= rootPane.getScene();
+        scene.setRoot(newPane);
     }
 
     @FXML

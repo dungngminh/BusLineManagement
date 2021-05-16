@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -94,10 +95,13 @@ public class Dashboard implements Initializable {
         FilterRoute controller = new FilterRoute(cbx_start.getSelectionModel().getSelectedItem(),
                 cbx_dest.getSelectionModel().getSelectedItem(), datetime.getValue());
         loader.setController(controller);
-//        controller.initVariable(cbx_start.getSelectionModel().getSelectedItem(),
-//                cbx_dest.getSelectionModel().getSelectedItem(), datetime.getValue());
+
         AnchorPane newPane = loader.load();
-        this.rootPane.getChildren().setAll(newPane);
+
+        newPane.requestLayout();
+//        rootPane.getChildren().setAll(newPane);
+        Scene scene= rootPane.getScene();
+        scene.setRoot(newPane);
     }
 
 }

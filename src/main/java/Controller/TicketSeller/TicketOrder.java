@@ -14,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -35,13 +36,7 @@ public class TicketOrder implements Initializable {
     private AnchorPane rootPane;
 
     @FXML
-    private JFXDrawer jfx_drawer;
-
-    @FXML
     private Pane pane2;
-
-    @FXML
-    private JFXHamburger jfx_hambur;
 
     @FXML
     private Label lb_code;
@@ -105,11 +100,6 @@ public class TicketOrder implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-
-            // Init for side bar
-            InitSideBar.getInstance().initializeForNavBar(this.rootPane, this.jfx_drawer, this.jfx_hambur);
-            //done
-
 
             // Init Figure Of Bus Type
             switch(modelTrip.getScheduleByIdSchedule().getBusByIdBus().getTypeOfBusByIdType().getIdType()) {
@@ -187,29 +177,6 @@ public class TicketOrder implements Initializable {
 
             pane2.hoverProperty().addListener((event)->refreshTicketForSLots());
 
-            // Init ticket detail
-            lb_code.setText("Choose your slots!");
-            lb_type.setText(modelTrip.getScheduleByIdSchedule().getBusByIdBus().getTypeOfBusByIdType().getTypeName());
-            lb_departdate.setText(date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-            lb_startstation.setText(modelTrip.getScheduleByIdSchedule().getRouteByIdRoute().getStartStation());
-            lb_destination.setText(modelTrip.getScheduleByIdSchedule().getRouteByIdRoute().getEndStation());
-            lb_phone.setText(modelTrip.getDriverByIdDriver().getPhone());
-            cbx_payment.getItems().add("Paid");
-            cbx_payment.getItems().add("Unpaid");
-            cbx_payment.getSelectionModel().selectFirst();
-            lb_price.setText("0đ");
-            //done!
-
-            // Event for slot
-            String floor1 = "9162935";
-            if(floor1.contains(String.valueOf(modelTrip.getScheduleByIdSchedule().getBusByIdBus().
-                    getTypeOfBusByIdType().getSlot())))
-                eventHandle_OneFloor();
-            else
-                eventHandle_TwoFloors();
-
-            // done
-
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -227,7 +194,10 @@ public class TicketOrder implements Initializable {
         loader.setController(controller);
 
         AnchorPane newPane = loader.load();
-        this.rootPane.getChildren().setAll(newPane);
+        newPane.requestLayout();
+//        rootPane.getChildren().setAll(newPane);
+        Scene scene= rootPane.getScene();
+        scene.setRoot(newPane);
     }
 
     @FXML
@@ -256,7 +226,10 @@ public class TicketOrder implements Initializable {
                             cbx_payment.getSelectionModel().getSelectedItem().equals("Paid"));
 
                     AnchorPane newPane = FXMLLoader.load(getClass().getResource("/view/seller_view/Dashboard.fxml"));
-                    rootPane.getChildren().setAll(newPane);
+                    newPane.requestLayout();
+            //        rootPane.getChildren().setAll(newPane);
+                    Scene scene= rootPane.getScene();
+                    scene.setRoot(newPane);
                 }
             }
         } catch (Exception err) {

@@ -18,9 +18,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -34,6 +32,18 @@ public class RoutePage implements Initializable {
 
     @FXML
     private AnchorPane pane;
+
+    @FXML
+    private BorderPane border_pane;
+
+    @FXML
+    private TitledPane titlepane_start;
+
+    @FXML
+    private TitledPane titlepane_end;
+
+    @FXML
+    private TitledPane titlepane_info;
 
     @FXML
     private JFXHamburger jfx_hambur;
@@ -84,7 +94,7 @@ public class RoutePage implements Initializable {
     private TableColumn<RouteEntity, String> col_note;
 
     @FXML
-    private ButtonBar grp_btn_tbl;
+    private FlowPane grp_btn_tbl;
 
 
     @FXML
@@ -323,6 +333,7 @@ public class RoutePage implements Initializable {
             BLL_Admin.getInstance().getProvinceName().forEach(type -> {
                 cbx_provinceEnd.getItems().add(type);
             });
+
             cbx_status.getItems().add("Available");
             cbx_status.getItems().add("Unavailable");
             tfx_distance.setEditable(false);
@@ -352,21 +363,23 @@ public class RoutePage implements Initializable {
             btn_ok.setVisible(false);
             btn_reset.setVisible(false);
             btn_cancel.setVisible(false);
+            titlepane_start.setVisible(false);
+            titlepane_end.setVisible(false);
+            titlepane_info.setVisible(false);
+
             grp_btn_tbl.setVisible(true);
-            table_view.setLayoutX(-290);
-            table_view.setPrefWidth(1165);
-            hbox.setLayoutX(80);
-            grp_btn_tbl.setLayoutX(85);
-            table_view.toFront();
+            AnchorPane.setLeftAnchor(border_pane, 2.0);
         } else {
             btn_reset.setVisible(true);
             btn_ok.setVisible(true);
             btn_cancel.setVisible(true);
+            titlepane_start.setVisible(true);
+            titlepane_end.setVisible(true);
+            titlepane_info.setVisible(true);
+
             grp_btn_tbl.setVisible(false);
-            table_view.setLayoutX(0);
-            table_view.setPrefWidth(885);
-            hbox.setLayoutX(114);
-            grp_btn_tbl.setLayoutX(253);
+
+            AnchorPane.setLeftAnchor(border_pane, 280.0);
         }
         jfx_hambur.toFront();
 
