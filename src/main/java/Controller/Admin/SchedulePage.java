@@ -140,6 +140,8 @@ public class SchedulePage implements Initializable {
     @FXML
     private TextField tfx_duration;
 
+
+    //TODO fix Show button
     //SUPPORT PROPERTY
     private static String CRUDType;
     private static int idSchedule;
