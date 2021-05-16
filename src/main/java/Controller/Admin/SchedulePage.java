@@ -22,6 +22,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 
 import java.io.IOException;
@@ -38,6 +40,9 @@ public class SchedulePage implements Initializable {
 
     @FXML
     private AnchorPane pane;
+
+    @FXML
+    private BorderPane border_pane;
 
     @FXML
     private JFXDrawer jfx_drawer;
@@ -69,7 +74,13 @@ public class SchedulePage implements Initializable {
     private TextField tfx_day_per_route;
 
     @FXML
-    private ButtonBar grp_btn_tbl;
+    private FlowPane grp_btn_tbl;
+
+    @FXML
+    private TitledPane titlepane_setting;
+
+    @FXML
+    private TitledPane titlepane_info;
 
     @FXML
     private SplitMenuButton btn_showmenu;
@@ -325,23 +336,19 @@ public class SchedulePage implements Initializable {
             btn_ok.setVisible(false);
             btn_reset.setVisible(false);
             btn_cancel.setVisible(false);
+            titlepane_info.setVisible(false);
+            titlepane_setting.setVisible(false);
             grp_btn_tbl.setVisible(true);
-
-            table_view.setLayoutX(-275);
-            table_view.setPrefWidth(1150);
-
-            hbox.setLayoutX(80);
-            grp_btn_tbl.setLayoutX(85);
-            table_view.toFront();
+            AnchorPane.setLeftAnchor(border_pane, 2.0);
         } else {
             btn_reset.setVisible(true);
             btn_ok.setVisible(true);
             btn_cancel.setVisible(true);
+            titlepane_info.setVisible(true);
+            titlepane_setting.setVisible(true);
             grp_btn_tbl.setVisible(false);
-            table_view.setLayoutX(0);
-            table_view.setPrefWidth(885);
-            hbox.setLayoutX(114);
-            grp_btn_tbl.setLayoutX(253);
+
+            AnchorPane.setLeftAnchor(border_pane, 280.0);
         }
         jfx_hambur.toFront();
 

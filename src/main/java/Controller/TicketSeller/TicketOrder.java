@@ -14,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -99,9 +100,6 @@ public class TicketOrder implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-
-
-
             // Init Figure Of Bus Type
             switch(modelTrip.getScheduleByIdSchedule().getBusByIdBus().getTypeOfBusByIdType().getIdType()) {
                 case 1: {
@@ -178,10 +176,6 @@ public class TicketOrder implements Initializable {
 
             pane2.hoverProperty().addListener((event)->refreshTicketForSLots());
 
-            // Init ticket detail
-            // done
-
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -198,7 +192,10 @@ public class TicketOrder implements Initializable {
         loader.setController(controller);
 
         AnchorPane newPane = loader.load();
-        this.rootPane.getChildren().setAll(newPane);
+        newPane.requestLayout();
+//        rootPane.getChildren().setAll(newPane);
+        Scene scene= rootPane.getScene();
+        scene.setRoot(newPane);
     }
 
     @FXML
@@ -227,7 +224,10 @@ public class TicketOrder implements Initializable {
                             cbx_payment.getSelectionModel().getSelectedItem().equals("Paid"));
 
                     AnchorPane newPane = FXMLLoader.load(getClass().getResource("/view/seller_view/Dashboard.fxml"));
-                    rootPane.getChildren().setAll(newPane);
+                    newPane.requestLayout();
+            //        rootPane.getChildren().setAll(newPane);
+                    Scene scene= rootPane.getScene();
+                    scene.setRoot(newPane);
                 }
             }
         } catch (Exception err) {

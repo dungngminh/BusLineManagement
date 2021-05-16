@@ -4,6 +4,7 @@ package Services;
 import Controller.TicketSeller.TicketOrder;
 import Model.*;
 import Model.ViewModel.FilterRoute_ViewModel;
+import Model.ViewModel.Ticket_ViewModel;
 import Util.HibernateUtils;
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
@@ -11,10 +12,9 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 
-import java.util.Date;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class BLL_Seller {
@@ -42,7 +42,7 @@ public class BLL_Seller {
         for(Object s1: list1) {
             for(Object s2: list2) {
                 res.add(Arrays.asList(((StationEntity)s1).getStationName(), ((StationEntity)s2).getStationName()));
-                System.out.println(((StationEntity)s1).getStationName() + " " + ((StationEntity)s2).getStationName());
+//                System.out.println(((StationEntity)s1).getStationName() + " " + ((StationEntity)s2).getStationName());
 
             }
         }
@@ -119,6 +119,61 @@ public class BLL_Seller {
         DAL.getInstance().deleteCurrentTicket(idTicket);
     }
     // DONE for TicketOrder
+
+    // NOTICE BLL for TicketPage
+
+    public List<Ticket_ViewModel> getAllTicket(ProvinceEntity fromProvince, ProvinceEntity toProvince, Date departDate
+            , String pay, String nameCustomer, String phoneCustomer) {
+        List<RouteEntity> listRoute = DAL.getInstance().getFilterRoute(getPairStationFromTwoProvince(fromProvince, toProvince));
+
+        List<TripInformationEntity> listTrip = DAL.getInstance().getFilterTrip(listRoute);
+        List<TicketEntity> listTicket = new ArrayList<>();
+        listTrip.forEach(trip ->{
+            if(trip.getDepartDate().compareTo(departDate) == 0) {
+                Arrays.asList(trip.getTicketsByIdTrip().toArray()).forEach(e -> {
+                    listTicket.add((TicketEntity)e);
+                });
+            }
+        });
+        List<Ticket_ViewModel> result = new ArrayList<>();
+        listTicket.forEach(ticket -> {
+            String nameTicket = ticket.getNameTicket();
+            String route = ticket.getTripInformationByIdTrip().getScheduleByIdSchedule().getRouteByIdRoute().getStartStation() +
+                    "-" + ticket.getTripInformationByIdTrip().getScheduleByIdSchedule().getRouteByIdRoute().getEndStation();
+            String departTime = new SimpleDateFormat("HH:mm:ss").format(ticket.getTripInformationByIdTrip()
+                    .getScheduleByIdSchedule().getDepartTime());
+            String name = ticket.getNameCustomer();
+            String phone = ticket.getPhoneNumber();
+            String isPaid = ticket.getIsPaid() ? "Paid" : "Unpaid";
+
+            // Format VNĐ
+            Locale localeVN = new Locale("vi", "VN");
+            NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
+            String price = currencyVN.format(ticket.getPrice());
+            //
+           if(pay.equals("All") && ticket.getNameCustomer().toLowerCase().contains(nameCustomer.toLowerCase()) &&
+                   ticket.getPhoneNumber().contains(phoneCustomer)) {
+
+               result.add(new Ticket_ViewModel(ticket.getIdTicket(), nameTicket, route, departTime, name, phone, isPaid, price));
+           } else if(ticket.getIsPaid() == pay.equals("Paid") && ticket.getNameCustomer().toLowerCase().contains(nameCustomer.toLowerCase()) &&
+                   ticket.getPhoneNumber().contains(phoneCustomer)) {
+
+               result.add(new Ticket_ViewModel(ticket.getIdTicket(), nameTicket, route, departTime, name, phone, isPaid, price));
+           }
+
+        });
+        return result;
+    }
+
+    public void setPaidTicket(Integer idTicket) {
+        DAL.getInstance().setPaidTicket(idTicket);
+    }
+
+    public TicketEntity getOneTicket(Integer idTicket) {
+        return DAL.getInstance().getOneTicket(idTicket);
+    }
+
+    //DONE for TicketPage
 
 
 }
