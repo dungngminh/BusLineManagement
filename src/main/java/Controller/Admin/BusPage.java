@@ -16,9 +16,7 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -31,6 +29,15 @@ public class BusPage implements Initializable {
 
     @FXML
     private AnchorPane pane;
+
+    @FXML
+    private BorderPane border_pane;
+
+    @FXML
+    private TitledPane titlepane_type;
+
+    @FXML
+    private TitledPane titlepane_bus;
 
     @FXML
     private JFXDrawer jfx_drawer;
@@ -97,7 +104,7 @@ public class BusPage implements Initializable {
     private TableColumn<BusEntity_ViewModel, Integer> col_status;
 
     @FXML
-    private ButtonBar grp_btn_tbl;
+    private FlowPane grp_btn_tbl;
 
     @FXML
     private TextField txf_search_nameofbus;
@@ -285,23 +292,21 @@ public class BusPage implements Initializable {
             btn_ok.setVisible(false);
             btn_reset.setVisible(false);
             btn_cancel.setVisible(false);
-            grp_btn_tbl.setVisible(true);
-            table_view.setLayoutX(-273);
-            table_view.setPrefWidth(1155);
-            hbox.setLayoutX(0);
-            grp_btn_tbl.setLayoutX(85);
-            table_view.toFront();
+            titlepane_type.setVisible(false);
+            titlepane_bus.setVisible(false);
 
+            grp_btn_tbl.setVisible(true);
+            AnchorPane.setLeftAnchor(border_pane, 2.0);
         }
         else {
             btn_ok.setVisible(true);
             btn_reset.setVisible(true);
             btn_cancel.setVisible(true);
+            titlepane_type.setVisible(true);
+            titlepane_bus.setVisible(true);
+
             grp_btn_tbl.setVisible(false);
-            table_view.setLayoutX(0);
-            table_view.setPrefWidth(885);
-            hbox.setLayoutX(114);
-            grp_btn_tbl.setLayoutX(253);
+            AnchorPane.setLeftAnchor(border_pane, 280.0);
         }
         jfx_hambur.toFront();
 

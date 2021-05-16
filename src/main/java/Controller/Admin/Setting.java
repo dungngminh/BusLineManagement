@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -42,12 +43,18 @@ public class Setting implements Initializable {
 
     public void showDecentralizePage() throws IOException {
         AnchorPane newPane = FXMLLoader.load(getClass().getResource("/view/admin_view/Decentralize.fxml"));
-        this.pane.getChildren().setAll(newPane);
+        newPane.requestLayout();
+//        rootPane.getChildren().setAll(newPane);
+        Scene scene= pane.getScene();
+        scene.setRoot(newPane);
     }
 
     public void showDriverPage() throws IOException {
         AnchorPane newPane = FXMLLoader.load(getClass().getResource("/view/admin_view/Driver.fxml"));
-        this.pane.getChildren().setAll(newPane);
+        newPane.requestLayout();
+//        rootPane.getChildren().setAll(newPane);
+        Scene scene= pane.getScene();
+        scene.setRoot(newPane);
     }
 
     @FXML

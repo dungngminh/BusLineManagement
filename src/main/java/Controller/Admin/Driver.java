@@ -14,9 +14,7 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -25,6 +23,9 @@ import java.util.ResourceBundle;
 public class Driver implements Initializable {
     @FXML
     private AnchorPane pane;
+
+    @FXML
+    private BorderPane border_pane;
 
     @FXML
     private TitledPane titlepane;
@@ -78,7 +79,7 @@ public class Driver implements Initializable {
     private TableColumn<DriverEntity, Integer> col_status;
 
     @FXML
-    private ButtonBar grp_btn_tbl;
+    private FlowPane grp_btn_tbl;
 
     @FXML
     private Button btn_show;
@@ -248,24 +249,21 @@ public class Driver implements Initializable {
             btn_ok.setVisible(false);
             btn_reset.setVisible(false);
             btn_cancel.setVisible(false);
-            grp_btn_tbl.setVisible(true);
-            table_view.setLayoutX(5);
-            table_view.setPrefWidth(1155);
-            hbox.setLayoutX(220);
-            grp_btn_tbl.setLayoutX(279);
             titlepane.setVisible(false);
-            table_view.toFront();
+
+            grp_btn_tbl.setVisible(true);
+
+            AnchorPane.setLeftAnchor(border_pane, 2.0);
         }
         else {
             btn_ok.setVisible(true);
             btn_reset.setVisible(true);
             btn_cancel.setVisible(true);
-            grp_btn_tbl.setVisible(false);
-            table_view.setLayoutX(277);
-            table_view.setPrefWidth(883);
-            hbox.setLayoutX(343);
-            grp_btn_tbl.setLayoutX(423);
             titlepane.setVisible(true);
+
+            grp_btn_tbl.setVisible(false);
+            AnchorPane.setLeftAnchor(border_pane, 280.0);
+
         }
         jfx_hambur.toFront();
 
