@@ -431,15 +431,24 @@ public class DAL {
     public List<ScheduleEntity> getScheduleData() {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
-        Query<ScheduleEntity> query = session.createQuery("select SCH FROM ScheduleEntity SCH, RouteEntity ROU, " +
-                " BusEntity BUS, TypeOfBusEntity TYPE WHERE  SCH.idRoute = ROU.idRoute AND SCH.isDelete = false AND ROU.status = 0 AND SCH.idBus = BUS.idBus" +
-                " AND BUS.status = 0 AND BUS.isDelete = false AND BUS.idType = TYPE.idType", ScheduleEntity.class);
+        Query<ScheduleEntity> query = session.createQuery("Select SCH from ScheduleEntity SCH, DriverEntity DRI, " +
+                "RouteEntity ROU, BusEntity BUS, TypeOfBusEntity TYPE where SCH.idDriver = DRI.idDriver AND DRI.status = 0 AND DRI.isDelete = false " +
+                "AND SCH.idRoute = ROU.idRoute AND ROU.status = 0 AND SCH.idBus = BUS.idBus AND BUS.status = 0 AND BUS.isDelete = false " +
+                "AND BUS.idType = TYPE.idType AND TYPE.isDelete = false",ScheduleEntity.class);
         List<ScheduleEntity> list = query.getResultList();
         session.getTransaction().commit();
         session.close();
         return list;
     }
-
+    public Date getOutDateUpdate(int idSchedule){
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        session.beginTransaction();
+        var query = session.createQuery("select max(TRIP.departDate) from TripInformationEntity TRIP" +
+                " where TRIP.idSchedule = :idSchedule");
+        query.setParameter("idSchedule", idSchedule);
+        List<Date> list = query.getResultList();
+        return list.get(0);
+    }
 
     public List<TripInformationEntity> getFilterTrip(List<RouteEntity> listRoute) {
         List<TripInformationEntity> result = new ArrayList<>();
@@ -556,14 +565,15 @@ public class DAL {
         session.close();
     }
 
-    public void updateSchedule(int idSchedule, RouteEntity routeSelected, BusEntity busSelected, Date departTimeInput, int durationInput, int durationInput1, int priceInput, int dprInput) {
+    public void updateSchedule(int idSchedule, RouteEntity routeSelected, BusEntity busSelected, DriverEntity driverSelected,Date departTimeInput, int durationInput, int durationInput1, int priceInput, int dprInput) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
         //TODO Query update Schedule
-        Query query = session.createQuery("Update ScheduleEntity set idRoute = :idRoute, idBus = :idBus, departTime = :departTime" +
+        Query query = session.createQuery("Update ScheduleEntity set idRoute = :idRoute, idBus = :idBus, idDriver = :idDriver,departTime = :departTime" +
                 ", price = :price, dpr = :dpr where idSchedule = :idSchedule");
         query.setParameter("idRoute", routeSelected.getIdRoute());
         query.setParameter("idBus", busSelected.getIdBus());
+        query.setParameter("idDriver",driverSelected.getIdDriver());
         query.setParameter("departTime", departTimeInput);
         query.setParameter("price", priceInput);
         query.setParameter("dpr", dprInput);

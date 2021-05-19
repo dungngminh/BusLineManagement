@@ -12,7 +12,8 @@ public class DriverEntity {
     private String address;
     private int status;
     private Boolean isDelete;
-    private Collection<TripInformationEntity> tripInformationsByIdDriver;
+    //    private Collection<TripInformationEntity> tripInformationsByIdDriver;
+    private Collection<ScheduleEntity> ScheduleByIdDriver;
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -104,11 +105,15 @@ public class DriverEntity {
     }
 
     @OneToMany(mappedBy = "driverByIdDriver")
-    public Collection<TripInformationEntity> getTripInformationsByIdDriver() {
-        return tripInformationsByIdDriver;
+    public Collection<ScheduleEntity> getScheduleByIdDriver() {
+        return ScheduleByIdDriver;
     }
 
-    public void setTripInformationsByIdDriver(Collection<TripInformationEntity> tripInformationsByIdDriver) {
-        this.tripInformationsByIdDriver = tripInformationsByIdDriver;
+    public void setScheduleByIdDriver(Collection<ScheduleEntity> tripInformationsByIdDriver) {
+        this.ScheduleByIdDriver = tripInformationsByIdDriver;
+    }
+
+    public String toString() {
+        return this.getNameDriver();
     }
 }

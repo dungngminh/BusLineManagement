@@ -205,24 +205,22 @@ public class BLL_Admin {
     public List<ScheduleEntity_ViewModel> updateTableSchedulePage(String name){
         List<ScheduleEntity_ViewModel> list = new ArrayList<>();
         DAL.getInstance().getScheduleData().forEach(data -> {
-            if((data.getRouteByIdRoute().getEndStation() + " " + data.getRouteByIdRoute().getEndStation()).contains(name))
-                list.add(new ScheduleEntity_ViewModel(data.getIdSchedule(), (data.getRouteByIdRoute().getStartStation() + " - " + data.getRouteByIdRoute().getEndStation()),data.getBusByIdBus().getBusName(),data.getBusByIdBus().getTypeOfBusByIdType().getTypeName(),new SimpleDateFormat("HH:mm:ss").format(data.getDepartTime()),data.getPrice(),data.getDpr(),data.getDuration(),data.getIsDelete()));
-            else
-                list.add(new ScheduleEntity_ViewModel(data.getIdSchedule(), (data.getRouteByIdRoute().getStartStation() + " - " + data.getRouteByIdRoute().getEndStation()),data.getBusByIdBus().getBusName(),data.getBusByIdBus().getTypeOfBusByIdType().getTypeName(),new SimpleDateFormat("HH:mm:ss").format(data.getDepartTime()),data.getPrice(),data.getDpr(),data.getDuration(),data.getIsDelete()));
+            list.add(new ScheduleEntity_ViewModel(data.getIdSchedule(), (data.getRouteByIdRoute().getStartStation() + " - " + data.getRouteByIdRoute().getEndStation()),data.getBusByIdBus().getBusName(),data.getBusByIdBus().getTypeOfBusByIdType().getTypeName(),data.getDriverByIdDriver().getNameDriver(),new SimpleDateFormat("HH:mm:ss").format(data.getDepartTime()),new SimpleDateFormat("dd/MM/yyyy").format(DAL.getInstance().getOutDateUpdate(data.getIdSchedule())),data.getPrice(),data.getDpr(),data.getDuration(),data.getIsDelete()));
         });
-
         return list;
     }
 
-    public void addSchedule(RouteEntity Route, BusEntity Bus, Date departTimeInput, int durationInput, int priceInput, int dprInput) {
+    public void addSchedule(RouteEntity Route, BusEntity Bus, DriverEntity driver,Date departTimeInput, int durationInput, int priceInput, int dprInput) {
         ScheduleEntity schedule = new ScheduleEntity();
         schedule.setIdRoute(Route.getIdRoute());
         schedule.setIdBus(Bus.getIdBus());
+        schedule.setIdDriver(driver.getIdDriver());
         schedule.setDepartTime(departTimeInput);
         schedule.setDpr(dprInput);
         schedule.setPrice(priceInput);
         schedule.setBusByIdBus(Bus);
         schedule.setRouteByIdRoute(Route);
+        schedule.setDriverByIdDriver(driver);
         schedule.setDuration(durationInput);
         schedule.setIsDelete(false);
         DAL.getInstance().insertSchedule(schedule);
@@ -231,8 +229,8 @@ public class BLL_Admin {
         DAL.getInstance().removeSchedule(idSchedule);
     }
 
-    public void updateSchedule(int idSchedule, RouteEntity routeSelected, BusEntity busSelected, Date departTimeInput, int durationInput, int priceInput, int dprInput) {
-        DAL.getInstance().updateSchedule(idSchedule, routeSelected, busSelected, departTimeInput, durationInput, durationInput, priceInput, dprInput);
+    public void updateSchedule(int idSchedule, RouteEntity routeSelected, BusEntity busSelected,DriverEntity driverSelected, Date departTimeInput, int durationInput, int priceInput, int dprInput) {
+        DAL.getInstance().updateSchedule(idSchedule, routeSelected, busSelected, driverSelected,departTimeInput, durationInput, durationInput, priceInput, dprInput);
     }
 
 

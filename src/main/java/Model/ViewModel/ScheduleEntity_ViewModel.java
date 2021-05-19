@@ -9,7 +9,9 @@ public class ScheduleEntity_ViewModel {
     private String routeName;
     private String busName;
     private String typeOfBus;
+    private String nameofDriver;
     private String departTime;
+    private String outDate;
     private int price;
     private int duration;
     private int dpr;
@@ -89,15 +91,33 @@ public class ScheduleEntity_ViewModel {
         this.duration = duration;
     }
 
-    public ScheduleEntity_ViewModel(int idSchedule, String routeName, String busName, String typeOfBus, String departTime, int price, int dpr, int duration, boolean isDeleted) {
+    public String getNameofDriver() {
+        return nameofDriver;
+    }
+
+    public void setNameofDriver(String nameofDriver) {
+        this.nameofDriver = nameofDriver;
+    }
+
+    public String getOutDate() {
+        return outDate;
+    }
+
+    public void setOutDate(String outDate) {
+        this.outDate = outDate;
+    }
+
+    public ScheduleEntity_ViewModel(int idSchedule, String routeName, String busName, String typeOfBus, String nameofDriver, String departTime, String outDate, int price, int duration, int dpr, boolean isDeleted) {
         this.idSchedule = idSchedule;
         this.routeName = routeName;
         this.busName = busName;
         this.typeOfBus = typeOfBus;
+        this.nameofDriver = nameofDriver;
         this.departTime = departTime;
+        this.outDate = outDate;
         this.price = price;
-        this.dpr = dpr;
         this.duration = duration;
+        this.dpr = dpr;
         this.isDeleted = isDeleted;
     }
 }
