@@ -1,9 +1,9 @@
 package Controller.Admin;
 
 
-
 import Model.BusEntity;
 
+import Model.DriverEntity;
 import Model.RouteEntity;
 import Model.ViewModel.ScheduleEntity_ViewModel;
 import Services.BLL_Admin;
@@ -53,13 +53,14 @@ public class SchedulePage implements Initializable {
     @FXML
     private ComboBox<BusEntity> cbx_bus;
 
+    @FXML
+    private ComboBox<DriverEntity> cbx_driver;
 
     @FXML
     private TextField tfx_typeofbus;
 
     @FXML
     private TextField tfx_price;
-
 
     @FXML
     private Button btn_ok;
@@ -125,10 +126,16 @@ public class SchedulePage implements Initializable {
     private TableColumn<ScheduleEntity_ViewModel, String> col_typeofbus;
 
     @FXML
+    private TableColumn<ScheduleEntity_ViewModel, String> col_nameofdriver;
+
+    @FXML
     private TableColumn<ScheduleEntity_ViewModel, Integer> col_price;
 
     @FXML
     private TableColumn<ScheduleEntity_ViewModel, Integer> col_departTime;
+
+    @FXML
+    private TableColumn<ScheduleEntity_ViewModel, String> col_outdate;
 
     @FXML
     private TableColumn<ScheduleEntity_ViewModel, Integer> col_duration;
@@ -181,7 +188,7 @@ public class SchedulePage implements Initializable {
     void btn_delete_clicked(MouseEvent event) {
         ScheduleEntity_ViewModel schedule = table_view.getSelectionModel().getSelectedItem();
         BLL_Admin.getInstance().deleteSchedule(schedule.getIdSchedule());
-        show("");
+        show();
     }
 
     @FXML
@@ -194,15 +201,19 @@ public class SchedulePage implements Initializable {
             int durationInput = Integer.parseInt(tfx_duration.getText());
             String time = spn_timepickerH.getValue().toString() + ":" + spn_timepickerM.getValue().toString() + ":" + spn_timepickerS.getValue().toString();
             Date departTimeInput = new SimpleDateFormat("HH:mm:ss").parse(time);
+            DriverEntity driverSelected = cbx_driver.getSelectionModel().getSelectedItem();
             if (cbx_route.getSelectionModel().getSelectedItem() == null || cbx_bus.getSelectionModel().getSelectedItem() == null) {
                 new Alert(Alert.AlertType.ERROR, "Please choose station!").showAndWait();
             } else {
                 switch (CRUDType) {
                     case "Create":
-                        BLL_Admin.getInstance().addSchedule(routeSelected, busSelected, departTimeInput, durationInput, priceInput, dprInput);
+                        BLL_Admin.getInstance().addSchedule(routeSelected, busSelected, driverSelected, departTimeInput, durationInput, priceInput, dprInput);
+                        show();
                         break;
                     case "Update":
-                        BLL_Admin.getInstance().updateSchedule(idSchedule, routeSelected, busSelected, departTimeInput, durationInput, priceInput, dprInput);
+                        BLL_Admin.getInstance().updateSchedule(idSchedule, routeSelected, busSelected, driverSelected, departTimeInput, durationInput, priceInput, dprInput);
+                        show();
+                        break;
                     default:
                         break;
                 }
@@ -272,7 +283,6 @@ public class SchedulePage implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        //TODO : show data text feild ft. combo box
         toggleDetail();
     }
 
@@ -280,7 +290,7 @@ public class SchedulePage implements Initializable {
     void onBusCBBAction(ActionEvent event) {
         Object[] objs = BLL_Admin.getInstance().getAllBus().toArray();
         List<Object> objsList = new ArrayList<Object>();
-        if(cbx_bus.getSelectionModel().getSelectedItem() != null)
+        if (cbx_bus.getSelectionModel().getSelectedItem() != null)
             tfx_typeofbus.setText(cbx_bus.getSelectionModel().getSelectedItem().getTypeOfBusByIdType().getTypeName());
         else System.out.println("null");
     }
@@ -300,6 +310,7 @@ public class SchedulePage implements Initializable {
 
             BLL_Admin.getInstance().getAllBus().forEach(bus -> cbx_bus.getItems().add(bus));
             BLL_Admin.getInstance().getRoutes(0, "").forEach(route -> cbx_route.getItems().add(route));
+            BLL_Admin.getInstance().getListDriver(0, "").forEach(driver -> cbx_driver.getItems().add(driver));
 
             tfx_typeofbus.setEditable(false);
 
@@ -307,7 +318,7 @@ public class SchedulePage implements Initializable {
             spn_timepickerM.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, 0));
             spn_timepickerS.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, 0));
 
-            show("");
+            show();
 
             toggleDetail();
         } catch (IOException e) {
@@ -315,16 +326,18 @@ public class SchedulePage implements Initializable {
         }
     }
 
-    private void show(String name) {
-        ObservableList<ScheduleEntity_ViewModel> listObj = FXCollections.observableArrayList(BLL_Admin.getInstance().updateTableSchedulePage(name));
+    private void show() {
+        ObservableList<ScheduleEntity_ViewModel> listObj = FXCollections.observableArrayList(BLL_Admin.getInstance().updateTableSchedulePage(""));
         col_id.setCellValueFactory(new PropertyValueFactory<>("idSchedule"));
         col_routename.setCellValueFactory(new PropertyValueFactory<>("routeName"));
         col_busname.setCellValueFactory(new PropertyValueFactory<>("busName"));
         col_typeofbus.setCellValueFactory(new PropertyValueFactory<>("typeOfBus"));
+        col_nameofdriver.setCellValueFactory(new PropertyValueFactory<>("nameofDriver"));
         col_price.setCellValueFactory(new PropertyValueFactory<>("price"));
         col_departTime.setCellValueFactory(new PropertyValueFactory<>("departTime"));
-        col_dpr.setCellValueFactory(new PropertyValueFactory<>("dpr"));
+        col_outdate.setCellValueFactory(new PropertyValueFactory<>("outDate"));
         col_duration.setCellValueFactory(new PropertyValueFactory<>("duration"));
+        col_dpr.setCellValueFactory(new PropertyValueFactory<>("dpr"));
 
 
         table_view.setItems(listObj);
@@ -353,7 +366,6 @@ public class SchedulePage implements Initializable {
         jfx_hambur.toFront();
 
     }
-
 
 
 }

@@ -112,4 +112,8 @@ public class DriverEntity {
     public void setScheduleByIdDriver(Collection<ScheduleEntity> tripInformationsByIdDriver) {
         this.ScheduleByIdDriver = tripInformationsByIdDriver;
     }
+
+    public String toString() {
+        return this.getNameDriver();
+    }
 }

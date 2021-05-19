@@ -10,7 +10,7 @@ public class TripInformationEntity {
     private int idTrip;
     private Timestamp departDate;
     private Integer idSchedule;
-//    private int idDriver;
+    //    private int idDriver;
     private Collection<TicketEntity> ticketsByIdTrip;
     private ScheduleEntity scheduleByIdSchedule;
 //    private DriverEntity driverByIdDriver;
