@@ -1,10 +1,15 @@
 package Controller.Admin;
 
+import Model.AccountEntity;
+import Model.ProvinceEntity;
+import Services.DAL;
 import com.jfoenix.controls.*;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 import javafx.fxml.*;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -23,6 +28,37 @@ public class MainWindow implements Initializable {
     @FXML
     private JFXHamburger jfx_hambur;
 
+    @FXML
+    private Label lb_greet;
+
+    @FXML
+    private Label lb_revenue;
+
+    @FXML
+    private Label lb_trip;
+
+    @FXML
+    private Label lb_route;
+
+    @FXML
+    private Label lb_personnel;
+
+    @FXML
+    private ComboBox<String> cbx_time;
+
+    @FXML
+    private ComboBox<AccountEntity> cbx_staff;
+
+    @FXML
+    private ComboBox<ProvinceEntity> cbx_toProvince;
+
+    @FXML
+    private ComboBox<ProvinceEntity> cbx_fromProvince;
+
+    public MainWindow() {
+    }
+
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
@@ -30,7 +66,9 @@ public class MainWindow implements Initializable {
             InitSideBar.getInstance().initializeForNavBar(this.rootPane, this.jfx_drawer, this.jfx_hambur);
             //done
 
-            // ...
+            // Set Greeting
+            lb_greet.setText("Welcome, " + DAL.current.getUsername());
+            // DONE
         } catch (IOException e) {
             e.printStackTrace();
         }

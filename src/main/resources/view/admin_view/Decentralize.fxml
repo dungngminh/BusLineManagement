@@ -23,7 +23,6 @@
 <AnchorPane fx:id="pane" prefHeight="627.0" prefWidth="1166.0" styleClass="pane" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Admin.Decentralize">
    <children>
       <JFXDrawer fx:id="jfx_drawer" defaultDrawerSize="195.0" prefHeight="641.0" prefWidth="101.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <JFXHamburger fx:id="jfx_hambur" layoutX="14.0" layoutY="20.0" />
       <FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <TabPane prefHeight="500.0" prefWidth="619.0" stylesheets="@../../css/admin_css/setting.css" tabClosingPolicy="UNAVAILABLE">
@@ -264,6 +263,7 @@
             </TabPane>
          </children>
       </FlowPane>
+      <JFXHamburger fx:id="jfx_hambur" layoutX="14.0" layoutY="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
    </children>
    <stylesheets>
       <URL value="@../../css/admin_css/setting.css" />

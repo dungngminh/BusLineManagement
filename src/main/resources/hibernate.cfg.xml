@@ -8,10 +8,11 @@
   <property name="connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
 
   <property name="connection.url">jdbc:sqlserver://103.95.197.121:9696;database=N2_19N12B</property>
-  <property name = "hibernate.connection.username">DACNPM</property>
-  <property name = "hibernate.connection.password">khoa19@itf</property>
 
-<!--  <property name="connection.url">jdbc:sqlserver://mssql-30780-0.cloudclusters.net:30780;database=QuanLyNhaXeKhach</property>-->
+    <property name = "hibernate.connection.username">DACNPM</property>
+    <property name = "hibernate.connection.password">khoa19@itf</property>
+
+    <!--  <property name="connection.url">jdbc:sqlserver://mssql-30780-0.cloudclusters.net:30780;database=QuanLyNhaXeKhach</property>-->
 <!--  <property name = "hibernate.connection.username">dung</property>-->
 <!--  <property name = "hibernate.connection.password">Kminhdung123</property>-->
 
@@ -61,7 +62,6 @@
   <mapping class="Model.DriverEntity"/>
   <mapping class="Model.ProvinceEntity"/>
   <mapping class="Model.RoleEntity"/>
-  <mapping class="Model.RoleAccountEntity"/>
   <mapping class="Model.StationEntity"/>
   <mapping class="Model.TypeOfBusEntity"/>
   <mapping class="Model.ViewModel.BusEntity_ViewModel"/>

@@ -94,8 +94,8 @@ public class InitSideBar {
         });
 
         // Init navbar transformation
-        HamburgerBackArrowBasicTransition burgerTask = new HamburgerBackArrowBasicTransition(jfx_hambur);
-//        HamburgerBasicCloseTransition burgerTask = new HamburgerBasicCloseTransition(jfx_hambur);
+//        HamburgerBackArrowBasicTransition burgerTask = new HamburgerBackArrowBasicTransition(jfx_hambur);
+        HamburgerBasicCloseTransition burgerTask = new HamburgerBasicCloseTransition(jfx_hambur);
         burgerTask.setRate(-1);
         jfx_hambur.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
             burgerTask.setRate(burgerTask.getRate() * -1);

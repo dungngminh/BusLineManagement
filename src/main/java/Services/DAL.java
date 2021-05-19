@@ -83,7 +83,7 @@ public class DAL {
             session.beginTransaction();
 
             // Get users
-            Query<AccountEntity> query = session.createQuery("from AccountEntity ", AccountEntity.class);
+            Query<AccountEntity> query = session.createQuery("from AccountEntity WHERE isDelete = false", AccountEntity.class);
 
             List<AccountEntity> list_acc = query.getResultList();
 //            list_acc.forEach(System.out::println);
@@ -185,23 +185,35 @@ public class DAL {
     // Done Bus here ?
 
     // DAL for Decentralize ?
-    public void addUserToAccount(String username, String password, int idRole) {
+    public RoleEntity getRole(Integer idRole) {
+        try (Session session = HibernateUtils.getSessionFactory().openSession()) {
+            // Begin a unit of work
+            session.beginTransaction();
+            // Get drivers
+//            List<TypeOfBusEntity> list_tob = session.createQuery("FROM TypeOfBusEntity ", TypeOfBusEntity.class).list();
+            Query<RoleEntity> query = session.createQuery("FROM RoleEntity WHERE idRole = :idRole ", RoleEntity.class);
+            query.setParameter("idRole", idRole);
+            RoleEntity role = query.getResultList().get(0);
+
+            // Commit the current resource transaction, writing any unflushed changes to the database.
+            session.getTransaction().commit();
+            session.close();
+            return role;
+        }
+    }
+    public void addUserToAccount(String username, String password, Integer idRole, RoleEntity role) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
         AccountEntity acc = new AccountEntity();
         acc.setUsername(username);
         acc.setPassword(password);
+        System.out.println(idRole);
+        acc.setIdRole(idRole);
+        acc.setIsOnline(false);
+        acc.setIsDelete(false);
+        acc.setRoleByIdRole(role);
 
-        int idUser = (Integer) session.save(acc);
-
-        RoleEntity role_obj = session.find(RoleEntity.class, idRole);
-        RoleAccountEntity role_acc = new RoleAccountEntity();
-        role_acc.setIdRole(idRole);
-        role_acc.setIdUser(idUser);
-        role_acc.setAccountByIdUser(acc);
-        role_acc.setRoleByIdRole(role_obj);
-
-        session.save(role_acc);
+        session.save(acc);
 
         //Commit the transaction
         session.getTransaction().commit();
@@ -212,7 +224,7 @@ public class DAL {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
 
-        Query<RoleAccountEntity> query = session.createQuery("update RoleAccountEntity set idRole = :idRole " +
+        Query<AccountEntity> query = session.createQuery("update AccountEntity set idRole = :idRole " +
                 "where idUser = :idUser");
 
         query.setParameter("idRole", idRole);
@@ -229,7 +241,7 @@ public class DAL {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
 
-        Query<RoleAccountEntity> query = session.createQuery("update AccountEntity set password = :password " +
+        Query<AccountEntity> query = session.createQuery("update AccountEntity set password = :password " +
                 "where idUser = :idUser");
 
         query.setParameter("password", acc.getPassword());
@@ -245,14 +257,10 @@ public class DAL {
     public void deleteUser(AccountEntity acc) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
-        Query query1 = session.createQuery("DELETE FROM RoleAccountEntity WHERE idUser = :idUser");
-        query1.setParameter("idUser", acc.getIdUser());
+        Query query = session.createQuery("UPDATE AccountEntity SET isDelete = true WHERE idUser = :idUser");
+        query.setParameter("idUser", acc.getIdUser());
 
-        Query query2 = session.createQuery("DELETE FROM AccountEntity WHERE idUser = :idUser");
-        query2.setParameter("idUser", acc.getIdUser());
-
-        query1.executeUpdate();
-        query2.executeUpdate();
+        query.executeUpdate();
 
         //Commit the transaction
         session.getTransaction().commit();
@@ -260,7 +268,6 @@ public class DAL {
     }
 
     // Done Decentralize here ?
-
     // DAL for Driver ?
     public List<DriverEntity> getListDriver() {
         try (Session session = HibernateUtils.getSessionFactory().openSession()) {
@@ -451,7 +458,7 @@ public class DAL {
             Query<TripInformationEntity> query = session.createQuery("SELECT TRIP FROM  TripInformationEntity TRIP, " +
                             "ScheduleEntity SCH, RouteEntity ROU, BusEntity BUS, TypeOfBusEntity TYPE, DriverEntity DRI " +
                             "WHERE TRIP.idSchedule = SCH.idSchedule AND SCH.isDelete = false AND SCH.idRoute = :idRoute " +
-                            "AND ROU.status = 0 AND TRIP.idDriver = DRI.idDriver AND DRI.status = 0 AND DRI.isDelete = false " +
+                            "AND ROU.status = 0 AND DRI.isDelete = false " +
                             "AND SCH.idBus = BUS.idBus AND BUS.isDelete = false " +
                             "AND BUS.status = 0 AND BUS.idType = TYPE.idType AND TYPE.isDelete = false",
                     TripInformationEntity.class);

@@ -1,7 +1,6 @@
 package Controller.Admin;
 
 import Model.AccountEntity;
-import Model.RoleAccountEntity;
 import Services.BLL_Admin;
 
 import Services.DAL;
@@ -9,24 +8,18 @@ import Services.DAL;
 import Util.HibernateUtils;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
-import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
-
-import javafx.application.Platform;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import org.hibernate.Session;
 
 import java.io.IOException;
@@ -107,7 +100,7 @@ public class Decentralize implements Initializable {
             //Init role
 
             currentAccount = DAL.getInstance().getCurrent();
-            int idRole = ((RoleAccountEntity)DAL.getInstance().getCurrent().getRoleAccountsByIdUser().toArray()[0]).getIdRole();
+            int idRole = DAL.getInstance().getCurrent().getIdRole();
             if(idRole == 3) {
                 cbx_role_add.getItems().add("Admin");
                 cbx_role.getItems().add("Admin");
@@ -237,12 +230,12 @@ public class Decentralize implements Initializable {
                     "\n" +
                     "Does not contain space, tab, etc.!").showAndWait();
         } else {
-            try {
-                BLL_Admin.getInstance().addUserToAccount(userName, passWord, role);
+//            try {
+                BLL_Admin.getInstance().addUserToAccount(userName, passWord, role, BLL_Admin.getInstance().getRole(role));
                 new Alert(Alert.AlertType.INFORMATION, "User added!").showAndWait();
-            } catch (Exception err) {
-                new Alert(Alert.AlertType.WARNING, "Maybe username was exist, Check again!").showAndWait();
-            }
+//            } catch (Exception err) {
+//                new Alert(Alert.AlertType.WARNING, "Maybe username was exist, Check again!").showAndWait();
+//            }
         }
     }
 
@@ -258,7 +251,7 @@ public class Decentralize implements Initializable {
         Session session = HibernateUtils.getSessionFactory().openSession();
         if(!cbx_user.getItems().isEmpty()) {
             AccountEntity acc = cbx_user.getSelectionModel().getSelectedItem();
-            cbx_role.getSelectionModel().select(((RoleAccountEntity)acc.getRoleAccountsByIdUser().toArray()[0]).getIdRole() - 1);
+            cbx_role.getSelectionModel().select(acc.getIdRole() - 1);
             session.close();
         }
     }
