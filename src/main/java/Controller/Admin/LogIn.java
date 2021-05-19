@@ -1,34 +1,65 @@
 package Controller.Admin;
 import Services.*;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.*;
 
 import java.io.IOException;
+import java.net.URL;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
-public class LogIn {
+public class LogIn implements Initializable {
 
     @FXML
     private TextField txf_username;
 
     @FXML
     private TextField txf_password;
+
+    @FXML
+    private Button btn_login;
+
     @FXML
     private Button btn_cancel;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        btn_login.setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.ENTER) {
+                try {
+                    btn_login_clicked(new MouseEvent(MouseEvent.MOUSE_CLICKED, btn_login.getLayoutX(), btn_login.getLayoutY()
+                            , btn_login.getLayoutX(), btn_login.getLayoutY(), MouseButton.PRIMARY, 1,
+                            true, true, true, true, true, true, true, true, true, true, null));
+                } catch (SQLException | ClassNotFoundException | IOException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        });
+
+        btn_cancel.setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.ENTER) {
+                Stage stage = (Stage) btn_cancel.getScene().getWindow();
+                stage.close();
+            }
+        });
+    }
 
     @FXML
     void btn_login_clicked(MouseEvent event) throws SQLException, ClassNotFoundException, IOException {
         String username = txf_username.getText();
         String password = txf_password.getText();
-//        try {
+        try {
             int res = BLL_Admin.getInstance().validate_Account(username, password);
-
             if(res == 1 || res == 3) {
 
 //                  new Alert(Alert.AlertType.INFORMATION, "Successful!").showAndWait();
@@ -40,11 +71,11 @@ public class LogIn {
             else {
                 new Alert(Alert.AlertType.WARNING, "Your username or password was wrong!").showAndWait();
             }
-//        }
-//        catch (Exception err) {
-////              new Alert(Alert.AlertType.ERROR, "Connect to Internet and try again!").showAndWait();
-//            new Alert(Alert.AlertType.ERROR, err.getMessage()).showAndWait();
-//        }
+        }
+        catch (Exception err) {
+//              new Alert(Alert.AlertType.ERROR, "Connect to Internet and try again!").showAndWait();
+            new Alert(Alert.AlertType.ERROR, err.getMessage()).showAndWait();
+        }
     }
 
     public void showHomePage(String path) throws IOException {

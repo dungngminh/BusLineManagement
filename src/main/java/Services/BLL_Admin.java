@@ -4,11 +4,14 @@ import Model.*;
 import Model.ViewModel.BusEntity_ViewModel;
 import Model.ViewModel.ScheduleEntity_ViewModel;
 
+import Util.HibernateUtils;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.CellReference;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
+import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import java.io.*;
 import java.net.URL;
@@ -38,13 +41,10 @@ public class BLL_Admin {
         DAL.getInstance().getListAcc().forEach(account -> {
             if (account.getUsername().equals(username) &&
                     account.getPassword().equals(DAL.getInstance().encryptSHA1(password))) {
-
-                int idRole = ((RoleAccountEntity) account.getRoleAccountsByIdUser().toArray()[0]).getIdRole();
+                int idRole = account.getIdRole();
                 valid.set(idRole);
                 DAL.getInstance().setCurrent(account);
                 System.out.println(DAL.getInstance().getCurrent().getUsername());
-
-
             }
         });
         return valid.get();
@@ -100,9 +100,14 @@ public class BLL_Admin {
         return DAL.getInstance().getListAcc();
     }
 
-    public void addUserToAccount(String username, String password, int idRole) {
+    public RoleEntity getRole(Integer idRole) {
+        return DAL.getInstance().getRole(idRole);
+    }
+
+    public void addUserToAccount(String username, String password, Integer idRole, RoleEntity role) {
         String encryptPass = DAL.getInstance().encryptSHA1(password);
-        DAL.getInstance().addUserToAccount(username, encryptPass, idRole);
+
+        DAL.getInstance().addUserToAccount(username, encryptPass, idRole, role);
     }
 
     public void updateRole(AccountEntity acc, int idRole) {
@@ -235,5 +240,12 @@ public class BLL_Admin {
         DAL.getInstance().updateSchedule(idSchedule, routeSelected, busSelected, departTimeInput, durationInput, durationInput, priceInput, dprInput);
     }
 
+
+
+    // NOTICE BLL for Main Window ?
+
+
+
+    //
 
 }

@@ -147,7 +147,7 @@ public class TicketOrder implements Initializable {
                     new SimpleDateFormat("HH:mm:ss").format(modelTrip.getScheduleByIdSchedule().getDepartTime()));
             lb_startstation.setText(modelTrip.getScheduleByIdSchedule().getRouteByIdRoute().getStartStation());
             lb_destination.setText(modelTrip.getScheduleByIdSchedule().getRouteByIdRoute().getEndStation());
-            lb_phone.setText(modelTrip.getDriverByIdDriver().getPhone());
+            lb_phone.setText(modelTrip.getScheduleByIdSchedule().getDriverByIdDriver().getPhone());
             lb_price.setText("0đ");
             cbx_payment.getItems().add("Paid");
             cbx_payment.getItems().add("Unpaid");
@@ -200,10 +200,11 @@ public class TicketOrder implements Initializable {
 
     @FXML
     void btn_confirm_clicked(MouseEvent event) throws IOException {
-        try {
+//        try {
             if(txf_namecustomer.getText().equals("") || txf_phonecustomer.getText().equals("")) {
                 new Alert(Alert.AlertType.WARNING, "Fill all field!").showAndWait();
-            } else if(!Pattern.matches("((\\+84)|09|03|07|08|05|[2|5|7|8|9])+([0-9]{8})\\b", txf_phonecustomer.getText())) {
+            } else if(!Pattern.matches("((\\+84)|09|03|07|08|05|[2|5|7|8|9])+([0-9]{8})\\b", txf_phonecustomer.getText()) ||
+                        txf_phonecustomer.getText().length() > 10) {
                 new Alert(Alert.AlertType.WARNING, "Phone customer is incorrect!").showAndWait();
             } else if(lb_code.getText().equals("") || lb_code.getText().equals("Choose your slots!")) {
                 new Alert(Alert.AlertType.WARNING, "You did not order any slot!").showAndWait();
@@ -230,9 +231,9 @@ public class TicketOrder implements Initializable {
                     scene.setRoot(newPane);
                 }
             }
-        } catch (Exception err) {
-            new Alert(Alert.AlertType.WARNING, "Unknown Error").showAndWait();
-        }
+//        } catch (Exception err) {
+//            new Alert(Alert.AlertType.WARNING, "Unknown Error").showAndWait();
+//        }
 
     }
     // DONE

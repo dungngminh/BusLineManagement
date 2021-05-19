@@ -42,7 +42,7 @@ public class BLL_Seller {
         for(Object s1: list1) {
             for(Object s2: list2) {
                 res.add(Arrays.asList(((StationEntity)s1).getStationName(), ((StationEntity)s2).getStationName()));
-//                System.out.println(((StationEntity)s1).getStationName() + " " + ((StationEntity)s2).getStationName());
+                System.out.println(((StationEntity)s1).getStationName() + " " + ((StationEntity)s2).getStationName());
 
             }
         }
@@ -83,7 +83,6 @@ public class BLL_Seller {
 
     public List<String> getOrderedTicket(Integer idTrip) {
         List<String> ans = new ArrayList<>();
-
 
         DAL.getInstance().getListTicket(idTrip).forEach(ticket -> {
             if(ticket.getStatus() == 1) {
