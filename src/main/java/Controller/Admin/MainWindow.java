@@ -2,6 +2,7 @@ package Controller.Admin;
 
 import Model.AccountEntity;
 import Model.ProvinceEntity;
+import Services.BLL_Admin;
 import Services.DAL;
 import com.jfoenix.controls.*;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
@@ -68,6 +69,12 @@ public class MainWindow implements Initializable {
 
             // Set Greeting
             lb_greet.setText("Welcome, " + DAL.current.getUsername());
+
+            // Set Total revenue
+            lb_revenue.setText(BLL_Admin.getInstance().getRevenueTicket1YearAgo());
+
+            // Set Routes today
+            lb_route.setText(String.valueOf(BLL_Admin.getInstance().getNumberRoutesToday()));
             // DONE
         } catch (IOException e) {
             e.printStackTrace();

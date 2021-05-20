@@ -131,7 +131,7 @@
                            <children>
                               <FlowPane alignment="CENTER" columnHalignment="CENTER" orientation="VERTICAL" prefHeight="200.0" prefWidth="200.0">
                                  <children>
-                                    <Label text="Label" textFill="WHITE">
+                                    <Label fx:id="lb_revenue" text="Label" textFill="WHITE">
                                        <font>
                                           <Font name="Segoe UI Bold" size="20.0" />
                                        </font>
@@ -167,7 +167,7 @@
                            <children>
                               <FlowPane alignment="CENTER" columnHalignment="CENTER" orientation="VERTICAL" prefHeight="200.0" prefWidth="200.0">
                                  <children>
-                                    <Label text="Label" textFill="WHITE">
+                                    <Label fx:id="lb_trip" text="Label" textFill="WHITE">
                                        <font>
                                           <Font name="Segoe UI Bold" size="20.0" />
                                        </font>
@@ -206,7 +206,7 @@
                            <children>
                               <FlowPane alignment="CENTER" columnHalignment="CENTER" orientation="VERTICAL" prefHeight="200.0" prefWidth="200.0">
                                  <children>
-                                    <Label text="Label" textFill="WHITE">
+                                    <Label fx:id="lb_route" text="Label" textFill="WHITE">
                                        <font>
                                           <Font name="Segoe UI Bold" size="20.0" />
                                        </font>
@@ -245,7 +245,7 @@
                            <children>
                               <FlowPane alignment="CENTER" columnHalignment="CENTER" orientation="VERTICAL" prefHeight="200.0" prefWidth="200.0">
                                  <children>
-                                    <Label text="Label" textFill="WHITE">
+                                    <Label fx:id="lb_personnel" text="Label" textFill="WHITE">
                                        <font>
                                           <Font name="Segoe UI Bold" size="20.0" />
                                        </font>
@@ -293,19 +293,19 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <ComboBox prefHeight="40.0" prefWidth="150.0" styleClass="cbx">
+                        <ComboBox fx:id="cbx_time" prefHeight="40.0" prefWidth="150.0" styleClass="cbx">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></ComboBox>
-                        <ComboBox prefHeight="40.0" prefWidth="150.0" styleClass="cbx" GridPane.columnIndex="1">
+                        <ComboBox fx:id="cbx_staff" prefHeight="40.0" prefWidth="150.0" styleClass="cbx" GridPane.columnIndex="1">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></ComboBox>
-                        <ComboBox prefHeight="40.0" prefWidth="150.0" styleClass="cbx" GridPane.columnIndex="5">
+                        <ComboBox fx:id="cbx_toProvince" prefHeight="40.0" prefWidth="150.0" styleClass="cbx" GridPane.columnIndex="5">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></ComboBox>
-                        <ComboBox prefHeight="40.0" prefWidth="150.0" styleClass="cbx" GridPane.columnIndex="3">
+                        <ComboBox fx:id="cbx_fromProvince" prefHeight="40.0" prefWidth="150.0" styleClass="cbx" GridPane.columnIndex="3">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></ComboBox>

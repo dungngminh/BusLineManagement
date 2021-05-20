@@ -1,5 +1,6 @@
 package Controller.Admin;
 import Services.*;
+import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +14,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.*;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -60,7 +62,10 @@ public class LogIn implements Initializable {
         String password = txf_password.getText();
         try {
             int res = BLL_Admin.getInstance().validate_Account(username, password);
-            if(res == 1 || res == 3) {
+            if (DAL.getInstance().getCurrent().getIsOnline()) {
+                new Alert(Alert.AlertType.WARNING, "This user is online, you are not allowed to login!").showAndWait();
+            }
+            else if(res == 1 || res == 3) {
 
 //                  new Alert(Alert.AlertType.INFORMATION, "Successful!").showAndWait();
                 showHomePage("admin_view/MainWindow");
@@ -68,17 +73,21 @@ public class LogIn implements Initializable {
             else if (res == 2) {
                 showHomePage("seller_view/Dashboard");
             }
+
             else {
                 new Alert(Alert.AlertType.WARNING, "Your username or password was wrong!").showAndWait();
             }
         }
         catch (Exception err) {
-//              new Alert(Alert.AlertType.ERROR, "Connect to Internet and try again!").showAndWait();
-            new Alert(Alert.AlertType.ERROR, err.getMessage()).showAndWait();
+              new Alert(Alert.AlertType.ERROR, "Connect to Internet and try again!").showAndWait();
+//            new Alert(Alert.AlertType.ERROR, err.getMessage()).showAndWait();
         }
     }
 
     public void showHomePage(String path) throws IOException {
+        //Set online for user
+        BLL_Admin.getInstance().toggleIsOnlineForAccout(DAL.getInstance().getCurrent(), true);
+
         FXMLLoader main_Page = new FXMLLoader();
         main_Page.setLocation(getClass().getResource("/view/" + path +".fxml"));
 
@@ -87,6 +96,19 @@ public class LogIn implements Initializable {
         stage.setTitle("Bus Management");
         stage.setScene(scene);
 
+        // Event when click on X(Close button)
+        stage.setOnCloseRequest(e -> {
+            // Case ticket seller booking ticket
+            Integer idTicket = BLL_Admin.getInstance().getIdTicketToClose();
+            if(idTicket > 0)
+                BLL_Seller.getInstance().deleteCurrentTicket(idTicket);
+
+            //
+            BLL_Admin.getInstance().toggleIsOnlineForAccout(DAL.getInstance().getCurrent(), false);
+            Platform.exit();
+            System.exit(0);
+        });
+        //
         stage.getIcons().add(new Image("/images/Icon/favicon.png"));
         stage.show();
         Stage cl = (Stage) btn_cancel.getScene().getWindow();

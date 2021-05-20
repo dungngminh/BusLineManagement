@@ -10,6 +10,7 @@ import javafx.print.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -25,6 +26,9 @@ import java.util.ResourceBundle;
 public class TicketForm implements Initializable {
     @FXML
     private Pane pane;
+
+    @FXML
+    private GridPane grid;
 
     @FXML
     private Label lb_code;
@@ -108,11 +112,11 @@ public class TicketForm implements Initializable {
     @FXML
     void btn_print_clicked(MouseEvent event) {
         Printer printer = Printer.getDefaultPrinter();
-        PageLayout pageLayout = printer.createPageLayout(Paper.A4,
+        PageLayout pageLayout = printer.createPageLayout(Paper.C,
                 PageOrientation.PORTRAIT, Printer.MarginType.HARDWARE_MINIMUM);
         PrinterJob job = PrinterJob.createPrinterJob();
-        if (job != null && job.showPrintDialog(pane.getScene().getWindow())) {
-            boolean success = job.printPage(pageLayout, pane);
+        if (job != null && job.showPrintDialog(grid.getScene().getWindow())) {
+            boolean success = job.printPage(pageLayout, grid);
             if (success) {
                 job.endJob();
                 Stage stage = (Stage) btn_cancel.getScene().getWindow();
