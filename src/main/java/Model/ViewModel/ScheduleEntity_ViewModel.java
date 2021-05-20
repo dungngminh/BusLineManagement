@@ -1,9 +1,5 @@
 package Model.ViewModel;
 
-
-import java.util.Date;
-
-
 public class ScheduleEntity_ViewModel {
     private int idSchedule;
     private String routeName;
