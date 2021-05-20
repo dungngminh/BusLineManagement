@@ -10,6 +10,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.CellReference;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -267,6 +268,14 @@ public class BLL_Admin {
 
     public long getNumberRoutesToday() {
         return DAL.getInstance().getNumberRoutesToday();
+    }
+
+    public List<ScheduleEntity> getOutDatedSchedule() {
+        return DAL.getInstance().getOutDatedSchedule();
+    }
+
+    public List<AccountEntity> getListSeller() {
+        return DAL.getInstance().getListSeller();
     }
 
 

@@ -31,7 +31,7 @@
 {
     -fx-background: #373F51;
     -fx-background-color: #373F51;
-    -fx-text-fill: -fx-text-base-color;
+    -fx-text-fill: white;
     -fx-padding: 3 0 2 7;
     -fx-cell-size: 1.66667em;
 }
