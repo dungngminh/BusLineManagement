@@ -85,7 +85,7 @@
                      </font>
                   </Label>
                   <ComboBox fx:id="cbx_pay" prefHeight="44.0" prefWidth="243.0" promptText="Select" styleClass="cbx" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <JFXToggleButton fx:id="btn_toggle" onAction="#btn_toggle_Clicked" text="Only Info Of Customer" textFill="WHITE" toggleColor="#c6002e" toggleLineColor="#fc376b" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                  <JFXToggleButton fx:id="btn_toggle" onAction="#btn_toggle_Clicked" text="Only Info Of Customer" textFill="WHITE" toggleColor="#00a1ff" toggleLineColor="#37b4fa" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <font>
                         <Font size="13.0" />
                      </font>

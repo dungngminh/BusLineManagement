@@ -62,7 +62,7 @@
                         <Font name="Calibri Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="170.0" text="Depart time" GridPane.columnIndex="4">
+                  <Label alignment="CENTER" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="170.0" text="Information" GridPane.columnIndex="4">
                      <font>
                         <Font name="Calibri Bold" size="18.0" />
                      </font>
@@ -229,7 +229,7 @@
          <bottom>
             <FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="40.0" prefWidth="1166.0" BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fx:id="arrow_right" fitHeight="30.0" fitWidth="40.0" onMouseClicked="#btn_arrow_right_clicked" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="arrow_left" fitHeight="30.0" fitWidth="40.0" onMouseClicked="#btn_arrow_left_clicked" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../images/Icon/arrow.png" />
                      </image>
@@ -242,7 +242,7 @@
                         <Insets left="10.0" right="10.0" />
                      </FlowPane.margin>
                   </Label>
-                  <ImageView fx:id="arrow_left" fitHeight="30.0" fitWidth="40.0" onMouseClicked="#btn_arrow_left_clicked" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                  <ImageView fx:id="arrow_right" fitHeight="30.0" fitWidth="40.0" onMouseClicked="#btn_arrow_right_clicked" pickOnBounds="true" preserveRatio="true" rotate="180.0">
                      <image>
                         <Image url="@../../images/Icon/arrow.png" />
                      </image>

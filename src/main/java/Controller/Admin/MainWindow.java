@@ -2,10 +2,13 @@ package Controller.Admin;
 
 import Model.AccountEntity;
 import Model.ProvinceEntity;
+import Model.ViewModel.BusEntity_ViewModel;
 import Services.BLL_Admin;
 import Services.DAL;
 import com.jfoenix.controls.*;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.*;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -14,9 +17,11 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import org.controlsfx.control.CheckComboBox;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class MainWindow implements Initializable {
@@ -48,13 +53,13 @@ public class MainWindow implements Initializable {
     private ComboBox<String> cbx_time;
 
     @FXML
-    private ComboBox<AccountEntity> cbx_staff;
+    private CheckComboBox<AccountEntity> cbx_staff;
 
     @FXML
-    private ComboBox<ProvinceEntity> cbx_toProvince;
+    private ComboBox<ProvinceEntity> cbx_to;
 
     @FXML
-    private ComboBox<ProvinceEntity> cbx_fromProvince;
+    private ComboBox<ProvinceEntity> cbx_from;
 
     public MainWindow() {
     }
@@ -75,8 +80,31 @@ public class MainWindow implements Initializable {
 
             // Set Routes today
             lb_route.setText(String.valueOf(BLL_Admin.getInstance().getNumberRoutesToday()));
+
+            // Set number outdated of Schedule
+            lb_trip.setText(String.valueOf(BLL_Admin.getInstance().getOutDatedSchedule().size()));
+
+            // Set number of personnel
+            lb_personnel.setText(String.valueOf(BLL_Admin.getInstance().getListAcc().size()));
+
+            // Set for combobox Time Interval
+            cbx_time.getItems().addAll("1 Week Ago", "1 Quarter Ago", "1 Year Ago");
+            cbx_time.getSelectionModel().selectFirst();
+
+            // Set for combobox staff
+            final ObservableList<AccountEntity> listObj = FXCollections.observableArrayList(BLL_Admin.getInstance().
+                    getListSeller());
+
+            cbx_staff.getItems().addAll(listObj);
+
+            // Set for combobox from - to
+            cbx_from.getItems().addAll(BLL_Admin.getInstance().getProvinceName());
+            cbx_to.getItems().addAll(BLL_Admin.getInstance().getProvinceName());
+            cbx_from.getSelectionModel().selectFirst();
+            cbx_to.getSelectionModel().selectFirst();
+
             // DONE
-        } catch (IOException e) {
+        } catch (IOException | SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
