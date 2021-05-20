@@ -10,6 +10,7 @@ import Services.BLL_Admin;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 
+import com.jfoenix.controls.JFXToggleButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -40,6 +41,9 @@ public class SchedulePage implements Initializable {
 
     @FXML
     private AnchorPane pane;
+
+    @FXML
+    private Label lb_update;
 
     @FXML
     private BorderPane border_pane;
@@ -100,6 +104,9 @@ public class SchedulePage implements Initializable {
 
     @FXML
     private Button btn_delete;
+
+    @FXML
+    private JFXToggleButton toggle_updateDpr;
 
     @FXML
     private HBox hbox;
@@ -179,16 +186,23 @@ public class SchedulePage implements Initializable {
 
     @FXML
     void btn_create_clicked(MouseEvent event) {
+        tfx_day_per_route.setDisable(false);
         btn_ok.setText("Add");
         CRUDType = "Create";
+        toggle_updateDpr.setVisible(false);
+        lb_update.setVisible(false);
         toggleDetail();
     }
 
     @FXML
     void btn_delete_clicked(MouseEvent event) {
-        ScheduleEntity_ViewModel schedule = table_view.getSelectionModel().getSelectedItem();
-        BLL_Admin.getInstance().deleteSchedule(schedule.getIdSchedule());
-        show();
+        try {
+            ScheduleEntity_ViewModel schedule = table_view.getSelectionModel().getSelectedItem();
+            BLL_Admin.getInstance().deleteSchedule(schedule.getIdSchedule());
+            show();
+        } catch (Exception e) {
+
+        }
     }
 
     @FXML
@@ -211,7 +225,9 @@ public class SchedulePage implements Initializable {
                         show();
                         break;
                     case "Update":
-                        BLL_Admin.getInstance().updateSchedule(idSchedule, routeSelected, busSelected, driverSelected, departTimeInput, durationInput, priceInput, dprInput);
+                        if(tfx_day_per_route.getText().equals(""))
+                            BLL_Admin.getInstance().updateScheduleNotDPR(idSchedule, routeSelected, busSelected, driverSelected, departTimeInput, durationInput, priceInput);
+                        else BLL_Admin.getInstance().updateSchedule(idSchedule, routeSelected, busSelected, driverSelected, departTimeInput, durationInput, priceInput, dprInput);
                         show();
                         break;
                     default:
@@ -246,7 +262,14 @@ public class SchedulePage implements Initializable {
     }
 
     @FXML
+    void toggleClicked(ActionEvent event) {
+        tfx_day_per_route.setDisable(toggle_updateDpr.isSelected());
+    }
+
+    @FXML
     void btn_update_clicked(MouseEvent event) {
+        toggle_updateDpr.setVisible(true);
+        lb_update.setVisible(true);
         CRUDType = "Update";
         btn_ok.setText("OK");
         try {
@@ -265,6 +288,14 @@ public class SchedulePage implements Initializable {
             busEntity.forEach(bus -> {
                 if (bus.getBusName().equals(scheduleEntity_viewModel.getBusName())) {
                     cbx_bus.getSelectionModel().select(bus);
+                }
+            });
+
+            List<DriverEntity> driverEntity = BLL_Admin.getInstance().getListDriver(0,"");
+            driverEntity.forEach(driver ->{
+                if(driver.toString().equals(scheduleEntity_viewModel.getNameofDriver())){
+                    System.out.println(driver);
+                    cbx_driver.getSelectionModel().select(driver);
                 }
             });
 
@@ -303,20 +334,26 @@ public class SchedulePage implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            // Init for side bar
-            InitSideBar.getInstance().initializeForNavBar(this.pane, this.jfx_drawer, this.jfx_hambur);
-
             // Init combobox for bus and route
-
             BLL_Admin.getInstance().getAllBus().forEach(bus -> cbx_bus.getItems().add(bus));
             BLL_Admin.getInstance().getRoutes(0, "").forEach(route -> cbx_route.getItems().add(route));
             BLL_Admin.getInstance().getListDriver(0, "").forEach(driver -> cbx_driver.getItems().add(driver));
+//            while (cbx_route.getItems().isEmpty() || cbx_bus.getItems().isEmpty() || cbx_driver.getItems().isEmpty()) {
+//                new Alert(Alert.AlertType.ERROR, "NOT ENOUGH DATA").showAndWait();
+//            }
+            // Init for side bar
+            InitSideBar.getInstance().initializeForNavBar(this.pane, this.jfx_drawer, this.jfx_hambur);
+
 
             tfx_typeofbus.setEditable(false);
 
             spn_timepickerH.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, 0));
             spn_timepickerM.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, 0));
             spn_timepickerS.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, 0));
+
+            spn_timepickerH.setEditable(true);
+            spn_timepickerM.setEditable(true);
+            spn_timepickerS.setEditable(true);
 
             show();
 

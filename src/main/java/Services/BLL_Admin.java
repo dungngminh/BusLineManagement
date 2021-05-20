@@ -205,7 +205,7 @@ public class BLL_Admin {
 
     public int getDistance(int startProvinceIndex, int endProvinceIndex) throws IOException {
         // cell B - Q  = 2 - 17
-        String[] cells = {"B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "N", "O", "P", "Q"};
+        String[] cells = {"B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q"};
         String[] rowIndex = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17"};
         HSSFWorkbook wb = new HSSFWorkbook(getClass().getResourceAsStream("/util/Distance.xls"));
         HSSFSheet sheet = wb.getSheetAt(0);
@@ -217,15 +217,15 @@ public class BLL_Admin {
     // done ?
 
     //BLL for Schedule
-    public List<ScheduleEntity_ViewModel> updateTableSchedulePage(String name){
+    public List<ScheduleEntity_ViewModel> updateTableSchedulePage(String name) {
         List<ScheduleEntity_ViewModel> list = new ArrayList<>();
         DAL.getInstance().getScheduleData().forEach(data -> {
-            list.add(new ScheduleEntity_ViewModel(data.getIdSchedule(), (data.getRouteByIdRoute().getStartStation() + " - " + data.getRouteByIdRoute().getEndStation()),data.getBusByIdBus().getBusName(),data.getBusByIdBus().getTypeOfBusByIdType().getTypeName(),data.getDriverByIdDriver().getNameDriver(),new SimpleDateFormat("HH:mm:ss").format(data.getDepartTime()),new SimpleDateFormat("dd/MM/yyyy").format(DAL.getInstance().getOutDateUpdate(data.getIdSchedule())),data.getPrice(),data.getDpr(),data.getDuration(),data.getIsDelete()));
+            list.add(new ScheduleEntity_ViewModel(data.getIdSchedule(), (data.getRouteByIdRoute().getStartStation() + " - " + data.getRouteByIdRoute().getEndStation()), data.getBusByIdBus().getBusName(), data.getBusByIdBus().getTypeOfBusByIdType().getTypeName(), data.getDriverByIdDriver().getNameDriver(), new SimpleDateFormat("HH:mm:ss").format(data.getDepartTime()), new SimpleDateFormat("dd/MM/yyyy").format(DAL.getInstance().getOutDateUpdate(data.getIdSchedule())), data.getPrice(), data.getDpr(), data.getDuration(), data.getIsDelete()));
         });
         return list;
     }
 
-    public void addSchedule(RouteEntity Route, BusEntity Bus, DriverEntity driver,Date departTimeInput, int durationInput, int priceInput, int dprInput) {
+    public void addSchedule(RouteEntity Route, BusEntity Bus, DriverEntity driver, Date departTimeInput, int durationInput, int priceInput, int dprInput) {
         ScheduleEntity schedule = new ScheduleEntity();
         schedule.setIdRoute(Route.getIdRoute());
         schedule.setIdBus(Bus.getIdBus());
@@ -240,16 +240,18 @@ public class BLL_Admin {
         schedule.setIsDelete(false);
         DAL.getInstance().insertSchedule(schedule);
     }
-    public void deleteSchedule(int idSchedule){
+
+    public void deleteSchedule(int idSchedule) {
         DAL.getInstance().removeSchedule(idSchedule);
     }
 
-    public void updateSchedule(int idSchedule, RouteEntity routeSelected, BusEntity busSelected,DriverEntity driverSelected, Date departTimeInput, int durationInput, int priceInput, int dprInput) {
-        DAL.getInstance().updateSchedule(idSchedule, routeSelected, busSelected, driverSelected,departTimeInput, durationInput, durationInput, priceInput, dprInput);
+    public void updateSchedule(int idSchedule, RouteEntity routeSelected, BusEntity busSelected, DriverEntity driverSelected, Date departTimeInput, int durationInput, int priceInput, int dprInput) {
+        DAL.getInstance().updateSchedule(idSchedule, routeSelected, busSelected, driverSelected, departTimeInput, durationInput, priceInput, dprInput);
     }
 
-
-
+    public void updateScheduleNotDPR(int idSchedule, RouteEntity routeSelected, BusEntity busSelected, DriverEntity driverSelected, Date departTimeInput, int durationInput, int priceInput) {
+        DAL.getInstance().updateScheduleNotDPR(idSchedule, routeSelected, busSelected, driverSelected, departTimeInput, durationInput, priceInput);
+    }
     // NOTICE BLL for MainWindow(Dashboard of Admin)
 
     public String getRevenueTicket1YearAgo() {
