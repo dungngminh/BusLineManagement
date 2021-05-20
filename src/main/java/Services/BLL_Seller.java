@@ -1,21 +1,15 @@
 package Services;
 
 
-import Controller.TicketSeller.TicketOrder;
 import Model.*;
 import Model.ViewModel.FilterRoute_ViewModel;
 import Model.ViewModel.Ticket_ViewModel;
-import Util.HibernateUtils;
-import javafx.scene.Node;
-import javafx.scene.layout.GridPane;
-import org.hibernate.Session;
-import org.hibernate.query.Query;
 
 
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class BLL_Seller {
     private static BLL_Seller instance;
@@ -123,44 +117,73 @@ public class BLL_Seller {
 
     public List<Ticket_ViewModel> getAllTicket(ProvinceEntity fromProvince, ProvinceEntity toProvince, Date departDate
             , String pay, String nameCustomer, String phoneCustomer) {
-        List<RouteEntity> listRoute = DAL.getInstance().getFilterRoute(getPairStationFromTwoProvince(fromProvince, toProvince));
-
-        List<TripInformationEntity> listTrip = DAL.getInstance().getFilterTrip(listRoute);
-        List<TicketEntity> listTicket = new ArrayList<>();
-        listTrip.forEach(trip ->{
-            if(trip.getDepartDate().compareTo(departDate) == 0) {
-                Arrays.asList(trip.getTicketsByIdTrip().toArray()).forEach(e -> {
-                    listTicket.add((TicketEntity)e);
-                });
-            }
-        });
         List<Ticket_ViewModel> result = new ArrayList<>();
-        listTicket.forEach(ticket -> {
-            String nameTicket = ticket.getNameTicket();
-            String route = ticket.getTripInformationByIdTrip().getScheduleByIdSchedule().getRouteByIdRoute().getStartStation() +
-                    "-" + ticket.getTripInformationByIdTrip().getScheduleByIdSchedule().getRouteByIdRoute().getEndStation();
-            String departTime = new SimpleDateFormat("HH:mm:ss").format(ticket.getTripInformationByIdTrip()
-                    .getScheduleByIdSchedule().getDepartTime());
-            String name = ticket.getNameCustomer();
-            String phone = ticket.getPhoneNumber();
-            String isPaid = ticket.getIsPaid() ? "Paid" : "Unpaid";
 
-            // Format VNĐ
-            Locale localeVN = new Locale("vi", "VN");
-            NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
-            String price = currencyVN.format(ticket.getPrice());
-            //
-           if(pay.equals("All") && ticket.getNameCustomer().toLowerCase().contains(nameCustomer.toLowerCase()) &&
-                   ticket.getPhoneNumber().contains(phoneCustomer)) {
+        if(fromProvince == null) {
+            DAL.getInstance().getAllTicket().forEach(ticket -> {
+                if(ticket.getNameCustomer().toLowerCase().contains(nameCustomer.toLowerCase()) &&
+                        ticket.getPhoneNumber().contains(phoneCustomer)) {
+                    String nameTicket = ticket.getNameTicket();
+                    String route = ticket.getTripInformationByIdTrip().getScheduleByIdSchedule().getRouteByIdRoute().getStartStation() +
+                            "-" + ticket.getTripInformationByIdTrip().getScheduleByIdSchedule().getRouteByIdRoute().getEndStation();
+                    String departTime = new SimpleDateFormat("HH:mm:ss").format(ticket.getTripInformationByIdTrip()
+                            .getScheduleByIdSchedule().getDepartTime());
+                    String name = ticket.getNameCustomer();
+                    String phone = ticket.getPhoneNumber();
+                    String isPaid = ticket.getIsPaid() ? "Paid" : "Unpaid";
 
-               result.add(new Ticket_ViewModel(ticket.getIdTicket(), nameTicket, route, departTime, name, phone, isPaid, price));
-           } else if(ticket.getIsPaid() == pay.equals("Paid") && ticket.getNameCustomer().toLowerCase().contains(nameCustomer.toLowerCase()) &&
-                   ticket.getPhoneNumber().contains(phoneCustomer)) {
+                    // Format VNĐ
+                    Locale localeVN = new Locale("vi", "VN");
+                    NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
+                    String price = currencyVN.format(ticket.getPrice());
+                    //
 
-               result.add(new Ticket_ViewModel(ticket.getIdTicket(), nameTicket, route, departTime, name, phone, isPaid, price));
-           }
+                    result.add(new Ticket_ViewModel(ticket.getIdTicket(), nameTicket, route, departTime, name, phone, isPaid, price));
+                }
 
-        });
+            });
+        }
+        else {
+            List<RouteEntity> listRoute = DAL.getInstance().getFilterRoute(getPairStationFromTwoProvince(fromProvince, toProvince));
+
+            List<TripInformationEntity> listTrip = DAL.getInstance().getFilterTrip(listRoute);
+            List<TicketEntity> listTicket = new ArrayList<>();
+            listTrip.forEach(trip ->{
+                if(trip.getDepartDate().compareTo(departDate) == 0) {
+                    Arrays.asList(trip.getTicketsByIdTrip().toArray()).forEach(e -> {
+                        listTicket.add((TicketEntity)e);
+                    });
+                }
+            });
+
+            listTicket.forEach(ticket -> {
+                String nameTicket = ticket.getNameTicket();
+                String route = ticket.getTripInformationByIdTrip().getScheduleByIdSchedule().getRouteByIdRoute().getStartStation() +
+                        "-" + ticket.getTripInformationByIdTrip().getScheduleByIdSchedule().getRouteByIdRoute().getEndStation();
+                String departTime = new SimpleDateFormat("HH:mm:ss").format(ticket.getTripInformationByIdTrip()
+                        .getScheduleByIdSchedule().getDepartTime());
+                String name = ticket.getNameCustomer();
+                String phone = ticket.getPhoneNumber();
+                String isPaid = ticket.getIsPaid() ? "Paid" : "Unpaid";
+
+                // Format VNĐ
+                Locale localeVN = new Locale("vi", "VN");
+                NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
+                String price = currencyVN.format(ticket.getPrice());
+                //
+                if(pay.equals("All") && ticket.getNameCustomer().toLowerCase().contains(nameCustomer.toLowerCase()) &&
+                        ticket.getPhoneNumber().contains(phoneCustomer)) {
+
+                    result.add(new Ticket_ViewModel(ticket.getIdTicket(), nameTicket, route, departTime, name, phone, isPaid, price));
+                } else if(ticket.getIsPaid() == pay.equals("Paid") && ticket.getNameCustomer().toLowerCase().contains(nameCustomer.toLowerCase()) &&
+                        ticket.getPhoneNumber().contains(phoneCustomer)) {
+
+                    result.add(new Ticket_ViewModel(ticket.getIdTicket(), nameTicket, route, departTime, name, phone, isPaid, price));
+                }
+
+            });
+        }
+
         return result;
     }
 
@@ -173,6 +196,4 @@ public class BLL_Seller {
     }
 
     //DONE for TicketPage
-
-
 }

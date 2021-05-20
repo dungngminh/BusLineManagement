@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
+<?import com.jfoenix.controls.JFXToggleButton?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
@@ -45,6 +46,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
                   <Label prefHeight="35.0" prefWidth="60.0" text="From">
@@ -52,7 +54,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label prefHeight="35.0" prefWidth="60.0" text="Name" GridPane.rowIndex="4">
+                  <Label prefHeight="35.0" prefWidth="60.0" text="Name" GridPane.rowIndex="5">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -62,15 +64,15 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label prefHeight="35.0" prefWidth="60.0" text="Phone" GridPane.rowIndex="5">
+                  <Label prefHeight="35.0" prefWidth="60.0" text="Phone" GridPane.rowIndex="6">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
                   <ComboBox fx:id="cbx_from" prefHeight="45.0" prefWidth="226.0" promptText="Select" styleClass="cbx" GridPane.columnIndex="1" />
                   <ComboBox fx:id="cbx_to" prefHeight="44.0" prefWidth="243.0" promptText="Select" styleClass="cbx" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField fx:id="txf_name" prefHeight="45.0" prefWidth="167.0" promptText="could empty" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <TextField fx:id="txf_phone" prefHeight="46.0" prefWidth="167.0" promptText="could empty" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <TextField fx:id="txf_name" prefHeight="45.0" prefWidth="167.0" promptText="could empty" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <TextField fx:id="txf_phone" prefHeight="46.0" prefWidth="167.0" promptText="could empty" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                   <Label prefHeight="35.0" prefWidth="60.0" text="Date" GridPane.rowIndex="2">
                      <font>
                         <Font size="14.0" />
@@ -83,6 +85,11 @@
                      </font>
                   </Label>
                   <ComboBox fx:id="cbx_pay" prefHeight="44.0" prefWidth="243.0" promptText="Select" styleClass="cbx" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <JFXToggleButton fx:id="btn_toggle" onAction="#btn_toggle_Clicked" text="Only Info Of Customer" textFill="WHITE" toggleColor="#c6002e" toggleLineColor="#fc376b" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </JFXToggleButton>
                </children>
             </GridPane>
             <Button layoutX="62.0" layoutY="586.0" mnemonicParsing="false" onMouseClicked="#btn_search_clicked" prefHeight="46.0" prefWidth="77.0" styleClass="search" stylesheets="@../../css/admin_css/setting.css" text="Search" textFill="WHITE">

@@ -8,8 +8,10 @@ import Services.BLL_Admin;
 import Services.BLL_Seller;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
+import com.jfoenix.controls.JFXToggleButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -80,6 +82,9 @@ public class Ticket implements Initializable {
     @FXML
     private DatePicker datepicker;
 
+    @FXML
+    private JFXToggleButton btn_toggle;
+
 
 
     @Override
@@ -111,16 +116,21 @@ public class Ticket implements Initializable {
     }
 
     public void show() {
-        ProvinceEntity fromProvince = cbx_from.getSelectionModel().getSelectedItem();
-        ProvinceEntity toProvince = cbx_to.getSelectionModel().getSelectedItem();
-
-//        Date date = new Date(datepicker.getValue().toEpochDay());
-        Date date = Date.from(datepicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
-        String pay = cbx_pay.getSelectionModel().getSelectedItem();
         String name = txf_name.getText();
         String phone = txf_phone.getText();
         ObservableList<Ticket_ViewModel> listObj = FXCollections.observableArrayList(BLL_Seller.getInstance().getAllTicket(
-                fromProvince, toProvince, date, pay, name, phone));
+                null, null, null, null, name, phone));
+
+        if(!cbx_from.isDisable()) {
+            ProvinceEntity fromProvince = cbx_from.getSelectionModel().getSelectedItem();
+            ProvinceEntity toProvince = cbx_to.getSelectionModel().getSelectedItem();
+
+    //        Date date = new Date(datepicker.getValue().toEpochDay());
+            Date date = Date.from(datepicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
+            String pay = cbx_pay.getSelectionModel().getSelectedItem();
+            listObj = FXCollections.observableArrayList(BLL_Seller.getInstance().getAllTicket(
+                    fromProvince, toProvince, date, pay, name, phone));
+        }
 
         nameTicket.setCellValueFactory(new PropertyValueFactory<>("nameTicket"));
         route.setCellValueFactory(new PropertyValueFactory<>("route"));
@@ -133,7 +143,6 @@ public class Ticket implements Initializable {
         tableview.setItems(listObj);
         tableview.refresh();
     }
-
 
 
     @FXML
@@ -227,5 +236,21 @@ public class Ticket implements Initializable {
         txf_name.setText("");
         txf_phone.setText("");
         cbx_pay.getSelectionModel().select("All");
+    }
+
+    @FXML
+    void btn_toggle_Clicked(ActionEvent event) {
+        if(btn_toggle.isSelected()) {
+            cbx_from.setDisable(true);
+            cbx_to.setDisable(true);
+            datepicker.setDisable(true);
+            cbx_pay.setDisable(true);
+        }
+        else {
+            cbx_from.setDisable(false);
+            cbx_to.setDisable(false);
+            datepicker.setDisable(false);
+            cbx_pay.setDisable(false);
+        }
     }
 }

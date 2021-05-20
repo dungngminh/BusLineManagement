@@ -5,14 +5,18 @@ import Controller.TicketSeller.TicketOrder;
 
 import Model.*;
 import Util.HibernateUtils;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
+import java.lang.annotation.Native;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import java.util.Date;
@@ -75,7 +79,7 @@ public class DAL {
             throw new RuntimeException(e);
         }
     }
-
+    // for LogIn
     public List<AccountEntity> getListAcc() throws SQLException, ClassNotFoundException {
 //        SessionFactory factory = new HibernateUtils.getSessionFactory();
         try (Session session = HibernateUtils.getSessionFactory().openSession()) {
@@ -95,6 +99,22 @@ public class DAL {
 
         }
     }
+
+    public void toggleIsOnlineForAccout(AccountEntity acc, Boolean isOnline) {
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query query = session.createQuery("update AccountEntity set isOnline = :isOnline" +
+                " where idUser = :idUser");
+        query.setParameter("isOnline", isOnline);
+        query.setParameter("idUser", acc.getIdUser());
+        int result = query.executeUpdate();
+
+        //Commit the transaction
+        session.getTransaction().commit();
+        session.close();
+    }
+
+    //DONE
 
     // DAL for Bus
     public List<TypeOfBusEntity> getListTypeOfBus() {
@@ -560,6 +580,22 @@ public class DAL {
 
     }
 
+    public Integer getIdTicketToClose() {
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        session.beginTransaction();
+        String sql = "SELECT TIC.* FROM Ticket TIC\n" +
+                "WHERE TIC.status = 0 AND TIC.idUser = :idUser";
+        SQLQuery query = session.createSQLQuery(sql);
+        query.addEntity(TicketEntity.class);
+        query.setParameter("idUser", DAL.getInstance().getCurrent().getIdUser());
+        List<TicketEntity> result = query.getResultList();
+
+        session.getTransaction().commit();
+        session.close();
+        return !result.isEmpty() ? result.get(0).getIdTicket() : -1;
+
+    }
+
     public void removeSchedule(int idSchedule) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
@@ -593,6 +629,20 @@ public class DAL {
     // done TicketOrder ?
 
     // NOTICE DAL ticket
+    public List<TicketEntity> getAllTicket() {
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        session.beginTransaction();
+        String sql = "SELECT * FROM Ticket TIC, TripInformation TRIP " +
+                "WHERE TIC.idTrip = TRIP.idTrip AND TRIP.departDate >= :date";
+        SQLQuery query = session.createSQLQuery(sql);
+        query.addEntity(TicketEntity.class);
+        query.setParameter("date", LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")));
+        List<TicketEntity> result = query.getResultList();
+
+        session.getTransaction().commit();
+        session.close();
+        return result;
+    }
     public void setPaidTicket(Integer idTicket) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
@@ -618,7 +668,40 @@ public class DAL {
         return result;
     }
 
-
-
     // DONE
+
+    // NOTICE DAL for MainWindow(Dashboard of Admin)
+
+    public List<TicketEntity> getListTicket1YearAgo() {
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        session.beginTransaction();
+        String sql = "SELECT * FROM Ticket TIC, TripInformation TRIP " +
+                "WHERE TIC.idTrip = TRIP.idTrip AND TRIP.departDate BETWEEN DATEADD(year, -1, GETDATE()) AND GETDATE()";
+        SQLQuery query = session.createSQLQuery(sql);
+        query.addEntity(TicketEntity.class);
+        List<TicketEntity> result = query.getResultList();
+
+        session.getTransaction().commit();
+        session.close();
+        return result;
+    }
+
+
+    public long getNumberRoutesToday() {
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        session.beginTransaction();
+        String sql = "SELECT ROU.* FROM Route ROU\n" +
+                "INNER JOIN Schedule S on ROU.idRoute = S.idRoute\n" +
+                "INNER JOIN TripInformation TI on S.idSchedule = TI.idSchedule\n" +
+                "WHERE TI.departDate = cast(GETDATE() as date)";
+        SQLQuery query = session.createSQLQuery(sql);
+        query.addEntity(RouteEntity.class);
+        List<RouteEntity> result = query.getResultList();
+
+        session.getTransaction().commit();
+        session.close();
+        return result.size();
+    }
+
+    //DONE
 }

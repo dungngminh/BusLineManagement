@@ -16,6 +16,7 @@ import org.hibernate.query.Query;
 import java.io.*;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
@@ -50,6 +51,15 @@ public class BLL_Admin {
         return valid.get();
     }
 
+    public void toggleIsOnlineForAccout(AccountEntity acc, Boolean isOnline) {
+        DAL.getInstance().toggleIsOnlineForAccout(acc, isOnline);
+    }
+
+    public Integer getIdTicketToClose() {
+        return DAL.getInstance().getIdTicketToClose();
+    }
+
+    // DONE
     // BLL for BusPage
     public List<TypeOfBusEntity> getListTypeOfBus() {
         return DAL.getInstance().getListTypeOfBus();
@@ -240,10 +250,24 @@ public class BLL_Admin {
 
 
 
-    // NOTICE BLL for Main Window ?
+    // NOTICE BLL for MainWindow(Dashboard of Admin)
+
+    public String getRevenueTicket1YearAgo() {
+        AtomicReference<Long> result = new AtomicReference<>(0L);
+        DAL.getInstance().getListTicket1YearAgo().forEach(ticket -> {
+            result.updateAndGet(v -> v + ticket.getPrice());
+        });
+
+        Locale localeVN = new Locale("vi", "VN");
+        NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
+        return currencyVN.format(result.get());
+    }
+
+    public long getNumberRoutesToday() {
+        return DAL.getInstance().getNumberRoutesToday();
+    }
 
 
-
-    //
+    //DONE
 
 }
