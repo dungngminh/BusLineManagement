@@ -7,14 +7,11 @@ import Services.BLL_Admin;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXToggleButton;
-import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.InputMethodEvent;
@@ -23,11 +20,11 @@ import javafx.scene.layout.*;
 
 import java.io.IOException;
 import java.net.URL;
-import java.text.AttributedCharacterIterator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class RoutePage implements Initializable {
 
@@ -180,6 +177,7 @@ public class RoutePage implements Initializable {
 
     @FXML
     void btn_ok_clicked(MouseEvent event) {
+        AtomicBoolean isDuplicate = new AtomicBoolean(false);
         try {
             String startStation = cbx_startstation.getSelectionModel().getSelectedItem().toString();
             String endStation = cbx_endstation.getSelectionModel().getSelectedItem().toString();
@@ -188,32 +186,40 @@ public class RoutePage implements Initializable {
                 new Alert(Alert.AlertType.ERROR, "Duplicate Station, please re fill!").showAndWait();
 
             else {
+                List<RouteEntity> listCheck = BLL_Admin.getInstance().getRoutes(0,"");
+                listCheck.forEach(route -> {
+                    if((route.getStartStation() + route.getEndStation()).equals(startStation+endStation))
+                        isDuplicate.set(true);
+                });
+                    if(isDuplicate.get() == true)
+                        new Alert(Alert.AlertType.ERROR, "Duplicate Data, please re fill").showAndWait();
+                    else {
+                        int distance = Integer.parseInt(tfx_distance.getText());
+                        String note = tax_note.getText().trim();
+                        if (cbx_startstation.getSelectionModel().getSelectedItem() == null || cbx_endstation.getSelectionModel().getSelectedItem() == null) {
+                            new Alert(Alert.AlertType.ERROR, "Please choose station!").showAndWait();
+                        } else {
+                            switch (CRUDType) {
+                                case "Create":
+                                    if (toggle_returnRoute.isSelected()) {
+                                        BLL_Admin.getInstance().addRoute(startStation, endStation, note, distance);
+                                        BLL_Admin.getInstance().addRoute(endStation, startStation, note, distance);
+                                    } else BLL_Admin.getInstance().addRoute(startStation, endStation, note, distance);
+                                    new Alert(Alert.AlertType.INFORMATION, "Add route successful!").showAndWait();
+                                    show(0, "");
+                                    break;
+                                case "Update":
+                                    int stt = cbx_status.getSelectionModel().getSelectedItem().equals("Available") ? 0 : 1;
+                                    BLL_Admin.getInstance().updateRoute(idRoute, startStation, endStation, note, distance, stt);
+                                    new Alert(Alert.AlertType.INFORMATION, "Update route successful!").showAndWait();
+                                    show(0, "");
+                                    break;
+                                default:
+                                    break;
+                            }
 
-                int distance = Integer.parseInt(tfx_distance.getText());
-                String note = tax_note.getText().trim();
-                if (cbx_startstation.getSelectionModel().getSelectedItem() == null || cbx_endstation.getSelectionModel().getSelectedItem() == null) {
-                    new Alert(Alert.AlertType.ERROR, "Please choose station!").showAndWait();
-                } else {
-                    switch (CRUDType) {
-                        case "Create":
-                            if (toggle_returnRoute.isSelected()) {
-                                BLL_Admin.getInstance().addRoute(startStation, endStation, note, distance);
-                                BLL_Admin.getInstance().addRoute(endStation, startStation, note, distance);
-                            } else BLL_Admin.getInstance().addRoute(startStation, endStation, note, distance);
-                            new Alert(Alert.AlertType.INFORMATION, "Add route successful!").showAndWait();
-                            show(0, "");
-                            break;
-                        case "Update":
-                            int stt = cbx_status.getSelectionModel().getSelectedItem().equals("Available") ? 0 : 1;
-                            BLL_Admin.getInstance().updateRoute(idRoute, startStation, endStation, note, distance, stt);
-                            new Alert(Alert.AlertType.INFORMATION, "Update route successful!").showAndWait();
-                            show(0, "");
-                            break;
-                        default:
-                            break;
+                        }
                     }
-
-                }
             }
         } catch (Exception ee) {
             new Alert(Alert.AlertType.ERROR, "Please fill information!").showAndWait();
