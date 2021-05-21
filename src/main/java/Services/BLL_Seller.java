@@ -59,7 +59,12 @@ public class BLL_Seller {
                 Date departTime = trip.getScheduleByIdSchedule().getDepartTime();
                 int duration = trip.getScheduleByIdSchedule().getDuration();
 
-                result.add(new FilterRoute_ViewModel(trip, picture, typeName, startStation, destStation, departTime, duration));
+                Locale localeVN = new Locale("vi", "VN");
+                NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
+
+                String price = currencyVN.format(trip.getScheduleByIdSchedule().getPrice());
+
+                result.add(new FilterRoute_ViewModel(trip, picture, typeName, startStation, destStation, departTime, duration, price));
             }
 
         });

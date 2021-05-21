@@ -467,6 +467,7 @@ public class DAL {
         session.close();
         return list;
     }
+
     public Date getOutDateUpdate(int idSchedule){
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
@@ -483,20 +484,35 @@ public class DAL {
 
 
         for (RouteEntity x : listRoute) {
-            session.beginTransaction();
-            Query<TripInformationEntity> query = session.createQuery("SELECT TRIP FROM  TripInformationEntity TRIP, " +
-                            "ScheduleEntity SCH, RouteEntity ROU, BusEntity BUS, TypeOfBusEntity TYPE, DriverEntity DRI " +
-                            "WHERE TRIP.idSchedule = SCH.idSchedule AND SCH.isDelete = false AND SCH.idRoute = :idRoute " +
-                            "AND ROU.status = 0 AND DRI.isDelete = false " +
-                            "AND SCH.idBus = BUS.idBus AND BUS.isDelete = false " +
-                            "AND BUS.status = 0 AND BUS.idType = TYPE.idType AND TYPE.isDelete = false",
-                    TripInformationEntity.class);
-            query.setParameter("idRoute", x.getIdRoute());
-//            System.out.println(x.getIdRoute());
-            query.getResultList().forEach(qr -> {
-                if (!result.contains(qr)) result.add(qr);
+//            session.beginTransaction();
+//            Query<TripInformationEntity> query = session.createQuery("SELECT TRIP FROM  TripInformationEntity TRIP, " +
+//                            "ScheduleEntity SCH, RouteEntity ROU, BusEntity BUS, TypeOfBusEntity TYPE, DriverEntity DRI " +
+//                            "WHERE TRIP.idSchedule = SCH.idSchedule AND SCH.isDelete = false AND SCH.idRoute = :idRoute " +
+//                            "AND ROU.status = 0 AND DRI.isDelete = false " +
+//                            "AND SCH.idBus = BUS.idBus AND BUS.isDelete = false " +
+//                            "AND BUS.status = 0 AND BUS.idType = TYPE.idType AND TYPE.isDelete = false",
+//                    TripInformationEntity.class);
+//            query.setParameter("idRoute", x.getIdRoute());
+////            System.out.println(x.getIdRoute());
+//            query.getResultList().forEach(qr -> {
+//                if (!result.contains(qr)) result.add(qr);
+//
+//            });
 
-            });
+            session.beginTransaction();
+            String sql = "SELECT DISTINCT TI.* FROM TripInformation TI\n" +
+                    "INNER JOIN Schedule S on S.idSchedule = TI.idSchedule\n" +
+                    "INNER JOIN Route R2 on S.idRoute = R2.idRoute\n" +
+                    "INNER JOIN Driver D on D.idDriver = S.idDriver\n" +
+                    "INNER JOIN Bus B on B.idBus = S.idBus\n" +
+                    "INNER JOIN TypeOfBus TOB on TOB.idType = B.idType\n" +
+                    "WHERE S.isDelete = 0 AND D.isDelete = 0 AND B.status = 0 \n" +
+                    " AND TOB.isDelete = 0 AND R2.status = 0 AND S.idRoute = :idRoute";
+            SQLQuery query = session.createSQLQuery(sql);
+            query.setParameter("idRoute", x.getIdRoute());
+            query.addEntity(TripInformationEntity.class);
+            List<TripInformationEntity> res = query.getResultList();
+            result.addAll(res);
             session.getTransaction().commit();
 
         }
@@ -702,6 +718,58 @@ public class DAL {
         session.close();
         return result.size();
     }
+
+    public List<ScheduleEntity> getOutDatedSchedule() {
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        session.beginTransaction();
+        String sql = "SELECT DISTINCT SCH.* FROM Schedule SCH\n" +
+                "INNER JOIN TripInformation TI on SCH.idSchedule = TI.idSchedule\n" +
+                "WHERE (SELECT max(departDate) FROM TripInformation) < DATEADD(day, 10, GETDATE())";
+        SQLQuery query = session.createSQLQuery(sql);
+        query.addEntity(ScheduleEntity.class);
+        List<ScheduleEntity> result = query.getResultList();
+
+        session.getTransaction().commit();
+        session.close();
+        return result;
+    }
+
+    public List<AccountEntity> getListSeller() {
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query<AccountEntity> query = session.createQuery("From AccountEntity WHERE idRole = 2", AccountEntity.class);
+
+        List<AccountEntity> result = query.getResultList();
+
+        session.getTransaction().commit();
+        session.close();
+        return result;
+    }
+
+    // IMPORTANT Illustrate 1
+
+    public List<TicketEntity> getListTicketInIntervalTime(String fromDate, String toDate, AccountEntity acc) {
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        session.beginTransaction();
+        String compAcc = acc == null ? "" : " AND A.idUser = :idUser";
+        String sql = "SELECT TIC.* FROM Ticket TIC\n" +
+                "INNER JOIN Account A on A.idUser = TIC.idUser\n" +
+                "INNER JOIN TripInformation TI on TI.idTrip = TIC.idTrip\n" +
+                "WHERE departDate BETWEEN :fromDate AND :toDate" + compAcc;
+        SQLQuery query = session.createSQLQuery(sql);
+        query.setParameter("fromDate", fromDate);
+        query.setParameter("toDate", toDate);
+        if(acc != null)
+            query.setParameter("idUser", acc.getIdUser());
+        query.addEntity(TicketEntity.class);
+        List<TicketEntity> result = query.getResultList();
+
+        session.getTransaction().commit();
+        session.close();
+        return result;
+    }
+    //
+
 
     //DONE
 }

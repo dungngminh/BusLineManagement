@@ -224,7 +224,12 @@ public class TicketOrder implements Initializable {
                             Integer.parseInt(lb_price.getText().substring(0, lb_price.getText().length() - 1)),
                             cbx_payment.getSelectionModel().getSelectedItem().equals("Paid"));
 
-                    AnchorPane newPane = FXMLLoader.load(getClass().getResource("/view/seller_view/Dashboard.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/seller_view/FilterRoute.fxml"));
+
+                    FilterRoute controller = new FilterRoute(startProvince, endProvince, date);
+                    loader.setController(controller);
+
+                    AnchorPane newPane = loader.load();
                     newPane.requestLayout();
             //        rootPane.getChildren().setAll(newPane);
                     Scene scene= rootPane.getScene();
