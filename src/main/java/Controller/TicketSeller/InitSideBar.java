@@ -73,6 +73,7 @@ public class InitSideBar {
 
         Button logout = (Button)box.lookup("#logout");
         logout.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, (e) -> {
+
             // Case ticket seller booking ticket
             Integer idTicket = BLL_Admin.getInstance().getIdTicketToClose();
             if(idTicket > 0)
@@ -80,7 +81,6 @@ public class InitSideBar {
 
             //
             BLL_Admin.getInstance().toggleIsOnlineForAccout(DAL.getInstance().getCurrent(), false);
-
             FXMLLoader main_Page = new FXMLLoader();
             main_Page.setLocation(getClass().getResource("/view/admin_view/LogIn.fxml"));
 

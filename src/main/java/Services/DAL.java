@@ -425,6 +425,52 @@ public class DAL {
         session.close();
     }
 
+    public void removeSchedule(int idSchedule) {
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query query = session.createQuery("update ScheduleEntity set isDelete = :del" +
+                " where idSchedule = :id");
+        query.setParameter("del", true);
+        query.setParameter("id", idSchedule);
+        query.executeUpdate();
+        session.getTransaction().commit();
+        session.close();
+    }
+
+    public void updateSchedule(int idSchedule, RouteEntity routeSelected, BusEntity busSelected, DriverEntity driverSelected,Date departTimeInput, int durationInput,int priceInput, int dprInput) {
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        session.beginTransaction();
+        //TODO Query update Schedule
+        Query query = session.createQuery("Update ScheduleEntity set idRoute = :idRoute, idBus = :idBus, idDriver = :idDriver,departTime = :departTime" +
+                ", price = :price, dpr = :dpr where idSchedule = :idSchedule");
+        query.setParameter("idRoute", routeSelected.getIdRoute());
+        query.setParameter("idBus", busSelected.getIdBus());
+        query.setParameter("idDriver",driverSelected.getIdDriver());
+        query.setParameter("departTime", departTimeInput);
+        query.setParameter("price", priceInput);
+        query.setParameter("dpr", dprInput);
+        query.setParameter("idSchedule", idSchedule);
+        query.executeUpdate();
+        session.getTransaction().commit();
+        session.close();
+    }
+
+    public void updateScheduleNotDPR(int idSchedule, RouteEntity routeSelected, BusEntity busSelected, DriverEntity driverSelected, Date departTimeInput, int durationInput, int priceInput) {
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        session.beginTransaction();
+        //TODO Query update Schedule
+        Query query = session.createQuery("Update ScheduleEntity set idRoute = :idRoute, idBus = :idBus, idDriver = :idDriver,departTime = :departTime" +
+                ", price = :price where idSchedule = :idSchedule");
+        query.setParameter("idRoute", routeSelected.getIdRoute());
+        query.setParameter("idBus", busSelected.getIdBus());
+        query.setParameter("idDriver",driverSelected.getIdDriver());
+        query.setParameter("departTime", departTimeInput);
+        query.setParameter("price", priceInput);
+        query.setParameter("idSchedule", idSchedule);
+        query.executeUpdate();
+        session.getTransaction().commit();
+        session.close();
+    }
     //DAL for Ticket Seller
     // DAL for FilterRoute ?
     /// This method: Get route have start station and end station from two province have been known
@@ -612,35 +658,6 @@ public class DAL {
 
     }
 
-    public void removeSchedule(int idSchedule) {
-        Session session = HibernateUtils.getSessionFactory().openSession();
-        session.beginTransaction();
-        Query query = session.createQuery("update ScheduleEntity set isDelete = :del" +
-                " where idSchedule = :id");
-        query.setParameter("del", true);
-        query.setParameter("id", idSchedule);
-        query.executeUpdate();
-        session.getTransaction().commit();
-        session.close();
-    }
-
-    public void updateSchedule(int idSchedule, RouteEntity routeSelected, BusEntity busSelected, DriverEntity driverSelected,Date departTimeInput, int durationInput, int durationInput1, int priceInput, int dprInput) {
-        Session session = HibernateUtils.getSessionFactory().openSession();
-        session.beginTransaction();
-        //TODO Query update Schedule
-        Query query = session.createQuery("Update ScheduleEntity set idRoute = :idRoute, idBus = :idBus, idDriver = :idDriver,departTime = :departTime" +
-                ", price = :price, dpr = :dpr where idSchedule = :idSchedule");
-        query.setParameter("idRoute", routeSelected.getIdRoute());
-        query.setParameter("idBus", busSelected.getIdBus());
-        query.setParameter("idDriver",driverSelected.getIdDriver());
-        query.setParameter("departTime", departTimeInput);
-        query.setParameter("price", priceInput);
-        query.setParameter("dpr", dprInput);
-        query.setParameter("idSchedule", idSchedule);
-        query.executeUpdate();
-        session.getTransaction().commit();
-        session.close();
-    }
 
     // done TicketOrder ?
 

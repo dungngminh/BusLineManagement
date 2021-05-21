@@ -6,6 +6,7 @@ import Model.StationEntity;
 import Services.BLL_Admin;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
+import com.jfoenix.controls.JFXToggleButton;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -113,6 +114,9 @@ public class RoutePage implements Initializable {
     private TextField txf_search_nameofRoute;
 
     @FXML
+    private JFXToggleButton toggle_returnRoute;
+
+    @FXML
     private Button btn_search;
 
     @FXML
@@ -153,6 +157,7 @@ public class RoutePage implements Initializable {
 
     @FXML
     void btn_create_clicked(MouseEvent event) {
+        toggle_returnRoute.setVisible(true);
         btn_ok.setText("Add");
         cbx_provinceStart.getSelectionModel().select(null);
         cbx_provinceEnd.getSelectionModel().select(null);
@@ -183,6 +188,7 @@ public class RoutePage implements Initializable {
                 new Alert(Alert.AlertType.ERROR, "Duplicate Station, please re fill!").showAndWait();
 
             else {
+
                 int distance = Integer.parseInt(tfx_distance.getText());
                 String note = tax_note.getText().trim();
                 if (cbx_startstation.getSelectionModel().getSelectedItem() == null || cbx_endstation.getSelectionModel().getSelectedItem() == null) {
@@ -190,7 +196,10 @@ public class RoutePage implements Initializable {
                 } else {
                     switch (CRUDType) {
                         case "Create":
-                            BLL_Admin.getInstance().addRoute(startStation, endStation, note, distance);
+                            if (toggle_returnRoute.isSelected()) {
+                                BLL_Admin.getInstance().addRoute(startStation, endStation, note, distance);
+                                BLL_Admin.getInstance().addRoute(endStation, startStation, note, distance);
+                            } else BLL_Admin.getInstance().addRoute(startStation, endStation, note, distance);
                             new Alert(Alert.AlertType.INFORMATION, "Add route successful!").showAndWait();
                             show(0, "");
                             break;
@@ -233,6 +242,7 @@ public class RoutePage implements Initializable {
 
     @FXML
     void btn_update_clicked(MouseEvent event) {
+        toggle_returnRoute.setVisible(false);
         btn_ok.setText("Ok");
         try {
             RouteEntity routeEntity = table_view.getSelectionModel().getSelectedItem();
