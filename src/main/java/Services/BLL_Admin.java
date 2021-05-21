@@ -4,21 +4,19 @@ import Model.*;
 import Model.ViewModel.BusEntity_ViewModel;
 import Model.ViewModel.ScheduleEntity_ViewModel;
 
-import Util.HibernateUtils;
+import javafx.util.Pair;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.CellReference;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
-import org.hibernate.query.Query;
 
 import java.io.*;
-import java.net.URL;
 import java.sql.SQLException;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -40,15 +38,18 @@ public class BLL_Admin {
     public Integer validate_Account(String username, String password) throws SQLException, ClassNotFoundException {
 //        AtomicBoolean valid = new AtomicBoolean(false);
         AtomicReference<Integer> valid = new AtomicReference<>(0);
-        DAL.getInstance().getListAcc().forEach(account -> {
+        for(AccountEntity account: DAL.getInstance().getListAcc()) {
             if (account.getUsername().equals(username) &&
                     account.getPassword().equals(DAL.getInstance().encryptSHA1(password))) {
                 int idRole = account.getIdRole();
                 valid.set(idRole);
                 DAL.getInstance().setCurrent(account);
                 System.out.println(DAL.getInstance().getCurrent().getUsername());
+                break;
             }
-        });
+            DAL.getInstance().setCurrent(account);
+        }
+
         return valid.get();
     }
 
@@ -276,6 +277,80 @@ public class BLL_Admin {
         return DAL.getInstance().getListSeller();
     }
 
+    public List<Pair<String, Double>> getDataForLineChart_1Month(AccountEntity acc) {
+        List<Pair<String, Double>> data = new ArrayList<>();
+
+        LocalDate crr = LocalDate.now().plusMonths(1);
+        LocalDate begin = crr.minusMonths(1);
+        while(crr.compareTo(begin) >= 0) {
+            String from = crr.minusDays(5).format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+            String to = crr.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+
+            AtomicReference<Double> sum = new AtomicReference<>(0D);
+            DAL.getInstance().getListTicketInIntervalTime(from, to, acc).forEach(tic -> {
+                sum.updateAndGet(v -> v + tic.getPrice() / 1000000D);
+            });
+
+            String interval = crr.minusDays(5).format(DateTimeFormatter.ofPattern("dd")) + " - " +
+                    crr.format(DateTimeFormatter.ofPattern("dd")) + "/" + crr.format(DateTimeFormatter.ofPattern("MM/yyyy"));
+            if (data.isEmpty())
+                data.add(new Pair<>(interval, sum.get()));
+            else data.add(0, new Pair<>(interval, sum.get()));
+            crr = crr.minusDays(5);
+        }
+
+        return data;
+    }
+
+    public List<Pair<String, Double>> getDataForLineChart_1Quarter(AccountEntity acc) {
+        List<Pair<String, Double>> data = new ArrayList<>();
+
+        LocalDate crr = LocalDate.now().plusMonths(3); // Fake data
+        LocalDate begin = crr.minusMonths(3);
+        while(crr.compareTo(begin) >= 0) {
+            String from = crr.minusDays(10).format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+            String to = crr.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+
+            AtomicReference<Double> sum = new AtomicReference<>(0D);
+            DAL.getInstance().getListTicketInIntervalTime(from, to, acc).forEach(tic -> {
+                sum.updateAndGet(v -> v + tic.getPrice() / 1000000D);
+            });
+
+            String interval = crr.minusDays(10).format(DateTimeFormatter.ofPattern("dd")) + " - " +
+                    crr.format(DateTimeFormatter.ofPattern("dd")) + "/" + crr.format(DateTimeFormatter.ofPattern("MM/yyyy"));
+            if (data.isEmpty())
+                data.add(new Pair<>(interval, sum.get()));
+            else data.add(0, new Pair<>(interval, sum.get()));
+            crr = crr.minusDays(10);
+        }
+
+        return data;
+    }
+
+    public List<Pair<String, Double>> getDataForLineChart_1Year(AccountEntity acc) {
+        List<Pair<String, Double>> data = new ArrayList<>();
+
+        LocalDate crr = LocalDate.now().plusYears(1); // fake data
+        LocalDate begin = crr.minusYears(1);
+        while(crr.compareTo(begin) >= 0) {
+            String from = crr.minusMonths(1).format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+            String to = crr.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+
+            AtomicReference<Double> sum = new AtomicReference<>(0D);
+            DAL.getInstance().getListTicketInIntervalTime(from, to, acc).forEach(tic -> {
+                sum.updateAndGet(v -> v + tic.getPrice() / 1000000D);
+            });
+
+            String interval = crr.minusMonths(1).format(DateTimeFormatter.ofPattern("dd")) + " - " +
+                    crr.format(DateTimeFormatter.ofPattern("dd")) + "/" + crr.format(DateTimeFormatter.ofPattern("MM/yyyy"));
+            if (data.isEmpty())
+                data.add(new Pair<>(interval, sum.get()));
+            else data.add(0, new Pair<>(interval, sum.get()));
+            crr = crr.minusMonths(1);
+        }
+
+        return data;
+    }
 
     //DONE
 
