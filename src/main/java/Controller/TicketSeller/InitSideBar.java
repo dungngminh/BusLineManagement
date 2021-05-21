@@ -73,7 +73,8 @@ public class InitSideBar {
 
         Button logout = (Button)box.lookup("#logout");
         logout.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, (e) -> {
-            //isOnline = false
+
+            // Case ticket seller booking ticket
             Integer idTicket = BLL_Admin.getInstance().getIdTicketToClose();
             if(idTicket > 0)
                 BLL_Seller.getInstance().deleteCurrentTicket(idTicket);
