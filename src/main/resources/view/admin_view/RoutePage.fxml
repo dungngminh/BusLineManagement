@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
+<?import com.jfoenix.controls.JFXToggleButton?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
@@ -30,22 +31,23 @@
       <JFXDrawer fx:id="jfx_drawer" alignment="TOP_LEFT" defaultDrawerSize="190.0" overLayVisible="false" prefHeight="686.0" prefWidth="99.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <Pane prefHeight="686.0" prefWidth="280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <TitledPane fx:id="titlepane_info" animated="false" layoutX="10.0" layoutY="349.0" prefHeight="164.0" prefWidth="265.0" text="Route Information">
+            <TitledPane fx:id="titlepane_info" animated="false" layoutX="10.0" layoutY="324.0" prefHeight="189.0" prefWidth="265.0" text="Route Information">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="136.0" prefWidth="280.0">
                      <children>
-                        <GridPane layoutX="-2.0" layoutY="12.0" prefHeight="117.0" prefWidth="259.0">
+                        <GridPane layoutX="-2.0" layoutY="2.0" prefHeight="139.0" prefWidth="259.0">
                            <columnConstraints>
                               <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="172.0" minWidth="10.0" prefWidth="109.0" />
                               <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="147.0" minWidth="10.0" prefWidth="147.0" />
                            </columnConstraints>
                            <rowConstraints>
-                              <RowConstraints maxHeight="43.0" minHeight="10.0" prefHeight="33.0" valignment="BASELINE" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="49.0" minHeight="10.0" prefHeight="47.0" valignment="BASELINE" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="43.0" minHeight="10.0" prefHeight="29.0" valignment="BASELINE" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="43.0" minHeight="10.0" prefHeight="36.0" valignment="BASELINE" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="55.0" minHeight="10.0" prefHeight="40.0" valignment="BASELINE" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="95.0" minHeight="10.0" prefHeight="28.0" valignment="BASELINE" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="68.0" minHeight="10.0" prefHeight="37.0" valignment="BASELINE" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <Label fx:id="lb_status" alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="107.0" text="Status" textAlignment="CENTER" GridPane.rowIndex="2">
+                              <Label fx:id="lb_status" alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="107.0" text="Status" textAlignment="CENTER" GridPane.rowIndex="2">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -53,7 +55,7 @@
                                     <Insets bottom="25.0" />
                                  </GridPane.margin>
                               </Label>
-                              <ComboBox fx:id="cbx_status" minHeight="-Infinity" minWidth="-Infinity" onAction="#cbx_status" prefHeight="30.0" prefWidth="146.0" styleClass="cbx" stylesheets="@../../css/admin_css/setting.css" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                              <ComboBox fx:id="cbx_status" minHeight="-Infinity" minWidth="-Infinity" onAction="#cbx_status" prefHeight="23.0" prefWidth="146.0" styleClass="cbx" stylesheets="@../../css/admin_css/setting.css" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                  <GridPane.margin>
                                     <Insets bottom="25.0" top="5.0" />
                                  </GridPane.margin>
@@ -69,18 +71,23 @@
                                     <Font size="16.0" />
                                  </font>
                               </Label>
-                              <TextArea fx:id="tax_note" prefHeight="5.0" prefWidth="146.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextArea fx:id="tax_note" prefHeight="41.0" prefWidth="147.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <JFXToggleButton fx:id="toggle_returnRoute" prefHeight="35.0" prefWidth="143.0" text="Khứ hồi" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </JFXToggleButton>
                            </children>
                         </GridPane>
                      </children>
                   </AnchorPane>
                </content>
             </TitledPane>
-            <TitledPane fx:id="titlepane_start" animated="false" layoutX="10.0" layoutY="80.0" prefHeight="126.0" prefWidth="265.0" text="Start Station">
+            <TitledPane fx:id="titlepane_start" animated="false" layoutX="10.0" layoutY="80.0" prefHeight="116.0" prefWidth="265.0" text="Start Station">
                <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="92.0" prefWidth="285.0">
                      <children>
-                        <GridPane layoutX="-2.0" layoutY="14.0" prefHeight="86.0" prefWidth="259.0">
+                        <GridPane layoutX="-2.0" layoutY="1.0" prefHeight="88.0" prefWidth="259.0">
                           <columnConstraints>
                             <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="172.0" minWidth="10.0" prefWidth="109.0" />
                             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="147.0" minWidth="10.0" prefWidth="147.0" />
@@ -138,11 +145,11 @@
                   </Button>
                </buttons>
             </ButtonBar>
-            <TitledPane fx:id="titlepane_end" animated="false" layoutX="10.0" layoutY="214.0" prefHeight="126.0" prefWidth="265.0" text="End Station">
+            <TitledPane fx:id="titlepane_end" animated="false" layoutX="10.0" layoutY="202.0" prefHeight="116.0" prefWidth="265.0" text="End Station">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="120.0" prefWidth="268.0">
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="126.0" prefWidth="259.0">
                      <children>
-                        <GridPane layoutX="-2.0" layoutY="14.0" prefHeight="86.0" prefWidth="259.0">
+                        <GridPane layoutX="-2.0" layoutY="4.0" prefHeight="84.0" prefWidth="259.0">
                            <columnConstraints>
                               <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="172.0" minWidth="10.0" prefWidth="109.0" />
                               <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="147.0" minWidth="10.0" prefWidth="147.0" />
