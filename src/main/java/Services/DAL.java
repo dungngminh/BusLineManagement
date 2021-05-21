@@ -763,6 +763,30 @@ public class DAL {
         return result;
     }
 
+    // IMPORTANT Illustrate 1
+
+    public List<TicketEntity> getListTicketInIntervalTime(String fromDate, String toDate, AccountEntity acc) {
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        session.beginTransaction();
+        String compAcc = acc == null ? "" : " AND A.idUser = :idUser";
+        String sql = "SELECT TIC.* FROM Ticket TIC\n" +
+                "INNER JOIN Account A on A.idUser = TIC.idUser\n" +
+                "INNER JOIN TripInformation TI on TI.idTrip = TIC.idTrip\n" +
+                "WHERE departDate BETWEEN :fromDate AND :toDate" + compAcc;
+        SQLQuery query = session.createSQLQuery(sql);
+        query.setParameter("fromDate", fromDate);
+        query.setParameter("toDate", toDate);
+        if(acc != null)
+            query.setParameter("idUser", acc.getIdUser());
+        query.addEntity(TicketEntity.class);
+        List<TicketEntity> result = query.getResultList();
+
+        session.getTransaction().commit();
+        session.close();
+        return result;
+    }
+    //
+
 
     //DONE
 }

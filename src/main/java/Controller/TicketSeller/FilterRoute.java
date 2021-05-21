@@ -5,6 +5,7 @@ import Model.ViewModel.FilterRoute_ViewModel;
 import Services.BLL_Admin;
 import Services.BLL_Seller;
 import com.jfoenix.controls.*;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -174,6 +175,7 @@ public class FilterRoute implements Initializable {
 
             // Init gridpane
             calendar.setValue(date);
+            beginIndex = 1;
             listRoute.addAll(BLL_Seller.getInstance().setUpFilterRouteView(startProvince, endProvince, java.sql.Date.valueOf(calendar.getValue())));
             lbIndex.setText("1");
             reloadTable();
@@ -283,6 +285,16 @@ public class FilterRoute implements Initializable {
         else {
             new Alert(Alert.AlertType.WARNING, "Out of data!").showAndWait();
         }
+    }
+
+    @FXML
+    void calendar_onAction(ActionEvent event) {
+        listRoute.clear();
+        setGridpaneUnvisible();
+        listRoute.addAll(BLL_Seller.getInstance().setUpFilterRouteView(startProvince, endProvince, java.sql.Date.valueOf(calendar.getValue())));
+        lbIndex.setText("1");
+        beginIndex = 1;
+        reloadTable();
     }
 
     public void reloadTable() {
