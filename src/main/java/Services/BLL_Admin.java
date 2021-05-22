@@ -354,6 +354,28 @@ public class BLL_Admin {
         return data;
     }
 
+    public List<Pair<String, Integer>> getDataForBarChart(ProvinceEntity fromProvince, ProvinceEntity toProvince) {
+        List<Pair<String, Integer>> data = new ArrayList<>();
+
+        LocalDate crr = LocalDate.now().plusDays(20); // fake data
+        LocalDate begin = crr.minusDays(30);
+        while(crr.compareTo(begin) >= 0) {
+            String from = crr.minusDays(5).format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+            String to = crr.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+
+            String interval = crr.minusDays(5).format(DateTimeFormatter.ofPattern("dd")) + " - " +
+                    crr.format(DateTimeFormatter.ofPattern("dd")) + "/" + crr.format(DateTimeFormatter.ofPattern("MM/yyyy"));
+            if (data.isEmpty())
+                data.add(new Pair<>(interval,
+                        DAL.getInstance().getListTripInIntervalTime(fromProvince, toProvince, from, to).size()));
+            else data.add(0, new Pair<>(interval,
+                    DAL.getInstance().getListTripInIntervalTime(fromProvince, toProvince, from, to).size()));
+            crr = crr.minusDays(5);
+        }
+
+        return data;
+    }
+
     //DONE
 
 }

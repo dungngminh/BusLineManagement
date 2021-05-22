@@ -308,7 +308,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </ComboBox>
-                        <Button fx:id="btn_show1" mnemonicParsing="false" onMouseClicked="#btn_show1_Clicked" prefHeight="40.0" prefWidth="80.0" styleClass="btn" text="Illustrate" textFill="WHITE" GridPane.columnIndex="2">
+                        <Button fx:id="btn_show1" mnemonicParsing="false" onMouseClicked="#btn_show1_Clicked" prefHeight="40.0" prefWidth="80.0" styleClass="btn" text="Illustrate" GridPane.columnIndex="2">
                            <font>
                               <Font name="Calibri Light" size="16.0" />
                            </font>
@@ -316,7 +316,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button fx:id="btn_show2" mnemonicParsing="false" onMouseClicked="#btn_show2_Clicked" prefHeight="40.0" prefWidth="80.0" styleClass="btn" text="Illustrate" textFill="WHITE" GridPane.columnIndex="6">
+                        <Button fx:id="btn_show2" mnemonicParsing="false" onMouseClicked="#btn_show2_Clicked" prefHeight="40.0" prefWidth="80.0" styleClass="btn" text="Illustrate" GridPane.columnIndex="6">
                            <font>
                               <Font name="Calibri Light" size="16.0" />
                            </font>
@@ -325,7 +325,7 @@
                            </cursor>
                         </Button>
                         <Label text="TO" GridPane.columnIndex="4" />
-                        <CheckComboBox fx:id="cbx_staff" prefHeight="40.0" prefWidth="150.0" GridPane.columnIndex="1" />
+                        <CheckComboBox fx:id="cbx_staff" prefHeight="40.0" prefWidth="150.0" styleClass="cbx" GridPane.columnIndex="1" />
                      </children>
                   </GridPane>
                   <GridPane GridPane.rowIndex="2">

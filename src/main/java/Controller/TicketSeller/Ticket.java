@@ -127,9 +127,15 @@ public class Ticket implements Initializable {
 
     //        Date date = new Date(datepicker.getValue().toEpochDay());
             Date date = Date.from(datepicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
-            String pay = cbx_pay.getSelectionModel().getSelectedItem();
+            String pay;
+            if(cbx_pay.getSelectionModel().getSelectedItem().equals("Paid"))
+                pay = "1";
+            else if(cbx_pay.getSelectionModel().getSelectedItem().equals("Unpaid")) {
+                pay = "0";
+            }
+            else pay = null;
             listObj = FXCollections.observableArrayList(BLL_Seller.getInstance().getAllTicket(
-                    fromProvince, toProvince, date, pay, name, phone));
+                    fromProvince, toProvince, pay, date, name, phone));
         }
 
         nameTicket.setCellValueFactory(new PropertyValueFactory<>("nameTicket"));

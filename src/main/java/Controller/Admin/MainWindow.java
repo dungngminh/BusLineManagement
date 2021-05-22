@@ -121,6 +121,10 @@ public class MainWindow implements Initializable {
                     , btn_show1.getLayoutX(), btn_show1.getLayoutY(), MouseButton.PRIMARY, 1,
                     true, true, true, true, true, true, true, true, true, true, null));
 
+            btn_show2_Clicked(new MouseEvent(MouseEvent.MOUSE_CLICKED, btn_show2.getLayoutX(), btn_show2.getLayoutY()
+                    , btn_show2.getLayoutX(), btn_show2.getLayoutY(), MouseButton.PRIMARY, 1,
+                    true, true, true, true, true, true, true, true, true, true, null));
+
             // DONE
         } catch (IOException | SQLException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -138,7 +142,7 @@ public class MainWindow implements Initializable {
 
                 BLL_Admin.getInstance().getDataForLineChart_1Month(acc).forEach(data -> {
                     dataSeries.getData().add(new XYChart.Data(data.getKey(), data.getValue()));
-                    System.out.println(data.getKey());
+//                    System.out.println(data.getKey());
                 });
 
 
@@ -168,6 +172,19 @@ public class MainWindow implements Initializable {
         return dataSeries;
     }
     //
+
+    // Show Bar Chart
+    public XYChart.Series<String, Integer> showBarChart(ProvinceEntity fromProvince, ProvinceEntity toProvince) {
+        XYChart.Series<String, Integer> dataSeries = new XYChart.Series<>();
+
+        BLL_Admin.getInstance().getDataForBarChart(fromProvince, toProvince).forEach(data -> {
+            dataSeries.getData().add(new XYChart.Data<>(data.getKey(), data.getValue()));
+        });
+
+
+        return dataSeries;
+    }
+
 
     @FXML
     void btn_show1_Clicked(MouseEvent event) {
@@ -257,7 +274,24 @@ public class MainWindow implements Initializable {
 
     @FXML
     void btn_show2_Clicked(MouseEvent event) {
+        ProvinceEntity from = cbx_from.getSelectionModel().getSelectedItem();
+        ProvinceEntity to = cbx_to.getSelectionModel().getSelectedItem();
+        CategoryAxis xAxis = new CategoryAxis();
+        xAxis.setLabel("Time intervals");
 
+        NumberAxis yAxis = new NumberAxis();
+        yAxis.setLabel("Number of trip(s)");
+
+        BarChart chart = new BarChart(xAxis, yAxis);
+        chart.getData().addAll(showBarChart(from, to));
+
+        chart.setTitle("Number of trips active in time periods");
+
+        paneArea.getChildren().setAll(chart);
+        AnchorPane.setTopAnchor(chart, 0.0);
+        AnchorPane.setRightAnchor(chart, 0.0);
+        AnchorPane.setBottomAnchor(chart, 0.0);
+        AnchorPane.setLeftAnchor(chart, 0.0);
     }
 
 }
