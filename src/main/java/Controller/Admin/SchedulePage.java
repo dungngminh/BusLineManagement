@@ -88,13 +88,7 @@ public class SchedulePage implements Initializable {
     private TitledPane titlepane_info;
 
     @FXML
-    private SplitMenuButton btn_showmenu;
-
-    @FXML
-    private MenuItem btmenu_avaliable;
-
-    @FXML
-    private MenuItem btmenu_unavaliable;
+    private Button btn_showmenu;
 
     @FXML
     private Button btn_create;
@@ -154,6 +148,9 @@ public class SchedulePage implements Initializable {
     private JFXHamburger jfx_hambur;
 
     @FXML
+    private Button btn_reOutdate;
+
+    @FXML
     private Spinner<Integer> spn_timepickerH;
 
     @FXML
@@ -165,8 +162,6 @@ public class SchedulePage implements Initializable {
     @FXML
     private TextField tfx_duration;
 
-
-    //TODO fix Show button
     //SUPPORT PROPERTY
     private static String CRUDType;
     private static int idSchedule;
@@ -201,7 +196,7 @@ public class SchedulePage implements Initializable {
             BLL_Admin.getInstance().deleteSchedule(schedule.getIdSchedule());
             show();
         } catch (Exception e) {
-
+            new Alert(Alert.AlertType.ERROR, "Error while deleting!");
         }
     }
 
@@ -225,9 +220,10 @@ public class SchedulePage implements Initializable {
                         show();
                         break;
                     case "Update":
-                        if(tfx_day_per_route.getText().equals(""))
+                        if (tfx_day_per_route.getText().equals(""))
                             BLL_Admin.getInstance().updateScheduleNotDPR(idSchedule, routeSelected, busSelected, driverSelected, departTimeInput, durationInput, priceInput);
-                        else BLL_Admin.getInstance().updateSchedule(idSchedule, routeSelected, busSelected, driverSelected, departTimeInput, durationInput, priceInput, dprInput);
+                        else
+                            BLL_Admin.getInstance().updateSchedule(idSchedule, routeSelected, busSelected, driverSelected, departTimeInput, durationInput, priceInput, dprInput);
                         show();
                         break;
                     default:
@@ -258,7 +254,7 @@ public class SchedulePage implements Initializable {
 
     @FXML
     void btn_showmenu_clicked(MouseEvent event) {
-
+        show();
     }
 
     @FXML
@@ -291,9 +287,9 @@ public class SchedulePage implements Initializable {
                 }
             });
 
-            List<DriverEntity> driverEntity = BLL_Admin.getInstance().getListDriver(0,"");
-            driverEntity.forEach(driver ->{
-                if(driver.toString().equals(scheduleEntity_viewModel.getNameofDriver())){
+            List<DriverEntity> driverEntity = BLL_Admin.getInstance().getListDriver(0, "");
+            driverEntity.forEach(driver -> {
+                if (driver.toString().equals(scheduleEntity_viewModel.getNameofDriver())) {
                     System.out.println(driver);
                     cbx_driver.getSelectionModel().select(driver);
                 }
@@ -327,39 +323,44 @@ public class SchedulePage implements Initializable {
     }
 
     @FXML
+    void onReOutdateClicked(MouseEvent event) {
+        ScheduleEntity_ViewModel scheduleEntity_viewModel = table_view.getSelectionModel().getSelectedItem();
+        System.out.println(scheduleEntity_viewModel.getIdSchedule());
+        //TODO  BLL_Admin.getInstance().updateScheduleNotDPR(idSchedule, routeSelected, busSelected, driverSelected, departTimeInput, durationInput, priceInput);
+    }
+
+    @FXML
     void onMenuClicked(ActionEvent event) {
 
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
-            // Init combobox for bus and route
-            BLL_Admin.getInstance().getAllBus().forEach(bus -> cbx_bus.getItems().add(bus));
-            BLL_Admin.getInstance().getRoutes(0, "").forEach(route -> cbx_route.getItems().add(route));
-            BLL_Admin.getInstance().getListDriver(0, "").forEach(driver -> cbx_driver.getItems().add(driver));
-//            while (cbx_route.getItems().isEmpty() || cbx_bus.getItems().isEmpty() || cbx_driver.getItems().isEmpty()) {
-//                new Alert(Alert.AlertType.ERROR, "NOT ENOUGH DATA").showAndWait();
-//            }
-            // Init for side bar
-            InitSideBar.getInstance().initializeForNavBar(this.pane, this.jfx_drawer, this.jfx_hambur);
+        // Init combobox for bus and route
+        BLL_Admin.getInstance().getAllBus().forEach(bus -> cbx_bus.getItems().add(bus));
+        BLL_Admin.getInstance().getRoutes(0, "").forEach(route -> cbx_route.getItems().add(route));
+        BLL_Admin.getInstance().getListDriver(0, "").forEach(driver -> cbx_driver.getItems().add(driver));
+        if (cbx_route.getItems().isEmpty() || cbx_bus.getItems().isEmpty() || cbx_driver.getItems().isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "NOT ENOUGH DATA, PLEASE CHECK DATA FROM BUSES, ROUTES AND DRIVERS").showAndWait();
+        } else {
+            try {
+                // Init for side bar
+                InitSideBar.getInstance().initializeForNavBar(this.pane, this.jfx_drawer, this.jfx_hambur);
+                tfx_typeofbus.setEditable(false);
+                spn_timepickerH.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, 0));
+                spn_timepickerM.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, 0));
+                spn_timepickerS.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, 0));
 
+                spn_timepickerH.setEditable(true);
+                spn_timepickerM.setEditable(true);
+                spn_timepickerS.setEditable(true);
 
-            tfx_typeofbus.setEditable(false);
+                show();
 
-            spn_timepickerH.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, 0));
-            spn_timepickerM.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, 0));
-            spn_timepickerS.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, 0));
-
-            spn_timepickerH.setEditable(true);
-            spn_timepickerM.setEditable(true);
-            spn_timepickerS.setEditable(true);
-
-            show();
-
-            toggleDetail();
-        } catch (IOException e) {
-            e.printStackTrace();
+                toggleDetail();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -403,6 +404,4 @@ public class SchedulePage implements Initializable {
         jfx_hambur.toFront();
 
     }
-
-
 }

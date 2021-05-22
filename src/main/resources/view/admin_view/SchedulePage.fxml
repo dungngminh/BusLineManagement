@@ -1,13 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
-<?import java.net.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.JFXHamburger?>
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="schedule_page" fx:id="pane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="686.0" prefWidth="1166.0" style="-fx-background-color: #EDB183;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Admin.SchedulePage">
+<AnchorPane id="schedule_page" fx:id="pane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="686.0" prefWidth="1166.0" style="-fx-background-color: #EDB183;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Admin.SchedulePage">
    <children>
       <JFXDrawer fx:id="jfx_drawer" alignment="TOP_LEFT" defaultDrawerSize="190.0" minHeight="-Infinity" minWidth="-Infinity" overLayVisible="false" prefHeight="686.0" prefWidth="99.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <Pane prefHeight="686.0" prefWidth="282.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -148,15 +165,15 @@
             <TableView fx:id="table_view" prefHeight="455.0" prefWidth="876.0" BorderPane.alignment="CENTER">
               <columns>
                   <TableColumn fx:id="col_id" prefWidth="109.0" text="ID" />
-                <TableColumn fx:id="col_routename" prefWidth="143.0" text="Route Name" />
-                <TableColumn fx:id="col_busname" prefWidth="75.0" text="Bus Name" />
+                <TableColumn fx:id="col_routename" prefWidth="102.0" text="Route Name" />
+                <TableColumn fx:id="col_busname" prefWidth="73.0" text="Bus Name" />
                   <TableColumn fx:id="col_typeofbus" prefWidth="75.0" text="Type of Bus" />
                   <TableColumn fx:id="col_nameofdriver" prefWidth="75.0" text="Driver Name" />
                   <TableColumn fx:id="col_price" prefWidth="75.0" text="Price" />
                   <TableColumn fx:id="col_departTime" prefWidth="75.0" text="Depart Time" />
                   <TableColumn fx:id="col_outdate" prefWidth="75.0" text="Outdate" />
-                  <TableColumn fx:id="col_duration" prefWidth="75.0" text="DPR" />
-                  <TableColumn fx:id="col_dpr" prefWidth="75.0" text="Duration" />
+                  <TableColumn fx:id="col_duration" prefWidth="75.0" text="Duration" />
+                  <TableColumn fx:id="col_dpr" editable="false" prefWidth="75.0" text="DPR" />
               </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -197,17 +214,13 @@
             </HBox>
          </top>
          <bottom>
-            <FlowPane fx:id="grp_btn_tbl" alignment="CENTER" columnHalignment="CENTER" prefHeight="151.0" prefWidth="886.0" BorderPane.alignment="CENTER">
+            <FlowPane fx:id="grp_btn_tbl" alignment="CENTER" columnHalignment="CENTER" hgap="10.0" prefHeight="151.0" prefWidth="886.0" BorderPane.alignment="CENTER">
                <children>
-                  <SplitMenuButton fx:id="btn_showmenu" mnemonicParsing="false" onMouseClicked="#btn_showmenu_clicked" prefHeight="35.0" prefWidth="80.0" styleClass="btn" stylesheets="@../../css/admin_css/setting.css" text="Show">
-                     <items>
-                        <MenuItem fx:id="btmenu_avaliable" mnemonicParsing="false" onAction="#onMenuClicked" text="Available" />
-                        <MenuItem fx:id="btmenu_unavaliable" mnemonicParsing="false" onAction="#onMenuClicked" text="Unavailable" />
-                     </items>
-                     <FlowPane.margin>
-                        <Insets right="10.0" />
-                     </FlowPane.margin>
-                  </SplitMenuButton>
+                  <Button fx:id="btn_showmenu" layoutX="269.0" layoutY="68.0" mnemonicParsing="false" onMouseClicked="#btn_showmenu_clicked" prefHeight="35.0" prefWidth="80.0" styleClass="btn" stylesheets="@../../css/admin_css/setting.css" text="Show">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
                   <Button fx:id="btn_create" mnemonicParsing="false" onMouseClicked="#btn_create_clicked" prefHeight="35.0" prefWidth="80.0" styleClass="btn" stylesheets="@../../css/admin_css/setting.css" text="Create">
                      <font>
                         <Font size="14.0" />
@@ -231,6 +244,11 @@
                      <FlowPane.margin>
                         <Insets right="10.0" />
                      </FlowPane.margin>
+                  </Button>
+                  <Button fx:id="btn_reOutdate" mnemonicParsing="false" onMouseClicked="#onReOutdateClicked" prefHeight="37.0" prefWidth="87.0" styleClass="btn" stylesheets="@../../css/admin_css/setting.css" text="Re outdate">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
                   </Button>
                </children>
             </FlowPane>
