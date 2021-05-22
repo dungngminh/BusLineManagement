@@ -26,11 +26,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 
 import java.io.IOException;
 import java.net.URL;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -194,6 +197,7 @@ public class SchedulePage implements Initializable {
         try {
             ScheduleEntity_ViewModel schedule = table_view.getSelectionModel().getSelectedItem();
             BLL_Admin.getInstance().deleteSchedule(schedule.getIdSchedule());
+            new Alert(Alert.AlertType.INFORMATION, "Delete successful!").showAndWait();
             show();
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, "Error while deleting!");
@@ -217,6 +221,7 @@ public class SchedulePage implements Initializable {
                 switch (CRUDType) {
                     case "Create":
                         BLL_Admin.getInstance().addSchedule(routeSelected, busSelected, driverSelected, departTimeInput, durationInput, priceInput, dprInput);
+                        new Alert(Alert.AlertType.INFORMATION, "Create successful!").showAndWait();
                         show();
                         break;
                     case "Update":
@@ -224,6 +229,8 @@ public class SchedulePage implements Initializable {
                             BLL_Admin.getInstance().updateScheduleNotDPR(idSchedule, routeSelected, busSelected, driverSelected, departTimeInput, durationInput, priceInput);
                         else
                             BLL_Admin.getInstance().updateSchedule(idSchedule, routeSelected, busSelected, driverSelected, departTimeInput, durationInput, priceInput, dprInput);
+                        new Alert(Alert.AlertType.INFORMATION, "Update successful!").showAndWait();
+
                         show();
                         break;
                     default:
@@ -308,18 +315,16 @@ public class SchedulePage implements Initializable {
             tfx_duration.setText(Integer.toString(scheduleEntity_viewModel.getDuration()));
 
         } catch (Exception e) {
-            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Please choose 1 row !").showAndWait();
         }
         toggleDetail();
     }
 
     @FXML
     void onBusCBBAction(ActionEvent event) {
-        Object[] objs = BLL_Admin.getInstance().getAllBus().toArray();
-        List<Object> objsList = new ArrayList<Object>();
         if (cbx_bus.getSelectionModel().getSelectedItem() != null)
             tfx_typeofbus.setText(cbx_bus.getSelectionModel().getSelectedItem().getTypeOfBusByIdType().getTypeName());
-        else System.out.println("null");
+        else tfx_typeofbus.setText("");
     }
 
     @FXML
@@ -329,10 +334,6 @@ public class SchedulePage implements Initializable {
         //TODO  BLL_Admin.getInstance().updateScheduleNotDPR(idSchedule, routeSelected, busSelected, driverSelected, departTimeInput, durationInput, priceInput);
     }
 
-    @FXML
-    void onMenuClicked(ActionEvent event) {
-
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -376,6 +377,22 @@ public class SchedulePage implements Initializable {
         col_outdate.setCellValueFactory(new PropertyValueFactory<>("outDate"));
         col_duration.setCellValueFactory(new PropertyValueFactory<>("duration"));
         col_dpr.setCellValueFactory(new PropertyValueFactory<>("dpr"));
+
+//        table_view.setRowFactory(row -> new TableRow<>(){
+//            @Override
+//            protected void updateItem(ScheduleEntity_ViewModel scheduleEntity_viewModel, boolean b) {
+//                LocalDate lcd = LocalDate.now();
+//                super.updateItem(scheduleEntity_viewModel, b);
+//                ScheduleEntity_ViewModel obj = getTableView().getItems().get(getIndex());
+//                try {
+//                    if((new SimpleDateFormat("dd/MM/yyyy").parse(obj.getOutDate()).getDay() - lcd.getDayOfMonth()) == 30){
+//                        setTextFill(Color.RED);
+//                    }
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
 
 
         table_view.setItems(listObj);

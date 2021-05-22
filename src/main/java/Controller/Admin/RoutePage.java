@@ -171,8 +171,8 @@ public class RoutePage implements Initializable {
     void btn_delete_clicked(MouseEvent event) {
         RouteEntity routeEntity = table_view.getSelectionModel().getSelectedItem();
         idRoute = routeEntity.getIdRoute();
-
         BLL_Admin.getInstance().deleteRoute(idRoute);
+        new Alert(Alert.AlertType.INFORMATION, "Delete successful!").showAndWait();
         show(0, "");
     }
 
@@ -218,7 +218,6 @@ public class RoutePage implements Initializable {
                                 default:
                                     break;
                             }
-
                         }
                     }
             }
@@ -241,9 +240,6 @@ public class RoutePage implements Initializable {
     void btn_search_clicked(MouseEvent event) {
         show(0, txf_search_nameofRoute.getText());
     }
-
-
-
     @FXML
     void btn_showmenu_clicked(MouseEvent event) {
         show(0, "");
