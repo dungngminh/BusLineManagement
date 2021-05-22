@@ -524,48 +524,33 @@ public class DAL {
         return list.get(0);
     }
 
-    public List<TripInformationEntity> getFilterTrip(List<RouteEntity> listRoute) {
-        List<TripInformationEntity> result = new ArrayList<>();
+    public List<TripInformationEntity> getFilterTrip(ProvinceEntity startPro, ProvinceEntity endPro, String departDate) {
         Session session = HibernateUtils.getSessionFactory().openSession();
+        session.beginTransaction();
+        String sql = "SELECT DISTINCT TI.* FROM Route R\n" +
+                "INNER JOIN Schedule S on R.idRoute = S.idRoute\n" +
+                "INNER JOIN TripInformation TI on S.idSchedule = TI.idSchedule\n" +
+                "INNER JOIN Driver D on D.idDriver = S.idDriver\n" +
+                "INNER JOIN Bus B on B.idBus = S.idBus\n" +
+                "INNER JOIN TypeOfBus TOB on TOB.idType = B.idType\n" +
+                "\n" +
+                "WHERE departDate = :departDate AND S.isDelete = 0 AND D.isDelete = 0 AND D.status = 0\n" +
+                "  AND B.status = 0 AND TOB.isDelete = 0 AND R.status = 0\n" +
+                "AND R.startStation IN (SELECT STA.stationName FROM Station STA WHERE STA.idProvince =\n" +
+                "                                            (SELECT PRO.idProvince FROM Province PRO WHERE PRO.provinceName = :from))\n" +
+                "AND R.endStation IN (SELECT STA.stationName FROM Station STA WHERE STA.idProvince =\n" +
+                "                                            (SELECT PRO.idProvince FROM Province PRO WHERE PRO.provinceName = :to))";
+        SQLQuery query = session.createSQLQuery(sql);
+        query.setParameter("departDate", departDate);
+        query.setParameter("from", startPro.getProvinceName());
+        query.setParameter("to", endPro.getProvinceName());
+        query.addEntity(TripInformationEntity.class);
+        List<TripInformationEntity> result = query.getResultList();
 
-
-        for (RouteEntity x : listRoute) {
-//            session.beginTransaction();
-//            Query<TripInformationEntity> query = session.createQuery("SELECT TRIP FROM  TripInformationEntity TRIP, " +
-//                            "ScheduleEntity SCH, RouteEntity ROU, BusEntity BUS, TypeOfBusEntity TYPE, DriverEntity DRI " +
-//                            "WHERE TRIP.idSchedule = SCH.idSchedule AND SCH.isDelete = false AND SCH.idRoute = :idRoute " +
-//                            "AND ROU.status = 0 AND DRI.isDelete = false " +
-//                            "AND SCH.idBus = BUS.idBus AND BUS.isDelete = false " +
-//                            "AND BUS.status = 0 AND BUS.idType = TYPE.idType AND TYPE.isDelete = false",
-//                    TripInformationEntity.class);
-//            query.setParameter("idRoute", x.getIdRoute());
-////            System.out.println(x.getIdRoute());
-//            query.getResultList().forEach(qr -> {
-//                if (!result.contains(qr)) result.add(qr);
-//
-//            });
-
-            session.beginTransaction();
-            String sql = "SELECT DISTINCT TI.* FROM TripInformation TI\n" +
-                    "INNER JOIN Schedule S on S.idSchedule = TI.idSchedule\n" +
-                    "INNER JOIN Route R2 on S.idRoute = R2.idRoute\n" +
-                    "INNER JOIN Driver D on D.idDriver = S.idDriver\n" +
-                    "INNER JOIN Bus B on B.idBus = S.idBus\n" +
-                    "INNER JOIN TypeOfBus TOB on TOB.idType = B.idType\n" +
-                    "WHERE S.isDelete = 0 AND D.isDelete = 0 AND B.status = 0 \n" +
-                    " AND TOB.isDelete = 0 AND R2.status = 0 AND S.idRoute = :idRoute";
-            SQLQuery query = session.createSQLQuery(sql);
-            query.setParameter("idRoute", x.getIdRoute());
-            query.addEntity(TripInformationEntity.class);
-            List<TripInformationEntity> res = query.getResultList();
-            result.addAll(res);
-            session.getTransaction().commit();
-
-        }
-
-//        System.out.println(result.size());
+        session.getTransaction().commit();
         session.close();
         return result;
+
     }
 
     // done FilterRoute ?
@@ -662,14 +647,30 @@ public class DAL {
     // done TicketOrder ?
 
     // NOTICE DAL ticket
-    public List<TicketEntity> getAllTicket() {
+    public List<TicketEntity> getAllTicket(ProvinceEntity fromProvince, ProvinceEntity toProvince, String paid, String departDate) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
-        String sql = "SELECT * FROM Ticket TIC, TripInformation TRIP " +
-                "WHERE TIC.idTrip = TRIP.idTrip AND TRIP.departDate >= :date";
+        String subQr1 = paid == null ? "" : ("AND T.isPaid = " + paid);
+        String subQr2 = fromProvince == null ? "" : "AND departDate >= :departDate\n" +
+                "AND R.startStation IN (SELECT STA.stationName FROM Station STA WHERE STA.idProvince =\n" +
+                "                                            (SELECT PRO.idProvince FROM Province PRO WHERE PRO.provinceName = :from))\n" +
+                "AND R.endStation IN (SELECT STA.stationName FROM Station STA WHERE STA.idProvince =\n" +
+                "                                            (SELECT PRO.idProvince FROM Province PRO WHERE PRO.provinceName = :to))";
+        String sql = "SELECT DISTINCT T.* FROM Route R\n" +
+                "INNER JOIN Schedule S on R.idRoute = S.idRoute\n" +
+                "INNER JOIN TripInformation TI on S.idSchedule = TI.idSchedule\n" +
+                "INNER JOIN Ticket T on TI.idTrip = T.idTrip\n" +
+                "\n" +
+                "WHERE departDate >= GETDATE()" + subQr1 + subQr2;
         SQLQuery query = session.createSQLQuery(sql);
+        if(fromProvince != null) {
+            query.setParameter("departDate", departDate);
+            query.setParameter("from", fromProvince.getProvinceName());
+            query.setParameter("to", toProvince.getProvinceName());
+        }
+
         query.addEntity(TicketEntity.class);
-        query.setParameter("date", LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")));
+
         List<TicketEntity> result = query.getResultList();
 
         session.getTransaction().commit();
@@ -741,7 +742,7 @@ public class DAL {
         session.beginTransaction();
         String sql = "SELECT DISTINCT SCH.* FROM Schedule SCH\n" +
                 "INNER JOIN TripInformation TI on SCH.idSchedule = TI.idSchedule\n" +
-                "WHERE (SELECT max(departDate) FROM TripInformation) < DATEADD(day, 10, GETDATE())";
+                "WHERE (SELECT max(departDate) FROM TripInformation) < DATEADD(day, 30, GETDATE())";
         SQLQuery query = session.createSQLQuery(sql);
         query.addEntity(ScheduleEntity.class);
         List<ScheduleEntity> result = query.getResultList();
@@ -786,6 +787,32 @@ public class DAL {
         return result;
     }
     //
+
+    public List<TripInformationEntity> getListTripInIntervalTime(ProvinceEntity fromProvince, ProvinceEntity toProvince,
+                                String fromDate, String toDate) {
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        session.beginTransaction();
+        String sql = "SELECT DISTINCT TI.* FROM Route R\n" +
+                "INNER JOIN Schedule S on R.idRoute = S.idRoute\n" +
+                "INNER JOIN TripInformation TI on S.idSchedule = TI.idSchedule\n" +
+                "\n" +
+                "WHERE departDate BETWEEN :fromDate AND :toDate\n" +
+                "AND R.startStation IN (SELECT STA.stationName FROM Station STA WHERE STA.idProvince =\n" +
+"                                                                    (SELECT PRO.idProvince FROM Province PRO WHERE PRO.provinceName = :from))\n" +
+                "AND R.endStation IN (SELECT STA.stationName FROM Station STA WHERE STA.idProvince =\n" +
+"                                                                    (SELECT PRO.idProvince FROM Province PRO WHERE PRO.provinceName = :to))";
+        SQLQuery query = session.createSQLQuery(sql);
+        query.setParameter("fromDate", fromDate);
+        query.setParameter("toDate", toDate);
+        query.setParameter("from", fromProvince.getProvinceName());
+        query.setParameter("to", toProvince.getProvinceName());
+        query.addEntity(TripInformationEntity.class);
+        List<TripInformationEntity> result = query.getResultList();
+
+        session.getTransaction().commit();
+        session.close();
+        return result;
+    }
 
 
     //DONE

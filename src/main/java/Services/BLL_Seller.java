@@ -45,27 +45,27 @@ public class BLL_Seller {
     }
 
     public List<FilterRoute_ViewModel> setUpFilterRouteView(ProvinceEntity startPro, ProvinceEntity endPro, Date departDate) {
-        List<RouteEntity> listRoute = DAL.getInstance().getFilterRoute(getPairStationFromTwoProvince(startPro, endPro));
-
-        List<TripInformationEntity> listTrip = DAL.getInstance().getFilterTrip(listRoute);
+//        List<RouteEntity> listRoute = DAL.getInstance().getFilterRoute(getPairStationFromTwoProvince(startPro, endPro));
+//
+//        List<TripInformationEntity> listTrip = DAL.getInstance().getFilterTrip(listRoute);
         List<FilterRoute_ViewModel> result = new ArrayList<>();
 
-        listTrip.forEach(trip ->{
-            if(trip.getDepartDate().compareTo(departDate) == 0) {
-                byte[] picture = trip.getScheduleByIdSchedule().getBusByIdBus().getTypeOfBusByIdType().getPicture();
-                String typeName = trip.getScheduleByIdSchedule().getBusByIdBus().getTypeOfBusByIdType().getTypeName();
-                String startStation = trip.getScheduleByIdSchedule().getRouteByIdRoute().getStartStation();
-                String destStation = trip.getScheduleByIdSchedule().getRouteByIdRoute().getEndStation();
-                Date departTime = trip.getScheduleByIdSchedule().getDepartTime();
-                int duration = trip.getScheduleByIdSchedule().getDuration();
+        DAL.getInstance().getFilterTrip(startPro, endPro, new SimpleDateFormat("yyyy/MM/dd").format(departDate))
+                .forEach(trip ->{
+            byte[] picture = trip.getScheduleByIdSchedule().getBusByIdBus().getTypeOfBusByIdType().getPicture();
+            String typeName = trip.getScheduleByIdSchedule().getBusByIdBus().getTypeOfBusByIdType().getTypeName();
+            String startStation = trip.getScheduleByIdSchedule().getRouteByIdRoute().getStartStation();
+            String destStation = trip.getScheduleByIdSchedule().getRouteByIdRoute().getEndStation();
+            Date departTime = trip.getScheduleByIdSchedule().getDepartTime();
+            int duration = trip.getScheduleByIdSchedule().getDuration();
 
-                Locale localeVN = new Locale("vi", "VN");
-                NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
+            Locale localeVN = new Locale("vi", "VN");
+            NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
 
-                String price = currencyVN.format(trip.getScheduleByIdSchedule().getPrice());
+            String price = currencyVN.format(trip.getScheduleByIdSchedule().getPrice());
 
-                result.add(new FilterRoute_ViewModel(trip, picture, typeName, startStation, destStation, departTime, duration, price));
-            }
+            result.add(new FilterRoute_ViewModel(trip, picture, typeName, startStation, destStation, departTime, duration, price));
+
 
         });
 
@@ -120,48 +120,14 @@ public class BLL_Seller {
 
     // NOTICE BLL for TicketPage
 
-    public List<Ticket_ViewModel> getAllTicket(ProvinceEntity fromProvince, ProvinceEntity toProvince, Date departDate
-            , String pay, String nameCustomer, String phoneCustomer) {
+    public List<Ticket_ViewModel> getAllTicket(ProvinceEntity fromProvince, ProvinceEntity toProvince, String paid, Date departDate
+            , String nameCustomer, String phoneCustomer) {
         List<Ticket_ViewModel> result = new ArrayList<>();
 
-        if(fromProvince == null) {
-            DAL.getInstance().getAllTicket().forEach(ticket -> {
-                if(ticket.getNameCustomer().toLowerCase().contains(nameCustomer.toLowerCase()) &&
-                        ticket.getPhoneNumber().contains(phoneCustomer)) {
-                    String nameTicket = ticket.getNameTicket();
-                    String route = ticket.getTripInformationByIdTrip().getScheduleByIdSchedule().getRouteByIdRoute().getStartStation() +
-                            "-" + ticket.getTripInformationByIdTrip().getScheduleByIdSchedule().getRouteByIdRoute().getEndStation();
-                    String departTime = new SimpleDateFormat("HH:mm:ss").format(ticket.getTripInformationByIdTrip()
-                            .getScheduleByIdSchedule().getDepartTime());
-                    String name = ticket.getNameCustomer();
-                    String phone = ticket.getPhoneNumber();
-                    String isPaid = ticket.getIsPaid() ? "Paid" : "Unpaid";
-
-                    // Format VNĐ
-                    Locale localeVN = new Locale("vi", "VN");
-                    NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
-                    String price = currencyVN.format(ticket.getPrice());
-                    //
-
-                    result.add(new Ticket_ViewModel(ticket.getIdTicket(), nameTicket, route, departTime, name, phone, isPaid, price));
-                }
-
-            });
-        }
-        else {
-            List<RouteEntity> listRoute = DAL.getInstance().getFilterRoute(getPairStationFromTwoProvince(fromProvince, toProvince));
-
-            List<TripInformationEntity> listTrip = DAL.getInstance().getFilterTrip(listRoute);
-            List<TicketEntity> listTicket = new ArrayList<>();
-            listTrip.forEach(trip ->{
-                if(trip.getDepartDate().compareTo(departDate) == 0) {
-                    Arrays.asList(trip.getTicketsByIdTrip().toArray()).forEach(e -> {
-                        listTicket.add((TicketEntity)e);
-                    });
-                }
-            });
-
-            listTicket.forEach(ticket -> {
+        String date = departDate == null ? "" : new SimpleDateFormat("yyyy/MM/dd").format(departDate);
+        DAL.getInstance().getAllTicket(fromProvince, toProvince, paid, date).forEach(ticket -> {
+            if(ticket.getNameCustomer().toLowerCase().contains(nameCustomer.toLowerCase()) &&
+                    ticket.getPhoneNumber().contains(phoneCustomer)) {
                 String nameTicket = ticket.getNameTicket();
                 String route = ticket.getTripInformationByIdTrip().getScheduleByIdSchedule().getRouteByIdRoute().getStartStation() +
                         "-" + ticket.getTripInformationByIdTrip().getScheduleByIdSchedule().getRouteByIdRoute().getEndStation();
@@ -176,18 +142,11 @@ public class BLL_Seller {
                 NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
                 String price = currencyVN.format(ticket.getPrice());
                 //
-                if(pay.equals("All") && ticket.getNameCustomer().toLowerCase().contains(nameCustomer.toLowerCase()) &&
-                        ticket.getPhoneNumber().contains(phoneCustomer)) {
 
-                    result.add(new Ticket_ViewModel(ticket.getIdTicket(), nameTicket, route, departTime, name, phone, isPaid, price));
-                } else if(ticket.getIsPaid() == pay.equals("Paid") && ticket.getNameCustomer().toLowerCase().contains(nameCustomer.toLowerCase()) &&
-                        ticket.getPhoneNumber().contains(phoneCustomer)) {
+                result.add(new Ticket_ViewModel(ticket.getIdTicket(), nameTicket, route, departTime, name, phone, isPaid, price));
+            }
 
-                    result.add(new Ticket_ViewModel(ticket.getIdTicket(), nameTicket, route, departTime, name, phone, isPaid, price));
-                }
-
-            });
-        }
+        });
 
         return result;
     }
