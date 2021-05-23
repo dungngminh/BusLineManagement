@@ -96,6 +96,9 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
+               <font>
+                  <Font size="16.0" />
+               </font>
             </Button>
             <ImageView fitHeight="35.0" fitWidth="32.0" layoutX="79.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -106,6 +109,9 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
+               <font>
+                  <Font size="16.0" />
+               </font>
             </Button>
          </children>
       </Pane>
@@ -131,7 +137,7 @@
                <children>
                   <Button mnemonicParsing="false" onMouseClicked="#btn_print_onClicked" prefHeight="46.0" prefWidth="99.0" styleClass="btn" text="Print">
                      <font>
-                        <Font name="Calibri" size="21.0" />
+                        <Font name="Calibri" size="18.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -142,7 +148,7 @@
                   </Button>
                   <Button mnemonicParsing="false" onMouseClicked="#btn_setpaid_onClicked" prefHeight="46.0" prefWidth="99.0" styleClass="btn" text="Set paid">
                      <font>
-                        <Font name="Calibri" size="21.0" />
+                        <Font name="Calibri" size="18.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -153,7 +159,7 @@
                   </Button>
                   <Button mnemonicParsing="false" onMouseClicked="#btn_delete_onClicked" prefHeight="46.0" prefWidth="99.0" styleClass="btn" text="Delete">
                      <font>
-                        <Font name="Calibri" size="21.0" />
+                        <Font name="Calibri" size="18.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -161,6 +167,14 @@
                      <FlowPane.margin>
                         <Insets right="15.0" />
                      </FlowPane.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onMouseClicked="#btn_export_onClicked" prefHeight="46.0" prefWidth="99.0" styleClass="btn" text="Export">
+                     <font>
+                        <Font name="Calibri" size="18.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                </children>
             </FlowPane>

@@ -9,20 +9,20 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.*;
+import javafx.scene.Scene;
 import javafx.scene.chart.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import org.controlsfx.control.CheckComboBox;
+import org.controlsfx.control.textfield.TextFields;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class MainWindow implements Initializable {
     @FXML
@@ -33,6 +33,9 @@ public class MainWindow implements Initializable {
 
     @FXML
     private JFXHamburger jfx_hambur;
+
+    @FXML
+    private TextField txf_search;
 
     @FXML
     private Label lb_greet;
@@ -126,6 +129,12 @@ public class MainWindow implements Initializable {
                     true, true, true, true, true, true, true, true, true, true, null));
 
             // DONE
+
+            // Init search text field
+
+            List<String> words = new ArrayList<>(Arrays.asList("Manage Bus", "Manage Route", "Manage Schedule",
+                    "Settings", "Manage Driver", "Decentralize"));
+            TextFields.bindAutoCompletion(txf_search, words);
         } catch (IOException | SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -185,6 +194,48 @@ public class MainWindow implements Initializable {
         return dataSeries;
     }
 
+    // Show Panel
+    public void showPage(AnchorPane rootPane, String path) throws IOException {
+        AnchorPane newPane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/admin_view/" +
+                path + ".fxml")));
+        newPane.requestLayout();
+//        rootPane.getChildren().setAll(newPane);
+        Scene scene= rootPane.getScene();
+        scene.setRoot(newPane);
+    }
+
+    @FXML
+    void btn_search_onClicked(MouseEvent event) throws IOException {
+        switch(txf_search.getText()) {
+            case "Manage Bus": {
+                showPage(rootPane,"BusPage");
+                break;
+            }
+            case "Manage Route": {
+                showPage(rootPane,"RoutePage");
+                break;
+            }
+            case "Manage Schedule": {
+                showPage(rootPane,"SchedulePage");
+                break;
+            }
+            case "Manage Driver": {
+                showPage(rootPane,"Driver");
+                break;
+            }
+            case "Settings": {
+                showPage(rootPane,"Setting");
+                break;
+            }
+            case "Decentralize": {
+                showPage(rootPane,"Decentralize");
+                break;
+            }
+            default:
+                new Alert(Alert.AlertType.INFORMATION, "Couldn't find anything!").showAndWait();
+                break;
+        }
+    }
 
     @FXML
     void btn_show1_Clicked(MouseEvent event) {
@@ -198,7 +249,7 @@ public class MainWindow implements Initializable {
                 NumberAxis yAxis = new NumberAxis();
                 yAxis.setLabel("Revenue( millions )");
 
-                LineChart chart = new LineChart(xAxis, yAxis);
+                AreaChart chart = new AreaChart(xAxis, yAxis);
 
                 if(listAcc.isEmpty()) chart.getData().add(showLineChart("1 Month Ago", null));
                 else {
@@ -223,7 +274,7 @@ public class MainWindow implements Initializable {
                 NumberAxis yAxis = new NumberAxis();
                 yAxis.setLabel("Revenue( millions )");
 
-                LineChart chart = new LineChart(xAxis, yAxis);
+                AreaChart chart = new AreaChart(xAxis, yAxis);
 
                 if(listAcc.isEmpty()) chart.getData().add(showLineChart("1 Quarter Ago", null));
                 else {
@@ -248,7 +299,7 @@ public class MainWindow implements Initializable {
                 NumberAxis yAxis = new NumberAxis();
                 yAxis.setLabel("Revenue( millions )");
 
-                LineChart chart = new LineChart(xAxis, yAxis);
+                AreaChart chart = new AreaChart(xAxis, yAxis);
 
                 if(listAcc.isEmpty()) chart.getData().add(showLineChart("1 Year Ago", null));
                 else {
@@ -292,6 +343,22 @@ public class MainWindow implements Initializable {
         AnchorPane.setRightAnchor(chart, 0.0);
         AnchorPane.setBottomAnchor(chart, 0.0);
         AnchorPane.setLeftAnchor(chart, 0.0);
+    }
+
+    @FXML
+    void panel_outdate_clicked(MouseEvent event) throws IOException {
+        showPage(rootPane, "SchedulePage");
+    }
+
+    @FXML
+    void panel_personnel_clicked(MouseEvent event) throws IOException {
+        showPage(rootPane, "Setting");
+    }
+
+
+    @FXML
+    void panel_route_clicked(MouseEvent event) throws IOException {
+        showPage(rootPane, "RoutePage");
     }
 
 }

@@ -92,10 +92,13 @@ public class BLL_Admin {
     public List<BusEntity_ViewModel> updateTableBusPage(int slot, String name) {
         List<BusEntity_ViewModel> list = new ArrayList<>();
         DAL.getInstance().getDataForBusPage().forEach(b -> {
-            if (slot == 0 && b.getBusName().contains(name))
-                list.add(new BusEntity_ViewModel(b.getIdBus(), b.getBusName(), b.getPlateNumber(), b.getTypeOfBusByIdType().getTypeName(), b.getTypeOfBusByIdType().getBrandName(), b.getTypeOfBusByIdType().getSlot(), b.getStatus()));
-            else if (slot == b.getTypeOfBusByIdType().getSlot() && b.getBusName().contains(name)) {
-                list.add(new BusEntity_ViewModel(b.getIdBus(), b.getBusName(), b.getPlateNumber(), b.getTypeOfBusByIdType().getTypeName(), b.getTypeOfBusByIdType().getBrandName(), b.getTypeOfBusByIdType().getSlot(), b.getStatus()));
+            if (slot == 0 && b.getBusName().toLowerCase().contains(name.toLowerCase()))
+                list.add(new BusEntity_ViewModel(b.getIdBus(), b.getBusName(), b.getPlateNumber(),
+                        b.getTypeOfBusByIdType().getTypeName(), b.getTypeOfBusByIdType().getBrandName(), b.getTypeOfBusByIdType().getSlot(), b.getStatus()));
+
+            else if (slot == b.getTypeOfBusByIdType().getSlot() && b.getBusName().toLowerCase().contains(name.toLowerCase())) {
+                list.add(new BusEntity_ViewModel(b.getIdBus(), b.getBusName(), b.getPlateNumber(),
+                        b.getTypeOfBusByIdType().getTypeName(), b.getTypeOfBusByIdType().getBrandName(), b.getTypeOfBusByIdType().getSlot(), b.getStatus()));
             }
         });
         return list;
@@ -189,11 +192,15 @@ public class BLL_Admin {
     }
 
     //find route using route, start + " end"
-    public List<RouteEntity> getRoutes(int status, String name) {
+    public List<RouteEntity> getRoutes(Integer status, String name) {
         List<RouteEntity> data = new ArrayList<>();
         DAL.getInstance().getRoutes().forEach(route -> {
             String routeName = route.getStartStation() + " " + route.getEndStation();
-            if (status == route.getStatus() && routeName.contains(name)) {
+            final boolean contains = routeName.toLowerCase().contains(name.toLowerCase());
+            if(status == null && contains) {
+                data.add(route);
+            }
+            else if (status != null && status == route.getStatus() && contains) {
                 data.add(route);
             }
         });
@@ -231,12 +238,23 @@ public class BLL_Admin {
     public List<ScheduleEntity_ViewModel> updateTableSchedulePage(String name) {
         List<ScheduleEntity_ViewModel> list = new ArrayList<>();
         DAL.getInstance().getScheduleData().forEach(data -> {
-            list.add(new ScheduleEntity_ViewModel(data.getIdSchedule(), (data.getRouteByIdRoute().getStartStation() + " - " + data.getRouteByIdRoute().getEndStation()), data.getBusByIdBus().getBusName(), data.getBusByIdBus().getTypeOfBusByIdType().getTypeName(), data.getDriverByIdDriver().getNameDriver(), new SimpleDateFormat("HH:mm:ss").format(data.getDepartTime()), new SimpleDateFormat("dd/MM/yyyy").format(DAL.getInstance().getOutDateUpdate(data.getIdSchedule())), data.getPrice(), data.getDuration(), data.getDpr(), data.getIsDelete()));
+            if((data.getRouteByIdRoute().getStartStation() + " - " + data.getRouteByIdRoute().getEndStation() +
+                    " || " + data.getBusByIdBus().getTypeOfBusByIdType().getTypeName() + " || " +
+                    new SimpleDateFormat("HH:mm:ss").format(data.getDepartTime())).toLowerCase().contains(name.toLowerCase()))
+
+                list.add(new ScheduleEntity_ViewModel(data.getIdSchedule(),
+                        (data.getRouteByIdRoute().getStartStation() + " - " + data.getRouteByIdRoute().getEndStation()),
+                        data.getBusByIdBus().getBusName(), data.getBusByIdBus().getTypeOfBusByIdType().getTypeName(),
+                        data.getDriverByIdDriver().getNameDriver(), new SimpleDateFormat("HH:mm:ss").format(data.getDepartTime()),
+                        new SimpleDateFormat("dd/MM/yyyy").format(DAL.getInstance().getOutDateUpdate(data.getIdSchedule())),
+                        data.getPrice(), data.getDuration(), data.getDpr(), data.getIsDelete()));
+
         });
         return list;
     }
 
-    public void addSchedule(RouteEntity Route, BusEntity Bus, DriverEntity driver, Date departTimeInput, int durationInput, int priceInput, int dprInput) {
+    public void addSchedule(RouteEntity Route, BusEntity Bus, DriverEntity driver, Date departTimeInput, int durationInput
+            , int priceInput, int dprInput) {
         ScheduleEntity schedule = new ScheduleEntity();
         schedule.setIdRoute(Route.getIdRoute());
         schedule.setIdBus(Bus.getIdBus());
@@ -256,18 +274,22 @@ public class BLL_Admin {
         DAL.getInstance().removeSchedule(idSchedule);
     }
 
-    public void updateSchedule(int idSchedule, RouteEntity routeSelected, BusEntity busSelected, DriverEntity driverSelected, Date departTimeInput, int durationInput, int priceInput, int dprInput) {
-        DAL.getInstance().updateSchedule(idSchedule, routeSelected, busSelected, driverSelected, departTimeInput, durationInput, priceInput, dprInput);
+    public void updateSchedule(int idSchedule, RouteEntity routeSelected, BusEntity busSelected, DriverEntity driverSelected
+            , Date departTimeInput, int durationInput, int priceInput, int dprInput) {
+        DAL.getInstance().updateSchedule(idSchedule, routeSelected, busSelected, driverSelected, departTimeInput, durationInput
+                , priceInput, dprInput);
     }
 
-    public void updateScheduleNotDPR(int idSchedule, RouteEntity routeSelected, BusEntity busSelected, DriverEntity driverSelected, Date departTimeInput, int durationInput, int priceInput) {
-        DAL.getInstance().updateScheduleNotDPR(idSchedule, routeSelected, busSelected, driverSelected, departTimeInput, durationInput, priceInput);
+    public void updateScheduleNotDPR(int idSchedule, RouteEntity routeSelected, BusEntity busSelected,
+                                     DriverEntity driverSelected, Date departTimeInput, int durationInput, int priceInput) {
+        DAL.getInstance().updateScheduleNotDPR(idSchedule, routeSelected, busSelected, driverSelected, departTimeInput,
+                durationInput, priceInput);
     }
 
     public Boolean outDateSchedule(String date) throws ParseException {
         return TimeUnit.DAYS.convert(new SimpleDateFormat("dd/MM/yyyy").parse(date).getTime() -
                 Date.from(LocalDate.now().
-                        atStartOfDay(ZoneId.systemDefault()).toInstant()).getTime(), TimeUnit.MILLISECONDS) <= 27;
+                        atStartOfDay(ZoneId.systemDefault()).toInstant()).getTime(), TimeUnit.MILLISECONDS) <= 20;
     }
     // NOTICE BLL for MainWindow(Dashboard of Admin)
 

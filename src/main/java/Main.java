@@ -10,6 +10,9 @@ public class Main extends Application {
 
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("view/admin_view/LogIn.fxml"));
+//        Parent root = FXMLLoader.load(getClass().getResource("view/admin_view/MainWindow.fxml"));
+//        Parent root = FXMLLoader.load(getClass().getResource("view/seller_view/Ticket.fxml"));
+//        Parent root = FXMLLoader.load(getClass().getResource("view/admin_view/SchedulePage.fxml"));
         primaryStage.setTitle("Log In");
         primaryStage.getIcons().add(new Image("/images/Icon/favicon.png"));
 //        primaryStage.setResizable(false);

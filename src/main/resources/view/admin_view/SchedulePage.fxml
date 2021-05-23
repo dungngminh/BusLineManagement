@@ -197,7 +197,7 @@
                         <Insets bottom="5.0" />
                      </padding>
                   </Label>
-                  <TextField fx:id="txf_search_nameofbus" prefHeight="35.0" prefWidth="186.0">
+                  <TextField fx:id="txf_search" prefHeight="35.0" prefWidth="186.0" promptText="route - type - time">
                      <HBox.margin>
                         <Insets right="25.0" />
                      </HBox.margin>
@@ -246,6 +246,11 @@
                      </FlowPane.margin>
                   </Button>
                   <Button fx:id="btn_reOutdate" mnemonicParsing="false" onMouseClicked="#onReOutdateClicked" prefHeight="37.0" prefWidth="87.0" styleClass="btn" stylesheets="@../../css/admin_css/setting.css" text="Re outdate">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btn_reOutdate1" mnemonicParsing="false" onMouseClicked="#btn_export_clicked" prefHeight="37.0" prefWidth="87.0" styleClass="btn" stylesheets="@../../css/admin_css/setting.css" text="Export">
                      <font>
                         <Font size="14.0" />
                      </font>

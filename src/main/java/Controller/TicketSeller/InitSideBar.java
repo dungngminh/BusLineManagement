@@ -6,6 +6,7 @@ import Services.DAL;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
+import com.jfoenix.transitions.hamburger.HamburgerBasicCloseTransition;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -35,9 +36,6 @@ public class InitSideBar {
 
 
     public void initializeForNavBar(AnchorPane rootPane, JFXDrawer jfx_drawer, JFXHamburger jfx_hambur) throws IOException {
-//        VBox box = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/seller_view/NavBar.fxml")));
-//        box.setFillWidth(true);
-//        VBox.setVgrow(box, Priority.ALWAYS);
 
         AnchorPane box =  FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/seller_view/NavBar.fxml")));
         jfx_drawer.setSidePane(box);
@@ -50,7 +48,8 @@ public class InitSideBar {
                     try {
                         switch (node.lookup(".btn").getId()) {
                             case "dashboard": {
-                                showPage(rootPane,"Dashboard");
+                                if(DAL.getInstance().getCurrent().getIdRole() == 2)
+                                    showPage(rootPane,"Dashboard");
                                 break;
                             }
                             case "ticket":{
@@ -100,7 +99,7 @@ public class InitSideBar {
         });
 
         // Init navbar transformation
-        HamburgerBackArrowBasicTransition burgerTask = new HamburgerBackArrowBasicTransition(jfx_hambur);
+        HamburgerBasicCloseTransition burgerTask = new HamburgerBasicCloseTransition(jfx_hambur);
         burgerTask.setRate(-1);
         jfx_hambur.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
             burgerTask.setRate(burgerTask.getRate() * -1);

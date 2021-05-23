@@ -21,13 +21,24 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class Ticket implements Initializable {
@@ -225,6 +236,61 @@ public class Ticket implements Initializable {
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, "Choose 1 row").showAndWait();
         }
+    }
+
+    @FXML
+    void btn_export_onClicked(MouseEvent event) throws IOException {
+        if(tableview.getItems().isEmpty()) {
+            new Alert(Alert.AlertType.WARNING, "List is empty!").showAndWait();
+            return;
+        }
+        Workbook workbook = new HSSFWorkbook();
+        Sheet spreadsheet = workbook.createSheet("ticket");
+
+        Row row = spreadsheet.createRow(0);
+
+        for (int j = 0; j < tableview.getColumns().size(); j++) {
+            row.createCell(j).setCellValue(tableview.getColumns().get(j).getText());
+        }
+
+        for (int i = 0; i < tableview.getItems().size(); i++) {
+            row = spreadsheet.createRow(i + 1);
+            for (int j = 0; j < tableview.getColumns().size(); j++) {
+                if(tableview.getColumns().get(j).getCellData(i) != null) {
+                    row.createCell(j).setCellValue(tableview.getColumns().get(j).getCellData(i).toString());
+                }
+                else {
+                    row.createCell(j).setCellValue("");
+                }
+            }
+        }
+
+        // Show Selected Directory
+        Stage stage = new Stage();
+
+        stage.setTitle("Export ticket");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(
+                ((Node)event.getSource()).getScene().getWindow() );
+
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        directoryChooser.setInitialDirectory(new File("src"));
+
+        File selectedDirectory = directoryChooser.showDialog(stage);
+        if(selectedDirectory != null) {
+            if (!selectedDirectory.canRead()) {
+                Boolean b = selectedDirectory.setReadable(true, false);
+            }
+
+            File myObj = new File(selectedDirectory.getAbsolutePath() + "/ListOfTicket_" +
+                    DateTimeFormatter.ofPattern("dd_MM_yyyy_HH_mm_ss").format(LocalDateTime.now()) + ".xls");
+            if (myObj.createNewFile()) {
+                FileOutputStream fileOut = new FileOutputStream(myObj);
+                workbook.write(fileOut);
+                fileOut.close();
+            }
+        }
+
     }
 
     @FXML

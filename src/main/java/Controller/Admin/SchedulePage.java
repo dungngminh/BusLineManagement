@@ -17,6 +17,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -27,14 +28,26 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Callback;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.controlsfx.control.textfield.TextFields;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class SchedulePage implements Initializable {
@@ -106,7 +119,7 @@ public class SchedulePage implements Initializable {
     private HBox hbox;
 
     @FXML
-    private TextField txf_search_nameofbus;
+    private TextField txf_search;
 
     @FXML
     private Button btn_search;
@@ -195,7 +208,7 @@ public class SchedulePage implements Initializable {
             ScheduleEntity_ViewModel schedule = table_view.getSelectionModel().getSelectedItem();
             BLL_Admin.getInstance().deleteSchedule(schedule.getIdSchedule());
             new Alert(Alert.AlertType.INFORMATION, "Delete successful!").showAndWait();
-            show();
+            show("");
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, "Error while deleting!");
         }
@@ -219,7 +232,7 @@ public class SchedulePage implements Initializable {
                     case "Create":
                         BLL_Admin.getInstance().addSchedule(routeSelected, busSelected, driverSelected, departTimeInput, durationInput, priceInput, dprInput);
                         new Alert(Alert.AlertType.INFORMATION, "Create successful!").showAndWait();
-                        show();
+                        show("");
                         break;
                     case "Update":
                         if (tfx_day_per_route.getText().equals(""))
@@ -228,7 +241,7 @@ public class SchedulePage implements Initializable {
                             BLL_Admin.getInstance().updateSchedule(idSchedule, routeSelected, busSelected, driverSelected, departTimeInput, durationInput, priceInput, dprInput);
                         new Alert(Alert.AlertType.INFORMATION, "Update successful!").showAndWait();
 
-                        show();
+                        show("");
                         break;
                     default:
                         break;
@@ -253,12 +266,13 @@ public class SchedulePage implements Initializable {
 
     @FXML
     void btn_search_clicked(MouseEvent event) {
-
+        String key = txf_search.getText();
+        show(key);
     }
 
     @FXML
     void btn_showmenu_clicked(MouseEvent event) {
-        show();
+        show("");
     }
 
     @FXML
@@ -318,6 +332,60 @@ public class SchedulePage implements Initializable {
     }
 
     @FXML
+    void btn_export_clicked(MouseEvent event) throws IOException {
+        if(table_view.getItems().isEmpty()) {
+            new Alert(Alert.AlertType.WARNING, "List is empty!").showAndWait();
+            return;
+        }
+        Workbook workbook = new HSSFWorkbook();
+        Sheet spreadsheet = workbook.createSheet("schedule");
+
+        Row row = spreadsheet.createRow(0);
+
+        for (int j = 0; j < table_view.getColumns().size(); j++) {
+            row.createCell(j).setCellValue(table_view.getColumns().get(j).getText());
+        }
+
+        for (int i = 0; i < table_view.getItems().size(); i++) {
+            row = spreadsheet.createRow(i + 1);
+            for (int j = 0; j < table_view.getColumns().size(); j++) {
+                if(table_view.getColumns().get(j).getCellData(i) != null) {
+                    row.createCell(j).setCellValue(table_view.getColumns().get(j).getCellData(i).toString());
+                }
+                else {
+                    row.createCell(j).setCellValue("");
+                }
+            }
+        }
+
+        // Show Selected Directory
+        Stage stage = new Stage();
+
+        stage.setTitle("Export data schedule");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(
+                ((Node)event.getSource()).getScene().getWindow() );
+
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        directoryChooser.setInitialDirectory(new File("src"));
+
+        File selectedDirectory = directoryChooser.showDialog(stage);
+        if(selectedDirectory != null) {
+            if (!selectedDirectory.canRead()) {
+                Boolean b = selectedDirectory.setReadable(true, false);
+            }
+
+            File myObj = new File(selectedDirectory.getAbsolutePath() + "/ListOfSchedule_" +
+                    DateTimeFormatter.ofPattern("dd_MM_yyyy_HH_mm_ss").format(LocalDateTime.now()) + ".xls");
+            if (myObj.createNewFile()) {
+                FileOutputStream fileOut = new FileOutputStream(myObj);
+                workbook.write(fileOut);
+                fileOut.close();
+            }
+        }
+    }
+
+    @FXML
     void onBusCBBAction(ActionEvent event) {
         if (cbx_bus.getSelectionModel().getSelectedItem() != null)
             tfx_typeofbus.setText(cbx_bus.getSelectionModel().getSelectedItem().getTypeOfBusByIdType().getTypeName());
@@ -353,17 +421,26 @@ public class SchedulePage implements Initializable {
                 spn_timepickerM.setEditable(true);
                 spn_timepickerS.setEditable(true);
 
-                show();
+                show("");
 
                 toggleDetail();
+
+                // Init search text field
+                List<String> words = new ArrayList<>();
+
+                BLL_Admin.getInstance().updateTableSchedulePage("").forEach(s -> {
+                    words.add(s.getRouteName() + " || " + s.getTypeOfBus() + " || " + s.getDepartTime());
+                });
+                TextFields.bindAutoCompletion(txf_search, words);
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    private void show() {
-        ObservableList<ScheduleEntity_ViewModel> listObj = FXCollections.observableArrayList(BLL_Admin.getInstance().updateTableSchedulePage(""));
+    private void show(String key) {
+        ObservableList<ScheduleEntity_ViewModel> listObj = FXCollections.observableArrayList(BLL_Admin.getInstance().updateTableSchedulePage(key));
         col_id.setCellValueFactory(new PropertyValueFactory<>("idSchedule"));
         col_routename.setCellValueFactory(new PropertyValueFactory<>("routeName"));
         col_busname.setCellValueFactory(new PropertyValueFactory<>("busName"));
