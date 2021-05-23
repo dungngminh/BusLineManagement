@@ -1,6 +1,7 @@
 package Controller.Admin;
 import Services.*;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -82,6 +83,12 @@ public class LogIn implements Initializable {
               new Alert(Alert.AlertType.ERROR, "Connect to Internet and try again!").showAndWait();
 //            new Alert(Alert.AlertType.ERROR, err.getMessage()).showAndWait();
         }
+    }
+
+    @FXML
+    void onForgetClicked(ActionEvent event) {
+        new Alert(Alert.AlertType.INFORMATION,"If you are ADMIN, please contact to Le Quoc Thinh for resetting your password!\n" +
+                "If you are TICKET SELLER, please contact to your manager!").showAndWait();
     }
 
     public void showHomePage(String path) throws IOException {

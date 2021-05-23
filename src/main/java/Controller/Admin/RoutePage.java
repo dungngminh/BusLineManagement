@@ -187,6 +187,7 @@ public class RoutePage implements Initializable {
                 new Alert(Alert.AlertType.ERROR, "Duplicate Station, please re fill!").showAndWait();
 
             else {
+
                 List<RouteEntity> listCheck = BLL_Admin.getInstance().getRoutes(0,"");
                 listCheck.forEach(route -> {
                     if((route.getStartStation() + route.getEndStation()).equals(startStation+endStation))

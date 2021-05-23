@@ -27,6 +27,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.util.Callback;
 
 import java.io.IOException;
 import java.net.URL;
@@ -34,11 +35,7 @@ import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class SchedulePage implements Initializable {
 
@@ -378,26 +375,26 @@ public class SchedulePage implements Initializable {
         col_duration.setCellValueFactory(new PropertyValueFactory<>("duration"));
         col_dpr.setCellValueFactory(new PropertyValueFactory<>("dpr"));
 
-//        table_view.setRowFactory(row -> new TableRow<>(){
-//            @Override
-//            protected void updateItem(ScheduleEntity_ViewModel scheduleEntity_viewModel, boolean b) {
-//                LocalDate lcd = LocalDate.now();
-//                super.updateItem(scheduleEntity_viewModel, b);
-//                ScheduleEntity_ViewModel obj = getTableView().getItems().get(getIndex());
-//                try {
-//                    if((new SimpleDateFormat("dd/MM/yyyy").parse(obj.getOutDate()).getDay() - lcd.getDayOfMonth()) == 30){
-//                        setTextFill(Color.RED);
-//                    }
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
-
+        table_view.setRowFactory(tv -> new TableRow<ScheduleEntity_ViewModel>() {
+            @Override
+            protected void updateItem(ScheduleEntity_ViewModel item, boolean b) {
+                super.updateItem(item, b);
+                if (item == null)
+                    setStyle("");
+                else try {
+                        if (BLL_Admin.getInstance().outDateSchedule(item.getOutDate())){
+                            setStyle("-fx-background-color: #D16666");
+                        }else setStyle("");
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                }
+        });
 
         table_view.setItems(listObj);
         table_view.refresh();
     }
+
 
     private void toggleDetail() {
         if (btn_ok.isVisible()) {
