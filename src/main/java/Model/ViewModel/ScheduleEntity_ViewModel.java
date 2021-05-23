@@ -103,7 +103,8 @@ public class ScheduleEntity_ViewModel {
         this.outDate = outDate;
     }
 
-    public ScheduleEntity_ViewModel(int idSchedule, String routeName, String busName, String typeOfBus, String nameofDriver, String departTime, String outDate, int price, int duration, int dpr, boolean isDeleted) {
+    public ScheduleEntity_ViewModel(int idSchedule, String routeName, String busName, String typeOfBus, String nameofDriver,
+                                    String departTime, String outDate, int price, int duration, int dpr, boolean isDeleted) {
         this.idSchedule = idSchedule;
         this.routeName = routeName;
         this.busName = busName;

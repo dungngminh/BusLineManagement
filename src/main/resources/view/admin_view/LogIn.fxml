@@ -54,7 +54,7 @@
                      <font>
                         <Font name="Arial" size="18.0" />
                      </font></PasswordField>
-                  <Hyperlink id="href_fypassword" alignment="CENTER_RIGHT" layoutX="25.0" prefHeight="25.0" prefWidth="144.0" text="Forgot your password!" GridPane.rowIndex="2">
+                  <Hyperlink id="href_fypassword" alignment="CENTER_RIGHT" layoutX="25.0" onAction="#onForgetClicked" prefHeight="25.0" prefWidth="144.0" text="Forgot your password!" GridPane.rowIndex="2">
                      <font>
                         <Font size="13.0" />
                      </font>

@@ -743,7 +743,7 @@ public class DAL {
         String sql = "SELECT DISTINCT SCH.* FROM Schedule SCH\n" +
                 "INNER JOIN TripInformation TI on SCH.idSchedule = TI.idSchedule\n" +
                 "WHERE (SELECT max(departDate) FROM TripInformation) < DATEADD(day, 30, GETDATE())";
-        SQLQuery query = session.createSQLQuery(sql);
+        var query = session.createSQLQuery(sql);
         query.addEntity(ScheduleEntity.class);
         List<ScheduleEntity> result = query.getResultList();
 

@@ -199,6 +199,7 @@ public class BusPage implements Initializable {
             BusEntity_ViewModel tbl = table_view.getSelectionModel().getSelectedItem();
             idBus = tbl.getIdBus();
             BLL_Admin.getInstance().deleteBus(idBus);
+            new Alert(Alert.AlertType.INFORMATION, "Delete Successful!").showAndWait();
             show(0, "");
         } catch (Exception err) {
             new Alert(Alert.AlertType.INFORMATION, "Choose only 1 row!").showAndWait();
@@ -218,12 +219,14 @@ public class BusPage implements Initializable {
         switch(CRUDType) {
             case "Create": {
                 BLL_Admin.getInstance().addBus(name_of_bus, plate_number,  type, false, 0);
+                new Alert(Alert.AlertType.INFORMATION, "Create Successful!").showAndWait();
                 show(0, "");
                 break;
             }
             case "Update": {
                 int stt = cbx_status.getSelectionModel().getSelectedItem().equals("Available") ? 0 : 1;
                 BLL_Admin.getInstance().updateBus(idBus, name_of_bus, plate_number, type, stt);
+                new Alert(Alert.AlertType.INFORMATION, "Update Successful!").showAndWait();
                 show(0, "");
                 break;
             }

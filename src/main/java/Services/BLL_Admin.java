@@ -14,10 +14,13 @@ import org.apache.poi.ss.usermodel.Row;
 import java.io.*;
 import java.sql.SQLException;
 import java.text.NumberFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class BLL_Admin {
@@ -38,7 +41,7 @@ public class BLL_Admin {
     public Integer validate_Account(String username, String password) throws SQLException, ClassNotFoundException {
 //        AtomicBoolean valid = new AtomicBoolean(false);
         AtomicReference<Integer> valid = new AtomicReference<>(0);
-        for(AccountEntity account: DAL.getInstance().getListAcc()) {
+        for (AccountEntity account : DAL.getInstance().getListAcc()) {
             if (account.getUsername().equals(username) &&
                     account.getPassword().equals(DAL.getInstance().encryptSHA1(password))) {
                 int idRole = account.getIdRole();
@@ -205,6 +208,12 @@ public class BLL_Admin {
         DAL.getInstance().deleteRoute(idRoute);
     }
 
+    //TODO checkDuplicateRoute
+//    public boolean checkDuplicateRoute(String startStation, String endStation){
+//
+//    }
+
+
     public int getDistance(int startProvinceIndex, int endProvinceIndex) throws IOException {
         // cell B - Q  = 2 - 17
         String[] cells = {"B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q"};
@@ -222,7 +231,7 @@ public class BLL_Admin {
     public List<ScheduleEntity_ViewModel> updateTableSchedulePage(String name) {
         List<ScheduleEntity_ViewModel> list = new ArrayList<>();
         DAL.getInstance().getScheduleData().forEach(data -> {
-            list.add(new ScheduleEntity_ViewModel(data.getIdSchedule(), (data.getRouteByIdRoute().getStartStation() + " - " + data.getRouteByIdRoute().getEndStation()), data.getBusByIdBus().getBusName(), data.getBusByIdBus().getTypeOfBusByIdType().getTypeName(), data.getDriverByIdDriver().getNameDriver(), new SimpleDateFormat("HH:mm:ss").format(data.getDepartTime()), new SimpleDateFormat("dd/MM/yyyy").format(DAL.getInstance().getOutDateUpdate(data.getIdSchedule())), data.getPrice(), data.getDpr(), data.getDuration(), data.getIsDelete()));
+            list.add(new ScheduleEntity_ViewModel(data.getIdSchedule(), (data.getRouteByIdRoute().getStartStation() + " - " + data.getRouteByIdRoute().getEndStation()), data.getBusByIdBus().getBusName(), data.getBusByIdBus().getTypeOfBusByIdType().getTypeName(), data.getDriverByIdDriver().getNameDriver(), new SimpleDateFormat("HH:mm:ss").format(data.getDepartTime()), new SimpleDateFormat("dd/MM/yyyy").format(DAL.getInstance().getOutDateUpdate(data.getIdSchedule())), data.getPrice(), data.getDuration(), data.getDpr(), data.getIsDelete()));
         });
         return list;
     }
@@ -254,6 +263,12 @@ public class BLL_Admin {
     public void updateScheduleNotDPR(int idSchedule, RouteEntity routeSelected, BusEntity busSelected, DriverEntity driverSelected, Date departTimeInput, int durationInput, int priceInput) {
         DAL.getInstance().updateScheduleNotDPR(idSchedule, routeSelected, busSelected, driverSelected, departTimeInput, durationInput, priceInput);
     }
+
+    public Boolean outDateSchedule(String date) throws ParseException {
+        return TimeUnit.DAYS.convert(new SimpleDateFormat("dd/MM/yyyy").parse(date).getTime() -
+                Date.from(LocalDate.now().
+                        atStartOfDay(ZoneId.systemDefault()).toInstant()).getTime(), TimeUnit.MILLISECONDS) <= 27;
+    }
     // NOTICE BLL for MainWindow(Dashboard of Admin)
 
     public String getRevenueTicket1YearAgo() {
@@ -284,7 +299,7 @@ public class BLL_Admin {
 
         LocalDate crr = LocalDate.now().plusMonths(1);
         LocalDate begin = crr.minusMonths(1);
-        while(crr.compareTo(begin) >= 0) {
+        while (crr.compareTo(begin) >= 0) {
             String from = crr.minusDays(5).format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
             String to = crr.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
 
@@ -309,7 +324,7 @@ public class BLL_Admin {
 
         LocalDate crr = LocalDate.now().plusMonths(3); // Fake data
         LocalDate begin = crr.minusMonths(3);
-        while(crr.compareTo(begin) >= 0) {
+        while (crr.compareTo(begin) >= 0) {
             String from = crr.minusDays(10).format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
             String to = crr.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
 
@@ -334,7 +349,7 @@ public class BLL_Admin {
 
         LocalDate crr = LocalDate.now().plusYears(1); // fake data
         LocalDate begin = crr.minusYears(1);
-        while(crr.compareTo(begin) >= 0) {
+        while (crr.compareTo(begin) >= 0) {
             String from = crr.minusMonths(1).format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
             String to = crr.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
 
@@ -359,7 +374,7 @@ public class BLL_Admin {
 
         LocalDate crr = LocalDate.now().plusDays(20); // fake data
         LocalDate begin = crr.minusDays(30);
-        while(crr.compareTo(begin) >= 0) {
+        while (crr.compareTo(begin) >= 0) {
             String from = crr.minusDays(5).format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
             String to = crr.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
 
