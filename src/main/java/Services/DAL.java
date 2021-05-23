@@ -644,7 +644,7 @@ public class DAL {
     }
 
 
-    // done TicketOrder ?
+    // DONE TicketOrder ?
 
     // NOTICE DAL ticket
     public List<TicketEntity> getAllTicket(ProvinceEntity fromProvince, ProvinceEntity toProvince, String paid, String departDate) {

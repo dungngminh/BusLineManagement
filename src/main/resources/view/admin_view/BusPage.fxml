@@ -75,7 +75,7 @@
                   </AnchorPane>
                </content>
             </TitledPane>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="75.0" prefHeight="39.0" prefWidth="152.0" text="CRUD BUS" textAlignment="CENTER">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="75.0" prefHeight="39.0" prefWidth="152.0" text="BUS" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="28.0" />
                </font>
@@ -165,7 +165,7 @@
                         <Insets right="10.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField fx:id="txf_slot" prefHeight="34.0" prefWidth="178.0">
+                  <TextField fx:id="txf_slot" prefHeight="34.0" prefWidth="178.0" promptText="slot of bus">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -181,7 +181,7 @@
                         <Insets bottom="5.0" />
                      </padding>
                   </Label>
-                  <TextField fx:id="txf_search_nameofbus" prefHeight="35.0" prefWidth="180.0">
+                  <TextField fx:id="txf_search_nameofbus" prefHeight="35.0" prefWidth="180.0" promptText="name of bus">
                      <HBox.margin>
                         <Insets right="25.0" />
                      </HBox.margin>
@@ -256,6 +256,11 @@
                      <FlowPane.margin>
                         <Insets right="10.0" />
                      </FlowPane.margin>
+                  </Button>
+                  <Button fx:id="btn_delete1" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#btn_export_clicked" prefHeight="35.0" prefWidth="80.0" styleClass="btn" stylesheets="@../../css/admin_css/setting.css" text="Export">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
                   </Button>
                </children>
             </FlowPane>

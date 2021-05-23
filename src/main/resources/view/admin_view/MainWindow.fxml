@@ -35,12 +35,12 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TextField prefHeight="37.0" prefWidth="465.0" promptText="Enter keyword" styleClass="box-search">
+                  <TextField fx:id="txf_search" prefHeight="37.0" prefWidth="465.0" promptText="Enter keyword" styleClass="box-search">
                      <GridPane.margin>
                         <Insets left="200.0" />
                      </GridPane.margin>
                   </TextField>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                  <ImageView fitHeight="25.0" fitWidth="25.0" onMouseClicked="#btn_search_onClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                      <image>
                         <Image url="@../../images/Dashboard/search.png" />
                      </image>
@@ -153,7 +153,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </GridPane>
-                        <GridPane styleClass="panel-trip" GridPane.columnIndex="2">
+                        <GridPane onMouseClicked="#panel_outdate_clicked" styleClass="panel-trip" GridPane.columnIndex="2">
                            <columnConstraints>
                               <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="76.0" prefWidth="100.0" />
                               <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="29.0" prefWidth="100.0" />
@@ -195,7 +195,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </GridPane>
-                        <GridPane styleClass="panel-route" GridPane.columnIndex="1">
+                        <GridPane onMouseClicked="#panel_route_clicked" styleClass="panel-route" GridPane.columnIndex="1">
                            <columnConstraints>
                               <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="70.0" prefWidth="100.0" />
                               <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="35.0" prefWidth="100.0" />
@@ -234,7 +234,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </GridPane>
-                        <GridPane GridPane.columnIndex="3">
+                        <GridPane onMouseClicked="#panel_personnel_clicked" GridPane.columnIndex="3">
                            <columnConstraints>
                               <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="70.0" prefWidth="100.0" />
                               <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="35.0" prefWidth="100.0" />

@@ -13,14 +13,28 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.controlsfx.control.textfield.TextFields;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.text.AttributedCharacterIterator;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -171,6 +185,7 @@ public class RoutePage implements Initializable {
     void btn_delete_clicked(MouseEvent event) {
         RouteEntity routeEntity = table_view.getSelectionModel().getSelectedItem();
         idRoute = routeEntity.getIdRoute();
+
         BLL_Admin.getInstance().deleteRoute(idRoute);
         new Alert(Alert.AlertType.INFORMATION, "Delete successful!").showAndWait();
         show(0, "");
@@ -241,6 +256,7 @@ public class RoutePage implements Initializable {
     void btn_search_clicked(MouseEvent event) {
         show(0, txf_search_nameofRoute.getText());
     }
+
     @FXML
     void btn_showmenu_clicked(MouseEvent event) {
         show(0, "");
@@ -284,6 +300,60 @@ public class RoutePage implements Initializable {
             toggleDetail();
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, "Please choose 1 row").showAndWait();
+        }
+    }
+
+    @FXML
+    void btn_export_clicked(MouseEvent event) throws IOException {
+        if(table_view.getItems().isEmpty()) {
+            new Alert(Alert.AlertType.WARNING, "List is empty!").showAndWait();
+            return;
+        }
+        Workbook workbook = new HSSFWorkbook();
+        Sheet spreadsheet = workbook.createSheet("route");
+
+        Row row = spreadsheet.createRow(0);
+
+        for (int j = 0; j < table_view.getColumns().size(); j++) {
+            row.createCell(j).setCellValue(table_view.getColumns().get(j).getText());
+        }
+
+        for (int i = 0; i < table_view.getItems().size(); i++) {
+            row = spreadsheet.createRow(i + 1);
+            for (int j = 0; j < table_view.getColumns().size(); j++) {
+                if(table_view.getColumns().get(j).getCellData(i) != null) {
+                    row.createCell(j).setCellValue(table_view.getColumns().get(j).getCellData(i).toString());
+                }
+                else {
+                    row.createCell(j).setCellValue("");
+                }
+            }
+        }
+
+        // Show Selected Directory
+        Stage stage = new Stage();
+
+        stage.setTitle("Export data route");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(
+                ((Node)event.getSource()).getScene().getWindow() );
+
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        directoryChooser.setInitialDirectory(new File("src"));
+
+        File selectedDirectory = directoryChooser.showDialog(stage);
+        if(selectedDirectory != null) {
+            if (!selectedDirectory.canRead()) {
+                Boolean b = selectedDirectory.setReadable(true, false);
+            }
+
+            File myObj = new File(selectedDirectory.getAbsolutePath() + "/ListOfRoute_" +
+                    DateTimeFormatter.ofPattern("dd_MM_yyyy_HH_mm_ss").format(LocalDateTime.now()) + ".xls");
+            if (myObj.createNewFile()) {
+                FileOutputStream fileOut = new FileOutputStream(myObj);
+                workbook.write(fileOut);
+                fileOut.close();
+            }
         }
     }
 
@@ -356,6 +426,14 @@ public class RoutePage implements Initializable {
 
             show(0, "");
             toggleDetail();
+
+            // Init search text field
+            List<String> words = new ArrayList<>();
+
+            BLL_Admin.getInstance().getRoutes(null, "").forEach(r -> {
+                words.add(r.getStartStation() + " " + r.getEndStation());
+            });
+            TextFields.bindAutoCompletion(txf_search_nameofRoute, words);
         } catch (IOException e) {
             e.printStackTrace();
         }
