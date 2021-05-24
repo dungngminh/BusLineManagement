@@ -458,7 +458,6 @@ public class DAL {
     public void updateScheduleNotDPR(int idSchedule, RouteEntity routeSelected, BusEntity busSelected, DriverEntity driverSelected, Date departTimeInput, int durationInput, int priceInput) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
-        //TODO Query update Schedule
         Query query = session.createQuery("Update ScheduleEntity set idRoute = :idRoute, idBus = :idBus, idDriver = :idDriver,departTime = :departTime" +
                 ", price = :price where idSchedule = :idSchedule");
         query.setParameter("idRoute", routeSelected.getIdRoute());
@@ -467,6 +466,16 @@ public class DAL {
         query.setParameter("departTime", departTimeInput);
         query.setParameter("price", priceInput);
         query.setParameter("idSchedule", idSchedule);
+        query.executeUpdate();
+        session.getTransaction().commit();
+        session.close();
+    }
+    public void updateDPR(int idSchedule, int dpr){
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        session.beginTransaction();
+        var query = session.createQuery("Update ScheduleEntity set dpr = :dpr where idSchedule = :idSchedule");
+        query.setParameter("dpr", dpr);
+        query.setParameter("idSchedule",idSchedule);
         query.executeUpdate();
         session.getTransaction().commit();
         session.close();
@@ -751,6 +760,7 @@ public class DAL {
         session.close();
         return result;
     }
+
 
     public List<AccountEntity> getListSeller() {
         Session session = HibernateUtils.getSessionFactory().openSession();

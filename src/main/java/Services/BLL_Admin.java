@@ -215,11 +215,10 @@ public class BLL_Admin {
         DAL.getInstance().deleteRoute(idRoute);
     }
 
-    //TODO checkDuplicateRoute
-//    public boolean checkDuplicateRoute(String startStation, String endStation){
-//
-//    }
-
+    public boolean checkDuplicateRoute(String startStation, String endStation){
+        return getRoutes(0,"").stream().anyMatch(route ->
+                (route.getStartStation() + route.getEndStation()).equals(startStation+endStation));
+    }
 
     public int getDistance(int startProvinceIndex, int endProvinceIndex) throws IOException {
         // cell B - Q  = 2 - 17
@@ -285,11 +284,14 @@ public class BLL_Admin {
         DAL.getInstance().updateScheduleNotDPR(idSchedule, routeSelected, busSelected, driverSelected, departTimeInput,
                 durationInput, priceInput);
     }
+    public void updateDPR(int idSchedule, int dpr){
+        DAL.getInstance().updateDPR(idSchedule, dpr);
+    }
 
     public Boolean outDateSchedule(String date) throws ParseException {
         return TimeUnit.DAYS.convert(new SimpleDateFormat("dd/MM/yyyy").parse(date).getTime() -
                 Date.from(LocalDate.now().
-                        atStartOfDay(ZoneId.systemDefault()).toInstant()).getTime(), TimeUnit.MILLISECONDS) <= 20;
+                        atStartOfDay(ZoneId.systemDefault()).toInstant()).getTime(), TimeUnit.MILLISECONDS) <= 10;
     }
     // NOTICE BLL for MainWindow(Dashboard of Admin)
 

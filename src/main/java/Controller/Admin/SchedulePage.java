@@ -13,6 +13,7 @@ import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXToggleButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.TableView;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,6 +23,7 @@ import javafx.scene.control.*;
 
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -235,7 +237,7 @@ public class SchedulePage implements Initializable {
                         show("");
                         break;
                     case "Update":
-                        if (tfx_day_per_route.getText().equals(""))
+                        if (tfx_day_per_route.isDisabled())
                             BLL_Admin.getInstance().updateScheduleNotDPR(idSchedule, routeSelected, busSelected, driverSelected, departTimeInput, durationInput, priceInput);
                         else
                             BLL_Admin.getInstance().updateSchedule(idSchedule, routeSelected, busSelected, driverSelected, departTimeInput, durationInput, priceInput, dprInput);
@@ -278,6 +280,7 @@ public class SchedulePage implements Initializable {
     @FXML
     void toggleClicked(ActionEvent event) {
         tfx_day_per_route.setDisable(toggle_updateDpr.isSelected());
+        tfx_day_per_route.setText("");
     }
 
     @FXML
@@ -374,7 +377,6 @@ public class SchedulePage implements Initializable {
             if (!selectedDirectory.canRead()) {
                 Boolean b = selectedDirectory.setReadable(true, false);
             }
-
             File myObj = new File(selectedDirectory.getAbsolutePath() + "/ListOfSchedule_" +
                     DateTimeFormatter.ofPattern("dd_MM_yyyy_HH_mm_ss").format(LocalDateTime.now()) + ".xls");
             if (myObj.createNewFile()) {
@@ -396,12 +398,14 @@ public class SchedulePage implements Initializable {
     void onReOutdateClicked(MouseEvent event) {
         ScheduleEntity_ViewModel scheduleEntity_viewModel = table_view.getSelectionModel().getSelectedItem();
         System.out.println(scheduleEntity_viewModel.getIdSchedule());
-        //TODO  BLL_Admin.getInstance().updateScheduleNotDPR(idSchedule, routeSelected, busSelected, driverSelected, departTimeInput, durationInput, priceInput);
+        BLL_Admin.getInstance().updateDPR(scheduleEntity_viewModel.getIdSchedule(), scheduleEntity_viewModel.getDpr());
+        new Alert(Alert.AlertType.INFORMATION, "Update Outdate successful!").showAndWait();
     }
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        btn_reOutdate.setDisable(true);
         // Init combobox for bus and route
         BLL_Admin.getInstance().getAllBus().forEach(bus -> cbx_bus.getItems().add(bus));
         BLL_Admin.getInstance().getRoutes(0, "").forEach(route -> cbx_route.getItems().add(route));
@@ -452,20 +456,36 @@ public class SchedulePage implements Initializable {
         col_duration.setCellValueFactory(new PropertyValueFactory<>("duration"));
         col_dpr.setCellValueFactory(new PropertyValueFactory<>("dpr"));
 
-        table_view.setRowFactory(tv -> new TableRow<ScheduleEntity_ViewModel>() {
-            @Override
-            protected void updateItem(ScheduleEntity_ViewModel item, boolean b) {
-                super.updateItem(item, b);
-                if (item == null)
-                    setStyle("");
-                else try {
-                        if (BLL_Admin.getInstance().outDateSchedule(item.getOutDate())){
+        table_view.setRowFactory(tv -> {
+            TableRow<ScheduleEntity_ViewModel> row = new TableRow<>() {
+                @Override
+                protected void updateItem(ScheduleEntity_ViewModel item, boolean b) {
+                    super.updateItem(item, b);
+                    if (item == null)
+                        setStyle("");
+                    else try {
+                        if (BLL_Admin.getInstance().outDateSchedule(item.getOutDate())) {
                             setStyle("-fx-background-color: #D16666");
-                        }else setStyle("");
+                        } else setStyle("");
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
                 }
+
+            };
+            row.setOnMouseClicked(mouseEvent -> {
+                if(!row.isEmpty() && mouseEvent.getButton() == MouseButton.PRIMARY){
+                    ScheduleEntity_ViewModel item = row.getItem();
+                    try {
+                        if(BLL_Admin.getInstance().outDateSchedule(item.getOutDate())){
+                            btn_reOutdate.setDisable(false);
+                        }else btn_reOutdate.setDisable(true);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            return row;
         });
 
         table_view.setItems(listObj);
