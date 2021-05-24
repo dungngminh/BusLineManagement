@@ -290,7 +290,6 @@ public class Ticket implements Initializable {
                 fileOut.close();
             }
         }
-
     }
 
     @FXML

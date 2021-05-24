@@ -193,7 +193,6 @@ public class RoutePage implements Initializable {
 
     @FXML
     void btn_ok_clicked(MouseEvent event) {
-        AtomicBoolean isDuplicate = new AtomicBoolean(false);
         try {
             String startStation = cbx_startstation.getSelectionModel().getSelectedItem().toString();
             String endStation = cbx_endstation.getSelectionModel().getSelectedItem().toString();
@@ -202,13 +201,7 @@ public class RoutePage implements Initializable {
                 new Alert(Alert.AlertType.ERROR, "Duplicate Station, please re fill!").showAndWait();
 
             else {
-
-                List<RouteEntity> listCheck = BLL_Admin.getInstance().getRoutes(0,"");
-                listCheck.forEach(route -> {
-                    if((route.getStartStation() + route.getEndStation()).equals(startStation+endStation))
-                        isDuplicate.set(true);
-                });
-                    if(isDuplicate.get() == true)
+                    if(BLL_Admin.getInstance().checkDuplicateRoute(startStation,endStation))
                         new Alert(Alert.AlertType.ERROR, "Duplicate Data, please re fill").showAndWait();
                     else {
                         int distance = Integer.parseInt(tfx_distance.getText());
