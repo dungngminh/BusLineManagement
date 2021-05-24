@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.*;
 
 @Entity
-@Table(name = "Schedule", schema = "dbo", catalog = "QuanLyNhaXeKhach")
+@Table(name = "Schedule", schema = "dbo", catalog = "N2_19N12B")
 public class ScheduleEntity {
 
     private int idSchedule;
@@ -15,11 +15,15 @@ public class ScheduleEntity {
     private int duration;
     private Boolean isDelete;
 
+    // FIXME
+    private int idDriver;
     private Integer price;
     private Integer dpr;
 
     private RouteEntity routeByIdRoute;
     private BusEntity busByIdBus;
+    // FIXME
+    private DriverEntity driverByIdDriver;
     private Collection<TripInformationEntity> tripInformationsByIdSchedule;
 
     @Id
@@ -83,6 +87,18 @@ public class ScheduleEntity {
         this.isDelete = delete;
     }
 
+    // NOTICE
+    @Basic
+    @Column(name = "idDriver", nullable = false, insertable = false, updatable = false)
+    public int getIdDriver() {
+        return idDriver;
+    }
+
+    public void setIdDriver(int idDriver) {
+        this.idDriver = idDriver;
+    }
+    //
+
     @Basic
     @Column(name = "Price", nullable = false)
     public Integer getPrice() {
@@ -116,6 +132,7 @@ public class ScheduleEntity {
         if (duration != that.duration) return false;
         if (isDelete != that.isDelete) return false;
         if (!dpr.equals(that.dpr)) return false;
+        if (idDriver != that.idDriver) return false;
         if (!price.equals(that.price)) return false;
         if (departTime != null ? !departTime.equals(that.departTime) : that.departTime != null) return false;
 
@@ -162,5 +179,15 @@ public class ScheduleEntity {
 
     public void setTripInformationsByIdSchedule(Collection<TripInformationEntity> tripInformationsByIdSchedule) {
         this.tripInformationsByIdSchedule = tripInformationsByIdSchedule;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "idDriver", referencedColumnName = "idDriver", nullable = false)
+    public DriverEntity getDriverByIdDriver() {
+        return driverByIdDriver;
+    }
+
+    public void setDriverByIdDriver(DriverEntity driverByIdDriver) {
+        this.driverByIdDriver = driverByIdDriver;
     }
 }

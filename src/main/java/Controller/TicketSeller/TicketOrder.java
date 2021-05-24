@@ -14,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -35,13 +36,7 @@ public class TicketOrder implements Initializable {
     private AnchorPane rootPane;
 
     @FXML
-    private JFXDrawer jfx_drawer;
-
-    @FXML
     private Pane pane2;
-
-    @FXML
-    private JFXHamburger jfx_hambur;
 
     @FXML
     private Label lb_code;
@@ -105,12 +100,6 @@ public class TicketOrder implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-
-            // Init for side bar
-            InitSideBar.getInstance().initializeForNavBar(this.rootPane, this.jfx_drawer, this.jfx_hambur);
-            //done
-
-
             // Init Figure Of Bus Type
             switch(modelTrip.getScheduleByIdSchedule().getBusByIdBus().getTypeOfBusByIdType().getIdType()) {
                 case 1: {
@@ -158,7 +147,7 @@ public class TicketOrder implements Initializable {
                     new SimpleDateFormat("HH:mm:ss").format(modelTrip.getScheduleByIdSchedule().getDepartTime()));
             lb_startstation.setText(modelTrip.getScheduleByIdSchedule().getRouteByIdRoute().getStartStation());
             lb_destination.setText(modelTrip.getScheduleByIdSchedule().getRouteByIdRoute().getEndStation());
-            lb_phone.setText(modelTrip.getDriverByIdDriver().getPhone());
+            lb_phone.setText(modelTrip.getScheduleByIdSchedule().getDriverByIdDriver().getPhone());
             lb_price.setText("0đ");
             cbx_payment.getItems().add("Paid");
             cbx_payment.getItems().add("Unpaid");
@@ -187,30 +176,6 @@ public class TicketOrder implements Initializable {
 
             pane2.hoverProperty().addListener((event)->refreshTicketForSLots());
 
-            // Init ticket detail
-            lb_code.setText("Choose your slots!");
-            lb_type.setText(modelTrip.getScheduleByIdSchedule().getBusByIdBus().getTypeOfBusByIdType().getTypeName());
-            lb_departdate.setText(date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-            lb_startstation.setText(modelTrip.getScheduleByIdSchedule().getRouteByIdRoute().getStartStation());
-            lb_destination.setText(modelTrip.getScheduleByIdSchedule().getRouteByIdRoute().getEndStation());
-            lb_phone.setText(modelTrip.getDriverByIdDriver().getPhone());
-            cbx_payment.getItems().add("Paid");
-            cbx_payment.getItems().add("Unpaid");
-            cbx_payment.getSelectionModel().selectFirst();
-            lb_price.setText("0đ");
-            //done!
-
-            // Event for slot
-            String floor1 = "9162935";
-            if(floor1.contains(String.valueOf(modelTrip.getScheduleByIdSchedule().getBusByIdBus().
-                    getTypeOfBusByIdType().getSlot())))
-                eventHandle_OneFloor();
-            else
-                eventHandle_TwoFloors();
-
-            // done
-
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -227,15 +192,19 @@ public class TicketOrder implements Initializable {
         loader.setController(controller);
 
         AnchorPane newPane = loader.load();
-        this.rootPane.getChildren().setAll(newPane);
+        newPane.requestLayout();
+//        rootPane.getChildren().setAll(newPane);
+        Scene scene= rootPane.getScene();
+        scene.setRoot(newPane);
     }
 
     @FXML
     void btn_confirm_clicked(MouseEvent event) throws IOException {
-        try {
+//        try {
             if(txf_namecustomer.getText().equals("") || txf_phonecustomer.getText().equals("")) {
                 new Alert(Alert.AlertType.WARNING, "Fill all field!").showAndWait();
-            } else if(!Pattern.matches("((\\+84)|09|03|07|08|05|[2|5|7|8|9])+([0-9]{8})\\b", txf_phonecustomer.getText())) {
+            } else if(!Pattern.matches("((\\+84)|09|03|07|08|05|[2|5|7|8|9])+([0-9]{8})\\b", txf_phonecustomer.getText()) ||
+                        txf_phonecustomer.getText().length() > 10) {
                 new Alert(Alert.AlertType.WARNING, "Phone customer is incorrect!").showAndWait();
             } else if(lb_code.getText().equals("") || lb_code.getText().equals("Choose your slots!")) {
                 new Alert(Alert.AlertType.WARNING, "You did not order any slot!").showAndWait();
@@ -255,13 +224,21 @@ public class TicketOrder implements Initializable {
                             Integer.parseInt(lb_price.getText().substring(0, lb_price.getText().length() - 1)),
                             cbx_payment.getSelectionModel().getSelectedItem().equals("Paid"));
 
-                    AnchorPane newPane = FXMLLoader.load(getClass().getResource("/view/seller_view/Dashboard.fxml"));
-                    rootPane.getChildren().setAll(newPane);
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/seller_view/FilterRoute.fxml"));
+
+                    FilterRoute controller = new FilterRoute(startProvince, endProvince, date);
+                    loader.setController(controller);
+
+                    AnchorPane newPane = loader.load();
+                    newPane.requestLayout();
+            //        rootPane.getChildren().setAll(newPane);
+                    Scene scene= rootPane.getScene();
+                    scene.setRoot(newPane);
                 }
             }
-        } catch (Exception err) {
-            new Alert(Alert.AlertType.WARNING, "Unknown Error").showAndWait();
-        }
+//        } catch (Exception err) {
+//            new Alert(Alert.AlertType.WARNING, "Unknown Error").showAndWait();
+//        }
 
     }
     // DONE
@@ -433,6 +410,7 @@ public class TicketOrder implements Initializable {
                     Integer.parseInt(lb_price.getText().substring(0, lb_price.getText().length() - 1)),
                     cbx_payment.getSelectionModel().getSelectedItem().equals("Paid"));
             ///
+
         }
     }
 }

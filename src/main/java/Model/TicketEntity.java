@@ -5,7 +5,7 @@ import org.hibernate.annotations.ColumnDefault;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Ticket", schema = "dbo", catalog = "QuanLyNhaXeKhach")
+@Table(name = "Ticket", schema = "dbo", catalog = "N2_19N12B")
 public class TicketEntity {
 
     private Integer idTicket;
@@ -21,12 +21,35 @@ public class TicketEntity {
     private AccountEntity accountByIdUser;
     private TripInformationEntity tripInformationByIdTrip;
 
+    @Basic
+    @Column(name = "isDelete", nullable = false)
+    public boolean isDelete() {
+        return isDelete;
+    }
+
+    public void setDelete(boolean delete) {
+        isDelete = delete;
+    }
+
+    @Basic
+    @Column(name = "isPaid", nullable = false)
+    public boolean isPaid() {
+        return isPaid;
+    }
+
+    public void setPaid(boolean paid) {
+        isPaid = paid;
+    }
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "idTicket", nullable = false)
     public Integer getIdTicket() {
         return idTicket;
+    }
+
+    public void setIdTicket(int idTicket) {
+        this.idTicket = idTicket;
     }
 
     public void setIdTicket(Integer idTicket) {
@@ -64,7 +87,7 @@ public class TicketEntity {
     }
 
     @Basic
-    @Column(name = "isDelete", nullable = false)
+    @Column(name = "isDelete", nullable = false, insertable = false, updatable = false)
     @ColumnDefault(value = "false")
     public Boolean getIsDelete() {
         return isDelete;
@@ -74,10 +97,11 @@ public class TicketEntity {
         this.isDelete = delete;
     }
 
-    @Column(name = "isPaid", nullable = false, unique = false)
+    @Column(name = "isPaid", nullable = false, unique = false, insertable = false, updatable = false)
     public Boolean getIsPaid() {
         return isPaid;
     }
+
     public void setIsPaid(Boolean isPaid) {
         this.isPaid = isPaid;
     }
@@ -86,6 +110,10 @@ public class TicketEntity {
     @Column(name = "price", nullable = false)
     public Integer getPrice() {
         return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     public void setPrice(Integer price) {
@@ -117,6 +145,10 @@ public class TicketEntity {
     @ColumnDefault(value = "0")
     public Integer getStatus() {
         return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public void setStatus(Integer status) {
