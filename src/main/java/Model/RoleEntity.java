@@ -4,14 +4,13 @@ import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
-@Table(name = "Role", schema = "dbo", catalog = "QuanLyNhaXeKhach")
+@Table(name = "Role", schema = "dbo", catalog = "N2_19N12B")
 public class RoleEntity {
     private int idRole;
     private String roleName;
-    private Collection<RoleAccountEntity> roleAccountsByIdRole;
+    private Collection<AccountEntity> accountsByIdRole;
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "idRole", nullable = false)
     public int getIdRole() {
         return idRole;
@@ -52,11 +51,11 @@ public class RoleEntity {
     }
 
     @OneToMany(mappedBy = "roleByIdRole")
-    public Collection<RoleAccountEntity> getRoleAccountsByIdRole() {
-        return roleAccountsByIdRole;
+    public Collection<AccountEntity> getAccountsByIdRole() {
+        return accountsByIdRole;
     }
 
-    public void setRoleAccountsByIdRole(Collection<RoleAccountEntity> roleAccountsByIdRole) {
-        this.roleAccountsByIdRole = roleAccountsByIdRole;
+    public void setAccountsByIdRole(Collection<AccountEntity> accountsByIdRole) {
+        this.accountsByIdRole = accountsByIdRole;
     }
 }

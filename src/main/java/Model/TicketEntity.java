@@ -1,27 +1,50 @@
 package Model;
 
+import org.hibernate.annotations.ColumnDefault;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Ticket", schema = "dbo", catalog = "QuanLyNhaXeKhach")
+@Table(name = "Ticket", schema = "dbo", catalog = "N2_19N12B")
 public class TicketEntity {
-    private int idTicket;
+
+    private Integer idTicket;
     private String nameTicket;
-    private int price;
     private Integer idUser;
     private Integer idTrip;
     private Boolean isDelete;
+    private Boolean isPaid;
+    private Integer price;
     private String phoneNumber;
     private String nameCustomer;
-    private int destination;
     private Integer status;
     private AccountEntity accountByIdUser;
     private TripInformationEntity tripInformationByIdTrip;
 
+    @Basic
+    @Column(name = "isDelete", nullable = false)
+    public boolean isDelete() {
+        return isDelete;
+    }
+
+    public void setDelete(boolean delete) {
+        isDelete = delete;
+    }
+
+    @Basic
+    @Column(name = "isPaid", nullable = false)
+    public boolean isPaid() {
+        return isPaid;
+    }
+
+    public void setPaid(boolean paid) {
+        isPaid = paid;
+    }
+
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "idTicket", nullable = false)
-    public int getIdTicket() {
+    public Integer getIdTicket() {
         return idTicket;
     }
 
@@ -29,24 +52,18 @@ public class TicketEntity {
         this.idTicket = idTicket;
     }
 
+    public void setIdTicket(Integer idTicket) {
+        this.idTicket = idTicket;
+    }
+
     @Basic
-    @Column(name = "nameTicket", nullable = true, length = 50)
+    @Column(name = "nameTicket", nullable = true, length = 200)
     public String getNameTicket() {
         return nameTicket;
     }
 
     public void setNameTicket(String nameTicket) {
         this.nameTicket = nameTicket;
-    }
-
-    @Basic
-    @Column(name = "Price", nullable = false)
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
     }
 
     @Basic
@@ -70,7 +87,8 @@ public class TicketEntity {
     }
 
     @Basic
-    @Column(name = "isDelete", nullable = true)
+    @Column(name = "isDelete", nullable = false, insertable = false, updatable = false)
+    @ColumnDefault(value = "false")
     public Boolean getIsDelete() {
         return isDelete;
     }
@@ -79,8 +97,31 @@ public class TicketEntity {
         this.isDelete = delete;
     }
 
+    @Column(name = "isPaid", nullable = false, unique = false, insertable = false, updatable = false)
+    public Boolean getIsPaid() {
+        return isPaid;
+    }
+
+    public void setIsPaid(Boolean isPaid) {
+        this.isPaid = isPaid;
+    }
+
     @Basic
-    @Column(name = "phoneNumber", nullable = false, length = 10)
+    @Column(name = "price", nullable = false)
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
+
+    @Basic
+    @Column(name = "phoneNumber", nullable = true, length = 10)
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -90,7 +131,7 @@ public class TicketEntity {
     }
 
     @Basic
-    @Column(name = "nameCustomer", nullable = false, length = 50)
+    @Column(name = "nameCustomer", nullable = true, length = 50)
     public String getNameCustomer() {
         return nameCustomer;
     }
@@ -100,19 +141,14 @@ public class TicketEntity {
     }
 
     @Basic
-    @Column(name = "destination", nullable = false)
-    public int getDestination() {
-        return destination;
-    }
-
-    public void setDestination(int destination) {
-        this.destination = destination;
-    }
-
-    @Basic
-    @Column(name = "status", nullable = true)
+    @Column(name = "status", nullable = false)
+    @ColumnDefault(value = "0")
     public Integer getStatus() {
         return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public void setStatus(Integer status) {
@@ -127,12 +163,12 @@ public class TicketEntity {
         TicketEntity that = (TicketEntity) o;
 
         if (idTicket != that.idTicket) return false;
-        if (price != that.price) return false;
-        if (destination != that.destination) return false;
         if (nameTicket != null ? !nameTicket.equals(that.nameTicket) : that.nameTicket != null) return false;
         if (idUser != null ? !idUser.equals(that.idUser) : that.idUser != null) return false;
         if (idTrip != null ? !idTrip.equals(that.idTrip) : that.idTrip != null) return false;
         if (isDelete != null ? !isDelete.equals(that.isDelete) : that.isDelete != null) return false;
+        if (isPaid != null ? !isPaid.equals(that.isPaid) : that.isPaid != null) return false;
+        if (!price.equals(that.price)) return false;
         if (phoneNumber != null ? !phoneNumber.equals(that.phoneNumber) : that.phoneNumber != null) return false;
         if (nameCustomer != null ? !nameCustomer.equals(that.nameCustomer) : that.nameCustomer != null) return false;
         if (status != null ? !status.equals(that.status) : that.status != null) return false;
@@ -144,14 +180,15 @@ public class TicketEntity {
     public int hashCode() {
         int result = idTicket;
         result = 31 * result + (nameTicket != null ? nameTicket.hashCode() : 0);
-        result = 31 * result + price;
         result = 31 * result + (idUser != null ? idUser.hashCode() : 0);
         result = 31 * result + (idTrip != null ? idTrip.hashCode() : 0);
         result = 31 * result + (isDelete != null ? isDelete.hashCode() : 0);
+        result = 31 * result + (isPaid != null ? isPaid.hashCode() : 0);
+        result = 31 * result + price;
         result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
         result = 31 * result + (nameCustomer != null ? nameCustomer.hashCode() : 0);
-        result = 31 * result + destination;
         result = 31 * result + (status != null ? status.hashCode() : 0);
+
         return result;
     }
 

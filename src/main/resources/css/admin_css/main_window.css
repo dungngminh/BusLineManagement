@@ -1,0 +1,104 @@
+.rootPane {
+    /*-fx-background-image: url(../../images/main_window.jpg);*/
+    -fx-background-size: 100% 100%;
+}
+
+#hamburger StackPane {-fx-background-color: white;}
+
+.btn {
+    -fx-background-color: #A3E7FC;
+    -fx-background-radius: 9px;
+    -fx-border-radius: 7px;
+}
+
+.btn:hover {
+    -fx-background-color: #84BCDA;
+    -fx-background-radius: 9px;
+    -fx-border-radius: 7px;
+}
+
+.combo-box {
+    -fx-effect: dropshadow(gaussian , #919191, 5, 0.2, 0, 0);
+    -fx-font-size: 16px;
+}
+
+.combo-box .arrow {
+    -fx-background-color: #039aff;
+}
+
+.combo-box .arrow-button {
+    -fx-background-color: #FFFFFA;
+}
+
+.combo-box .list-cell
+{
+    -fx-background-color: #FFFFFA;
+    -fx-text-fill: #1a1919;
+    -fx-padding: 3 0 2 7;
+    -fx-cell-size: 1.66667em;
+}
+
+.combo-box-popup .list-view
+{
+    -fx-background-color: #FFFFFA;
+    -fx-background-insets: 0, 1;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 8, 0.0 , 0 , 0 );
+}
+
+.grid-top {
+    -fx-background-radius: 0 0 4px 4px;
+    -fx-border-radius: 0 0 2px 2px;
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #FE1157, #FF809D);
+    -fx-effect: dropshadow(two-pass-box, #2e5053, 5, 0.0, 0.1, 2);
+}
+
+.box-search {
+    -fx-background-radius: 16px;
+    -fx-border-radius: 15px;
+}
+
+.panel-revenue {
+    -fx-background-radius: 9px;
+    -fx-border-radius: 7px;
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #ea5753, #ffb88e);
+    -fx-effect: dropshadow(gaussian , #919191, 10, 0.2, 0, 0);
+}
+
+.panel-route {
+    -fx-background-radius: 9px;
+    -fx-border-radius: 7px;
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #5fc52e, #D0E6A5);
+    -fx-effect: dropshadow(gaussian , #919191, 10, 0.2, 0, 0);
+}
+
+.panel-trip {
+    -fx-background-radius: 9px;
+    -fx-border-radius: 7px;
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #ff930f, #f7ba2c);
+    -fx-effect: dropshadow(gaussian , #919191, 10, 0.2, 0, 0);
+}
+
+.panel-personnel {
+    -fx-background-radius: 9px;
+    -fx-border-radius: 7px;
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #2278fb, #6bdfdb);
+    -fx-effect: dropshadow(gaussian , #919191, 10, 0.2, 0, 0);
+}
+
+.panel-revenue:hover {
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #ffb88e, #ea5753);
+}
+
+.panel-route:hover {
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #D0E6A5, #5fc52e);
+}
+
+.panel-trip:hover {
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #f7ba2c, #ff930f);
+}
+
+.panel-personnel:hover {
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #6bdfdb, #2278fb);
+}
+
+

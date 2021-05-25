@@ -3,37 +3,60 @@ package Controller.Admin;
 import Model.ProvinceEntity;
 import Model.RouteEntity;
 import Model.StationEntity;
+import Model.ViewModel.ScheduleEntity_ViewModel;
 import Services.BLL_Admin;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
-import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
+import com.jfoenix.controls.JFXToggleButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.controlsfx.control.textfield.TextFields;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.text.AttributedCharacterIterator;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class RoutePage implements Initializable {
 
     @FXML
     private AnchorPane pane;
+
+    @FXML
+    private BorderPane border_pane;
+
+    @FXML
+    private TitledPane titlepane_start;
+
+    @FXML
+    private TitledPane titlepane_end;
+
+    @FXML
+    private TitledPane titlepane_info;
 
     @FXML
     private JFXHamburger jfx_hambur;
@@ -84,7 +107,7 @@ public class RoutePage implements Initializable {
     private TableColumn<RouteEntity, String> col_note;
 
     @FXML
-    private ButtonBar grp_btn_tbl;
+    private FlowPane grp_btn_tbl;
 
 
     @FXML
@@ -101,6 +124,9 @@ public class RoutePage implements Initializable {
 
     @FXML
     private TextField txf_search_nameofRoute;
+
+    @FXML
+    private JFXToggleButton toggle_returnRoute;
 
     @FXML
     private Button btn_search;
@@ -143,6 +169,7 @@ public class RoutePage implements Initializable {
 
     @FXML
     void btn_create_clicked(MouseEvent event) {
+        toggle_returnRoute.setVisible(true);
         btn_ok.setText("Add");
         cbx_provinceStart.getSelectionModel().select(null);
         cbx_provinceEnd.getSelectionModel().select(null);
@@ -158,8 +185,9 @@ public class RoutePage implements Initializable {
     void btn_delete_clicked(MouseEvent event) {
         RouteEntity routeEntity = table_view.getSelectionModel().getSelectedItem();
         idRoute = routeEntity.getIdRoute();
-        System.out.println(idRoute);
+
         BLL_Admin.getInstance().deleteRoute(idRoute);
+        new Alert(Alert.AlertType.INFORMATION, "Delete successful!").showAndWait();
         show(0, "");
     }
 
@@ -168,28 +196,39 @@ public class RoutePage implements Initializable {
         try {
             String startStation = cbx_startstation.getSelectionModel().getSelectedItem().toString();
             String endStation = cbx_endstation.getSelectionModel().getSelectedItem().toString();
-            if(startStation.equals(endStation)) new Alert(Alert.AlertType.ERROR,"Duplicate Station, please re fill!").showAndWait();
+
+            if (startStation.equals(endStation))
+                new Alert(Alert.AlertType.ERROR, "Duplicate Station, please re fill!").showAndWait();
+
             else {
-                int distance = Integer.parseInt(tfx_distance.getText());
-                String note = tax_note.getText().trim();
-                if (cbx_startstation.getSelectionModel().getSelectedItem() == null || cbx_endstation.getSelectionModel().getSelectedItem() == null) {
-                    new Alert(Alert.AlertType.ERROR, "Please choose station!").showAndWait();
-                }
-                switch (CRUDType) {
-                    case "Create":
-                        BLL_Admin.getInstance().addRoute(startStation, endStation, note, distance);
-                        new Alert(Alert.AlertType.INFORMATION, "Add route successful!").showAndWait();
-                        show(0, "");
-                        break;
-                    case "Update":
-                        int stt = cbx_status.getSelectionModel().getSelectedItem().equals("Available") ? 0 : 1;
-                        BLL_Admin.getInstance().updateRoute(idRoute, startStation, endStation, note, distance, stt);
-                        new Alert(Alert.AlertType.INFORMATION, "Update route successful!").showAndWait();
-                        show(0, "");
-                        break;
-                    default:
-                        break;
-                }
+                    if(BLL_Admin.getInstance().checkDuplicateRoute(startStation,endStation))
+                        new Alert(Alert.AlertType.ERROR, "Duplicate Data, please re fill").showAndWait();
+                    else {
+                        int distance = Integer.parseInt(tfx_distance.getText());
+                        String note = tax_note.getText().trim();
+                        if (cbx_startstation.getSelectionModel().getSelectedItem() == null || cbx_endstation.getSelectionModel().getSelectedItem() == null) {
+                            new Alert(Alert.AlertType.ERROR, "Please choose station!").showAndWait();
+                        } else {
+                            switch (CRUDType) {
+                                case "Create":
+                                    if (toggle_returnRoute.isSelected()) {
+                                        BLL_Admin.getInstance().addRoute(startStation, endStation, note, distance);
+                                        BLL_Admin.getInstance().addRoute(endStation, startStation, note, distance);
+                                    } else BLL_Admin.getInstance().addRoute(startStation, endStation, note, distance);
+                                    new Alert(Alert.AlertType.INFORMATION, "Add route successful!").showAndWait();
+                                    show(0, "");
+                                    break;
+                                case "Update":
+                                    int stt = cbx_status.getSelectionModel().getSelectedItem().equals("Available") ? 0 : 1;
+                                    BLL_Admin.getInstance().updateRoute(idRoute, startStation, endStation, note, distance, stt);
+                                    new Alert(Alert.AlertType.INFORMATION, "Update route successful!").showAndWait();
+                                    show(0, "");
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    }
             }
         } catch (Exception ee) {
             new Alert(Alert.AlertType.ERROR, "Please fill information!").showAndWait();
@@ -218,6 +257,7 @@ public class RoutePage implements Initializable {
 
     @FXML
     void btn_update_clicked(MouseEvent event) {
+        toggle_returnRoute.setVisible(false);
         btn_ok.setText("Ok");
         try {
             RouteEntity routeEntity = table_view.getSelectionModel().getSelectedItem();
@@ -253,6 +293,60 @@ public class RoutePage implements Initializable {
             toggleDetail();
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, "Please choose 1 row").showAndWait();
+        }
+    }
+
+    @FXML
+    void btn_export_clicked(MouseEvent event) throws IOException {
+        if(table_view.getItems().isEmpty()) {
+            new Alert(Alert.AlertType.WARNING, "List is empty!").showAndWait();
+            return;
+        }
+        Workbook workbook = new HSSFWorkbook();
+        Sheet spreadsheet = workbook.createSheet("route");
+
+        Row row = spreadsheet.createRow(0);
+
+        for (int j = 0; j < table_view.getColumns().size(); j++) {
+            row.createCell(j).setCellValue(table_view.getColumns().get(j).getText());
+        }
+
+        for (int i = 0; i < table_view.getItems().size(); i++) {
+            row = spreadsheet.createRow(i + 1);
+            for (int j = 0; j < table_view.getColumns().size(); j++) {
+                if(table_view.getColumns().get(j).getCellData(i) != null) {
+                    row.createCell(j).setCellValue(table_view.getColumns().get(j).getCellData(i).toString());
+                }
+                else {
+                    row.createCell(j).setCellValue("");
+                }
+            }
+        }
+
+        // Show Selected Directory
+        Stage stage = new Stage();
+
+        stage.setTitle("Export data route");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(
+                ((Node)event.getSource()).getScene().getWindow() );
+
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        directoryChooser.setInitialDirectory(new File("src"));
+
+        File selectedDirectory = directoryChooser.showDialog(stage);
+        if(selectedDirectory != null) {
+            if (!selectedDirectory.canRead()) {
+                Boolean b = selectedDirectory.setReadable(true, false);
+            }
+
+            File myObj = new File(selectedDirectory.getAbsolutePath() + "/ListOfRoute_" +
+                    DateTimeFormatter.ofPattern("dd_MM_yyyy_HH_mm_ss").format(LocalDateTime.now()) + ".xls");
+            if (myObj.createNewFile()) {
+                FileOutputStream fileOut = new FileOutputStream(myObj);
+                workbook.write(fileOut);
+                fileOut.close();
+            }
         }
     }
 
@@ -318,12 +412,21 @@ public class RoutePage implements Initializable {
             BLL_Admin.getInstance().getProvinceName().forEach(type -> {
                 cbx_provinceEnd.getItems().add(type);
             });
+
             cbx_status.getItems().add("Available");
             cbx_status.getItems().add("Unavailable");
             tfx_distance.setEditable(false);
 
             show(0, "");
             toggleDetail();
+
+            // Init search text field
+            List<String> words = new ArrayList<>();
+
+            BLL_Admin.getInstance().getRoutes(null, "").forEach(r -> {
+                words.add(r.getStartStation() + " " + r.getEndStation());
+            });
+            TextFields.bindAutoCompletion(txf_search_nameofRoute, words);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -347,21 +450,23 @@ public class RoutePage implements Initializable {
             btn_ok.setVisible(false);
             btn_reset.setVisible(false);
             btn_cancel.setVisible(false);
+            titlepane_start.setVisible(false);
+            titlepane_end.setVisible(false);
+            titlepane_info.setVisible(false);
+
             grp_btn_tbl.setVisible(true);
-            table_view.setLayoutX(-290);
-            table_view.setPrefWidth(1165);
-            hbox.setLayoutX(80);
-            grp_btn_tbl.setLayoutX(85);
-            table_view.toFront();
+            AnchorPane.setLeftAnchor(border_pane, 2.0);
         } else {
             btn_reset.setVisible(true);
             btn_ok.setVisible(true);
             btn_cancel.setVisible(true);
+            titlepane_start.setVisible(true);
+            titlepane_end.setVisible(true);
+            titlepane_info.setVisible(true);
+
             grp_btn_tbl.setVisible(false);
-            table_view.setLayoutX(0);
-            table_view.setPrefWidth(885);
-            hbox.setLayoutX(114);
-            grp_btn_tbl.setLayoutX(253);
+
+            AnchorPane.setLeftAnchor(border_pane, 280.0);
         }
         jfx_hambur.toFront();
 

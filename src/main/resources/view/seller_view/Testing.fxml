@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="558.0" prefWidth="781.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Bus_Type.Bus40">
+   <children>
+      <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="558.0" prefWidth="317.0" styleClass="tabpane" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab text="Tầng 1">
+               <content>
+                  <Pane prefHeight="576.0" prefWidth="317.0" styleClass="floor1" />
+               </content>
+               <content>
+                  <GridPane prefHeight="388.0" prefWidth="287.0">
+                    <columnConstraints>
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Button id="A1" fx:id="a1" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="A1" GridPane.columnIndex="2" />
+                        <Button id="A2" fx:id="a2" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="A2" GridPane.columnIndex="1" />
+                        <Button id="A3" fx:id="a3" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="A3" />
+                        <Button id="A6" fx:id="a6" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="A6" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <Button id="A5" fx:id="a5" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="A5" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Button id="A4" fx:id="a4" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="A4" GridPane.rowIndex="1" />
+                        <Button id="A7" fx:id="a7" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="A7" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                        <Button id="A8" fx:id="a8" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="A8" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Button id="A9" fx:id="a9" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="A9" GridPane.rowIndex="2" />
+                        <Button id="A12" fx:id="a12" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="A12" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                        <Button id="A11" fx:id="a11" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="A11" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Button id="A10" fx:id="a10" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="A10" GridPane.rowIndex="3" />
+                        <Button id="A13" fx:id="a13" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="A13" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                        <Button id="A14" fx:id="a14" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="A14" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Button id="A15" fx:id="a15" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="A15" GridPane.rowIndex="4" />
+                     </children>
+                  </GridPane>
+               </content>
+            </Tab>
+            <Tab text="Tầng 2">
+               <content>
+                  <Pane prefHeight="558.0" prefWidth="317.0" styleClass="floor2">
+                     <children>
+                        <Button id="B3" fx:id="b3" layoutX="14.0" layoutY="81.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="B3" />
+                        <Button id="B4" fx:id="b4" layoutX="14.0" layoutY="160.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="B4" />
+                        <Button id="B9" layoutX="14.0" layoutY="235.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="B9" />
+                        <Button id="B2" fx:id="b2" layoutX="124.0" layoutY="81.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="B2" />
+                        <Button id="B7" fx:id="b7" layoutX="233.0" layoutY="235.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="B7" />
+                        <Button id="B8" layoutX="124.0" layoutY="235.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="B8" />
+                        <Button id="B5" fx:id="b5" layoutX="124.0" layoutY="160.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="B5" />
+                        <Button id="B6" fx:id="b6" layoutX="233.0" layoutY="160.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="B6" />
+                        <Button id="B1" fx:id="b1" layoutX="233.0" layoutY="81.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="B1" />
+                        <Button id="B10" layoutX="14.0" layoutY="310.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="B10" />
+                        <Button id="B11" layoutX="124.0" layoutY="310.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="B11" />
+                        <Button id="B12" layoutX="233.0" layoutY="310.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="B12" />
+                        <Button id="B15" layoutX="14.0" layoutY="384.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="B15" />
+                        <Button id="B14" fx:id="b14" layoutX="124.0" layoutY="384.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="B14" />
+                        <Button id="B13" fx:id="b13" layoutX="233.0" layoutY="384.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="70.0" styleClass="slot" text="B13" />
+                        <Button id="B16" fx:id="b16" layoutX="4.0" layoutY="465.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="62.0" styleClass="slot" text="B16" />
+                        <Button id="B17" fx:id="b17" layoutX="66.0" layoutY="465.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="62.0" styleClass="slot" text="B17" />
+                        <Button id="B18" fx:id="b18" layoutX="128.0" layoutY="465.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="62.0" styleClass="slot" text="B18" />
+                        <Button id="B19" fx:id="b19" layoutX="190.0" layoutY="465.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="62.0" styleClass="slot" text="B19" />
+                        <Button id="B20" fx:id="b20" layoutX="252.0" layoutY="465.0" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="62.0" styleClass="slot" text="B20" />
+                     </children>
+                  </Pane>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+      <GridPane layoutX="297.0" layoutY="446.0" prefHeight="65.0" prefWidth="500.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button id="A20" fx:id="a20" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="62.0" styleClass="slot" text="A20" GridPane.columnIndex="4" />
+            <Button id="A19" fx:id="a19" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="62.0" styleClass="slot" text="A19" GridPane.columnIndex="3" />
+            <Button id="A18" fx:id="a18" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="62.0" styleClass="slot" text="A18" GridPane.columnIndex="2" />
+            <Button id="A17" fx:id="a17" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="62.0" styleClass="slot" text="A17" GridPane.columnIndex="1" />
+            <Button id="A16" fx:id="a16" mnemonicParsing="false" onMouseClicked="#onSeatClick" prefHeight="50.0" prefWidth="62.0" styleClass="slot" text="A16" />
+         </children>
+      </GridPane>
+      <Label layoutX="536.0" layoutY="24.0" text="Đường lên">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>

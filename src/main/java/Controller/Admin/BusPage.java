@@ -16,12 +16,21 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class BusPage implements Initializable {
@@ -31,6 +40,15 @@ public class BusPage implements Initializable {
 
     @FXML
     private AnchorPane pane;
+
+    @FXML
+    private BorderPane border_pane;
+
+    @FXML
+    private TitledPane titlepane_type;
+
+    @FXML
+    private TitledPane titlepane_bus;
 
     @FXML
     private JFXDrawer jfx_drawer;
@@ -97,7 +115,7 @@ public class BusPage implements Initializable {
     private TableColumn<BusEntity_ViewModel, Integer> col_status;
 
     @FXML
-    private ButtonBar grp_btn_tbl;
+    private FlowPane grp_btn_tbl;
 
     @FXML
     private TextField txf_search_nameofbus;
@@ -192,6 +210,7 @@ public class BusPage implements Initializable {
             BusEntity_ViewModel tbl = table_view.getSelectionModel().getSelectedItem();
             idBus = tbl.getIdBus();
             BLL_Admin.getInstance().deleteBus(idBus);
+            new Alert(Alert.AlertType.INFORMATION, "Delete Successful!").showAndWait();
             show(0, "");
         } catch (Exception err) {
             new Alert(Alert.AlertType.INFORMATION, "Choose only 1 row!").showAndWait();
@@ -211,12 +230,14 @@ public class BusPage implements Initializable {
         switch(CRUDType) {
             case "Create": {
                 BLL_Admin.getInstance().addBus(name_of_bus, plate_number,  type, false, 0);
+                new Alert(Alert.AlertType.INFORMATION, "Create Successful!").showAndWait();
                 show(0, "");
                 break;
             }
             case "Update": {
                 int stt = cbx_status.getSelectionModel().getSelectedItem().equals("Available") ? 0 : 1;
                 BLL_Admin.getInstance().updateBus(idBus, name_of_bus, plate_number, type, stt);
+                new Alert(Alert.AlertType.INFORMATION, "Update Successful!").showAndWait();
                 show(0, "");
                 break;
             }
@@ -271,6 +292,60 @@ public class BusPage implements Initializable {
     }
 
     @FXML
+    void btn_export_clicked(MouseEvent event) throws IOException {
+        if(table_view.getItems().isEmpty()) {
+            new Alert(Alert.AlertType.WARNING, "List is empty!").showAndWait();
+            return;
+        }
+        Workbook workbook = new HSSFWorkbook();
+        Sheet spreadsheet = workbook.createSheet("bus");
+
+        Row row = spreadsheet.createRow(0);
+
+        for (int j = 0; j < table_view.getColumns().size(); j++) {
+            row.createCell(j).setCellValue(table_view.getColumns().get(j).getText());
+        }
+
+        for (int i = 0; i < table_view.getItems().size(); i++) {
+            row = spreadsheet.createRow(i + 1);
+            for (int j = 0; j < table_view.getColumns().size(); j++) {
+                if(table_view.getColumns().get(j).getCellData(i) != null) {
+                    row.createCell(j).setCellValue(table_view.getColumns().get(j).getCellData(i).toString());
+                }
+                else {
+                    row.createCell(j).setCellValue("");
+                }
+            }
+        }
+
+        // Show Selected Directory
+        Stage stage = new Stage();
+
+        stage.setTitle("Export data bus");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(
+                ((Node)event.getSource()).getScene().getWindow() );
+
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        directoryChooser.setInitialDirectory(new File("src"));
+
+        File selectedDirectory = directoryChooser.showDialog(stage);
+        if(selectedDirectory != null) {
+            if (!selectedDirectory.canRead()) {
+                Boolean b = selectedDirectory.setReadable(true, false);
+            }
+
+            File myObj = new File(selectedDirectory.getAbsolutePath() + "/ListOfBus_" +
+                    DateTimeFormatter.ofPattern("dd_MM_yyyy_HH_mm_ss").format(LocalDateTime.now()) + ".xls");
+            if (myObj.createNewFile()) {
+                FileOutputStream fileOut = new FileOutputStream(myObj);
+                workbook.write(fileOut);
+                fileOut.close();
+            }
+        }
+    }
+
+    @FXML
     void cbx_nameoftype_Action(ActionEvent event) {
         TypeOfBusEntity tob = BLL_Admin.getInstance().getTypeOfBusObj(cbx_nameoftype.getSelectionModel().
                 getSelectedIndex() + 1);
@@ -285,23 +360,21 @@ public class BusPage implements Initializable {
             btn_ok.setVisible(false);
             btn_reset.setVisible(false);
             btn_cancel.setVisible(false);
-            grp_btn_tbl.setVisible(true);
-            table_view.setLayoutX(-273);
-            table_view.setPrefWidth(1155);
-            hbox.setLayoutX(0);
-            grp_btn_tbl.setLayoutX(85);
-            table_view.toFront();
+            titlepane_type.setVisible(false);
+            titlepane_bus.setVisible(false);
 
+            grp_btn_tbl.setVisible(true);
+            AnchorPane.setLeftAnchor(border_pane, 2.0);
         }
         else {
             btn_ok.setVisible(true);
             btn_reset.setVisible(true);
             btn_cancel.setVisible(true);
+            titlepane_type.setVisible(true);
+            titlepane_bus.setVisible(true);
+
             grp_btn_tbl.setVisible(false);
-            table_view.setLayoutX(0);
-            table_view.setPrefWidth(885);
-            hbox.setLayoutX(114);
-            grp_btn_tbl.setLayoutX(253);
+            AnchorPane.setLeftAnchor(border_pane, 280.0);
         }
         jfx_hambur.toFront();
 

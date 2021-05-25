@@ -5,9 +5,11 @@ import Model.ViewModel.FilterRoute_ViewModel;
 import Services.BLL_Admin;
 import Services.BLL_Seller;
 import com.jfoenix.controls.*;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -23,10 +25,12 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class FilterRoute implements Initializable {
@@ -171,6 +175,7 @@ public class FilterRoute implements Initializable {
 
             // Init gridpane
             calendar.setValue(date);
+            beginIndex = 1;
             listRoute.addAll(BLL_Seller.getInstance().setUpFilterRouteView(startProvince, endProvince, java.sql.Date.valueOf(calendar.getValue())));
             lbIndex.setText("1");
             reloadTable();
@@ -184,50 +189,76 @@ public class FilterRoute implements Initializable {
     void btn1_clicked(MouseEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/seller_view/TicketOrder.fxml"));
 
-        TicketOrder controller = new TicketOrder(listRoute.get(beginIndex - 1).getModelTrip(), date);
+
+        TicketOrder controller = new TicketOrder(listRoute.get(beginIndex - 1).getModelTrip(), date, startProvince, endProvince);
+
         loader.setController(controller);
         AnchorPane newPane = loader.load();
-        this.rootPane.getChildren().setAll(newPane);
+        newPane.requestLayout();
+//        rootPane.getChildren().setAll(newPane);
+        Scene scene= rootPane.getScene();
+        scene.setRoot(newPane);
     }
 
     @FXML
     void btn2_clicked(MouseEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/seller_view/TicketOrder.fxml"));
 
-        TicketOrder controller = new TicketOrder(listRoute.get(beginIndex).getModelTrip(), date);
+
+        TicketOrder controller = new TicketOrder(listRoute.get(beginIndex).getModelTrip(), date, startProvince, endProvince);
+
         loader.setController(controller);
         AnchorPane newPane = loader.load();
-        this.rootPane.getChildren().setAll(newPane);
+        newPane.requestLayout();
+//        rootPane.getChildren().setAll(newPane);
+        Scene scene= rootPane.getScene();
+        scene.setRoot(newPane);
     }
+
 
     @FXML
     void btn3_clicked(MouseEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/seller_view/TicketOrder.fxml"));
 
-        TicketOrder controller = new TicketOrder(listRoute.get(beginIndex + 1).getModelTrip(), date);
+
+        TicketOrder controller = new TicketOrder(listRoute.get(beginIndex + 1).getModelTrip(), date, startProvince, endProvince);
+
         loader.setController(controller);
         AnchorPane newPane = loader.load();
-        this.rootPane.getChildren().setAll(newPane);
+        newPane.requestLayout();
+//        rootPane.getChildren().setAll(newPane);
+        Scene scene= rootPane.getScene();
+        scene.setRoot(newPane);
     }
 
     @FXML
     void btn4_clicked(MouseEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/seller_view/TicketOrder.fxml"));
 
-        TicketOrder controller = new TicketOrder(listRoute.get(beginIndex + 2).getModelTrip(), date);
+
+        TicketOrder controller = new TicketOrder(listRoute.get(beginIndex + 2).getModelTrip(), date, startProvince, endProvince);
+
         loader.setController(controller);
         AnchorPane newPane = loader.load();
-        this.rootPane.getChildren().setAll(newPane);
+        newPane.requestLayout();
+//        rootPane.getChildren().setAll(newPane);
+        Scene scene= rootPane.getScene();
+        scene.setRoot(newPane);
     }
 
     @FXML
     void btn5_clicked(MouseEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/seller_view/TicketOrder.fxml"));
 
-        TicketOrder controller = new TicketOrder(listRoute.get(beginIndex + 3).getModelTrip(), date);
+
+        TicketOrder controller = new TicketOrder(listRoute.get(beginIndex + 3).getModelTrip(), date, startProvince, endProvince);
+
         loader.setController(controller);
         AnchorPane newPane = loader.load();
-        this.rootPane.getChildren().setAll(newPane);
+        newPane.requestLayout();
+//        rootPane.getChildren().setAll(newPane);
+        Scene scene= rootPane.getScene();
+        scene.setRoot(newPane);
     }
 
     @FXML
@@ -256,6 +287,16 @@ public class FilterRoute implements Initializable {
         }
     }
 
+    @FXML
+    void calendar_onAction(ActionEvent event) {
+        listRoute.clear();
+        setGridpaneUnvisible();
+        listRoute.addAll(BLL_Seller.getInstance().setUpFilterRouteView(startProvince, endProvince, java.sql.Date.valueOf(calendar.getValue())));
+        lbIndex.setText("1");
+        beginIndex = 1;
+        reloadTable();
+    }
+
     public void reloadTable() {
 //        new Alert(Alert.AlertType.WARNING, String.valueOf(listRoute.size())).showAndWait();
         for(int i = beginIndex; i < beginIndex + 5; ++i) {
@@ -273,9 +314,11 @@ public class FilterRoute implements Initializable {
                     lbl11.setText(listRoute.get(beginIndex - 1).getTypeName());
                     lbl21.setText(listRoute.get(beginIndex - 1).getStartStation());
                     lbl31.setText(listRoute.get(beginIndex - 1).getDestStation());
-                    String time = new SimpleDateFormat("HH:mm:ss").format(listRoute.get(beginIndex - 1).getDepartTime());
-                    lbl41.setText(time + "\nDuration: " +
-                            listRoute.get(beginIndex - 1).getDuration() + "h");
+                    String time = new SimpleDateFormat("HH:mm").format(listRoute.get(beginIndex - 1).getDepartTime());
+
+                    lbl41.setText("Depart time: " + time + "\nDuration: " +
+                            listRoute.get(beginIndex - 1).getDuration() + "h\n" +
+                            "Price: " + listRoute.get(beginIndex - 1).getPrice());
                     break;
                 }
                 case 2: {
@@ -290,9 +333,10 @@ public class FilterRoute implements Initializable {
                     lbl12.setText(listRoute.get(beginIndex).getTypeName());
                     lbl22.setText(listRoute.get(beginIndex).getStartStation());
                     lbl32.setText(listRoute.get(beginIndex).getDestStation());
-                    String time = new SimpleDateFormat("HH:mm:ss").format(listRoute.get(beginIndex).getDepartTime());
-                    lbl42.setText(time + "\nDuration: " +
-                            listRoute.get(beginIndex).getDuration() + "h");
+                    String time = new SimpleDateFormat("HH:mm").format(listRoute.get(beginIndex).getDepartTime());
+                    lbl42.setText("Depart time: " + time + "\nDuration: " +
+                            listRoute.get(beginIndex).getDuration() + "h\n" +
+                            "Price: " + listRoute.get(beginIndex - 1).getPrice());
                     break;
                 }
                 case 3: {
@@ -307,9 +351,10 @@ public class FilterRoute implements Initializable {
                     lbl13.setText(listRoute.get(beginIndex + 1).getTypeName());
                     lbl23.setText(listRoute.get(beginIndex + 1).getStartStation());
                     lbl33.setText(listRoute.get(beginIndex + 1).getDestStation());
-                    String time = new SimpleDateFormat("HH:mm:ss").format(listRoute.get(beginIndex + 1).getDepartTime());
-                    lbl43.setText(time + "\nDuration: " +
-                            listRoute.get(beginIndex + 1).getDuration() + "h");
+                    String time = new SimpleDateFormat("HH:mm").format(listRoute.get(beginIndex + 1).getDepartTime());
+                    lbl43.setText("Depart time: " + time + "\nDuration: " +
+                            listRoute.get(beginIndex + 1).getDuration() + "h\n" +
+                            "Price: " + listRoute.get(beginIndex - 1).getPrice());
                     break;
                 }
                 case 4: {
@@ -324,9 +369,10 @@ public class FilterRoute implements Initializable {
                     lbl14.setText(listRoute.get(beginIndex + 2).getTypeName());
                     lbl24.setText(listRoute.get(beginIndex + 2).getStartStation());
                     lbl34.setText(listRoute.get(beginIndex + 2).getDestStation());
-                    String time = new SimpleDateFormat("HH:mm:ss").format(listRoute.get(beginIndex + 2).getDepartTime());
-                    lbl44.setText(time + "\nDuration: " +
-                            listRoute.get(beginIndex + 2).getDuration() + "h");
+                    String time = new SimpleDateFormat("HH:mm").format(listRoute.get(beginIndex + 2).getDepartTime());
+                    lbl44.setText("Depart time: " + time + "\nDuration: " +
+                            listRoute.get(beginIndex + 2).getDuration() + "h\n" +
+                            "Price: " + listRoute.get(beginIndex - 1).getPrice());
                     break;
                 }
                 case 5: {
@@ -341,17 +387,16 @@ public class FilterRoute implements Initializable {
                     lbl15.setText(listRoute.get(beginIndex + 3).getTypeName());
                     lbl25.setText(listRoute.get(beginIndex + 3).getStartStation());
                     lbl35.setText(listRoute.get(beginIndex + 3).getDestStation());
-                    String time = new SimpleDateFormat("HH:mm:ss").format(listRoute.get(beginIndex + 3).getDepartTime());
-                    lbl45.setText(time + "\nDuration: " +
-                            listRoute.get(beginIndex + 3).getDuration() + "h");
+                    String time = new SimpleDateFormat("HH:mm").format(listRoute.get(beginIndex + 3).getDepartTime());
+                    lbl45.setText("Depart time: " + time + "\nDuration: " +
+                            listRoute.get(beginIndex + 3).getDuration() + "h\n" +
+                            "Price: " + listRoute.get(beginIndex - 1).getPrice());
                     break;
                 }
 
                 default:
                     break;
             }
-
-
         }
     }
 
