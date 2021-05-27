@@ -397,9 +397,13 @@ public class SchedulePage implements Initializable {
     @FXML
     void onReOutdateClicked(MouseEvent event) {
         ScheduleEntity_ViewModel scheduleEntity_viewModel = table_view.getSelectionModel().getSelectedItem();
-        System.out.println(scheduleEntity_viewModel.getIdSchedule());
-        BLL_Admin.getInstance().updateDPR(scheduleEntity_viewModel.getIdSchedule(), scheduleEntity_viewModel.getDpr());
-        new Alert(Alert.AlertType.INFORMATION, "Update Outdate successful!").showAndWait();
+        if(!BLL_Admin.getInstance().outDateSchedule(scheduleEntity_viewModel.getOutDate())){
+            new Alert(Alert.AlertType.WARNING,"It's not time to update!").showAndWait();
+        }
+        else {
+             BLL_Admin.getInstance().updateDPR(scheduleEntity_viewModel.getIdSchedule(), scheduleEntity_viewModel.getDpr());
+             new Alert(Alert.AlertType.INFORMATION, "Update Outdate successful!").showAndWait();
+        }
     }
 
 
@@ -473,18 +477,6 @@ public class SchedulePage implements Initializable {
                 }
 
             };
-            row.setOnMouseClicked(mouseEvent -> {
-                if(!row.isEmpty() && mouseEvent.getButton() == MouseButton.PRIMARY){
-                    ScheduleEntity_ViewModel item = row.getItem();
-                    try {
-                        if(BLL_Admin.getInstance().outDateSchedule(item.getOutDate())){
-                            btn_reOutdate.setDisable(false);
-                        }else btn_reOutdate.setDisable(true);
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
             return row;
         });
 
