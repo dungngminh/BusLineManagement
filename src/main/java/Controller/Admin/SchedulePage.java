@@ -395,7 +395,7 @@ public class SchedulePage implements Initializable {
     }
 
     @FXML
-    void onReOutdateClicked(MouseEvent event) {
+    void onReOutdateClicked(MouseEvent event) throws ParseException {
         ScheduleEntity_ViewModel scheduleEntity_viewModel = table_view.getSelectionModel().getSelectedItem();
         if(!BLL_Admin.getInstance().outDateSchedule(scheduleEntity_viewModel.getOutDate())){
             new Alert(Alert.AlertType.WARNING,"It's not time to update!").showAndWait();
@@ -403,13 +403,13 @@ public class SchedulePage implements Initializable {
         else {
              BLL_Admin.getInstance().updateDPR(scheduleEntity_viewModel.getIdSchedule(), scheduleEntity_viewModel.getDpr());
              new Alert(Alert.AlertType.INFORMATION, "Update Outdate successful!").showAndWait();
+             show("");
         }
     }
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        btn_reOutdate.setDisable(true);
         // Init combobox for bus and route
         BLL_Admin.getInstance().getAllBus().forEach(bus -> cbx_bus.getItems().add(bus));
         BLL_Admin.getInstance().getRoutes(0, "").forEach(route -> cbx_route.getItems().add(route));
