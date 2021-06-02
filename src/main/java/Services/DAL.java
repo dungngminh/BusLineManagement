@@ -1,22 +1,17 @@
 package Services;
 
-
-import Controller.TicketSeller.TicketOrder;
-
 import Model.*;
 import Util.HibernateUtils;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
-import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
-import java.lang.annotation.Native;
+
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 
 import java.util.Date;
@@ -79,6 +74,7 @@ public class DAL {
             throw new RuntimeException(e);
         }
     }
+
     // for LogIn
     public List<AccountEntity> getListAcc() throws SQLException, ClassNotFoundException {
 //        SessionFactory factory = new HibernateUtils.getSessionFactory();
@@ -221,6 +217,7 @@ public class DAL {
             return role;
         }
     }
+
     public void addUserToAccount(String username, String password, Integer idRole, RoleEntity role) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
@@ -437,7 +434,7 @@ public class DAL {
         session.close();
     }
 
-    public void updateSchedule(int idSchedule, RouteEntity routeSelected, BusEntity busSelected, DriverEntity driverSelected,Date departTimeInput, int durationInput,int priceInput, int dprInput) {
+    public void updateSchedule(int idSchedule, RouteEntity routeSelected, BusEntity busSelected, DriverEntity driverSelected, Date departTimeInput, int durationInput, int priceInput, int dprInput) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
         //TODO Query update Schedule
@@ -445,7 +442,7 @@ public class DAL {
                 ", price = :price, dpr = :dpr where idSchedule = :idSchedule");
         query.setParameter("idRoute", routeSelected.getIdRoute());
         query.setParameter("idBus", busSelected.getIdBus());
-        query.setParameter("idDriver",driverSelected.getIdDriver());
+        query.setParameter("idDriver", driverSelected.getIdDriver());
         query.setParameter("departTime", departTimeInput);
         query.setParameter("price", priceInput);
         query.setParameter("dpr", dprInput);
@@ -462,7 +459,7 @@ public class DAL {
                 ", price = :price where idSchedule = :idSchedule");
         query.setParameter("idRoute", routeSelected.getIdRoute());
         query.setParameter("idBus", busSelected.getIdBus());
-        query.setParameter("idDriver",driverSelected.getIdDriver());
+        query.setParameter("idDriver", driverSelected.getIdDriver());
         query.setParameter("departTime", departTimeInput);
         query.setParameter("price", priceInput);
         query.setParameter("idSchedule", idSchedule);
@@ -470,16 +467,18 @@ public class DAL {
         session.getTransaction().commit();
         session.close();
     }
-    public void updateDPR(int idSchedule, int dpr){
+
+    public void updateDPR(int idSchedule, int dpr) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
         var query = session.createQuery("Update ScheduleEntity set dpr = :dpr where idSchedule = :idSchedule");
         query.setParameter("dpr", dpr);
-        query.setParameter("idSchedule",idSchedule);
+        query.setParameter("idSchedule", idSchedule);
         query.executeUpdate();
         session.getTransaction().commit();
         session.close();
     }
+
     //DAL for Ticket Seller
     // DAL for FilterRoute ?
     /// This method: Get route have start station and end station from two province have been known
@@ -516,14 +515,14 @@ public class DAL {
         Query<ScheduleEntity> query = session.createQuery("Select SCH from ScheduleEntity SCH, DriverEntity DRI, " +
                 "RouteEntity ROU, BusEntity BUS, TypeOfBusEntity TYPE where SCH.idDriver = DRI.idDriver AND DRI.status = 0 AND DRI.isDelete = false " +
                 "AND SCH.idRoute = ROU.idRoute AND ROU.status = 0 AND SCH.idBus = BUS.idBus AND BUS.status = 0 AND BUS.isDelete = false " +
-                "AND BUS.idType = TYPE.idType AND TYPE.isDelete = false",ScheduleEntity.class);
+                "AND BUS.idType = TYPE.idType AND TYPE.isDelete = false", ScheduleEntity.class);
         List<ScheduleEntity> list = query.getResultList();
         session.getTransaction().commit();
         session.close();
         return list;
     }
 
-    public Date getOutDateUpdate(int idSchedule){
+    public Date getOutDateUpdate(int idSchedule) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
         var query = session.createQuery("select max(TRIP.departDate) from TripInformationEntity TRIP" +
@@ -672,7 +671,7 @@ public class DAL {
                 "\n" +
                 "WHERE departDate >= GETDATE()" + subQr1 + subQr2;
         SQLQuery query = session.createSQLQuery(sql);
-        if(fromProvince != null) {
+        if (fromProvince != null) {
             query.setParameter("departDate", departDate);
             query.setParameter("from", fromProvince.getProvinceName());
             query.setParameter("to", toProvince.getProvinceName());
@@ -686,6 +685,7 @@ public class DAL {
         session.close();
         return result;
     }
+
     public void setPaidTicket(Integer idTicket) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
@@ -746,16 +746,15 @@ public class DAL {
         return result.size();
     }
 
-    public List<ScheduleEntity> getOutDatedSchedule() {
+    public List<Integer> getOutDatedSchedule() {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
-        String sql = "SELECT DISTINCT SCH.* FROM Schedule SCH\n" +
-                "INNER JOIN TripInformation TI on SCH.idSchedule = TI.idSchedule\n" +
-                "WHERE (SELECT max(departDate) FROM TripInformation) < DATEADD(day, 30, GETDATE())";
+        String sql = "SELECT COUNT(TI.idSchedule)\n" +
+                "FROM Schedule SCH INNER JOIN TripInformation TI ON SCH.idSchedule = TI.idSchedule\n" +
+                "GROUP BY Ti.idSchedule\n" +
+                "HAVING max(TI.departDate) <= DATEADD(day,20,GETDATE())";
         var query = session.createSQLQuery(sql);
-        query.addEntity(ScheduleEntity.class);
-        List<ScheduleEntity> result = query.getResultList();
-
+        List<Integer> result = query.getResultList();
         session.getTransaction().commit();
         session.close();
         return result;
@@ -787,7 +786,7 @@ public class DAL {
         SQLQuery query = session.createSQLQuery(sql);
         query.setParameter("fromDate", fromDate);
         query.setParameter("toDate", toDate);
-        if(acc != null)
+        if (acc != null)
             query.setParameter("idUser", acc.getIdUser());
         query.addEntity(TicketEntity.class);
         List<TicketEntity> result = query.getResultList();
@@ -799,7 +798,7 @@ public class DAL {
     //
 
     public List<TripInformationEntity> getListTripInIntervalTime(ProvinceEntity fromProvince, ProvinceEntity toProvince,
-                                String fromDate, String toDate) {
+                                                                 String fromDate, String toDate) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
         String sql = "SELECT DISTINCT TI.* FROM Route R\n" +
@@ -808,9 +807,9 @@ public class DAL {
                 "\n" +
                 "WHERE departDate BETWEEN :fromDate AND :toDate\n" +
                 "AND R.startStation IN (SELECT STA.stationName FROM Station STA WHERE STA.idProvince =\n" +
-"                                                                    (SELECT PRO.idProvince FROM Province PRO WHERE PRO.provinceName = :from))\n" +
+                "                                                                    (SELECT PRO.idProvince FROM Province PRO WHERE PRO.provinceName = :from))\n" +
                 "AND R.endStation IN (SELECT STA.stationName FROM Station STA WHERE STA.idProvince =\n" +
-"                                                                    (SELECT PRO.idProvince FROM Province PRO WHERE PRO.provinceName = :to))";
+                "                                                                    (SELECT PRO.idProvince FROM Province PRO WHERE PRO.provinceName = :to))";
         SQLQuery query = session.createSQLQuery(sql);
         query.setParameter("fromDate", fromDate);
         query.setParameter("toDate", toDate);
