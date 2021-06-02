@@ -49,8 +49,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class SchedulePage implements Initializable {
 
@@ -213,6 +215,7 @@ public class SchedulePage implements Initializable {
             show("");
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, "Error while deleting!");
+            e.printStackTrace();
         }
     }
 
@@ -280,7 +283,6 @@ public class SchedulePage implements Initializable {
     @FXML
     void toggleClicked(ActionEvent event) {
         tfx_day_per_route.setDisable(toggle_updateDpr.isSelected());
-        tfx_day_per_route.setText("");
     }
 
     @FXML
@@ -330,6 +332,7 @@ public class SchedulePage implements Initializable {
 
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, "Please choose 1 row !").showAndWait();
+            e.printStackTrace();
         }
         toggleDetail();
     }
@@ -397,7 +400,10 @@ public class SchedulePage implements Initializable {
     @FXML
     void onReOutdateClicked(MouseEvent event) throws ParseException {
         ScheduleEntity_ViewModel scheduleEntity_viewModel = table_view.getSelectionModel().getSelectedItem();
-        if(!BLL_Admin.getInstance().outDateSchedule(scheduleEntity_viewModel.getOutDate())){
+        if(!(TimeUnit.DAYS.convert(new SimpleDateFormat("dd/MM/yyyy").
+                parse(scheduleEntity_viewModel.getOutDate()).getTime() -
+                Date.from(LocalDate.now().
+                        atStartOfDay(ZoneId.systemDefault()).toInstant()).getTime(), TimeUnit.MILLISECONDS) <= 20)){
             new Alert(Alert.AlertType.WARNING,"It's not time to update!").showAndWait();
         }
         else {
@@ -460,24 +466,23 @@ public class SchedulePage implements Initializable {
         col_duration.setCellValueFactory(new PropertyValueFactory<>("duration"));
         col_dpr.setCellValueFactory(new PropertyValueFactory<>("dpr"));
 
-        table_view.setRowFactory(tv -> {
-            TableRow<ScheduleEntity_ViewModel> row = new TableRow<>() {
-                @Override
-                protected void updateItem(ScheduleEntity_ViewModel item, boolean b) {
-                    super.updateItem(item, b);
-                    if (item == null)
-                        setStyle("");
-                    else try {
-                        if (BLL_Admin.getInstance().outDateSchedule(item.getOutDate())) {
-                            setStyle("-fx-background-color: #D16666");
-                        } else setStyle("");
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
+        table_view.setRowFactory(tv -> new TableRow<>() {
+            @Override
+            protected void updateItem(ScheduleEntity_ViewModel item, boolean b) {
+                super.updateItem(item, b);
+                if (item == null)
+                    setStyle("");
+                else try {
+                    if (TimeUnit.DAYS.convert(new SimpleDateFormat("dd/MM/yyyy").
+                            parse(item.getOutDate()).getTime() -
+                            Date.from(LocalDate.now().
+                                    atStartOfDay(ZoneId.systemDefault()).toInstant()).getTime(), TimeUnit.MILLISECONDS) <= 20) {
+                        setStyle("-fx-background-color: #D16666");
+                    } else setStyle("");
+                } catch (ParseException e) {
+                    e.printStackTrace();
                 }
-
-            };
-            return row;
+            }
         });
 
         table_view.setItems(listObj);
