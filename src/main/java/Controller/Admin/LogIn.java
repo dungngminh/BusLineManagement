@@ -105,6 +105,9 @@ public class LogIn implements Initializable {
         Stage stage = new Stage();
         stage.setTitle("Bus Management");
         stage.setScene(scene);
+        stage.setMaximized(true);
+        stage.setMinWidth(1166);
+        stage.setMinHeight(686);
 
         // Event when click on X(Close button)
         stage.setOnCloseRequest(e -> {
