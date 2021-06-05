@@ -6,8 +6,9 @@
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -15,28 +16,23 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="frame-1" blendMode="DARKEN" prefHeight="518.0" prefWidth="565.0" style="-fx-background-color: #373E40;" stylesheets="@../../css/admin_css/style_login.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Admin.LogIn">
+<AnchorPane id="frame" blendMode="DARKEN" prefHeight="611.0" prefWidth="1100.0" stylesheets="@../../css/admin_css/style_login.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Admin.LogIn">
    <children>
-      <Pane id="pane" layoutX="50.0" layoutY="36.0" prefHeight="447.0" prefWidth="466.0" stylesheets="@../../css/admin_css/style_login.css">
+      <Pane id="pane" prefHeight="611.0" prefWidth="367.0" stylesheets="@../../css/admin_css/style_login.css">
          <children>
-            <Label id="lb-wel" alignment="CENTER" contentDisplay="CENTER" layoutX="18.0" layoutY="26.0" prefHeight="45.0" prefWidth="445.0" stylesheets="@../../css/admin_css/style_login.css" text="BUS MANAGEMENT APPLICATION" textAlignment="CENTER">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Label>
-            <GridPane layoutX="40.0" layoutY="114.0" prefHeight="272.0" prefWidth="367.0">
+            <GridPane layoutX="12.0" layoutY="172.0" prefHeight="313.0" prefWidth="344.0">
               <columnConstraints>
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="BOTTOM" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label id="lb-us-pa" alignment="CENTER_RIGHT" prefHeight="31.0" prefWidth="153.0" stylesheets="@../../css/admin_css/style_login.css" text="Username" textFill="#1f1e78">
+                  <Label id="lb-us-pa" alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="153.0" stylesheets="@../../css/admin_css/style_login.css" text="Username" textAlignment="CENTER" textFill="#1f1e78">
                      <font>
                         <Font name="Arial Black" size="21.0" />
                      </font>
@@ -45,7 +41,7 @@
                      <font>
                         <Font name="Arial" size="18.0" />
                      </font></TextField>
-                  <Label id="lb-us-pa" alignment="CENTER_RIGHT" prefHeight="31.0" prefWidth="152.0" stylesheets="@../../css/admin_css/style_login.css" text="Password" textFill="#1f1e78" GridPane.rowIndex="1">
+                  <Label id="lb-us-pa" alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="152.0" stylesheets="@../../css/admin_css/style_login.css" text="Password" textAlignment="CENTER" textFill="#1f1e78" GridPane.rowIndex="1">
                      <font>
                         <Font name="Arial Black" size="21.0" />
                      </font>
@@ -54,12 +50,12 @@
                      <font>
                         <Font name="Arial" size="18.0" />
                      </font></PasswordField>
-                  <Hyperlink id="href_fypassword" alignment="CENTER_RIGHT" layoutX="25.0" onAction="#onForgetClicked" prefHeight="25.0" prefWidth="144.0" text="Forgot your password!" GridPane.rowIndex="2">
+                  <Hyperlink id="href_fypassword" alignment="CENTER_RIGHT" layoutX="25.0" onAction="#onForgetClicked" prefHeight="25.0" prefWidth="160.0" text="Forgot your password!" GridPane.rowIndex="2">
                      <font>
                         <Font size="13.0" />
                      </font>
                      <GridPane.margin>
-                        <Insets left="40.0" right="-15.0" />
+                        <Insets left="20.0" right="10.0" />
                      </GridPane.margin>
                   </Hyperlink>
                   <Button id="blue" fx:id="btn_login" mnemonicParsing="false" onMouseClicked="#btn_login_clicked" styleClass="blue" stylesheets="@../../css/admin_css/style_login.css" text="Log in" textFill="WHITE" GridPane.rowIndex="3">
@@ -86,8 +82,17 @@
                   </Button>
                </children>
             </GridPane>
+            <ImageView fitHeight="73.0" fitWidth="353.0" layoutX="8.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/Stuff/logo.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="79.0" fitWidth="153.0" layoutX="144.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/Icon/bus.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
-      <TextArea layoutX="-421.0" layoutY="-86.0" prefHeight="200.0" prefWidth="200.0" text="BUS MANAGEMENT &#10;APPLICATION" />
    </children>
 </AnchorPane>

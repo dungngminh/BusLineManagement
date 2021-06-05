@@ -324,6 +324,9 @@ public class BLL_Admin {
         LocalDate crr = LocalDate.now().plusMonths(1);
         LocalDate begin = crr.minusMonths(1);
         while (crr.compareTo(begin) >= 0) {
+
+//            System.out.println(crr);
+
             String from = crr.minusDays(5).format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
             String to = crr.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
 

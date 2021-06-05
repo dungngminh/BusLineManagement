@@ -1,5 +1,5 @@
 .rootPane {
-    /*-fx-background-image: url(../../images/main_window.jpg);*/
+    -fx-background-image: url(../../images/main_window.jpg);
     -fx-background-size: 100% 100%;
 }
 
