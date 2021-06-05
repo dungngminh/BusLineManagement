@@ -19,7 +19,6 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
@@ -186,33 +185,6 @@
                </BorderPane.margin>
             </TableView>
          </center>
-         <top>
-            <HBox fx:id="hbox" alignment="CENTER" prefHeight="82.0" prefWidth="886.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="140.0" text="Name of schedule">
-                     <font>
-                        <Font name="System Bold" size="15.0" />
-                     </font>
-                     <padding>
-                        <Insets bottom="5.0" />
-                     </padding>
-                  </Label>
-                  <TextField fx:id="txf_search" prefHeight="35.0" prefWidth="186.0" promptText="route - type - time">
-                     <HBox.margin>
-                        <Insets right="25.0" />
-                     </HBox.margin>
-                  </TextField>
-                  <Button fx:id="btn_search" mnemonicParsing="false" onMouseClicked="#btn_search_clicked" prefHeight="35.0" prefWidth="95.0" styleClass="search" stylesheets="@../../css/admin_css/setting.css" text="Search" textFill="WHITE">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </Button>
-               </children>
-               <opaqueInsets>
-                  <Insets right="25.0" />
-               </opaqueInsets>
-            </HBox>
-         </top>
          <bottom>
             <FlowPane fx:id="grp_btn_tbl" alignment="CENTER" columnHalignment="CENTER" hgap="10.0" prefHeight="151.0" prefWidth="886.0" BorderPane.alignment="CENTER">
                <children>
@@ -245,7 +217,7 @@
                         <Insets right="10.0" />
                      </FlowPane.margin>
                   </Button>
-                  <Button fx:id="btn_reOutdate" mnemonicParsing="false" onMouseClicked="#onReOutdateClicked" prefHeight="37.0" prefWidth="87.0" styleClass="btn" stylesheets="@../../css/admin_css/setting.css" text="Re outdate">
+                  <Button fx:id="btn_reOutdate" mnemonicParsing="false" onMouseClicked="#onReOutdateClicked" prefHeight="37.0" prefWidth="97.0" styleClass="btn" stylesheets="@../../css/admin_css/setting.css" text="Re Outdate">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -258,6 +230,31 @@
                </children>
             </FlowPane>
          </bottom>
+         <top>
+            <FlowPane alignment="CENTER" hgap="10.0" prefHeight="80.0" prefWidth="886.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label prefHeight="17.0" prefWidth="102.0" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="155.0" text="Name of schedule">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="5.0" />
+                     </padding>
+                  </Label>
+                  <TextField fx:id="txf_search" prefHeight="35.0" prefWidth="198.0" promptText="route - type - time" />
+                  <Button fx:id="btn_search" mnemonicParsing="false" onMouseClicked="#btn_search_clicked" prefHeight="35.0" prefWidth="95.0" styleClass="search" stylesheets="@../../css/admin_css/setting.css" text="Search" textFill="WHITE" />
+                  <Label fx:id="lb_textOutDate" alignment="CENTER_RIGHT" prefHeight="64.0" prefWidth="278.0" textFill="RED">
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </FlowPane>
+         </top>
       </BorderPane>
       <JFXHamburger fx:id="jfx_hambur" alignment="TOP_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="32.0" />
    </children>

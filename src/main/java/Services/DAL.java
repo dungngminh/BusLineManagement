@@ -752,7 +752,7 @@ public class DAL {
         String sql = "SELECT COUNT(TI.idSchedule)\n" +
                 "FROM Schedule SCH INNER JOIN TripInformation TI ON SCH.idSchedule = TI.idSchedule\n" +
                 "GROUP BY Ti.idSchedule\n" +
-                "HAVING max(TI.departDate) <= DATEADD(day,20,GETDATE())";
+                "HAVING max(TI.departDate) <= DATEADD(day,7,GETDATE())";
         var query = session.createSQLQuery(sql);
         List<Integer> result = query.getResultList();
         session.getTransaction().commit();

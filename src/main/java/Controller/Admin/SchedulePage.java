@@ -179,6 +179,9 @@ public class SchedulePage implements Initializable {
     @FXML
     private TextField tfx_duration;
 
+    @FXML
+    private Label lb_textOutDate;
+
     //SUPPORT PROPERTY
     private static String CRUDType;
     private static int idSchedule;
@@ -400,10 +403,7 @@ public class SchedulePage implements Initializable {
     @FXML
     void onReOutdateClicked(MouseEvent event) throws ParseException {
         ScheduleEntity_ViewModel scheduleEntity_viewModel = table_view.getSelectionModel().getSelectedItem();
-        if(!(TimeUnit.DAYS.convert(new SimpleDateFormat("dd/MM/yyyy").
-                parse(scheduleEntity_viewModel.getOutDate()).getTime() -
-                Date.from(LocalDate.now().
-                        atStartOfDay(ZoneId.systemDefault()).toInstant()).getTime(), TimeUnit.MILLISECONDS) <= 20)){
+        if(!checkOutDate(scheduleEntity_viewModel.getOutDate())){
             new Alert(Alert.AlertType.WARNING,"It's not time to update!").showAndWait();
         }
         else {
@@ -437,6 +437,8 @@ public class SchedulePage implements Initializable {
 
                 show("");
 
+                lb_textOutDate.setText("Tuyến màu đỏ là tuyến bị tới hạn 1 tuần,\n" +
+                        "vui lòng chọn và nhấn Re Outdate để cập nhật");
                 toggleDetail();
 
                 // Init search text field
@@ -473,10 +475,7 @@ public class SchedulePage implements Initializable {
                 if (item == null)
                     setStyle("");
                 else try {
-                    if (TimeUnit.DAYS.convert(new SimpleDateFormat("dd/MM/yyyy").
-                            parse(item.getOutDate()).getTime() -
-                            Date.from(LocalDate.now().
-                                    atStartOfDay(ZoneId.systemDefault()).toInstant()).getTime(), TimeUnit.MILLISECONDS) <= 20) {
+                    if (checkOutDate(item.getOutDate())) {
                         setStyle("-fx-background-color: #D16666");
                     } else setStyle("");
                 } catch (ParseException e) {
@@ -489,7 +488,12 @@ public class SchedulePage implements Initializable {
         table_view.refresh();
     }
 
-
+    boolean checkOutDate(String outdate) throws ParseException {
+        return TimeUnit.DAYS.convert(new SimpleDateFormat("dd/MM/yyyy").
+                parse(outdate).getTime() -
+                Date.from(LocalDate.now().
+                        atStartOfDay(ZoneId.systemDefault()).toInstant()).getTime(), TimeUnit.MILLISECONDS) <= 7;
+    }
     private void toggleDetail() {
         if (btn_ok.isVisible()) {
             btn_ok.setVisible(false);
