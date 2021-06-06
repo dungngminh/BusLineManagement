@@ -2,7 +2,6 @@
 
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
-<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -19,7 +18,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="rootpane" fx:id="rootPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1166.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="rootpane" fx:id="rootPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1166.0" stylesheets="@../../css/seller_css/filterRoute.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <JFXDrawer fx:id="jfx_drawer" defaultDrawerSize="190.0" prefHeight="650.0" prefWidth="103.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -267,8 +266,4 @@
       </BorderPane>
       <JFXHamburger fx:id="jfx_hambur" layoutX="10.0" layoutY="10.0" />
    </children>
-   <stylesheets>
-      <URL value="@../../css/seller_css/filterRoute.css" />
-      <URL value="@../../css/general.css" />
-   </stylesheets>
 </AnchorPane>

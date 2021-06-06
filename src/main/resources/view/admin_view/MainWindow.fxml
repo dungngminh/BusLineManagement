@@ -81,7 +81,7 @@
                         <Insets left="50.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label fx:id="lb_greet" alignment="CENTER" prefHeight="28.0" prefWidth="176.0" text="Welcome" GridPane.columnIndex="2" GridPane.valignment="CENTER">
+                  <Label fx:id="lb_greet" alignment="CENTER" prefHeight="43.0" prefWidth="176.0" text="Welcome" GridPane.columnIndex="2" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets right="70.0" />
                      </GridPane.margin>
