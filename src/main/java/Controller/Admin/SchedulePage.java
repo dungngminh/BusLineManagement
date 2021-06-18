@@ -23,17 +23,14 @@ import javafx.scene.control.*;
 
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -181,6 +178,9 @@ public class SchedulePage implements Initializable {
 
     @FXML
     private Label lb_textOutDate;
+
+    @FXML
+    private Button btn_reAll;
 
     //SUPPORT PROPERTY
     private static String CRUDType;
@@ -340,6 +340,18 @@ public class SchedulePage implements Initializable {
         toggleDetail();
     }
 
+    @FXML
+    void onReAllClicked(MouseEvent event) throws ParseException {
+        try {
+            for (ScheduleEntity_ViewModel item : table_view.getItems()) {
+                if(checkOutDate(item.getOutDate()))
+                    BLL_Admin.getInstance().updateDPR(item.getIdSchedule(), item.getDpr());
+            }
+            new Alert(Alert.AlertType.INFORMATION,"Update all OutDate Schedule successful!").showAndWait();
+        }catch(Exception ee){
+            new Alert(Alert.AlertType.ERROR, "Update fail, try again").showAndWait();
+        }
+    }
     @FXML
     void btn_export_clicked(MouseEvent event) throws IOException {
         if(table_view.getItems().isEmpty()) {

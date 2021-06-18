@@ -222,6 +222,11 @@
                         <Font size="14.0" />
                      </font>
                   </Button>
+                  <Button fx:id="btn_reAll" layoutX="551.0" layoutY="67.0" mnemonicParsing="false" onMouseClicked="#onReAllClicked" prefHeight="37.0" prefWidth="97.0" styleClass="btn" stylesheets="@../../css/admin_css/setting.css" text="Re All">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
                   <Button fx:id="btn_reOutdate1" mnemonicParsing="false" onMouseClicked="#btn_export_clicked" prefHeight="37.0" prefWidth="87.0" styleClass="btn" stylesheets="@../../css/admin_css/setting.css" text="Export">
                      <font>
                         <Font size="14.0" />
