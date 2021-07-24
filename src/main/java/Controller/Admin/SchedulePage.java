@@ -23,17 +23,14 @@ import javafx.scene.control.*;
 
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -49,8 +46,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class SchedulePage implements Initializable {
 
@@ -177,6 +176,12 @@ public class SchedulePage implements Initializable {
     @FXML
     private TextField tfx_duration;
 
+    @FXML
+    private Label lb_textOutDate;
+
+    @FXML
+    private Button btn_reAll;
+
     //SUPPORT PROPERTY
     private static String CRUDType;
     private static int idSchedule;
@@ -213,6 +218,7 @@ public class SchedulePage implements Initializable {
             show("");
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, "Error while deleting!");
+            e.printStackTrace();
         }
     }
 
@@ -280,7 +286,6 @@ public class SchedulePage implements Initializable {
     @FXML
     void toggleClicked(ActionEvent event) {
         tfx_day_per_route.setDisable(toggle_updateDpr.isSelected());
-        tfx_day_per_route.setText("");
     }
 
     @FXML
@@ -330,10 +335,23 @@ public class SchedulePage implements Initializable {
 
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, "Please choose 1 row !").showAndWait();
+            e.printStackTrace();
         }
         toggleDetail();
     }
 
+    @FXML
+    void onReAllClicked(MouseEvent event) throws ParseException {
+        try {
+            for (ScheduleEntity_ViewModel item : table_view.getItems()) {
+                if(checkOutDate(item.getOutDate()))
+                    BLL_Admin.getInstance().updateDPR(item.getIdSchedule(), item.getDpr());
+            }
+            new Alert(Alert.AlertType.INFORMATION,"Update all OutDate Schedule successful!").showAndWait();
+        }catch(Exception ee){
+            new Alert(Alert.AlertType.ERROR, "Update fail, try again").showAndWait();
+        }
+    }
     @FXML
     void btn_export_clicked(MouseEvent event) throws IOException {
         if(table_view.getItems().isEmpty()) {
@@ -395,17 +413,21 @@ public class SchedulePage implements Initializable {
     }
 
     @FXML
-    void onReOutdateClicked(MouseEvent event) {
+    void onReOutdateClicked(MouseEvent event) throws ParseException {
         ScheduleEntity_ViewModel scheduleEntity_viewModel = table_view.getSelectionModel().getSelectedItem();
-        System.out.println(scheduleEntity_viewModel.getIdSchedule());
-        BLL_Admin.getInstance().updateDPR(scheduleEntity_viewModel.getIdSchedule(), scheduleEntity_viewModel.getDpr());
-        new Alert(Alert.AlertType.INFORMATION, "Update Outdate successful!").showAndWait();
+        if(!checkOutDate(scheduleEntity_viewModel.getOutDate())){
+            new Alert(Alert.AlertType.WARNING,"It's not time to update!").showAndWait();
+        }
+        else {
+             BLL_Admin.getInstance().updateDPR(scheduleEntity_viewModel.getIdSchedule(), scheduleEntity_viewModel.getDpr());
+             new Alert(Alert.AlertType.INFORMATION, "Update Outdate successful!").showAndWait();
+             show("");
+        }
     }
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        btn_reOutdate.setDisable(true);
         // Init combobox for bus and route
         BLL_Admin.getInstance().getAllBus().forEach(bus -> cbx_bus.getItems().add(bus));
         BLL_Admin.getInstance().getRoutes(0, "").forEach(route -> cbx_route.getItems().add(route));
@@ -427,6 +449,8 @@ public class SchedulePage implements Initializable {
 
                 show("");
 
+                lb_textOutDate.setText("Tuyến màu đỏ là tuyến bị tới hạn 1 tuần,\n" +
+                        "vui lòng chọn và nhấn Re Outdate để cập nhật");
                 toggleDetail();
 
                 // Init search text field
@@ -456,43 +480,32 @@ public class SchedulePage implements Initializable {
         col_duration.setCellValueFactory(new PropertyValueFactory<>("duration"));
         col_dpr.setCellValueFactory(new PropertyValueFactory<>("dpr"));
 
-        table_view.setRowFactory(tv -> {
-            TableRow<ScheduleEntity_ViewModel> row = new TableRow<>() {
-                @Override
-                protected void updateItem(ScheduleEntity_ViewModel item, boolean b) {
-                    super.updateItem(item, b);
-                    if (item == null)
-                        setStyle("");
-                    else try {
-                        if (BLL_Admin.getInstance().outDateSchedule(item.getOutDate())) {
-                            setStyle("-fx-background-color: #D16666");
-                        } else setStyle("");
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
+        table_view.setRowFactory(tv -> new TableRow<>() {
+            @Override
+            protected void updateItem(ScheduleEntity_ViewModel item, boolean b) {
+                super.updateItem(item, b);
+                if (item == null)
+                    setStyle("");
+                else try {
+                    if (checkOutDate(item.getOutDate())) {
+                        setStyle("-fx-background-color: #D16666");
+                    } else setStyle("");
+                } catch (ParseException e) {
+                    e.printStackTrace();
                 }
-
-            };
-            row.setOnMouseClicked(mouseEvent -> {
-                if(!row.isEmpty() && mouseEvent.getButton() == MouseButton.PRIMARY){
-                    ScheduleEntity_ViewModel item = row.getItem();
-                    try {
-                        if(BLL_Admin.getInstance().outDateSchedule(item.getOutDate())){
-                            btn_reOutdate.setDisable(false);
-                        }else btn_reOutdate.setDisable(true);
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-            return row;
+            }
         });
 
         table_view.setItems(listObj);
         table_view.refresh();
     }
 
-
+    boolean checkOutDate(String outdate) throws ParseException {
+        return TimeUnit.DAYS.convert(new SimpleDateFormat("dd/MM/yyyy").
+                parse(outdate).getTime() -
+                Date.from(LocalDate.now().
+                        atStartOfDay(ZoneId.systemDefault()).toInstant()).getTime(), TimeUnit.MILLISECONDS) <= 7;
+    }
     private void toggleDetail() {
         if (btn_ok.isVisible()) {
             btn_ok.setVisible(false);

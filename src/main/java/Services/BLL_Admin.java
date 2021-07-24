@@ -14,13 +14,10 @@ import org.apache.poi.ss.usermodel.Row;
 import java.io.*;
 import java.sql.SQLException;
 import java.text.NumberFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class BLL_Admin {
@@ -197,10 +194,9 @@ public class BLL_Admin {
         DAL.getInstance().getRoutes().forEach(route -> {
             String routeName = route.getStartStation() + " " + route.getEndStation();
             final boolean contains = routeName.toLowerCase().contains(name.toLowerCase());
-            if(status == null && contains) {
+            if (status == null && contains) {
                 data.add(route);
-            }
-            else if (status != null && status == route.getStatus() && contains) {
+            } else if (status != null && status == route.getStatus() && contains) {
                 data.add(route);
             }
         });
@@ -215,9 +211,9 @@ public class BLL_Admin {
         DAL.getInstance().deleteRoute(idRoute);
     }
 
-    public boolean checkDuplicateRoute(String startStation, String endStation){
-        return getRoutes(0,"").stream().anyMatch(route ->
-                (route.getStartStation() + route.getEndStation()).equals(startStation+endStation));
+    public boolean checkDuplicateRoute(String startStation, String endStation) {
+        return getRoutes(0, "").stream().anyMatch(route ->
+                (route.getStartStation() + route.getEndStation()).equals(startStation + endStation));
     }
 
     public int getDistance(int startProvinceIndex, int endProvinceIndex) throws IOException {
@@ -237,7 +233,7 @@ public class BLL_Admin {
     public List<ScheduleEntity_ViewModel> updateTableSchedulePage(String name) {
         List<ScheduleEntity_ViewModel> list = new ArrayList<>();
         DAL.getInstance().getScheduleData().forEach(data -> {
-            if((data.getRouteByIdRoute().getStartStation() + " - " + data.getRouteByIdRoute().getEndStation() +
+            if ((data.getRouteByIdRoute().getStartStation() + " - " + data.getRouteByIdRoute().getEndStation() +
                     " || " + data.getBusByIdBus().getTypeOfBusByIdType().getTypeName() + " || " +
                     new SimpleDateFormat("HH:mm:ss").format(data.getDepartTime())).toLowerCase().contains(name.toLowerCase()))
 
@@ -284,15 +280,11 @@ public class BLL_Admin {
         DAL.getInstance().updateScheduleNotDPR(idSchedule, routeSelected, busSelected, driverSelected, departTimeInput,
                 durationInput, priceInput);
     }
-    public void updateDPR(int idSchedule, int dpr){
+
+    public void updateDPR(int idSchedule, int dpr) {
         DAL.getInstance().updateDPR(idSchedule, dpr);
     }
 
-    public Boolean outDateSchedule(String date) throws ParseException {
-        return TimeUnit.DAYS.convert(new SimpleDateFormat("dd/MM/yyyy").parse(date).getTime() -
-                Date.from(LocalDate.now().
-                        atStartOfDay(ZoneId.systemDefault()).toInstant()).getTime(), TimeUnit.MILLISECONDS) <= 10;
-    }
     // NOTICE BLL for MainWindow(Dashboard of Admin)
 
     public String getRevenueTicket1YearAgo() {
@@ -310,7 +302,7 @@ public class BLL_Admin {
         return DAL.getInstance().getNumberRoutesToday();
     }
 
-    public List<ScheduleEntity> getOutDatedSchedule() {
+    public List<Integer> getOutDatedSchedule() {
         return DAL.getInstance().getOutDatedSchedule();
     }
 
@@ -324,6 +316,9 @@ public class BLL_Admin {
         LocalDate crr = LocalDate.now().plusMonths(1);
         LocalDate begin = crr.minusMonths(1);
         while (crr.compareTo(begin) >= 0) {
+
+//            System.out.println(crr);
+
             String from = crr.minusDays(5).format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
             String to = crr.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
 

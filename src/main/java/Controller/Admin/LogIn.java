@@ -72,10 +72,10 @@ public class LogIn implements Initializable {
             else if(res == 1 || res == 3) {
 
 //                  new Alert(Alert.AlertType.INFORMATION, "Successful!").showAndWait();
-                showHomePage("admin_view/MainWindow");
+                showHomePage("admin_view/MainWindow", res);
             }
             else if (res == 2) {
-                showHomePage("seller_view/Dashboard");
+                showHomePage("seller_view/Dashboard", res);
             }
 
             else {
@@ -94,30 +94,17 @@ public class LogIn implements Initializable {
                 "If you are TICKET SELLER, please contact to your manager!").showAndWait();
     }
 
-    public void showHomePage(String path) throws IOException {
-        //Set online for user
-        BLL_Admin.getInstance().toggleIsOnlineForAccout(DAL.getInstance().getCurrent(), true);
+    public void showHomePage(String path, Integer role) throws IOException {
 
+        Preloader controller = new Preloader(role);
         FXMLLoader main_Page = new FXMLLoader();
-        main_Page.setLocation(getClass().getResource("/view/" + path +".fxml"));
+        main_Page.setLocation(getClass().getResource("/view/admin_view/Preloader.fxml"));
+        main_Page.setController(controller);
 
         Scene scene = new Scene(main_Page.load());
         Stage stage = new Stage();
         stage.setTitle("Bus Management");
         stage.setScene(scene);
-
-        // Event when click on X(Close button)
-        stage.setOnCloseRequest(e -> {
-            // Case ticket seller booking ticket
-            Integer idTicket = BLL_Admin.getInstance().getIdTicketToClose();
-            if(idTicket > 0)
-                BLL_Seller.getInstance().deleteCurrentTicket(idTicket);
-
-            //
-            BLL_Admin.getInstance().toggleIsOnlineForAccout(DAL.getInstance().getCurrent(), false);
-            Platform.exit();
-            System.exit(0);
-        });
         //
         stage.getIcons().add(new Image("/images/Icon/favicon.png"));
         stage.show();
