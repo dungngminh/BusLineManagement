@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXDrawer?>
-<?import com.jfoenix.controls.JFXHamburger?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
@@ -15,140 +19,188 @@
 
 <AnchorPane fx:id="rootPane" prefHeight="650.0" prefWidth="1166.0" style="-fx-background-color: #AAEFDF;" styleClass="pane" stylesheets="@../../css/seller_css/ticketOrder.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <JFXDrawer fx:id="jfx_drawer" defaultDrawerSize="190.0" prefHeight="650.0" prefWidth="103.0" />
-      <Pane prefHeight="650.0" prefWidth="1166.0">
-         <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="132.0" prefHeight="29.0" prefWidth="282.0" text="TICKET DETAIL" textAlignment="CENTER">
-               <font>
-                  <Font name="System Bold" size="28.0" />
-               </font>
-            </Label>
-            <Pane layoutX="76.0" layoutY="43.0" prefHeight="572.0" prefWidth="388.0" styleClass="pane1" stylesheets="@../../css/seller_css/ticketOrder.css">
+      <BorderPane layoutX="109.0" prefHeight="615.0" prefWidth="468.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <GridPane layoutX="32.0" layoutY="21.0" prefHeight="455.0" prefWidth="334.0">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="186.0" minWidth="10.0" prefWidth="156.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="244.0" minWidth="10.0" prefWidth="205.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                        <RowConstraints maxHeight="67.0" minHeight="10.0" percentHeight="17.0" prefHeight="53.0" valignment="CENTER" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="67.0" minHeight="10.0" percentHeight="17.0" prefHeight="53.0" valignment="CENTER" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="91.0" minHeight="10.0" percentHeight="17.0" prefHeight="69.0" valignment="CENTER" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="90.0" minHeight="10.0" percentHeight="17.0" prefHeight="90.0" valignment="CENTER" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" percentHeight="17.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="69.0" minHeight="10.0" percentHeight="17.0" prefHeight="58.0" valignment="CENTER" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="62.0" minHeight="10.0" percentHeight="17.0" prefHeight="33.0" valignment="CENTER" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" percentHeight="17.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" percentHeight="17.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" percentHeight="17.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                     <children>
-                        <Label prefHeight="71.0" prefWidth="138.0" text="Depart date" textAlignment="RIGHT" GridPane.rowIndex="1">
+                  <BorderPane prefHeight="615.0" prefWidth="468.0">
+                     <center>
+                        <Pane prefHeight="572.0" prefWidth="388.0" styleClass="pane1" stylesheets="@../../css/seller_css/ticketOrder.css" BorderPane.alignment="CENTER">
+                           <children>
+                              <GridPane layoutX="32.0" layoutY="21.0" prefHeight="455.0" prefWidth="334.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="186.0" minWidth="10.0" prefWidth="156.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="244.0" minWidth="10.0" prefWidth="205.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints maxHeight="67.0" minHeight="10.0" percentHeight="17.0" prefHeight="53.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="67.0" minHeight="10.0" percentHeight="17.0" prefHeight="53.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="91.0" minHeight="10.0" percentHeight="17.0" prefHeight="69.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="90.0" minHeight="10.0" percentHeight="17.0" prefHeight="90.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" percentHeight="17.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="69.0" minHeight="10.0" percentHeight="17.0" prefHeight="58.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="62.0" minHeight="10.0" percentHeight="17.0" prefHeight="33.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" percentHeight="17.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" percentHeight="17.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" percentHeight="17.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <Label prefHeight="71.0" prefWidth="138.0" text="Depart date" textAlignment="RIGHT" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label prefHeight="99.0" prefWidth="138.0" text="Start station  " textAlignment="RIGHT" GridPane.rowIndex="2">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label prefHeight="99.0" prefWidth="138.0" text="Destination" textAlignment="RIGHT" GridPane.rowIndex="3">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label prefHeight="56.0" prefWidth="124.0" text="Phone driver" textAlignment="RIGHT" GridPane.rowIndex="4">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label prefHeight="71.0" prefWidth="138.0" text="Type of bus" textAlignment="RIGHT" GridPane.rowIndex="5">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label prefHeight="71.0" prefWidth="138.0" text="Code" textAlignment="RIGHT">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label prefHeight="71.0" prefWidth="138.0" text="Type of payment" textAlignment="RIGHT" GridPane.rowIndex="6">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lb_code" alignment="CENTER" prefHeight="52.0" prefWidth="249.0" text="Label" wrapText="true" GridPane.columnIndex="1">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lb_destination" alignment="CENTER" prefHeight="52.0" prefWidth="254.0" text="Label" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lb_startstation" alignment="CENTER" prefHeight="51.0" prefWidth="250.0" text="Label" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lb_departdate" alignment="CENTER" prefHeight="52.0" prefWidth="249.0" text="Label" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lb_phone" alignment="CENTER" prefHeight="51.0" prefWidth="255.0" text="Label" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lb_type" alignment="CENTER" prefHeight="53.0" prefWidth="259.0" text="Label" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <ComboBox fx:id="cbx_payment" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="192.0" styleClass="cbx" stylesheets="@../../css/seller_css/ticketOrder.css" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                    <Label prefHeight="71.0" prefWidth="138.0" text="Price" textAlignment="RIGHT" GridPane.rowIndex="9">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lb_price" alignment="CENTER" prefHeight="53.0" prefWidth="276.0" text="Label" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="9">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label prefHeight="71.0" prefWidth="138.0" text="Phone customer" textAlignment="RIGHT" GridPane.rowIndex="8">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label prefHeight="71.0" prefWidth="138.0" text="Name customer" textAlignment="RIGHT" GridPane.rowIndex="7">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="txf_namecustomer" prefHeight="40.0" prefWidth="192.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                    <TextField fx:id="txf_phonecustomer" prefHeight="40.0" prefWidth="192.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                                 </children>
+                              </GridPane>
+                              <Button fx:id="btn_confirm" layoutX="73.0" layoutY="501.0" mnemonicParsing="false" onMouseClicked="#btn_confirm_clicked" prefHeight="40.0" prefWidth="87.0" styleClass="btn" stylesheets="@../../css/seller_css/ticketOrder.css" text="Confirm">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="btn_cancel" layoutX="223.0" layoutY="501.0" mnemonicParsing="false" onMouseClicked="#btn_cancel_clicked" prefHeight="40.0" prefWidth="87.0" styleClass="btn" stylesheets="@../../css/seller_css/ticketOrder.css" text="Cancel">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </Pane>
+                     </center>
+                     <top>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="256.0" text="TICKET DETAIL" textAlignment="CENTER" BorderPane.alignment="CENTER">
                            <font>
-                              <Font name="System Bold" size="16.0" />
+                              <Font name="System Bold" size="28.0" />
                            </font>
+                           <BorderPane.margin>
+                              <Insets right="50.0" />
+                           </BorderPane.margin>
                         </Label>
-                        <Label prefHeight="99.0" prefWidth="138.0" text="Start station  " textAlignment="RIGHT" GridPane.rowIndex="2">
-                           <font>
-                              <Font name="System Bold" size="16.0" />
-                           </font>
-                        </Label>
-                        <Label prefHeight="99.0" prefWidth="138.0" text="Destination" textAlignment="RIGHT" GridPane.rowIndex="3">
-                           <font>
-                              <Font name="System Bold" size="16.0" />
-                           </font>
-                        </Label>
-                        <Label prefHeight="56.0" prefWidth="124.0" text="Phone driver" textAlignment="RIGHT" GridPane.rowIndex="4">
-                           <font>
-                              <Font name="System Bold" size="16.0" />
-                           </font>
-                        </Label>
-                        <Label prefHeight="71.0" prefWidth="138.0" text="Type of bus" textAlignment="RIGHT" GridPane.rowIndex="5">
-                           <font>
-                              <Font name="System Bold" size="16.0" />
-                           </font>
-                        </Label>
-                        <Label prefHeight="71.0" prefWidth="138.0" text="Code" textAlignment="RIGHT">
-                           <font>
-                              <Font name="System Bold" size="16.0" />
-                           </font>
-                        </Label>
-                        <Label prefHeight="71.0" prefWidth="138.0" text="Type of payment" textAlignment="RIGHT" GridPane.rowIndex="6">
-                           <font>
-                              <Font name="System Bold" size="16.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="lb_code" alignment="CENTER" prefHeight="52.0" prefWidth="249.0" text="Label" wrapText="true" GridPane.columnIndex="1">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="lb_destination" alignment="CENTER" prefHeight="52.0" prefWidth="254.0" text="Label" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="lb_startstation" alignment="CENTER" prefHeight="51.0" prefWidth="250.0" text="Label" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="lb_departdate" alignment="CENTER" prefHeight="52.0" prefWidth="249.0" text="Label" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="lb_phone" alignment="CENTER" prefHeight="51.0" prefWidth="255.0" text="Label" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="lb_type" alignment="CENTER" prefHeight="53.0" prefWidth="259.0" text="Label" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="5">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <ComboBox fx:id="cbx_payment" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="192.0" styleClass="cbx" stylesheets="@../../css/seller_css/ticketOrder.css" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                        <Label prefHeight="71.0" prefWidth="138.0" text="Price" textAlignment="RIGHT" GridPane.rowIndex="9">
-                           <font>
-                              <Font name="System Bold" size="16.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="lb_price" alignment="CENTER" prefHeight="53.0" prefWidth="276.0" text="Label" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="9">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Label>
-                        <Label prefHeight="71.0" prefWidth="138.0" text="Phone customer" textAlignment="RIGHT" GridPane.rowIndex="8">
-                           <font>
-                              <Font name="System Bold" size="16.0" />
-                           </font>
-                        </Label>
-                        <Label prefHeight="71.0" prefWidth="138.0" text="Name customer" textAlignment="RIGHT" GridPane.rowIndex="7">
-                           <font>
-                              <Font name="System Bold" size="16.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="txf_namecustomer" prefHeight="40.0" prefWidth="192.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                        <TextField fx:id="txf_phonecustomer" prefHeight="40.0" prefWidth="192.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                     </children>
-                  </GridPane>
-                  <Button fx:id="btn_confirm" layoutX="73.0" layoutY="501.0" mnemonicParsing="false" onMouseClicked="#btn_confirm_clicked" prefHeight="40.0" prefWidth="87.0" styleClass="btn" stylesheets="@../../css/seller_css/ticketOrder.css" text="Confirm">
-                     <font>
-                        <Font size="15.0" />
-                     </font></Button>
-                  <Button fx:id="btn_cancel" layoutX="223.0" layoutY="501.0" mnemonicParsing="false" onMouseClicked="#btn_cancel_clicked" prefHeight="40.0" prefWidth="87.0" styleClass="btn" stylesheets="@../../css/seller_css/ticketOrder.css" text="Cancel">
-                     <font>
-                        <Font size="15.0" />
-                     </font></Button>
+                     </top>
+                     <right>
+                        <FlowPane orientation="VERTICAL" prefHeight="573.0" prefWidth="71.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Button mnemonicParsing="false" prefHeight="56.0" prefWidth="66.0" style="-fx-background-color: #8C271E;" text="Ordered" textFill="WHITE">
+                                 <FlowPane.margin>
+                                    <Insets bottom="10.0" left="5.0" />
+                                 </FlowPane.margin>
+                              </Button>
+                              <Button mnemonicParsing="false" prefHeight="57.0" prefWidth="66.0" style="-fx-background-color: #F1D302;" text="Pending">
+                                 <FlowPane.margin>
+                                    <Insets bottom="10.0" left="5.0" />
+                                 </FlowPane.margin>
+                              </Button>
+                              <Button mnemonicParsing="false" prefHeight="57.0" prefWidth="66.0" text="Ready">
+                                 <FlowPane.margin>
+                                    <Insets bottom="10.0" left="5.0" />
+                                 </FlowPane.margin>
+                              </Button>
+                           </children>
+                        </FlowPane>
+                     </right>
+                     <FlowPane.margin>
+                        <Insets right="150.0" />
+                     </FlowPane.margin>
+                  </BorderPane>
+                  <BorderPane prefHeight="628.0" prefWidth="424.0">
+                     <center>
+                        <Pane fx:id="pane2" prefHeight="629.0" prefWidth="382.0" BorderPane.alignment="CENTER" />
+                     </center>
+                     <left>
+                        <ImageView fitHeight="40.0" fitWidth="46.0" onMouseClicked="#btn_reload_onClicked" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="BOTTOM_LEFT">
+                           <image>
+                              <Image url="@../../images/Icon/circular-arrow.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                     </left>
+                  </BorderPane>
                </children>
-            </Pane>
-            <Pane fx:id="pane2" layoutX="770.0" layoutY="11.0" prefHeight="629.0" prefWidth="382.0" />
-            <Button layoutX="470.0" layoutY="43.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="66.0" style="-fx-background-color: #8C271E;" text="Ordered" textFill="WHITE" />
-            <Button layoutX="470.0" layoutY="110.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="66.0" style="-fx-background-color: #F1D302;" text="Pending" />
-            <Button layoutX="470.0" layoutY="178.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="66.0" text="Ready" />
-         </children>
-      </Pane>
-      <JFXHamburger fx:id="jfx_hambur" layoutX="10.0" layoutY="10.0" />
+            </FlowPane>
+         </center>
+      </BorderPane>
    </children>
 </AnchorPane>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+
+<AnchorPane id="pane" fx:id="rootPane" prefHeight="650.0" prefWidth="1166.0" stylesheets="@../../css/admin_css/preloader.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <FlowPane alignment="BOTTOM_CENTER" columnHalignment="CENTER" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fx:id="loading" fitHeight="142.0" fitWidth="246.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/Stuff/preloader.gif" />
+               </image>
+               <FlowPane.margin>
+                  <Insets bottom="20.0" />
+               </FlowPane.margin>
+            </ImageView>
+         </children>
+      </FlowPane>
+   </children>
+</AnchorPane>

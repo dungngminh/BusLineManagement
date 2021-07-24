@@ -1,64 +1,64 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE hibernate-configuration PUBLIC
-    "-//Hibernate/Hibernate Configuration DTD//EN"
-    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-<session-factory>
-  <!-- Database connection settings -->
-  <property name="connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
-<!--  <property name="connection.url">jdbc:sqlserver://34.72.153.240;database=QuanLyNhaXeKhach</property>-->
-  <property name="connection.url">jdbc:sqlserver://34.87.114.154</property>
-  <property name = "hibernate.connection.username">sqlserver</property>
-  <property name = "hibernate.connection.password">123456</property>
+    <session-factory>
+        <!-- Database connection settings -->
+        <property name="connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+        <property name="connection.url">jdbc:sqlserver://103.95.197.121:9696;database=N2_19N12B</property>
+        <property name="hibernate.connection.username">DACNPM</property>
+        <property name="hibernate.connection.password">khoa19@itf</property>
 
-  <property name="hibernate.connection.release_mode">auto</property>
-  <property name="hibernate.connection.autoReconnect">true</property>
-  <property name="hibernate.connection.autocommit">true</property>
+        <property name="hibernate.connection.release_mode">auto</property>
+        <property name="hibernate.connection.autoReconnect">true</property>
+        <property name="hibernate.connection.autocommit">true</property>
 
-  <property name="hibernate.connection.CharSet">utf8</property>
-  <property name="hibernate.connection.characterEncoding">utf8</property>
-  <property name="hibernate.connection.useUnicode">true</property>
-<!--  &lt;!&ndash; JDBC connection pool (use the built-in) &ndash;&gt;-->
-<!--  <property name="connection.pool_size">10</property>-->
 
-<!--  &lt;!&ndash; SQL dialect &ndash;&gt;-->
-  <property name="dialect">org.hibernate.dialect.SQLServerDialect</property>
+        <property name="hibernate.connection.CharSet">utf8</property>
+        <property name="hibernate.connection.characterEncoding">utf8</property>
+        <property name="hibernate.connection.useUnicode">true</property>
+        <!--  &lt;!&ndash; JDBC connection pool (use the built-in) &ndash;&gt;-->
+        <!--  <property name="connection.pool_size">10</property>-->
 
-<!--  &lt;!&ndash; Enable Hibernate's automatic session context management &ndash;&gt;-->
-<!--  <property name="current_session_context_class">thread</property>-->
 
-<!--  &lt;!&ndash; Disable the second-level cache &ndash;&gt;-->
-<!--  <property name="cache.provider_class">org.hibernate.cache.internal.NoCachingRegionFactory</property>-->
+        <!--  &lt;!&ndash; SQL dialect &ndash;&gt;-->
+        <property name="dialect">org.hibernate.dialect.SQLServerDialect</property>
 
-<!--  &lt;!&ndash; Echo all executed SQL to stdout &ndash;&gt;-->
-  <property name="show_sql">false</property>
-<!--  <property name="logging.level.org.hibernate.SQL">OFF</property>-->
+        <!--  &lt;!&ndash; Enable Hibernate's automatic session context management &ndash;&gt;-->
+        <!--  <property name="current_session_context_class">thread</property>-->
 
-<!--  <property name = "hibernate.temp.use_jdbc_metadata_defaults">true</property>-->
+        <!--  &lt;!&ndash; Disable the second-level cache &ndash;&gt;-->
+        <!--  <property name="cache.provider_class">org.hibernate.cache.internal.NoCachingRegionFactory</property>-->
 
-<!--  &lt;!&ndash; Drop and re-create the database schema on startup &ndash;&gt;-->
-<!--  <property name="hbm2ddl.auto">update</property>-->
+        <!--  &lt;!&ndash; Echo all executed SQL to stdout &ndash;&gt;-->
+        <property name="show_sql">false</property>
+        <!--  <property name="logging.level.org.hibernate.SQL">OFF</property>-->
 
-  <!-- c3p0 connection pool -->
-  <property name="hibernate.c3p0.min_size">1</property>
-  <property name="hibernate.c3p0.max_size">100</property>
-  <property name="hibernate.c3p0.timeout">200</property>
-  <property name="hibernate.c3p0.max_statements">100</property>
-  <property name="hibernate.c3p0.idle_test_period">5000</property>
+        <!--  <property name = "hibernate.temp.use_jdbc_metadata_defaults">true</property>-->
 
-  <mapping class="Model.AccountEntity" />
-  <mapping class="Model.BusEntity" />
-  <mapping class="Model.RouteEntity" />
-  <mapping class="Model.ScheduleEntity" />
-  <mapping class="Model.TicketEntity" />
-  <mapping class="Model.TripInformationEntity" />
-  <mapping class="Model.DriverEntity"/>
-  <mapping class="Model.ProvinceEntity"/>
-  <mapping class="Model.RoleEntity"/>
-  <mapping class="Model.RoleAccountEntity"/>
-  <mapping class="Model.StationEntity"/>
-  <mapping class="Model.TypeOfBusEntity"/>
-  <mapping class="Model.ViewModel.BusEntity_ViewModel"/>
+        <!--  &lt;!&ndash; Drop and re-create the database schema on startup &ndash;&gt;-->
+        <!--  <property name="hbm2ddl.auto">update</property>-->
 
-</session-factory>
+        <!-- c3p0 connection pool -->
+        <property name="hibernate.c3p0.min_size">1</property>
+        <property name="hibernate.c3p0.max_size">100</property>
+        <property name="hibernate.c3p0.timeout">200</property>
+        <property name="hibernate.c3p0.max_statements">100</property>
+        <property name="hibernate.c3p0.idle_test_period">5000</property>
+
+        <mapping class="Model.AccountEntity"/>
+        <mapping class="Model.BusEntity"/>
+        <mapping class="Model.RouteEntity"/>
+        <mapping class="Model.ScheduleEntity"/>
+        <mapping class="Model.TicketEntity"/>
+        <mapping class="Model.TripInformationEntity"/>
+        <mapping class="Model.DriverEntity"/>
+        <mapping class="Model.ProvinceEntity"/>
+        <mapping class="Model.RoleEntity"/>
+        <mapping class="Model.StationEntity"/>
+        <mapping class="Model.TypeOfBusEntity"/>
+        <mapping class="Model.ViewModel.BusEntity_ViewModel"/>
+
+    </session-factory>
 </hibernate-configuration>

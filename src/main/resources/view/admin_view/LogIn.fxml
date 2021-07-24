@@ -1,86 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Hyperlink?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="frame-1" blendMode="DARKEN" prefHeight="518.0" prefWidth="565.0" style="-fx-background-color: #373E40;" stylesheets="@../../css/admin_css/style_login.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Admin.LogIn">
+<AnchorPane blendMode="DARKEN" prefHeight="568.0" prefWidth="1084.0" stylesheets="@../../css/admin_css/style_login.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Admin.LogIn">
    <children>
-      <Pane id="pane" layoutX="50.0" layoutY="36.0" prefHeight="447.0" prefWidth="466.0" stylesheets="@../../css/admin_css/style_login.css">
+      <Pane id="pane" layoutX="715.0" prefHeight="566.0" prefWidth="369.0" stylesheets="@../../css/admin_css/style_login.css">
          <children>
-            <Label id="lb-wel" alignment="CENTER" contentDisplay="CENTER" layoutX="18.0" layoutY="26.0" prefHeight="45.0" prefWidth="445.0" stylesheets="@../../css/admin_css/style_login.css" text="BUS MANAGEMENT APPLICATION" textAlignment="CENTER">
+            <ImageView fitHeight="73.0" fitWidth="353.0" layoutX="8.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/Stuff/logo.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="79.0" fitWidth="153.0" layoutX="139.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/Icon/bus.png" />
+               </image>
+            </ImageView>
+            <Button id="blue" fx:id="btn_login" layoutX="67.0" layoutY="435.0" mnemonicParsing="false" onMouseClicked="#btn_login_clicked" styleClass="blue" stylesheets="@../../css/admin_css/style_login.css" text="Log in" textFill="WHITE">
                <font>
-                  <Font size="15.0" />
+                  <Font size="21.0" />
                </font>
-            </Label>
-            <GridPane layoutX="40.0" layoutY="114.0" prefHeight="272.0" prefWidth="367.0">
-              <columnConstraints>
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <Label id="lb-us-pa" alignment="CENTER_RIGHT" prefHeight="31.0" prefWidth="153.0" stylesheets="@../../css/admin_css/style_login.css" text="Username" textFill="#1f1e78">
-                     <font>
-                        <Font name="Arial Black" size="21.0" />
-                     </font>
-                  </Label>
-                  <TextField id="txf_username" fx:id="txf_username" prefHeight="39.0" prefWidth="183.0" GridPane.columnIndex="1">
-                     <font>
-                        <Font name="Arial" size="18.0" />
-                     </font></TextField>
-                  <Label id="lb-us-pa" alignment="CENTER_RIGHT" prefHeight="31.0" prefWidth="152.0" stylesheets="@../../css/admin_css/style_login.css" text="Password" textFill="#1f1e78" GridPane.rowIndex="1">
-                     <font>
-                        <Font name="Arial Black" size="21.0" />
-                     </font>
-                  </Label>
-                  <PasswordField id="txf_password" fx:id="txf_password" prefHeight="37.0" prefWidth="183.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                     <font>
-                        <Font name="Arial" size="18.0" />
-                     </font></PasswordField>
-                  <Hyperlink id="href_fypassword" alignment="CENTER_RIGHT" layoutX="25.0" prefHeight="25.0" prefWidth="144.0" text="Forgot your password!" GridPane.rowIndex="2">
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                     <GridPane.margin>
-                        <Insets left="40.0" right="-15.0" />
-                     </GridPane.margin>
-                  </Hyperlink>
-                  <Button id="blue" mnemonicParsing="false" onMouseClicked="#btn_login_clicked" styleClass="blue" stylesheets="@../../css/admin_css/style_login.css" text="Log in" textFill="WHITE" GridPane.rowIndex="3">
-                     <font>
-                        <Font size="21.0" />
-                     </font>
-                     <GridPane.margin>
-                        <Insets left="50.0" />
-                     </GridPane.margin>
-                  </Button>
-                  <Button id="red" fx:id="btn_cancel" mnemonicParsing="false" onMouseClicked="#btn_cancel_clicked" styleClass="red" stylesheets="@../../css/admin_css/style_login.css" text="Cancel" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                     <font>
-                        <Font size="21.0" />
-                     </font>
-                     <GridPane.margin>
-                        <Insets left="15.0" />
-                     </GridPane.margin>
-                  </Button>
-               </children>
-            </GridPane>
+               <cursor>
+                  <Cursor fx:constant="CLOSED_HAND" />
+               </cursor>
+            </Button>
+            <Button id="red" fx:id="btn_cancel" layoutX="228.0" layoutY="435.0" mnemonicParsing="false" onMouseClicked="#btn_cancel_clicked" styleClass="red" stylesheets="@../../css/admin_css/style_login.css" text="Cancel" textFill="WHITE">
+               <font>
+                  <Font size="21.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="CLOSED_HAND" />
+               </cursor>
+            </Button>
+            <TextField id="txf_username" fx:id="txf_username" layoutX="59.0" layoutY="211.0" prefHeight="39.0" prefWidth="252.0" promptText="username">
+               <tooltip><Tooltip text="Fill your user name here!" /></tooltip>
+               <font>
+                  <Font name="Arial" size="18.0" />
+               </font>
+               <padding>
+                  <Insets left="45.0" />
+               </padding>
+            </TextField>
+            <PasswordField id="txf_password" fx:id="txf_password" layoutX="59.0" layoutY="276.0" prefHeight="37.0" prefWidth="252.0" promptText="password">
+               <tooltip><Tooltip text="Fill your password here!" /></tooltip>
+               <font>
+                  <Font name="Arial" size="18.0" />
+               </font>
+               <padding>
+                  <Insets left="45.0" />
+               </padding>
+            </PasswordField>
+            <Hyperlink id="href_fypassword" alignment="CENTER_RIGHT" layoutX="59.0" layoutY="332.0" onAction="#onForgetClicked" prefHeight="25.0" prefWidth="142.0" text="Forgot your password!">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Hyperlink>
+            <ImageView fitHeight="23.0" fitWidth="23.0" layoutX="70.0" layoutY="219.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/Icon/username.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="73.0" layoutY="284.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/Icon/password.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
-      <TextArea layoutX="-421.0" layoutY="-86.0" prefHeight="200.0" prefWidth="200.0" text="BUS MANAGEMENT &#10;APPLICATION" />
+      <Pane id="frame" layoutX="-8.0" prefHeight="566.0" prefWidth="723.0" />
    </children>
 </AnchorPane>

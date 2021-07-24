@@ -13,6 +13,10 @@ public class FilterRoute_ViewModel {
     private String destStation;
     private Date departTime;
     private int duration;
+    private String price;
+
+
+
 
     public TripInformationEntity getModelTrip() {
         return modelTrip;
@@ -70,9 +74,15 @@ public class FilterRoute_ViewModel {
         this.duration = duration;
     }
 
+    public String getPrice() {
+        return price;
+    }
 
+    public void setPrice(String price) {
+        this.price = price;
+    }
 
-    public FilterRoute_ViewModel(TripInformationEntity modelTrip, byte[] picture, String typeName, String startStation, String destStation, Date departTime, int duration) {
+    public FilterRoute_ViewModel(TripInformationEntity modelTrip, byte[] picture, String typeName, String startStation, String destStation, Date departTime, int duration, String price) {
         this.modelTrip = modelTrip;
         this.picture = picture;
         this.typeName = typeName;
@@ -80,5 +90,6 @@ public class FilterRoute_ViewModel {
         this.destStation = destStation;
         this.departTime = departTime;
         this.duration = duration;
+        this.price = price;
     }
 }

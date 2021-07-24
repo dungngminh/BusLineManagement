@@ -52,14 +52,17 @@
 }
 
 .subbtn {
-    -fx-background-color: #f1f1f5 !important;
-    -fx-font-size: 20px;
+
+    -fx-background-color: linear-gradient(from 50% 50% to 100% 100%, #0e1c26, #243748);
+    -fx-font-size: 16px;
 }
 
 .subbtn:hover {
-    -fx-background-color: #6ca7ab !important;
-    -fx-background-radius: 9px 9px 9px 9px;
-    -fx-border-radius: 7px 7px 7px 7px;
+    -fx-background-color: linear-gradient(from 50% 50% to 100% 100%, #243748, #0e1c26);
     -fx-border-color: white;
-    /*-fx-border-width: -2px;*/
+    -fx-text-fill: white;
+}
+
+.menu-item .label{
+    -fx-text-fill: greenyellow;
 }

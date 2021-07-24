@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -9,139 +10,263 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pane" prefHeight="627.0" prefWidth="1166.0" styleClass="pane" stylesheets="@../../css/admin_css/setting.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Admin.Decentralize">
+<AnchorPane fx:id="pane" prefHeight="627.0" prefWidth="1166.0" styleClass="pane" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Admin.Decentralize">
    <children>
-      <Button fx:id="btn_adduser" layoutX="425.0" layoutY="116.0" mnemonicParsing="false" onMouseClicked="#btn_adduser_clicked" prefHeight="50.0" prefWidth="143.0" styleClass="btn" stylesheets="@../../css/admin_css/setting.css" text="Add user">
-         <cursor>
-            <Cursor fx:constant="DEFAULT" />
-         </cursor>
-         <font>
-            <Font name="Segoe UI Bold" size="18.0" />
-         </font></Button>
-      <Button fx:id="btn_changerole" layoutX="641.0" layoutY="116.0" mnemonicParsing="false" onMouseClicked="#btn_changerole_clicked" prefHeight="50.0" prefWidth="143.0" styleClass="btn" stylesheets="@../../css/admin_css/setting.css" text="Change Role">
-         <cursor>
-            <Cursor fx:constant="DEFAULT" />
-         </cursor>
-         <font>
-            <Font name="Segoe UI Bold" size="18.0" />
-         </font></Button>
-      <StackPane layoutX="368.0" layoutY="229.0" prefHeight="279.0" prefWidth="431.0">
+      <JFXDrawer fx:id="jfx_drawer" defaultDrawerSize="195.0" prefHeight="641.0" prefWidth="101.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <GridPane fx:id="grid_add" prefHeight="229.0" prefWidth="341.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="223.0" minWidth="10.0" prefWidth="174.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="257.0" minWidth="10.0" prefWidth="256.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <Label prefHeight="50.0" prefWidth="90.0" text="Username" textFill="WHITE">
-                     <font>
-                        <Font name="Arial Black" size="16.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="txf_username" prefHeight="36.0" prefWidth="207.0" GridPane.columnIndex="1">
-                     <font>
-                        <Font name="Arial" size="16.0" />
-                     </font>
-                  </TextField>
-                  <Label prefHeight="50.0" prefWidth="90.0" text="Password" textFill="WHITE" GridPane.rowIndex="1">
-                     <font>
-                        <Font name="Arial Black" size="16.0" />
-                     </font>
-                  </Label>
-                  <PasswordField fx:id="txf_password" prefHeight="36.0" prefWidth="207.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                     <font>
-                        <Font name="Arial" size="16.0" />
-                     </font>
-                  </PasswordField>
-                  <Label prefHeight="50.0" prefWidth="167.0" text="Confirm password" textFill="WHITE" GridPane.rowIndex="2">
-                     <font>
-                        <Font name="Arial Black" size="16.0" />
-                     </font>
-                  </Label>
-                  <PasswordField fx:id="txf_password_confirm" prefHeight="36.0" prefWidth="207.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                     <font>
-                        <Font name="Arial" size="16.0" />
-                     </font>
-                  </PasswordField>
-                  <Label prefHeight="50.0" prefWidth="90.0" text="Role" textFill="WHITE" GridPane.rowIndex="3">
-                     <font>
-                        <Font name="Arial Black" size="16.0" />
-                     </font>
-                  </Label>
-                  <ComboBox fx:id="cbx_role_add" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="256.0" styleClass="cbx" stylesheets="@../../css/admin_css/setting.css" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <ButtonBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="55.0" prefWidth="194.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
-                    <buttons>
-                        <Button fx:id="btn_add" mnemonicParsing="false" onMouseClicked="#btn_add_clicked" prefHeight="43.0" prefWidth="100.0" styleClass="btn" stylesheets="@../../css/admin_css/setting.css" text="Add">
-                           <cursor>
-                              <Cursor fx:constant="DEFAULT" />
-                           </cursor>
-                           <font>
-                              <Font name="Segoe UI" size="15.0" />
-                           </font></Button>
-                      <Button fx:id="btn_reset" mnemonicParsing="false" onMouseClicked="#btn_reset_clicked" prefHeight="43.0" prefWidth="80.0" styleClass="btn" stylesheets="@../../css/admin_css/setting.css" text="Reset">
-                           <cursor>
-                              <Cursor fx:constant="DEFAULT" />
-                           </cursor>
-                           <font>
-                              <Font name="Segoe UI" size="15.0" />
-                           </font></Button>
-                    </buttons>
-                     <padding>
-                        <Insets right="65.0" />
-                     </padding>
-                     <GridPane.margin>
-                        <Insets left="-20.0" />
-                     </GridPane.margin>
-                  </ButtonBar>
-               </children>
-            </GridPane>
-            <GridPane fx:id="grid_role" prefHeight="279.0" prefWidth="403.0" visible="false">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="230.0" minWidth="10.0" prefWidth="115.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="326.0" minWidth="10.0" prefWidth="273.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-               <children>
-                  <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="50.0" prefWidth="90.0" text="User" textAlignment="RIGHT">
-                     <font>
-                        <Font name="Arial Black" size="19.0" />
-                     </font>
-                  </Label>
-                  <ComboBox fx:id="cbx_user" onAction="#cbx_user_Action" prefHeight="35.0" prefWidth="237.0" styleClass="cbx" stylesheets="@../../css/admin_css/setting.css" GridPane.columnIndex="1" />
-                  <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="50.0" prefWidth="90.0" text="Role" textAlignment="RIGHT" GridPane.rowIndex="1">
-                     <font>
-                        <Font name="Arial Black" size="19.0" />
-                     </font>
-                  </Label>
-                  <ComboBox fx:id="cbx_role" prefHeight="35.0" prefWidth="238.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Button fx:id="btn_confirm" mnemonicParsing="false" onMouseClicked="#btn_confirm_clicked" prefHeight="43.0" prefWidth="87.0" styleClass="btn" stylesheets="@../../css/admin_css/setting.css" text="Confirm" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                     <font>
-                        <Font size="15.0" />
-                     </font></Button>
-               </children>
-            </GridPane>
+            <TabPane prefHeight="500.0" prefWidth="619.0" stylesheets="@../../css/admin_css/setting.css" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                  <Tab text="Change password">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <GridPane fx:id="grid_add1" layoutX="38.0" layoutY="77.0" prefHeight="297.0" prefWidth="481.0" AnchorPane.leftAnchor="38.0" AnchorPane.rightAnchor="100.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="223.0" minWidth="10.0" prefWidth="210.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="257.0" minWidth="10.0" prefWidth="232.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <Label prefHeight="50.0" prefWidth="141.0" text="New password" textFill="WHITE" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font name="Arial Black" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <PasswordField fx:id="txf_newpassword" prefHeight="36.0" prefWidth="207.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font name="Arial" size="16.0" />
+                                       </font>
+                                    </PasswordField>
+                                    <Label prefHeight="50.0" prefWidth="202.0" text="Confirm new password" textFill="WHITE" GridPane.rowIndex="2">
+                                       <font>
+                                          <Font name="Arial Black" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <PasswordField fx:id="txf_newpassword_confirm" prefHeight="36.0" prefWidth="207.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                       <font>
+                                          <Font name="Arial" size="16.0" />
+                                       </font>
+                                    </PasswordField>
+                                    <ButtonBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="55.0" prefWidth="194.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                                       <buttons>
+                                          <Button mnemonicParsing="false" onMouseClicked="#btn_changepassword_confirm_clicked" prefHeight="43.0" prefWidth="100.0" styleClass="btn" stylesheets="@../../css/admin_css/setting.css" text="Confirm">
+                                             <cursor>
+                                                <Cursor fx:constant="DEFAULT" />
+                                             </cursor>
+                                             <font>
+                                                <Font name="Segoe UI" size="15.0" />
+                                             </font>
+                                          </Button>
+                                          <Button mnemonicParsing="false" onMouseClicked="#changepassword_reset_onClicked" prefHeight="43.0" prefWidth="80.0" styleClass="btn" stylesheets="@../../css/admin_css/setting.css" text="Reset">
+                                             <cursor>
+                                                <Cursor fx:constant="DEFAULT" />
+                                             </cursor>
+                                             <font>
+                                                <Font name="Segoe UI" size="15.0" />
+                                             </font>
+                                          </Button>
+                                       </buttons>
+                                       <padding>
+                                          <Insets right="65.0" />
+                                       </padding>
+                                       <GridPane.margin>
+                                          <Insets left="-20.0" />
+                                       </GridPane.margin>
+                                    </ButtonBar>
+                                    <Label prefHeight="50.0" prefWidth="132.0" text="Old password" textFill="WHITE">
+                                       <font>
+                                          <Font name="Arial Black" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <PasswordField fx:id="txf_oldpassword" prefHeight="36.0" prefWidth="207.0" GridPane.columnIndex="1">
+                                       <font>
+                                          <Font name="Arial" size="16.0" />
+                                       </font>
+                                    </PasswordField>
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </Tab>
+                <Tab fx:id="tab_adduser" closable="false" text="Add user">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <GridPane fx:id="grid_add" layoutX="49.0" layoutY="77.0" prefHeight="297.0" prefWidth="442.0" AnchorPane.leftAnchor="49.0" AnchorPane.rightAnchor="128.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="223.0" minWidth="10.0" prefWidth="174.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="257.0" minWidth="10.0" prefWidth="256.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Label prefHeight="50.0" prefWidth="90.0" text="Username" textFill="WHITE">
+                                       <font>
+                                          <Font name="Arial Black" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="txf_username" prefHeight="36.0" prefWidth="207.0" GridPane.columnIndex="1">
+                                       <font>
+                                          <Font name="Arial" size="16.0" />
+                                       </font>
+                                    </TextField>
+                                    <Label prefHeight="50.0" prefWidth="90.0" text="Password" textFill="WHITE" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font name="Arial Black" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <PasswordField fx:id="txf_password" prefHeight="36.0" prefWidth="207.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font name="Arial" size="16.0" />
+                                       </font>
+                                    </PasswordField>
+                                    <Label prefHeight="50.0" prefWidth="167.0" text="Confirm password" textFill="WHITE" GridPane.rowIndex="2">
+                                       <font>
+                                          <Font name="Arial Black" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <PasswordField fx:id="txf_password_confirm" prefHeight="36.0" prefWidth="207.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                       <font>
+                                          <Font name="Arial" size="16.0" />
+                                       </font>
+                                    </PasswordField>
+                                    <Label prefHeight="50.0" prefWidth="90.0" text="Role" textFill="WHITE" GridPane.rowIndex="3">
+                                       <font>
+                                          <Font name="Arial Black" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <ComboBox fx:id="cbx_role_add" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="256.0" styleClass="cbx" stylesheets="@../../css/admin_css/setting.css" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <ButtonBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="55.0" prefWidth="194.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+                                      <buttons>
+                                          <Button fx:id="btn_add" mnemonicParsing="false" onMouseClicked="#btn_add_clicked" prefHeight="43.0" prefWidth="100.0" styleClass="btn" stylesheets="@../../css/admin_css/setting.css" text="Add">
+                                             <cursor>
+                                                <Cursor fx:constant="DEFAULT" />
+                                             </cursor>
+                                             <font>
+                                                <Font name="Segoe UI" size="15.0" />
+                                             </font>
+                                          </Button>
+                                        <Button fx:id="btn_reset" mnemonicParsing="false" onMouseClicked="#btn_reset_clicked" prefHeight="43.0" prefWidth="80.0" styleClass="btn" stylesheets="@../../css/admin_css/setting.css" text="Reset">
+                                             <cursor>
+                                                <Cursor fx:constant="DEFAULT" />
+                                             </cursor>
+                                             <font>
+                                                <Font name="Segoe UI" size="15.0" />
+                                             </font>
+                                          </Button>
+                                      </buttons>
+                                       <padding>
+                                          <Insets right="65.0" />
+                                       </padding>
+                                       <GridPane.margin>
+                                          <Insets left="-20.0" />
+                                       </GridPane.margin>
+                                    </ButtonBar>
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                <Tab fx:id="tab_changerole" closable="false" disable="true" text="Change role">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <GridPane fx:id="grid_role" layoutX="58.0" layoutY="86.0" prefHeight="279.0" prefWidth="403.0" AnchorPane.leftAnchor="58.0" AnchorPane.rightAnchor="158.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="230.0" minWidth="10.0" prefWidth="115.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="326.0" minWidth="10.0" prefWidth="273.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="50.0" prefWidth="90.0" text="User" textAlignment="RIGHT" textFill="WHITE">
+                                       <font>
+                                          <Font name="Arial Black" size="19.0" />
+                                       </font>
+                                    </Label>
+                                    <ComboBox fx:id="cbx_user" onAction="#cbx_user_Action" prefHeight="35.0" prefWidth="237.0" styleClass="cbx" stylesheets="@../../css/admin_css/setting.css" GridPane.columnIndex="1" />
+                                    <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="50.0" prefWidth="90.0" text="Role" textAlignment="RIGHT" textFill="WHITE" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font name="Arial Black" size="19.0" />
+                                       </font>
+                                    </Label>
+                                    <ComboBox fx:id="cbx_role" prefHeight="35.0" prefWidth="238.0" styleClass="cbx" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <Button fx:id="btn_confirm" mnemonicParsing="false" onMouseClicked="#btn_confirm_clicked" prefHeight="43.0" prefWidth="87.0" styleClass="btn" stylesheets="@../../css/admin_css/setting.css" text="Confirm" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                  <Tab fx:id="tab_deleteuser" closable="false" disable="true" text="Delete user">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <GridPane fx:id="grid_role1" layoutX="47.0" layoutY="153.0" prefHeight="145.0" prefWidth="403.0" AnchorPane.leftAnchor="47.0" AnchorPane.rightAnchor="169.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="230.0" minWidth="10.0" prefWidth="115.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="326.0" minWidth="10.0" prefWidth="273.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="50.0" prefWidth="90.0" text="User" textAlignment="RIGHT" textFill="WHITE">
+                                       <font>
+                                          <Font name="Arial Black" size="19.0" />
+                                       </font>
+                                    </Label>
+                                    <ComboBox fx:id="cbx_user_delete" onAction="#cbx_user_Action" prefHeight="35.0" prefWidth="237.0" styleClass="cbx" stylesheets="@../../css/admin_css/setting.css" GridPane.columnIndex="1" />
+                                    <Button fx:id="btn_delete" mnemonicParsing="false" onMouseClicked="#btn_delete_clicked" prefHeight="43.0" prefWidth="87.0" styleClass="btn" stylesheets="@../../css/admin_css/setting.css" text="Delete" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </Tab>
+              </tabs>
+            </TabPane>
          </children>
-      </StackPane>
-      <JFXDrawer fx:id="jfx_drawer" defaultDrawerSize="195.0" prefHeight="641.0" prefWidth="101.0" />
-      <JFXHamburger fx:id="jfx_hambur" layoutX="14.0" layoutY="20.0" />
+      </FlowPane>
+      <JFXHamburger fx:id="jfx_hambur" layoutX="14.0" layoutY="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
    </children>
+   <stylesheets>
+      <URL value="@../../css/admin_css/setting.css" />
+      <URL value="@../../css/general.css" />
+   </stylesheets>
 </AnchorPane>

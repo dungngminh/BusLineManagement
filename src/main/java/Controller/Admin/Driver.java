@@ -14,17 +14,29 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class Driver implements Initializable {
     @FXML
     private AnchorPane pane;
+
+    @FXML
+    private BorderPane border_pane;
 
     @FXML
     private TitledPane titlepane;
@@ -78,7 +90,7 @@ public class Driver implements Initializable {
     private TableColumn<DriverEntity, Integer> col_status;
 
     @FXML
-    private ButtonBar grp_btn_tbl;
+    private FlowPane grp_btn_tbl;
 
     @FXML
     private Button btn_show;
@@ -177,6 +189,60 @@ public class Driver implements Initializable {
     }
 
     @FXML
+    void btn_export_clicked(MouseEvent event) throws IOException {
+        if(table_view.getItems().isEmpty()) {
+            new Alert(Alert.AlertType.WARNING, "List is empty!").showAndWait();
+            return;
+        }
+        Workbook workbook = new HSSFWorkbook();
+        Sheet spreadsheet = workbook.createSheet("driver");
+
+        Row row = spreadsheet.createRow(0);
+
+        for (int j = 0; j < table_view.getColumns().size(); j++) {
+            row.createCell(j).setCellValue(table_view.getColumns().get(j).getText());
+        }
+
+        for (int i = 0; i < table_view.getItems().size(); i++) {
+            row = spreadsheet.createRow(i + 1);
+            for (int j = 0; j < table_view.getColumns().size(); j++) {
+                if(table_view.getColumns().get(j).getCellData(i) != null) {
+                    row.createCell(j).setCellValue(table_view.getColumns().get(j).getCellData(i).toString());
+                }
+                else {
+                    row.createCell(j).setCellValue("");
+                }
+            }
+        }
+
+        // Show Selected Directory
+        Stage stage = new Stage();
+
+        stage.setTitle("Export data driver");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(
+                ((Node)event.getSource()).getScene().getWindow() );
+
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        directoryChooser.setInitialDirectory(new File("src"));
+
+        File selectedDirectory = directoryChooser.showDialog(stage);
+        if(selectedDirectory != null) {
+            if (!selectedDirectory.canRead()) {
+                Boolean b = selectedDirectory.setReadable(true, false);
+            }
+
+            File myObj = new File(selectedDirectory.getAbsolutePath() + "/ListOfDriver_" +
+                    DateTimeFormatter.ofPattern("dd_MM_yyyy_HH_mm_ss").format(LocalDateTime.now()) + ".xls");
+            if (myObj.createNewFile()) {
+                FileOutputStream fileOut = new FileOutputStream(myObj);
+                workbook.write(fileOut);
+                fileOut.close();
+            }
+        }
+    }
+
+    @FXML
     void btn_ok_clicked(MouseEvent event) {
         String name_of_driver = txf_nameofdriver.getText().trim();
         String phonenumber = txf_phonenumber.getText().trim();
@@ -248,24 +314,21 @@ public class Driver implements Initializable {
             btn_ok.setVisible(false);
             btn_reset.setVisible(false);
             btn_cancel.setVisible(false);
-            grp_btn_tbl.setVisible(true);
-            table_view.setLayoutX(5);
-            table_view.setPrefWidth(1155);
-            hbox.setLayoutX(220);
-            grp_btn_tbl.setLayoutX(279);
             titlepane.setVisible(false);
-            table_view.toFront();
+
+            grp_btn_tbl.setVisible(true);
+
+            AnchorPane.setLeftAnchor(border_pane, 2.0);
         }
         else {
             btn_ok.setVisible(true);
             btn_reset.setVisible(true);
             btn_cancel.setVisible(true);
-            grp_btn_tbl.setVisible(false);
-            table_view.setLayoutX(277);
-            table_view.setPrefWidth(883);
-            hbox.setLayoutX(343);
-            grp_btn_tbl.setLayoutX(423);
             titlepane.setVisible(true);
+
+            grp_btn_tbl.setVisible(false);
+            AnchorPane.setLeftAnchor(border_pane, 280.0);
+
         }
         jfx_hambur.toFront();
 

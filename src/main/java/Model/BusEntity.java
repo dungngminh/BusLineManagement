@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
-@Table(name = "Bus", schema = "dbo", catalog = "QuanLyNhaXeKhach")
+@Table(name = "Bus", schema = "dbo", catalog = "N2_19N12B")
 public class BusEntity {
 
     private int idBus;

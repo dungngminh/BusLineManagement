@@ -1,23 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Coda:wght@800&family=Staatliches&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Sans:wght@500&display=swap');
-#frame-1 {
-    -fx-background-image: url(../../images/frame_1_login.jpg);
+@import url('https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap');
+
+#frame {
+    -fx-background-image: url(../../images/login.jpg);
     -fx-background-size: 100% 100%;
 }
 
 #pane {
-    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #1ed7b5, #f0f9a7);
+    /*-fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #1ed7b5, #f0f9a7);*/
     /*-fx-background-size: 100% 100%;*/
-    -fx-background-radius:20px;
-    -fx-border-radius: 20px;
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 0 10px 10px 0;
+    -fx-border-radius: 0 10px 10px 0;
+    /*-fx-effect: dropshadow(gaussian , #919191, 5, 0.1, 0, 0);*/
 
 }
-
-
 #lb-wel {
     -fx-font-color: #295270;
-    -fx-font-family: 'Anton', sans-serif;
-    -fx-font-size: 30px;
+    -fx-font-family: 'Fjalla One', sans-serif;
+    -fx-font-size: 35px;
 }
 
 .blue {
@@ -42,4 +44,19 @@
     -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #ff5282, #f28367);
     -fx-background-radius: 9px;
     -fx-border-radius: 7px;
+}
+
+.text-field {
+    -fx-background-color: #F8F7FF;
+    -fx-background-radius: 9px;
+    -fx-border-radius: 7px;
+    /*-fx-background-insets: -1 -1 -1 -1, 0 0 0 0, 0 -1 3 -1;*/
+}
+
+.text-field:focused {
+    -fx-background-color: #F4F7F5;
+    -fx-background-radius: 9px;
+    -fx-border-radius: 7px;
+    -fx-effect: dropshadow(gaussian , #2D7DD2, 10, 0.2, 0, 0);
+    /*-fx-background-insets: -1 -1 -1 -1, 0 0 0 0, 0 -1 3 -1;*/
 }

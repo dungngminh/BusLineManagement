@@ -5,15 +5,15 @@ import java.sql.Timestamp;
 import java.util.Collection;
 
 @Entity
-@Table(name = "TripInformation", schema = "dbo", catalog = "QuanLyNhaXeKhach")
+@Table(name = "TripInformation", schema = "dbo", catalog = "N2_19N12B")
 public class TripInformationEntity {
     private int idTrip;
     private Timestamp departDate;
     private Integer idSchedule;
-    private int idDriver;
+    //    private int idDriver;
     private Collection<TicketEntity> ticketsByIdTrip;
     private ScheduleEntity scheduleByIdSchedule;
-    private DriverEntity driverByIdDriver;
+//    private DriverEntity driverByIdDriver;
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -46,15 +46,15 @@ public class TripInformationEntity {
         this.idSchedule = idSchedule;
     }
 
-    @Basic
-    @Column(name = "idDriver", nullable = false, insertable = false, updatable = false)
-    public int getIdDriver() {
-        return idDriver;
-    }
-
-    public void setIdDriver(int idDriver) {
-        this.idDriver = idDriver;
-    }
+//    @Basic
+//    @Column(name = "idDriver", nullable = false, insertable = false, updatable = false)
+//    public int getIdDriver() {
+//        return idDriver;
+//    }
+//
+//    public void setIdDriver(int idDriver) {
+//        this.idDriver = idDriver;
+//    }
 
     @Override
     public boolean equals(Object o) {
@@ -64,7 +64,7 @@ public class TripInformationEntity {
         TripInformationEntity that = (TripInformationEntity) o;
 
         if (idTrip != that.idTrip) return false;
-        if (idDriver != that.idDriver) return false;
+//        if (idDriver != that.idDriver) return false;
         if (departDate != null ? !departDate.equals(that.departDate) : that.departDate != null) return false;
         if (idSchedule != null ? !idSchedule.equals(that.idSchedule) : that.idSchedule != null) return false;
 
@@ -76,7 +76,7 @@ public class TripInformationEntity {
         int result = idTrip;
         result = 31 * result + (departDate != null ? departDate.hashCode() : 0);
         result = 31 * result + (idSchedule != null ? idSchedule.hashCode() : 0);
-        result = 31 * result + idDriver;
+//        result = 31 * result + idDriver;
         return result;
     }
 
@@ -99,13 +99,13 @@ public class TripInformationEntity {
         this.scheduleByIdSchedule = scheduleByIdSchedule;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "idDriver", referencedColumnName = "idDriver", nullable = false)
-    public DriverEntity getDriverByIdDriver() {
-        return driverByIdDriver;
-    }
-
-    public void setDriverByIdDriver(DriverEntity driverByIdDriver) {
-        this.driverByIdDriver = driverByIdDriver;
-    }
+//    @ManyToOne
+//    @JoinColumn(name = "idDriver", referencedColumnName = "idDriver", nullable = false)
+//    public DriverEntity getDriverByIdDriver() {
+//        return driverByIdDriver;
+//    }
+//
+//    public void setDriverByIdDriver(DriverEntity driverByIdDriver) {
+//        this.driverByIdDriver = driverByIdDriver;
+//    }
 }

@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
-@Table(name = "Route", schema = "dbo", catalog = "QuanLyNhaXeKhach")
+@Table(name = "Route", schema = "dbo", catalog = "N2_19N12B")
 public class RouteEntity {
     private int idRoute;
     private String startStation;
@@ -111,5 +111,8 @@ public class RouteEntity {
 
     public void setSchedulesByIdRoute(Collection<ScheduleEntity> schedulesByIdRoute) {
         this.schedulesByIdRoute = schedulesByIdRoute;
+    }
+    public String toString() {
+        return this.getStartStation() + " - " + this.getEndStation();
     }
 }
