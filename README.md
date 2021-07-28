@@ -151,7 +151,7 @@ project
 |   |    |   └───Admin View
 |   |    |   └───BusType View
 |   |    |   └───Seller View
-
+```
 
 
 <!-- USAGE EXAMPLES -->
