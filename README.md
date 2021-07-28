@@ -111,6 +111,46 @@ You still need to install these things first:
     database-init.sh
    ```
    
+### Directory Structure
+
+```
+project
+│   README.md
+│
+└───screenshot
+│
+│
+└───src/main
+│   └───java
+|   |   |   main.java                           <- [Main class in java Program]
+|   |   |
+│   │   │   Controller                          <- [Controller]
+|   |   |   └───Admin Controller
+|   |   |   └───BusType Controller
+|   |   |   └───TicketSeller Controller
+|   |   |
+│   │   │   Model                               <- [Model]
+|   |   |   └───Entity Class
+|   |   |   └───ViewModel Class
+|   |   |
+|   |   |   Services                            <- [Services]
+|   |   |   └───DBConnectionHelper Class
+|   |   |   └───BusinessLogic Class
+|   |   |
+|   |   |   Utils                               <- [Utilities]
+|   |   |   └───HibernateUtil Class
+│   │
+│   └───resources                 
+│   |    │   css
+|   |    |
+│   |    │   images
+|   |    |
+|   |    |   util
+|   |    |
+|   |    |   views                              <- [Contains FXML file for UI/ UX]
+|   |    |   └───Admin View
+|   |    |   └───BusType View
+|   |    |   └───Seller View
 
 
 
