@@ -162,54 +162,54 @@ There are some screenshots about this app, and the sequence of using the app.
 **1. Login**
     <br/>
     <br/>
-    ![image_login](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/login1.jpg)
+    ![image_login](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/master/screenshot/login1.jpg)
     
 **2. Main Page**
     <br/>
     <br/>
-    ![image_main](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/ticketseller_dashboard1.jpg)
+    ![image_main](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/master/screenshot/ticketseller_dashboard1.jpg)
 
 **3. Bus Page**
     <br/>
     <br/>
-    ![image_bus1](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/bus.jpg)
+    ![image_bus1](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/master/screenshot/bus.jpg)
     <br/>
     <br/>
-    ![imgae_bus2](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/bus1.jpg)
+    ![imgae_bus2](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/master/screenshot/bus1.jpg)
 
 **4. Route**
     <br/>
     <br/>
-    ![image_route1](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/route1.jpg)
+    ![image_route1](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/master/screenshot/route1.jpg)
     <br/>
     <br/>
-    ![image_route2](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/route2.jpg)
+    ![image_route2](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/master/screenshot/route2.jpg)
     
 **5. Route List**
     <br/>
     <br/>
-    ![image_ticket2](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/routebydate.jpg)
+    ![image_ticket2](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/master/screenshot/routebydate.jpg)
     
 **6. Driver**
     <br/>
     <br/>
-    ![image_driver1](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/driver1.jpg)
+    ![image_driver1](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/master/screenshot/driver1.jpg)
      <br/>
      <br/>
-    ![image_driver2](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/driver2.jpg)
+    ![image_driver2](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/master/screenshot/driver2.jpg)
 
 **7. Decentralize**
     <br/>
     <br/>
-    ![image_acc1](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/acc1.jpg)
+    ![image_acc1](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/master/screenshot/acc1.jpg)
     <br/>
     <br/>
-    ![image_acc2](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/acc2.jpg)
+    ![image_acc2](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/master/screenshot/acc2.jpg)
     
 **8. Ticket Detail**
     <br/>
     <br/>
-    ![image_ticket1](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/ticketdetail.jpg)
+    ![image_ticket1](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/master/screenshot/ticketdetail.jpg)
 
 
     
