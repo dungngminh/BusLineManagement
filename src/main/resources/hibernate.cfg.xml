@@ -10,10 +10,13 @@
         <property name="hibernate.connection.username">DACNPM</property>
         <property name="hibernate.connection.password">khoa19@itf</property>
 
+        <!--        <property name="connection.url">jdbc:sqlserver://localhost;database=N2_19N12B</property>-->
+<!--        <property name="hibernate.connection.username">derek</property>-->
+<!--        <property name="hibernate.connection.password">123456</property>-->
+
         <property name="hibernate.connection.release_mode">auto</property>
         <property name="hibernate.connection.autoReconnect">true</property>
         <property name="hibernate.connection.autocommit">true</property>
-
 
         <property name="hibernate.connection.CharSet">utf8</property>
         <property name="hibernate.connection.characterEncoding">utf8</property>
@@ -25,11 +28,11 @@
         <!--  &lt;!&ndash; SQL dialect &ndash;&gt;-->
         <property name="dialect">org.hibernate.dialect.SQLServerDialect</property>
 
-        <!--  &lt;!&ndash; Enable Hibernate's automatic session context management &ndash;&gt;-->
-        <!--  <property name="current_session_context_class">thread</property>-->
+<!--          &lt;!&ndash; Enable Hibernate's automatic session context management &ndash;&gt;-->
+<!--          <property name="current_session_context_class">thread</property>-->
 
-        <!--  &lt;!&ndash; Disable the second-level cache &ndash;&gt;-->
-        <!--  <property name="cache.provider_class">org.hibernate.cache.internal.NoCachingRegionFactory</property>-->
+<!--          &lt;!&ndash; Disable the second-level cache &ndash;&gt;-->
+<!--          <property name="cache.provider_class">org.hibernate.cache.internal.NoCachingRegionFactory</property>-->
 
         <!--  &lt;!&ndash; Echo all executed SQL to stdout &ndash;&gt;-->
         <property name="show_sql">false</property>
@@ -59,6 +62,7 @@
         <mapping class="Model.StationEntity"/>
         <mapping class="Model.TypeOfBusEntity"/>
         <mapping class="Model.ViewModel.BusEntity_ViewModel"/>
+        <mapping class="Model.NotificationEntity"/>
 
     </session-factory>
 </hibernate-configuration>

@@ -2,6 +2,7 @@ package Services;
 
 import Model.*;
 import Model.ViewModel.BusEntity_ViewModel;
+import Model.ViewModel.Notification_ViewModel;
 import Model.ViewModel.ScheduleEntity_ViewModel;
 
 import javafx.util.Pair;
@@ -411,5 +412,23 @@ public class BLL_Admin {
     }
 
     //DONE
+
+    // NOTICE BLL for Notifocation(Dashboard of Admin)
+
+    public void pushMessageIntoDB(String message) {
+        DAL.getInstance().pushMessageIntoDB(message);
+    }
+
+    public List<Notification_ViewModel> getAllNotification() {
+        List<Notification_ViewModel> list = new ArrayList<>();
+
+        DAL.getInstance().getAllNotification().forEach(noti -> {
+            list.add(new Notification_ViewModel(noti.getIdNotify(), noti.getNotifyContent(),
+                    new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(noti.getTime())));
+        });
+        return list;
+    }
+
+    // DONE
 
 }

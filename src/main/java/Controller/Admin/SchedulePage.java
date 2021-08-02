@@ -23,7 +23,6 @@ import javafx.scene.control.*;
 
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -34,6 +33,8 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -181,6 +182,9 @@ public class SchedulePage implements Initializable {
 
     @FXML
     private Label lb_textOutDate;
+
+    @FXML
+    private Button btn_reAll;
 
     //SUPPORT PROPERTY
     private static String CRUDType;
@@ -341,15 +345,27 @@ public class SchedulePage implements Initializable {
     }
 
     @FXML
+    void onReAllClicked(MouseEvent event) throws ParseException {
+        try {
+            for (ScheduleEntity_ViewModel item : table_view.getItems()) {
+                if(checkOutDate(item.getOutDate()))
+                    BLL_Admin.getInstance().updateDPR(item.getIdSchedule(), item.getDpr());
+            }
+            new Alert(Alert.AlertType.INFORMATION,"Update all OutDate Schedule successful!").showAndWait();
+        }catch(Exception ee){
+            new Alert(Alert.AlertType.ERROR, "Update fail, try again").showAndWait();
+        }
+    }
+    @FXML
     void btn_export_clicked(MouseEvent event) throws IOException {
         if(table_view.getItems().isEmpty()) {
             new Alert(Alert.AlertType.WARNING, "List is empty!").showAndWait();
             return;
         }
-        Workbook workbook = new HSSFWorkbook();
-        Sheet spreadsheet = workbook.createSheet("schedule");
+        HSSFWorkbook workbook = new HSSFWorkbook();
+        HSSFSheet spreadsheet = workbook.createSheet("schedule");
 
-        Row row = spreadsheet.createRow(0);
+        HSSFRow row = spreadsheet.createRow(0);
 
         for (int j = 0; j < table_view.getColumns().size(); j++) {
             row.createCell(j).setCellValue(table_view.getColumns().get(j).getText());
@@ -376,7 +392,7 @@ public class SchedulePage implements Initializable {
                 ((Node)event.getSource()).getScene().getWindow() );
 
         DirectoryChooser directoryChooser = new DirectoryChooser();
-        directoryChooser.setInitialDirectory(new File("src"));
+        directoryChooser.setInitialDirectory(new File(System.getProperty("user.home"), "./"));
 
         File selectedDirectory = directoryChooser.showDialog(stage);
         if(selectedDirectory != null) {

@@ -12,6 +12,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import java.util.Date;
@@ -224,7 +225,7 @@ public class DAL {
         AccountEntity acc = new AccountEntity();
         acc.setUsername(username);
         acc.setPassword(password);
-        System.out.println(idRole);
+
         acc.setIdRole(idRole);
         acc.setIsOnline(false);
         acc.setIsDelete(false);
@@ -825,4 +826,39 @@ public class DAL {
 
 
     //DONE
+
+    // NOTICE DAL for Notifocation(Dashboard of Admin)
+    public void pushMessageIntoDB(String message) {
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        NotificationEntity noti = new NotificationEntity();
+        noti.setIdUser(current.getIdUser());
+        noti.setNotifyContent(message);
+        noti.setTime(new Timestamp(System.currentTimeMillis()));
+        noti.setAccountByIdUser(current);
+
+        session.save(noti);
+        //Commit the transaction
+        session.getTransaction().commit();
+        session.close();
+    }
+
+    public List<NotificationEntity> getAllNotification() {
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        session.beginTransaction();
+        String sql = "SELECT NOTI.*\n" +
+                "FROM Notification NOTI WHERE NOTI.time >= DATEADD(day, -7, GETDATE()) AND NOTI.idUser = :idUser\n" +
+                "ORDER BY NOTI.idNotify DESC";
+        SQLQuery query = session.createSQLQuery(sql);
+        query.setParameter("idUser", current.getIdUser());
+
+        query.addEntity(NotificationEntity.class);
+        List<NotificationEntity> result = query.getResultList();
+        session.getTransaction().commit();
+        session.close();
+
+        return result;
+    }
+    // DONE
 }
