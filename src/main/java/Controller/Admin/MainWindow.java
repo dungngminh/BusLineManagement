@@ -381,7 +381,7 @@ public class MainWindow implements Initializable {
 
             stage.setScene(scene);
             stage.setResizable(false);
-            stage.setTitle("Print ticket");
+            stage.setTitle("Recent notification");
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initOwner(
                     ((Node)event.getSource()).getScene().getWindow() );

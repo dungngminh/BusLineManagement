@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TicketSeller.Notification">
+   <children>
+      <TableView fx:id="tableview" layoutX="8.0" layoutY="10.0" prefHeight="341.0" prefWidth="582.0">
+         <columns>
+            <TableColumn fx:id="mess_col" prefWidth="462.0" text="Message" />
+            <TableColumn fx:id="time_col" prefWidth="118.0" text="Time" />
+         </columns>
+      </TableView>
+      <Button fx:id="btn_show" layoutX="216.0" layoutY="361.0" mnemonicParsing="false" onMouseClicked="#btn_show_Click" prefHeight="25.0" prefWidth="59.0" text="show" />
+      <Button fx:id="btn_cancel" layoutX="300.0" layoutY="361.0" mnemonicParsing="false" onMouseClicked="#btn_cancel_Click" prefHeight="25.0" prefWidth="59.0" text="cancel" />
+   </children>
+</AnchorPane>
