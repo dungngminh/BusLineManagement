@@ -847,11 +847,9 @@ public class DAL {
     public List<NotificationEntity> getAllNotification() {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
-        String sql = "SELECT NOTI.*\n" +
-                "FROM Notification NOTI WHERE NOTI.time >= DATEADD(day, -7, GETDATE()) AND NOTI.idUser = :idUser\n" +
-                "ORDER BY NOTI.idNotify DESC";
+        String sql = "SELECT NOTI.* FROM Notification NOTI WHERE NOTI.time >= DATEADD(day, -7, GETDATE())\n" +
+                "ORDER BY NOTI.time DESC";
         SQLQuery query = session.createSQLQuery(sql);
-        query.setParameter("idUser", current.getIdUser());
 
         query.addEntity(NotificationEntity.class);
         List<NotificationEntity> result = query.getResultList();
@@ -859,6 +857,31 @@ public class DAL {
         session.close();
 
         return result;
+    }
+
+    public void updateNotification(Integer idNotify, String content) {
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        Query query = session.createQuery("update NotificationEntity set notifyContent = :content, time = :time" +
+                " where id = :id");
+        query.setParameter("content", content);
+        query.setParameter("time", new Timestamp(System.currentTimeMillis()));
+        query.setParameter("id", idNotify);
+        query.executeUpdate();
+        session.getTransaction().commit();
+        session.close();
+    }
+
+    public void deleteNotification(Integer id) {
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        Query query = session.createQuery("delete from NotificationEntity where idNotify = :id");
+        query.setParameter("id", id);
+        query.executeUpdate();
+        session.getTransaction().commit();
+        session.close();
     }
     // DONE
 }

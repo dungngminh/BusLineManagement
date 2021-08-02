@@ -373,13 +373,14 @@ public class MainWindow implements Initializable {
 
     @FXML
     void onBtn_notificationClick(MouseEvent event) throws IOException {
-//        try {
+        try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/admin_view/Notification.fxml"));
 
             Scene scene = new Scene(loader.load());
             Stage stage = new Stage();
 
             stage.setScene(scene);
+            stage.setResizable(false);
             stage.setTitle("Print ticket");
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initOwner(
@@ -387,9 +388,9 @@ public class MainWindow implements Initializable {
 
             stage.show();
 
-//        } catch (Exception e) {
-//            new Alert(Alert.AlertType.ERROR, e.getMessage()).showAndWait();
-//        }
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).showAndWait();
+        }
     }
 
 }
