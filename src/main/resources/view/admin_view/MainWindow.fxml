@@ -62,7 +62,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </ImageView>
-                  <ImageView fitHeight="43.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+                  <ImageView fitHeight="34.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                      <GridPane.margin>
                         <Insets right="250.0" />
                      </GridPane.margin>
@@ -73,6 +73,17 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </ImageView>
+                  <ImageView fx:id="btn_notification" fitHeight="30.0" fitWidth="29.0" onMouseClicked="#onBtn_notificationClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+                     <image>
+                        <Image url="@../../images/Dashboard/notifications.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="CLOSED_HAND" />
+                     </cursor>
+                     <GridPane.margin>
+                        <Insets right="300.0" />
+                     </GridPane.margin>
+                  </ImageView>
                   <Label prefHeight="24.0" prefWidth="133.0" text="DASHBOARD" textFill="WHITE">
                      <font>
                         <Font name="Segoe UI Bold" size="21.0" />
@@ -81,7 +92,7 @@
                         <Insets left="50.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label fx:id="lb_greet" alignment="CENTER" prefHeight="28.0" prefWidth="176.0" text="Welcome" GridPane.columnIndex="2" GridPane.valignment="CENTER">
+                  <Label fx:id="lb_greet" alignment="CENTER" prefHeight="43.0" prefWidth="176.0" text="Welcome" GridPane.columnIndex="2" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets right="70.0" />
                      </GridPane.margin>

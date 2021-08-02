@@ -22,6 +22,8 @@ import javafx.scene.layout.*;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -302,10 +304,10 @@ public class RoutePage implements Initializable {
             new Alert(Alert.AlertType.WARNING, "List is empty!").showAndWait();
             return;
         }
-        Workbook workbook = new HSSFWorkbook();
-        Sheet spreadsheet = workbook.createSheet("route");
+        HSSFWorkbook workbook = new HSSFWorkbook();
+        HSSFSheet spreadsheet = workbook.createSheet("route");
 
-        Row row = spreadsheet.createRow(0);
+        HSSFRow row = spreadsheet.createRow(0);
 
         for (int j = 0; j < table_view.getColumns().size(); j++) {
             row.createCell(j).setCellValue(table_view.getColumns().get(j).getText());
@@ -332,7 +334,7 @@ public class RoutePage implements Initializable {
                 ((Node)event.getSource()).getScene().getWindow() );
 
         DirectoryChooser directoryChooser = new DirectoryChooser();
-        directoryChooser.setInitialDirectory(new File("src"));
+        directoryChooser.setInitialDirectory(new File(System.getProperty("user.home"), "./"));
 
         File selectedDirectory = directoryChooser.showDialog(stage);
         if(selectedDirectory != null) {

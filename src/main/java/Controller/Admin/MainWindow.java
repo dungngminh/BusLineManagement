@@ -1,21 +1,28 @@
 package Controller.Admin;
 
+import Controller.TicketSeller.TicketForm;
 import Model.AccountEntity;
 import Model.ProvinceEntity;
+import Model.ViewModel.Ticket_ViewModel;
 import Services.BLL_Admin;
+import Services.BLL_Seller;
 import Services.DAL;
 import com.jfoenix.controls.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.*;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import org.controlsfx.control.CheckComboBox;
 import org.controlsfx.control.textfield.TextFields;
 
@@ -36,6 +43,9 @@ public class MainWindow implements Initializable {
 
     @FXML
     private TextField txf_search;
+
+    @FXML
+    private ImageView btn_notification;
 
     @FXML
     private Label lb_greet;
@@ -359,6 +369,27 @@ public class MainWindow implements Initializable {
     @FXML
     void panel_route_clicked(MouseEvent event) throws IOException {
         showPage(rootPane, "RoutePage");
+    }
+
+    @FXML
+    void onBtn_notificationClick(MouseEvent event) throws IOException {
+//        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/admin_view/Notification.fxml"));
+
+            Scene scene = new Scene(loader.load());
+            Stage stage = new Stage();
+
+            stage.setScene(scene);
+            stage.setTitle("Print ticket");
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initOwner(
+                    ((Node)event.getSource()).getScene().getWindow() );
+
+            stage.show();
+
+//        } catch (Exception e) {
+//            new Alert(Alert.AlertType.ERROR, e.getMessage()).showAndWait();
+//        }
     }
 
 }
