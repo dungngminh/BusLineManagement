@@ -423,10 +423,18 @@ public class BLL_Admin {
         List<Notification_ViewModel> list = new ArrayList<>();
 
         DAL.getInstance().getAllNotification().forEach(noti -> {
-            list.add(new Notification_ViewModel(noti.getIdNotify(), noti.getNotifyContent(),
+            list.add(new Notification_ViewModel(noti.getIdNotify(), noti.getAccountByIdUser().getUsername(), noti.getNotifyContent(),
                     new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(noti.getTime())));
         });
         return list;
+    }
+
+    public void updateNotification(Integer idNotify, String content) {
+        DAL.getInstance().updateNotification(idNotify, content);
+    }
+
+    public void deleteNotification(Integer id) {
+        DAL.getInstance().deleteNotification(id);
     }
 
     // DONE

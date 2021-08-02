@@ -16,7 +16,7 @@ public class Main extends Application {
 //        Parent root = FXMLLoader.load(getClass().getResource("view/admin_view/Preloader.fxml"));
         primaryStage.setTitle("Log In");
         primaryStage.getIcons().add(new Image("/images/Icon/favicon.png"));
-//        primaryStage.setResizable(false);
+        primaryStage.setResizable(false);
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }

@@ -2,6 +2,10 @@ package Model.ViewModel;
 
 public class Notification_ViewModel {
     private Integer idNotify;
+
+
+
+    private String nameUser;
     private String notifyContent;
     private String time;
 
@@ -17,6 +21,14 @@ public class Notification_ViewModel {
         return time;
     }
 
+    public String getNameUser() {
+        return nameUser;
+    }
+
+    public void setNameUser(String nameUser) {
+        this.nameUser = nameUser;
+    }
+
     public void setIdNotify(Integer idNotify) {
         this.idNotify = idNotify;
     }
@@ -29,8 +41,9 @@ public class Notification_ViewModel {
         this.time = time;
     }
 
-    public Notification_ViewModel(Integer idNotify, String notifyContent, String time) {
+    public Notification_ViewModel(Integer idNotify, String nameUser, String notifyContent, String time) {
         this.idNotify = idNotify;
+        this.nameUser = nameUser;
         this.notifyContent = notifyContent;
         this.time = time;
     }
