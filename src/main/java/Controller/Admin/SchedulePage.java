@@ -28,13 +28,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
 import javafx.util.Callback;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
+
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -351,6 +352,7 @@ public class SchedulePage implements Initializable {
             }
             new Alert(Alert.AlertType.INFORMATION,"Update all OutDate Schedule successful!").showAndWait();
             show("");
+
         }catch(Exception ee){
             new Alert(Alert.AlertType.ERROR, "Update fail, try again").showAndWait();
         }
