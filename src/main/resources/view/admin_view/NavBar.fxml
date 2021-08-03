@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane id="navbar" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="708.0" prefWidth="160.0" stylesheets="@../../css/nav_bar.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox alignment="BASELINE_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="582.0" prefWidth="156.0" styleClass="vbox" stylesheets="@../../css/nav_bar.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -19,10 +18,10 @@
          <children>
             <ImageView fitHeight="118.0" fitWidth="121.0" pickOnBounds="true" preserveRatio="true" styleClass="btn">
                <image>
-                  <Image url="@../../images/Icon/logo.png" />
+                  <Image url="@../../images/Stuff/logo.png" />
                </image>
                <VBox.margin>
-                  <Insets top="5.0" />
+                  <Insets top="30.0" />
                </VBox.margin>
             </ImageView>
             <Button id="dashboard" accessibleText="dashboard" contentDisplay="TOP" mnemonicParsing="false" prefHeight="75.0" prefWidth="160.0" styleClass="btn" stylesheets="@../../css/nav_bar.css" text="Dashboard" textAlignment="JUSTIFY" textFill="WHITE">
@@ -43,7 +42,7 @@
                   </ImageView>
                </graphic>
                <VBox.margin>
-                  <Insets bottom="10.0" />
+                  <Insets bottom="10.0" top="10.0" />
                </VBox.margin>
                <cursor>
                   <Cursor fx:constant="HAND" />

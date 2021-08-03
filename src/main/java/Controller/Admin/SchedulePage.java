@@ -31,6 +31,11 @@ import javafx.scene.layout.HBox;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import javafx.util.Callback;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -152,8 +157,6 @@ public class SchedulePage implements Initializable {
     @FXML
     private TableColumn<ScheduleEntity_ViewModel, String> col_outdate;
 
-    @FXML
-    private TableColumn<ScheduleEntity_ViewModel, Integer> col_duration;
 
     @FXML
     private TableColumn<ScheduleEntity_ViewModel, Integer> col_dpr;
@@ -348,6 +351,8 @@ public class SchedulePage implements Initializable {
                     BLL_Admin.getInstance().updateDPR(item.getIdSchedule(), item.getDpr());
             }
             new Alert(Alert.AlertType.INFORMATION,"Update all OutDate Schedule successful!").showAndWait();
+            show("");
+
         }catch(Exception ee){
             new Alert(Alert.AlertType.ERROR, "Update fail, try again").showAndWait();
         }
@@ -358,10 +363,10 @@ public class SchedulePage implements Initializable {
             new Alert(Alert.AlertType.WARNING, "List is empty!").showAndWait();
             return;
         }
-        Workbook workbook = new HSSFWorkbook();
-        Sheet spreadsheet = workbook.createSheet("schedule");
+        HSSFWorkbook workbook = new HSSFWorkbook();
+        HSSFSheet spreadsheet = workbook.createSheet("schedule");
 
-        Row row = spreadsheet.createRow(0);
+        HSSFRow row = spreadsheet.createRow(0);
 
         for (int j = 0; j < table_view.getColumns().size(); j++) {
             row.createCell(j).setCellValue(table_view.getColumns().get(j).getText());
@@ -388,7 +393,7 @@ public class SchedulePage implements Initializable {
                 ((Node)event.getSource()).getScene().getWindow() );
 
         DirectoryChooser directoryChooser = new DirectoryChooser();
-        directoryChooser.setInitialDirectory(new File("src"));
+        directoryChooser.setInitialDirectory(new File(System.getProperty("user.home"), "./"));
 
         File selectedDirectory = directoryChooser.showDialog(stage);
         if(selectedDirectory != null) {
@@ -477,7 +482,6 @@ public class SchedulePage implements Initializable {
         col_price.setCellValueFactory(new PropertyValueFactory<>("price"));
         col_departTime.setCellValueFactory(new PropertyValueFactory<>("departTime"));
         col_outdate.setCellValueFactory(new PropertyValueFactory<>("outDate"));
-        col_duration.setCellValueFactory(new PropertyValueFactory<>("duration"));
         col_dpr.setCellValueFactory(new PropertyValueFactory<>("dpr"));
 
         table_view.setRowFactory(tv -> new TableRow<>() {

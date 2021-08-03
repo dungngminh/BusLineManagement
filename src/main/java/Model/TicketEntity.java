@@ -48,10 +48,6 @@ public class TicketEntity {
         return idTicket;
     }
 
-    public void setIdTicket(int idTicket) {
-        this.idTicket = idTicket;
-    }
-
     public void setIdTicket(Integer idTicket) {
         this.idTicket = idTicket;
     }

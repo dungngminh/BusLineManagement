@@ -78,7 +78,7 @@ public class Preloader implements Initializable {
 
             FXMLLoader main_Page = new FXMLLoader();
             main_Page.setLocation(getClass().getResource("/view/" + path +".fxml"));
-
+            System.out.println("Hello");
             Scene scene = new Scene(main_Page.load());
             Stage stage = new Stage();
             stage.setTitle("Bus Management");

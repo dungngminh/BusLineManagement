@@ -62,6 +62,17 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </ImageView>
+                  <ImageView fitHeight="40.0" fitWidth="45.0" onMouseClicked="#onBtn_notificationClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+                     <image>
+                        <Image url="@../../images/Dashboard/notifications.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <GridPane.margin>
+                        <Insets right="310.0" />
+                     </GridPane.margin>
+                  </ImageView>
                   <ImageView fitHeight="43.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                      <GridPane.margin>
                         <Insets right="250.0" />
