@@ -160,4 +160,10 @@ public class BLL_Seller {
     }
 
     //DONE for TicketPage
+
+    // NOTICE BLL for Notifocation(Dashboard of Ticket seller)
+
+
+
+    // DONE
 }

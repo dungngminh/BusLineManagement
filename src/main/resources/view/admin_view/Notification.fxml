@@ -94,11 +94,11 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <TableView fx:id="tableview" layoutX="8.0" layoutY="10.0" prefHeight="345.0" prefWidth="587.0">
+                              <TableView fx:id="tableview" layoutX="11.0" layoutY="10.0" prefHeight="345.0" prefWidth="576.0">
                                 <columns>
-                                    <TableColumn fx:id="user_col" prefWidth="90.0" text="User" />
-                                  <TableColumn fx:id="mess_col" prefWidth="374.0" text="Message" />
-                                  <TableColumn fx:id="time_col" prefWidth="121.0" text="Time" />
+                                    <TableColumn fx:id="user_col" prefWidth="58.0" text="User" />
+                                  <TableColumn fx:id="mess_col" prefWidth="399.0" text="Message" />
+                                  <TableColumn fx:id="time_col" prefWidth="118.0" text="Time" />
                                 </columns>
                               </TableView>
                               <Button fx:id="btn_show_edit" layoutX="48.0" layoutY="369.0" mnemonicParsing="false" onMouseClicked="#btn_show_edit_Click" prefHeight="25.0" prefWidth="59.0" text="show" />

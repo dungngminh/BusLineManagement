@@ -31,17 +31,6 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class Notification implements Initializable {
-    @FXML
-    private Tab tab_adduser;
-
-    @FXML
-    private GridPane grid_add;
-
-    @FXML
-    private Button btn_push;
-
-    @FXML
-    private Button btn_reset;
 
     @FXML
     private Button btn_cancel;
