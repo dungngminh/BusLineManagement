@@ -83,7 +83,7 @@
                                     <Spinner fx:id="spn_timepickerS" layoutX="10.0" layoutY="21.0" prefHeight="25.0" prefWidth="56.0" />
                                  </children>
                               </FlowPane>
-                              <Label contentDisplay="CENTER" prefHeight="17.0" prefWidth="89.0" text="Duration" GridPane.rowIndex="6">
+                              <Label contentDisplay="CENTER" prefHeight="17.0" prefWidth="89.0" text="After today" GridPane.rowIndex="6">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
@@ -171,7 +171,6 @@
                   <TableColumn fx:id="col_price" prefWidth="75.0" text="Price" />
                   <TableColumn fx:id="col_departTime" prefWidth="75.0" text="Depart Time" />
                   <TableColumn fx:id="col_outdate" prefWidth="75.0" text="Outdate" />
-                  <TableColumn fx:id="col_duration" prefWidth="75.0" text="Duration" />
                   <TableColumn fx:id="col_dpr" prefWidth="75.0" text="DPR" />
               </columns>
                <columnResizePolicy>

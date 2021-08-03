@@ -156,8 +156,6 @@ public class SchedulePage implements Initializable {
     @FXML
     private TableColumn<ScheduleEntity_ViewModel, String> col_outdate;
 
-    @FXML
-    private TableColumn<ScheduleEntity_ViewModel, Integer> col_duration;
 
     @FXML
     private TableColumn<ScheduleEntity_ViewModel, Integer> col_dpr;
@@ -352,6 +350,7 @@ public class SchedulePage implements Initializable {
                     BLL_Admin.getInstance().updateDPR(item.getIdSchedule(), item.getDpr());
             }
             new Alert(Alert.AlertType.INFORMATION,"Update all OutDate Schedule successful!").showAndWait();
+            show("");
         }catch(Exception ee){
             new Alert(Alert.AlertType.ERROR, "Update fail, try again").showAndWait();
         }
@@ -409,25 +408,7 @@ public class SchedulePage implements Initializable {
         }
     }
 
-    @FXML
-    void onBusCBBAction(ActionEvent event) {
-        if (cbx_bus.getSelectionModel().getSelectedItem() != null)
-            tfx_typeofbus.setText(cbx_bus.getSelectionModel().getSelectedItem().getTypeOfBusByIdType().getTypeName());
-        else tfx_typeofbus.setText("");
-    }
 
-    @FXML
-    void onReOutdateClicked(MouseEvent event) throws ParseException {
-        ScheduleEntity_ViewModel scheduleEntity_viewModel = table_view.getSelectionModel().getSelectedItem();
-        if(!checkOutDate(scheduleEntity_viewModel.getOutDate())){
-            new Alert(Alert.AlertType.WARNING,"It's not time to update!").showAndWait();
-        }
-        else {
-             BLL_Admin.getInstance().updateDPR(scheduleEntity_viewModel.getIdSchedule(), scheduleEntity_viewModel.getDpr());
-             new Alert(Alert.AlertType.INFORMATION, "Update Outdate successful!").showAndWait();
-             show("");
-        }
-    }
 
 
     @Override
@@ -481,7 +462,6 @@ public class SchedulePage implements Initializable {
         col_price.setCellValueFactory(new PropertyValueFactory<>("price"));
         col_departTime.setCellValueFactory(new PropertyValueFactory<>("departTime"));
         col_outdate.setCellValueFactory(new PropertyValueFactory<>("outDate"));
-        col_duration.setCellValueFactory(new PropertyValueFactory<>("duration"));
         col_dpr.setCellValueFactory(new PropertyValueFactory<>("dpr"));
 
         table_view.setRowFactory(tv -> new TableRow<>() {
