@@ -30,6 +30,7 @@
 /*}*/
 
 /* CSS decorator for NavBar components */
+/* Fix navbar components */
 
 #navbar {
     -fx-background-color: linear-gradient(from 75% 75% to 100% 100%, #0e1c26, #243748);
