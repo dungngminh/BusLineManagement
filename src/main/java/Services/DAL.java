@@ -4,6 +4,7 @@ import Model.*;
 import Util.HibernateUtils;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
+import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
 
@@ -352,7 +353,7 @@ public class DAL {
     public List<ProvinceEntity> getProvinceName() {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
-        Query<ProvinceEntity> query = session.createQuery("From ProvinceEntity ", ProvinceEntity.class);
+        Query<ProvinceEntity> query = session.createNativeQuery("SELECT * FROM Province", ProvinceEntity.class);
         List<ProvinceEntity> result = query.getResultList();
         session.getTransaction().commit();
         session.close();
@@ -372,7 +373,9 @@ public class DAL {
     public List<RouteEntity> getRoutes() {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
-        Query<RouteEntity> query = session.createQuery("From RouteEntity", RouteEntity.class);
+        var query = session.createSQLQuery("SELECT * FROM Route");
+        query.addEntity(RouteEntity.class);
+        //Query<RouteEntity> query = session.createQuery("From RouteEntity", RouteEntity.class);
         List<RouteEntity> result = query.getResultList();
         session.getTransaction().commit();
         session.close();
@@ -383,8 +386,9 @@ public class DAL {
     public void updateRoute(int idRoute, String startStation, String endStation, String note, int distance, int stt) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
-        var query = session.createQuery("update RouteEntity set startStation=:startStation,endStation =:endStation,note =:note, distance =:distance, status =:stt" +
-                " where idRoute = :idRoute");
+        var query = session.createNativeQuery("UPDATE RouteEntity SET startStation=:startStation,endStation =:endStation,note =:note, distance =:distance, status =:stt" +
+                " WHERE idRoute = :idRoute");
+
         query.setParameter("startStation", startStation);
         query.setParameter("endStation", endStation);
         query.setParameter("distance", distance);
@@ -401,8 +405,8 @@ public class DAL {
     public void deleteRoute(int idRoute) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
-        var query = session.createQuery("update RouteEntity set status = :stt" +
-                " where idRoute = :idRoute");
+        var query = session.createSQLQuery("UPDATE Route SET status = :stt" +
+                " WHERE idRoute = :idRoute");
         query.setParameter("stt", 2);
 
         query.setParameter("idRoute", idRoute);
@@ -426,8 +430,8 @@ public class DAL {
     public void removeSchedule(int idSchedule) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
-        Query query = session.createQuery("update ScheduleEntity set isDelete = :del" +
-                " where idSchedule = :id");
+        var query = session.createSQLQuery("UPDATE Schedule SET isDelete = :del" +
+                " WHERE idSchedule = :id");
         query.setParameter("del", true);
         query.setParameter("id", idSchedule);
         query.executeUpdate();
@@ -439,8 +443,9 @@ public class DAL {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
         //TODO Query update Schedule
-        Query query = session.createQuery("Update ScheduleEntity set idRoute = :idRoute, idBus = :idBus, idDriver = :idDriver,departTime = :departTime" +
-                ", price = :price, dpr = :dpr where idSchedule = :idSchedule");
+        var query = session.createSQLQuery("UPDATE Schedule SET idRoute = :idRoute, idBus = :idBus, idDriver = :idDriver,departTime = :departTime" +
+                ", price = :price, dpr = :dpr WHERE idSchedule = :idSchedule");
+
         query.setParameter("idRoute", routeSelected.getIdRoute());
         query.setParameter("idBus", busSelected.getIdBus());
         query.setParameter("idDriver", driverSelected.getIdDriver());
@@ -456,8 +461,9 @@ public class DAL {
     public void updateScheduleNotDPR(int idSchedule, RouteEntity routeSelected, BusEntity busSelected, DriverEntity driverSelected, Date departTimeInput, int durationInput, int priceInput) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
-        Query query = session.createQuery("Update ScheduleEntity set idRoute = :idRoute, idBus = :idBus, idDriver = :idDriver,departTime = :departTime" +
-                ", price = :price where idSchedule = :idSchedule");
+        var query = session.createSQLQuery("UPDATE Schedule SET idRoute = :idRoute, idBus = :idBus, idDriver = :idDriver,departTime = :departTime" +
+                ", price = :price WHERE idSchedule = :idSchedule");
+
         query.setParameter("idRoute", routeSelected.getIdRoute());
         query.setParameter("idBus", busSelected.getIdBus());
         query.setParameter("idDriver", driverSelected.getIdDriver());
@@ -472,7 +478,7 @@ public class DAL {
     public void updateDPR(int idSchedule, int dpr) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
-        var query = session.createQuery("Update ScheduleEntity set dpr = :dpr where idSchedule = :idSchedule");
+        var query = session.createSQLQuery("UPDATE Schedule SET dpr = :dpr WHERE idSchedule = :idSchedule");
         query.setParameter("dpr", dpr);
         query.setParameter("idSchedule", idSchedule);
         query.executeUpdate();
@@ -488,7 +494,6 @@ public class DAL {
 
         Session session = HibernateUtils.getSessionFactory().openSession();
 
-
         for (List<String> x : listPairStation) {
 
             session.beginTransaction();
@@ -502,10 +507,8 @@ public class DAL {
             result.addAll(query.getResultList());
             session.getTransaction().commit();
 
-
         }
         session.close();
-
         return result;
     }
 
@@ -513,10 +516,12 @@ public class DAL {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
 
-        Query<ScheduleEntity> query = session.createQuery("Select SCH from ScheduleEntity SCH, DriverEntity DRI, " +
-                "RouteEntity ROU, BusEntity BUS, TypeOfBusEntity TYPE where SCH.idDriver = DRI.idDriver AND DRI.status = 0 AND DRI.isDelete = false " +
-                "AND SCH.idRoute = ROU.idRoute AND ROU.status = 0 AND SCH.idBus = BUS.idBus AND BUS.status = 0 AND BUS.isDelete = false " +
-                "AND BUS.idType = TYPE.idType AND TYPE.isDelete = false", ScheduleEntity.class);
+        var query = session.createNativeQuery("SELECT SCH.* FROM Schedule SCH INNER JOIN " +
+                "Driver DRI ON SCH.idDriver = DRI.idDriver INNER JOIN Route ROU ON SCH.idRoute = ROU.idRoute " +
+                "INNER JOIN Bus ON SCH.idBus = Bus.idBus INNER JOIN TypeOfBus TYPE ON Bus.idType = TYPE.idType " +
+                "WHERE DRI.[status] = 0 AND DRI.isDelete = 0 and ROU.[status] = 0 and Bus.[status] = 0 and Bus.isDelete = 0 and SCH.isDelete = 0 " +
+                "and TYPE.isDelete = 0", ScheduleEntity.class);
+
         List<ScheduleEntity> list = query.getResultList();
         session.getTransaction().commit();
         session.close();
@@ -549,7 +554,7 @@ public class DAL {
                 "                                            (SELECT PRO.idProvince FROM Province PRO WHERE PRO.provinceName = :from))\n" +
                 "AND R.endStation IN (SELECT STA.stationName FROM Station STA WHERE STA.idProvince =\n" +
                 "                                            (SELECT PRO.idProvince FROM Province PRO WHERE PRO.provinceName = :to))";
-        SQLQuery query = session.createSQLQuery(sql);
+        var query = session.createSQLQuery(sql);
         query.setParameter("departDate", departDate);
         query.setParameter("from", startPro.getProvinceName());
         query.setParameter("to", endPro.getProvinceName());
