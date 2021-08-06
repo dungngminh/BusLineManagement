@@ -509,10 +509,10 @@ public class DAL {
         return result;
     }
 
-
     public List<ScheduleEntity> getScheduleData() {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
+
         Query<ScheduleEntity> query = session.createQuery("Select SCH from ScheduleEntity SCH, DriverEntity DRI, " +
                 "RouteEntity ROU, BusEntity BUS, TypeOfBusEntity TYPE where SCH.idDriver = DRI.idDriver AND DRI.status = 0 AND DRI.isDelete = false " +
                 "AND SCH.idRoute = ROU.idRoute AND ROU.status = 0 AND SCH.idBus = BUS.idBus AND BUS.status = 0 AND BUS.isDelete = false " +
