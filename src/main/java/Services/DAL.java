@@ -512,15 +512,16 @@ public class DAL {
         return result;
     }
 
-
     public List<ScheduleEntity> getScheduleData() {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
+
         var query = session.createNativeQuery("SELECT SCH.* FROM Schedule SCH INNER JOIN " +
                 "Driver DRI ON SCH.idDriver = DRI.idDriver INNER JOIN Route ROU ON SCH.idRoute = ROU.idRoute " +
                 "INNER JOIN Bus ON SCH.idBus = Bus.idBus INNER JOIN TypeOfBus TYPE ON Bus.idType = TYPE.idType " +
                 "WHERE DRI.[status] = 0 AND DRI.isDelete = 0 and ROU.[status] = 0 and Bus.[status] = 0 and Bus.isDelete = 0 and SCH.isDelete = 0 " +
                 "and TYPE.isDelete = 0", ScheduleEntity.class);
+
         List<ScheduleEntity> list = query.getResultList();
         session.getTransaction().commit();
         session.close();
