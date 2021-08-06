@@ -172,7 +172,7 @@ public class DAL {
     public void updateBus(int idBus, String busName, String plateNumber, TypeOfBusEntity tob, int stt) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
-        Query query = session.createQuery("update BusEntity set busName = :busName, plateNumber = :plateNumber, typeOfBusByIdType = :tob, status = :stt" +
+        var query = session.createQuery("update BusEntity set busName = :busName, plateNumber = :plateNumber, typeOfBusByIdType = :tob, status = :stt" +
                 " where idBus = :idBus");
         query.setParameter("busName", busName);
         query.setParameter("plateNumber", plateNumber);
@@ -189,7 +189,7 @@ public class DAL {
     public void deleteBus(int idBus) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
-        Query<BusEntity> query = session.createQuery("update BusEntity set isDelete = :del" +
+        var query = session.createNativeQuery("update Bus set isDelete = :del" +
                 " where idBus = :idBus");
         query.setParameter("del", true);
         query.setParameter("idBus", idBus);
@@ -318,7 +318,7 @@ public class DAL {
     public void updateDriver(int id, String driverName, String phoneNumber, String address, int stt) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
-        Query query = session.createQuery("update DriverEntity set nameDriver = :name, phone = :phoneNumber, address = :address, status = :stt" +
+        var query = session.createNativeQuery("update Driver set nameDriver = :name, phone = :phoneNumber, address = :address, status = :stt" +
                 " where idDriver = :id");
         query.setParameter("name", driverName);
         query.setParameter("phoneNumber", phoneNumber);
@@ -335,7 +335,7 @@ public class DAL {
     public void deleteDriver(int idDriver) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
-        Query<DriverEntity> query = session.createQuery("update DriverEntity set isDelete = :del" +
+        var query = session.createNativeQuery("update Driver set isDelete = :del" +
                 " where idDriver = :idDriver");
         query.setParameter("del", true);
         query.setParameter("idDriver", idDriver);
@@ -755,7 +755,7 @@ public class DAL {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
         String sql = "SELECT COUNT(TI.idSchedule)\n" +
-                "FROM Schedule SCH INNER JOIN TripInformation TI ON SCH.idSchedule = TI.idSchedule\n" +
+                "FROM Schedule SCH INNER JOIN TripInformation TI ON SCH.idSchedule = TI.idSchedule WHERE SCH.isDelete = 0 \n" +
                 "GROUP BY Ti.idSchedule\n" +
                 "HAVING max(TI.departDate) <= DATEADD(day,7,GETDATE())";
         var query = session.createSQLQuery(sql);

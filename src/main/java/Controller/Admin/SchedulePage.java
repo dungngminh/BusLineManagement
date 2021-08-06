@@ -184,6 +184,8 @@ public class SchedulePage implements Initializable {
     @FXML
     private Button btn_reAll;
 
+    @FXML
+    private Label lb_duration;
     //SUPPORT PROPERTY
     private static String CRUDType;
     private static int idSchedule;
@@ -192,6 +194,7 @@ public class SchedulePage implements Initializable {
     void btn_cancel_clicked(MouseEvent event) {
         cbx_route.getSelectionModel().select(null);
         cbx_bus.getSelectionModel().select(null);
+        cbx_driver.getSelectionModel().select(null);
         tfx_typeofbus.setText("");
         tfx_price.setText("");
         spn_timepickerH.getValueFactory().setValue(0);
@@ -203,11 +206,16 @@ public class SchedulePage implements Initializable {
 
     @FXML
     void btn_create_clicked(MouseEvent event) {
+        lb_duration.setVisible(true);
+        tfx_duration.setVisible(true);
         tfx_day_per_route.setDisable(false);
         btn_ok.setText("Add");
         CRUDType = "Create";
         toggle_updateDpr.setVisible(false);
         lb_update.setVisible(false);
+        cbx_route.getSelectionModel().select(null);
+        cbx_bus.getSelectionModel().select(null);
+        cbx_driver.getSelectionModel().select(null);
         toggleDetail();
     }
 
@@ -292,6 +300,8 @@ public class SchedulePage implements Initializable {
 
     @FXML
     void btn_update_clicked(MouseEvent event) {
+        lb_duration.setVisible(false);
+        tfx_duration.setVisible(false);
         toggle_updateDpr.setVisible(true);
         lb_update.setVisible(true);
         CRUDType = "Update";
@@ -300,7 +310,6 @@ public class SchedulePage implements Initializable {
             ScheduleEntity_ViewModel scheduleEntity_viewModel = table_view.getSelectionModel().getSelectedItem();
             idSchedule = scheduleEntity_viewModel.getIdSchedule();
             List<RouteEntity> routeEntity = BLL_Admin.getInstance().getRoutes(0, "");
-
             routeEntity.forEach(route -> {
                 if (route.toString().equals(scheduleEntity_viewModel.getRouteName())) {
                     System.out.println(route);
@@ -334,12 +343,11 @@ public class SchedulePage implements Initializable {
 
             tfx_day_per_route.setText(Integer.toString(scheduleEntity_viewModel.getDpr()));
             tfx_duration.setText(Integer.toString(scheduleEntity_viewModel.getDuration()));
-
+            toggleDetail();
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, "Please choose 1 row !").showAndWait();
-            e.printStackTrace();
         }
-        toggleDetail();
+
     }
 
     @FXML
