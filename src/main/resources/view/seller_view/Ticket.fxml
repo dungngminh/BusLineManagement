@@ -121,6 +121,7 @@
                <columns>
                   <TableColumn fx:id="nameTicket" minWidth="-1.0" prefWidth="152.0" text="Name of ticket" />
                   <TableColumn fx:id="route" minWidth="-1.0" prefWidth="209.0" text="Route" />
+                  <TableColumn fx:id="departDate" minWidth="-1.0" prefWidth="128.0" text="Depart Date" />
                   <TableColumn fx:id="departTime" minWidth="-1.0" prefWidth="128.0" text="Depart time" />
                   <TableColumn fx:id="nameCustomer" minWidth="-Infinity" prefWidth="135.0" text="Name customer" />
                   <TableColumn fx:id="phoneCustomer" minWidth="-Infinity" prefWidth="140.0" text="Phone customer" />

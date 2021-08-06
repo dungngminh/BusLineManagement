@@ -133,6 +133,7 @@ public class BLL_Seller {
                         "-" + ticket.getTripInformationByIdTrip().getScheduleByIdSchedule().getRouteByIdRoute().getEndStation();
                 String departTime = new SimpleDateFormat("HH:mm:ss").format(ticket.getTripInformationByIdTrip()
                         .getScheduleByIdSchedule().getDepartTime());
+                String departDateDisplay = new SimpleDateFormat("dd/MM/yyyy").format(ticket.getTripInformationByIdTrip().getDepartDate());
                 String name = ticket.getNameCustomer();
                 String phone = ticket.getPhoneNumber();
                 String isPaid = ticket.getIsPaid() ? "Paid" : "Unpaid";
@@ -143,7 +144,7 @@ public class BLL_Seller {
                 String price = currencyVN.format(ticket.getPrice());
                 //
 
-                result.add(new Ticket_ViewModel(ticket.getIdTicket(), nameTicket, route, departTime, name, phone, isPaid, price));
+                result.add(new Ticket_ViewModel(ticket.getIdTicket(), nameTicket, route, departTime,departDateDisplay, name, phone, isPaid, price));
             }
 
         });
