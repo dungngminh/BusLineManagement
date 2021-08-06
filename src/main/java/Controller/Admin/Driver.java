@@ -180,14 +180,15 @@ public class Driver implements Initializable {
 
     @FXML
     void btn_delete_clicked(MouseEvent event) {
-//        try {
+        try {
             DriverEntity tbl = table_view.getSelectionModel().getSelectedItem();
             idDriver = tbl.getIdDriver();
             BLL_Admin.getInstance().deleteDriver(idDriver);
+            new Alert(Alert.AlertType.INFORMATION, "Delete successfully!").showAndWait();
             show(-1, "");
-//        } catch (Exception err) {
-//            new Alert(Alert.AlertType.INFORMATION, "Choose only 1 row!").showAndWait();
-//        }
+        } catch (Exception err) {
+            new Alert(Alert.AlertType.WARNING, "Choose only 1 row!").showAndWait();
+        }
     }
 
     @FXML
@@ -255,15 +256,29 @@ public class Driver implements Initializable {
         }
         switch(CRUDType) {
             case "Create": {
-                BLL_Admin.getInstance().addDriver(name_of_driver, phonenumber,  address, 0);
-                show(-1, "");
-                break;
+                try {
+                    BLL_Admin.getInstance().addDriver(name_of_driver, phonenumber, address, 0);
+                    new Alert(Alert.AlertType.INFORMATION, "Add new Driver successfully!").showAndWait();
+                    toggleDetail();
+                    show(-1, "");
+                    break;
+                }catch (Exception e){
+                    System.out.println("Add not successfully!");
+                    new Alert(Alert.AlertType.WARNING, "Error occurred, Please check again!").showAndWait();
+                }
             }
             case "Update": {
-                int stt = cbx_status.getSelectionModel().getSelectedItem().equals("Available") ? 0 : 1;
-                BLL_Admin.getInstance().updateDriver(idDriver, name_of_driver, phonenumber, address, stt);
-                show(-1, "");
-                break;
+                try {
+                    int stt = cbx_status.getSelectionModel().getSelectedItem().equals("Available") ? 0 : 1;
+                    BLL_Admin.getInstance().updateDriver(idDriver, name_of_driver, phonenumber, address, stt);
+                    new Alert(Alert.AlertType.INFORMATION, "Update Driver successfully!").showAndWait();
+                    toggleDetail();
+                    show(-1, "");
+                    break;
+                }catch (Exception e){
+                    System.out.println("Update not successfully!");
+                    new Alert(Alert.AlertType.WARNING, "Error occurred during updating, Please check again!").showAndWait();
+                }
             }
             default:
                 break;
