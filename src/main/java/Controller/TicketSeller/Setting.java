@@ -71,14 +71,12 @@ public class Setting implements Initializable {
             new Alert(Alert.AlertType.WARNING, "Password is incorrect!").showAndWait();
         } else if(!newPassword.equals(newPasswordConfirm)) {
             new Alert(Alert.AlertType.WARNING, "Check password again!").showAndWait();
-        } else if(!Pattern.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=.,])(?=\\S+$).{8,}$", newPassword)) {
+        } else if(!Pattern.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}$", newPassword)) {
             new Alert(Alert.AlertType.WARNING, "At least 8 chars\n" +
                     "\n" +
                     "Contains at least one digit\n" +
                     "\n" +
                     "Contains at least one lower alpha char and one upper alpha char\n" +
-                    "\n" +
-                    "Contains at least one char within a set of special chars (@#%$^ etc.)\n" +
                     "\n" +
                     "Does not contain space, tab, etc.!").showAndWait();
         } else {
