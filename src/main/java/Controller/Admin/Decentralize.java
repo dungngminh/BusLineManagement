@@ -77,7 +77,6 @@ public class Decentralize implements Initializable {
     private ComboBox<String> cbx_role_add;
 
     @FXML
-
     private Tab tab_adduser;
 
     @FXML
@@ -228,12 +227,12 @@ public class Decentralize implements Initializable {
                     "\n" +
                     "Does not contain space, tab, etc.!").showAndWait();
         } else {
-//            try {
+            try {
                 BLL_Admin.getInstance().addUserToAccount(userName, passWord, role, BLL_Admin.getInstance().getRole(role));
                 new Alert(Alert.AlertType.INFORMATION, "User added!").showAndWait();
-//            } catch (Exception err) {
-//                new Alert(Alert.AlertType.WARNING, "Maybe username was exist, Check again!").showAndWait();
-//            }
+            } catch (Exception err) {
+                new Alert(Alert.AlertType.WARNING, "Maybe username was exist, Check again!").showAndWait();
+            }
         }
     }
 
