@@ -314,6 +314,15 @@ public class FilterRoute implements Initializable {
     }
 
     @FXML
+    void btnBack_Click(MouseEvent event) throws IOException {
+        AnchorPane newPane = FXMLLoader.load(getClass().getResource("/view/seller_view/Dashboard.fxml"));
+        newPane.requestLayout();
+//        rootPane.getChildren().setAll(newPane);
+        Scene scene= rootPane.getScene();
+        scene.setRoot(newPane);
+    }
+
+    @FXML
     void calendar_onAction(ActionEvent event) {
         listRoute.clear();
         setGridpaneUnvisible();
