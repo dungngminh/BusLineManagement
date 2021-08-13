@@ -21,9 +21,7 @@ import java.util.Objects;
 public class InitSideBar {
     private static InitSideBar instance;
 
-    private InitSideBar() {
-
-    }
+    private InitSideBar() {}
 
     public static InitSideBar getInstance() {
         if (instance == null) {
@@ -33,9 +31,6 @@ public class InitSideBar {
     }
 
     public void initializeForNavBar(AnchorPane rootPane, JFXDrawer jfx_drawer, JFXHamburger jfx_hambur) throws IOException {
-//        VBox box = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/admin_view/NavBar.fxml")));
-//        box.setFillWidth(true);
-//        VBox.setVgrow(box, Priority.ALWAYS);
         AnchorPane box =  FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/admin_view/NavBar.fxml")));
         jfx_drawer.setSidePane(box);
         VBox vbox = (VBox)box.lookup(".vbox");
@@ -105,7 +100,7 @@ public class InitSideBar {
         });
 
         // Init navbar transformation
-//        HamburgerBackArrowBasicTransition burgerTask = new HamburgerBackArrowBasicTransition(jfx_hambur);
+        // HamburgerBackArrowBasicTransition burgerTask = new HamburgerBackArrowBasicTransition(jfx_hambur);
         HamburgerBasicCloseTransition burgerTask = new HamburgerBasicCloseTransition(jfx_hambur);
         burgerTask.setRate(-1);
         jfx_hambur.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
@@ -130,7 +125,7 @@ public class InitSideBar {
     public void showPage(AnchorPane rootPane, String path) throws IOException {
         AnchorPane newPane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/admin_view/" + path + ".fxml")));
         newPane.requestLayout();
-//        rootPane.getChildren().setAll(newPane);
+    // rootPane.getChildren().setAll(newPane);
         Scene scene= rootPane.getScene();
         scene.setRoot(newPane);
     }

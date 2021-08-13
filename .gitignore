@@ -1,3 +1,5 @@
 .idea
 target/
 BusManagement.iml
+src/main/java/resources/hibernate.cfg.xml
+hibernate.cfg.xml

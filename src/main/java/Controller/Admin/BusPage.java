@@ -147,18 +147,17 @@ public class BusPage implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            // Init for side bar
             InitSideBar.getInstance().initializeForNavBar(this.pane, this.jfx_drawer, this.jfx_hambur);
-            //done
+
             // Init combobox for type of bus
             BLL_Admin.getInstance().getListTypeOfBus().forEach(type -> {
                cbx_nameoftype.getItems().add(type.getTypeName());
             });
-            //done
+
             // Init combobox status
-                cbx_status.getItems().add("Available");
-                cbx_status.getItems().add("Unavailable");
-            // done
+            cbx_status.getItems().add("Available");
+            cbx_status.getItems().add("Unavailable");
+
             // Init tableview
             show(0, "");
             //done
@@ -187,6 +186,7 @@ public class BusPage implements Initializable {
         table_view.setItems(listObj);
         table_view.refresh();
     }
+
     @FXML
     void btn_create_clicked(MouseEvent event) {
         CRUDType = "Create";
@@ -320,7 +320,6 @@ public class BusPage implements Initializable {
             }
         }
 
-        // Show Selected Directory
         Stage stage = new Stage();
 
         stage.setTitle("Export data bus");
@@ -379,7 +378,6 @@ public class BusPage implements Initializable {
             AnchorPane.setLeftAnchor(border_pane, 280.0);
         }
         jfx_hambur.toFront();
-
     }
 
 }
