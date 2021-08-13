@@ -127,12 +127,12 @@ There are some screenshots about this app, and the sequence of using the app.
 **2. Admin Dashboard**
     <br/>
     <br/>
-    ![image_main](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/dashboard.jpg)
+    ![image_dashboard](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/dashboard.jpg)
  
 **3. Main Page**
     <br/>
     <br/>
-    ![image_dashboard](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/ticketseller_dashboard1.jpg)
+    ![image_dashboard1](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/ticketseller_dashboard1.jpg)
 
 **4. Bus Page**
     <br/>
