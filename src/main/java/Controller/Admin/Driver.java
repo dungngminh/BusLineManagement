@@ -118,7 +118,6 @@ public class Driver implements Initializable {
     @FXML
     private Button btn_search;
 
-    // Var static
     private static String CRUDType;
     private static Integer idDriver;
 
@@ -127,7 +126,6 @@ public class Driver implements Initializable {
         try {
             // Init for side bar
             InitSideBar.getInstance().initializeForNavBar(this.pane, this.jfx_drawer, this.jfx_hambur);
-            //done
 
             toggleDetail();
             show(-1, "");
@@ -158,10 +156,6 @@ public class Driver implements Initializable {
         table_view.refresh();
     }
 
-
-    //done
-
-    // Handle event
     @FXML
     void btn_cancel_clicked(MouseEvent event) {
         btn_reset.fire();
@@ -180,6 +174,7 @@ public class Driver implements Initializable {
 
     @FXML
     void btn_delete_clicked(MouseEvent event) {
+
         try {
             DriverEntity tbl = table_view.getSelectionModel().getSelectedItem();
             idDriver = tbl.getIdDriver();
@@ -189,6 +184,7 @@ public class Driver implements Initializable {
         } catch (Exception err) {
             new Alert(Alert.AlertType.WARNING, "Choose only 1 row!").showAndWait();
         }
+
     }
 
     @FXML

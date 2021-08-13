@@ -117,8 +117,7 @@ public class MainWindow implements Initializable {
             cbx_time.getSelectionModel().selectFirst();
 
             // Set for combobox staff
-            final ObservableList<AccountEntity> listObj = FXCollections.observableArrayList(BLL_Admin.getInstance().
-                    getListSeller());
+            final ObservableList<AccountEntity> listObj = FXCollections.observableArrayList(BLL_Admin.getInstance().getListSeller());
 
             cbx_staff.getItems().addAll(listObj);
 
@@ -209,7 +208,7 @@ public class MainWindow implements Initializable {
         AnchorPane newPane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/admin_view/" +
                 path + ".fxml")));
         newPane.requestLayout();
-//        rootPane.getChildren().setAll(newPane);
+    // rootPane.getChildren().setAll(newPane);
         Scene scene= rootPane.getScene();
         scene.setRoot(newPane);
     }
@@ -364,7 +363,6 @@ public class MainWindow implements Initializable {
     void panel_personnel_clicked(MouseEvent event) throws IOException {
         showPage(rootPane, "Setting");
     }
-
 
     @FXML
     void panel_route_clicked(MouseEvent event) throws IOException {

@@ -25,8 +25,6 @@ public class BLL_Seller {
         return instance;
     }
 
-
-    // NOTICE BLL for FilterRout
     public List<List<String>> getPairStationFromTwoProvince(ProvinceEntity startPro, ProvinceEntity endPro) {
         List<List<String>> res = new ArrayList<List<String>>();
 
@@ -36,8 +34,6 @@ public class BLL_Seller {
         for(Object s1: list1) {
             for(Object s2: list2) {
                 res.add(Arrays.asList(((StationEntity)s1).getStationName(), ((StationEntity)s2).getStationName()));
-                System.out.println(((StationEntity)s1).getStationName() + " " + ((StationEntity)s2).getStationName());
-
             }
         }
 
@@ -45,50 +41,42 @@ public class BLL_Seller {
     }
 
     public List<FilterRoute_ViewModel> setUpFilterRouteView(ProvinceEntity startPro, ProvinceEntity endPro, Date departDate) {
-//        List<RouteEntity> listRoute = DAL.getInstance().getFilterRoute(getPairStationFromTwoProvince(startPro, endPro));
-//
-//        List<TripInformationEntity> listTrip = DAL.getInstance().getFilterTrip(listRoute);
         List<FilterRoute_ViewModel> result = new ArrayList<>();
 
         DAL.getInstance().getFilterTrip(startPro, endPro, new SimpleDateFormat("yyyy/MM/dd").format(departDate))
-                .forEach(trip ->{
-            byte[] picture = trip.getScheduleByIdSchedule().getBusByIdBus().getTypeOfBusByIdType().getPicture();
-            String typeName = trip.getScheduleByIdSchedule().getBusByIdBus().getTypeOfBusByIdType().getTypeName();
-            String startStation = trip.getScheduleByIdSchedule().getRouteByIdRoute().getStartStation();
-            String destStation = trip.getScheduleByIdSchedule().getRouteByIdRoute().getEndStation();
-            Date departTime = trip.getScheduleByIdSchedule().getDepartTime();
-            int duration = trip.getScheduleByIdSchedule().getDuration();
+            .forEach(trip -> {
+                byte[] picture = trip.getScheduleByIdSchedule().getBusByIdBus().getTypeOfBusByIdType().getPicture();
+                String typeName = trip.getScheduleByIdSchedule().getBusByIdBus().getTypeOfBusByIdType().getTypeName();
+                String startStation = trip.getScheduleByIdSchedule().getRouteByIdRoute().getStartStation();
+                String destStation = trip.getScheduleByIdSchedule().getRouteByIdRoute().getEndStation();
+                Date departTime = trip.getScheduleByIdSchedule().getDepartTime();
+                int duration = trip.getScheduleByIdSchedule().getDuration();
 
-            Locale localeVN = new Locale("vi", "VN");
-            NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
+                Locale localeVN = new Locale("vi", "VN");
+                NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
 
-            String price = currencyVN.format(trip.getScheduleByIdSchedule().getPrice());
+                String price = currencyVN.format(trip.getScheduleByIdSchedule().getPrice());
 
-            result.add(new FilterRoute_ViewModel(trip, picture, typeName, startStation, destStation, departTime, duration, price));
-
-
+                result.add(new FilterRoute_ViewModel(trip, picture, typeName, startStation, destStation, departTime, duration, price));
         });
 
         return result;
     }
 
-
-    // DONE FilterRoute ?
-
-    // NOTICE BLL for TickeOrder ?
     public TicketEntity pendingTicketOrderToTicket(TripInformationEntity trip) {
         return DAL.getInstance().pendingTicketOrderToTicket(DAL.getInstance().getCurrent(), trip);
     }
 
     public List<String> getOrderedTicket(Integer idTrip) {
-        List<String> ans = new ArrayList<>();
+        List<String> listOrderedTicket = new ArrayList<>();
 
         DAL.getInstance().getListTicket(idTrip).forEach(ticket -> {
             if(ticket.getStatus() == 1) {
-                ans.addAll(Arrays.asList(ticket.getNameTicket().split("-")));
+                listOrderedTicket.addAll(Arrays.asList(ticket.getNameTicket().split("-")));
             }
         });
-        return ans;
+
+        return listOrderedTicket;
     }
 
     public List<String> getPendingTicket(Integer idTrip, Integer crrId) {
@@ -99,6 +87,7 @@ public class BLL_Seller {
                 ans.addAll(Arrays.asList(ticket.getNameTicket().split("-")));
             }
         });
+
         return ans;
     }
 
@@ -116,9 +105,6 @@ public class BLL_Seller {
     public void deleteCurrentTicket(Integer idTicket) {
         DAL.getInstance().deleteCurrentTicket(idTicket);
     }
-    // DONE for TicketOrder
-
-    // NOTICE BLL for TicketPage
 
     public List<Ticket_ViewModel> getAllTicket(ProvinceEntity fromProvince, ProvinceEntity toProvince, String paid, Date departDate
             , String nameCustomer, String phoneCustomer) {
@@ -159,12 +145,4 @@ public class BLL_Seller {
     public TicketEntity getOneTicket(Integer idTicket) {
         return DAL.getInstance().getOneTicket(idTicket);
     }
-
-    //DONE for TicketPage
-
-    // NOTICE BLL for Notifocation(Dashboard of Ticket seller)
-
-
-
-    // DONE
 }

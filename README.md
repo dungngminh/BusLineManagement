@@ -124,12 +124,17 @@ There are some screenshots about this app, and the sequence of using the app.
     <br/>
     ![image_login](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/login1.jpg)
     
-**2. Main Page**
+**2. Admin Dashboard**
     <br/>
     <br/>
-    ![image_main](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/ticketseller_dashboard1.jpg)
+    ![image_dashboard](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/dashboard.jpg)
+ 
+**3. Main Page**
+    <br/>
+    <br/>
+    ![image_dashboard1](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/ticketseller_dashboard1.jpg)
 
-**3. Bus Page**
+**4. Bus Page**
     <br/>
     <br/>
     ![image_bus1](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/bus.jpg)
@@ -137,7 +142,7 @@ There are some screenshots about this app, and the sequence of using the app.
     <br/>
     ![imgae_bus2](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/bus1.jpg)
 
-**4. Route**
+**5. Route**
     <br/>
     <br/>
     ![image_route1](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/route1.jpg)
@@ -145,12 +150,12 @@ There are some screenshots about this app, and the sequence of using the app.
     <br/>
     ![image_route2](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/route2.jpg)
     
-**5. Route List**
+**6. Route List**
     <br/>
     <br/>
     ![image_ticket2](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/routebydate.jpg)
     
-**6. Driver**
+**7. Driver**
     <br/>
     <br/>
     ![image_driver1](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/driver1.jpg)
@@ -166,7 +171,7 @@ There are some screenshots about this app, and the sequence of using the app.
     <br/>
     ![image_acc2](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/acc2.jpg)
     
-**8. Ticket Detail**
+**9. Ticket Detail**
     <br/>
     <br/>
     ![image_ticket1](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/ticketdetail.jpg)

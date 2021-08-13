@@ -70,21 +70,17 @@ public class LogIn implements Initializable {
                 new Alert(Alert.AlertType.WARNING, "This user is online, you are not allowed to login!").showAndWait();
             }
             else if(res == 1 || res == 3) {
-
-//                  new Alert(Alert.AlertType.INFORMATION, "Successful!").showAndWait();
                 showHomePage("admin_view/MainWindow", res);
             }
             else if (res == 2) {
                 showHomePage("seller_view/Dashboard", res);
             }
-
             else {
                 new Alert(Alert.AlertType.WARNING, "Your username or password was wrong!").showAndWait();
             }
         }
         catch (Exception err) {
-              new Alert(Alert.AlertType.ERROR, "Connect to Internet and try again!").showAndWait();
-//            new Alert(Alert.AlertType.ERROR, err.getMessage()).showAndWait();
+            new Alert(Alert.AlertType.ERROR, "Connect to Internet and try again!").showAndWait();
         }
     }
 
@@ -95,7 +91,6 @@ public class LogIn implements Initializable {
     }
 
     public void showHomePage(String path, Integer role) throws IOException {
-
         Preloader controller = new Preloader(role);
         FXMLLoader main_Page = new FXMLLoader();
         main_Page.setLocation(getClass().getResource("/view/admin_view/Preloader.fxml"));
@@ -105,7 +100,7 @@ public class LogIn implements Initializable {
         Stage stage = new Stage();
         stage.setTitle("Bus Management");
         stage.setScene(scene);
-        //
+        
         stage.getIcons().add(new Image("/images/Icon/favicon.png"));
         stage.show();
         Stage cl = (Stage) btn_cancel.getScene().getWindow();
@@ -116,7 +111,6 @@ public class LogIn implements Initializable {
     void btn_cancel_clicked(MouseEvent event) {
         Stage stage = (Stage) btn_cancel.getScene().getWindow();
         stage.close();
-
     }
 
 }
