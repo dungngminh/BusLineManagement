@@ -77,7 +77,6 @@ public class Decentralize implements Initializable {
     private ComboBox<String> cbx_role_add;
 
     @FXML
-
     private Tab tab_adduser;
 
     @FXML
@@ -219,23 +218,21 @@ public class Decentralize implements Initializable {
             new Alert(Alert.AlertType.WARNING, "Fill all field!").showAndWait();
         } else if(!passWord.equals(confirm_password)) {
             new Alert(Alert.AlertType.WARNING, "Check password again!").showAndWait();
-        } else if(!Pattern.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$", passWord)) {
+        } else if(!Pattern.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}$", passWord)) {
             new Alert(Alert.AlertType.WARNING, "At least 8 chars\n" +
                     "\n" +
                     "Contains at least one digit\n" +
                     "\n" +
                     "Contains at least one lower alpha char and one upper alpha char\n" +
                     "\n" +
-                    "Contains at least one char within a set of special chars (@#%$^ etc.)\n" +
-                    "\n" +
                     "Does not contain space, tab, etc.!").showAndWait();
         } else {
-//            try {
+            try {
                 BLL_Admin.getInstance().addUserToAccount(userName, passWord, role, BLL_Admin.getInstance().getRole(role));
                 new Alert(Alert.AlertType.INFORMATION, "User added!").showAndWait();
-//            } catch (Exception err) {
-//                new Alert(Alert.AlertType.WARNING, "Maybe username was exist, Check again!").showAndWait();
-//            }
+            } catch (Exception err) {
+                new Alert(Alert.AlertType.WARNING, "Maybe username was exist, Check again!").showAndWait();
+            }
         }
     }
 

@@ -78,7 +78,6 @@ public class Preloader implements Initializable {
 
             FXMLLoader main_Page = new FXMLLoader();
             main_Page.setLocation(getClass().getResource("/view/" + path +".fxml"));
-            System.out.println("Hello");
             Scene scene = new Scene(main_Page.load());
             Stage stage = new Stage();
             stage.setTitle("Bus Management");
@@ -94,17 +93,15 @@ public class Preloader implements Initializable {
                 if(idTicket > 0)
                     BLL_Seller.getInstance().deleteCurrentTicket(idTicket);
 
-                //
                 BLL_Admin.getInstance().toggleIsOnlineForAccout(DAL.getInstance().getCurrent(), false);
                 Platform.exit();
                 System.exit(0);
             });
-            //
-                stage.getIcons().add(new Image("/images/Icon/favicon.png"));
-                stage.show();
-                Stage cl = (Stage) loading.getScene().getWindow();
-                cl.close();
 
+            stage.getIcons().add(new Image("/images/Icon/favicon.png"));
+            stage.show();
+            Stage cl = (Stage) loading.getScene().getWindow();
+            cl.close();
         }
     }
 }
