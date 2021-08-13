@@ -240,7 +240,7 @@ Project Link: [Bus Lines Management](https://github.com/dungngminh/QuanLyNhaXe_M
 [contributors-url]: https://github.com/dungngminh/QuanLyNhaXe_Maven/graphs/contributors
 [forks-shield]: https://img.shields.io/badge/FORKS-_0_-blue?style=for-the-badge
 [forks-url]: https://github.com/dungngminh/QuanLyNhaXe_Maven/network/members
-[stars-shield]: https://img.shields.io/badge/STARS-_4_-blue?style=for-the-badge
+[stars-shield]: https://img.shields.io/badge/STARS-_3_-blue?style=for-the-badge
 [stars-url]: https://github.com/dungngminh/QuanLyNhaXe_Maven/stargazers
 [issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
 [issues-url]: https://github.com/dungngminh/QuanLyNhaXe_Maven/issues

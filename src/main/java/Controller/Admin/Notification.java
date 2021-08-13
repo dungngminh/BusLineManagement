@@ -69,11 +69,15 @@ public class Notification implements Initializable {
 
     public void btn_push_clicked(MouseEvent mouseEvent) {
         try {
-            String text = txt_area_add.getText();
-
-            BLL_Admin.getInstance().pushMessageIntoDB(text);
-            new Alert(Alert.AlertType.INFORMATION, "Pushed message success!").showAndWait();
-            show();
+            if(txt_area_add.getText().equals("")){
+                new Alert(Alert.AlertType.WARNING, "Please provide a message!").showAndWait();
+            }else {
+                String text = txt_area_add.getText();
+                BLL_Admin.getInstance().pushMessageIntoDB(text);
+                new Alert(Alert.AlertType.INFORMATION, "Pushed message success!").showAndWait();
+                txt_area_add.setText("");
+                show();
+            }
         } catch (Exception e) {
             new Alert(Alert.AlertType.WARNING, "Cannot push this message! (number of words < 500)").showAndWait();
         }

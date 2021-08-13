@@ -63,6 +63,9 @@ public class Ticket implements Initializable {
     private TableColumn<Ticket_ViewModel, String> route;
 
     @FXML
+    private TableColumn<Ticket_ViewModel, String> departDate;
+
+    @FXML
     private TableColumn<Ticket_ViewModel, String> departTime;
 
     @FXML
@@ -153,6 +156,7 @@ public class Ticket implements Initializable {
 
         nameTicket.setCellValueFactory(new PropertyValueFactory<>("nameTicket"));
         route.setCellValueFactory(new PropertyValueFactory<>("route"));
+        departDate.setCellValueFactory(new PropertyValueFactory<>("departDate"));
         departTime.setCellValueFactory(new PropertyValueFactory<>("departTime"));
         nameCustomer.setCellValueFactory(new PropertyValueFactory<>("nameCustomer"));
         phoneCustomer.setCellValueFactory(new PropertyValueFactory<>("phoneCustomer"));

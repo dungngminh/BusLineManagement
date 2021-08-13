@@ -233,6 +233,7 @@ public class BusPage implements Initializable {
             case "Create": {
                 BLL_Admin.getInstance().addBus(name_of_bus, plate_number,  type, false, 0);
                 new Alert(Alert.AlertType.INFORMATION, "Create Successful!").showAndWait();
+                toggleDetail();
                 show(0, "");
                 break;
             }
@@ -240,6 +241,7 @@ public class BusPage implements Initializable {
                 int stt = cbx_status.getSelectionModel().getSelectedItem().equals("Available") ? 0 : 1;
                 BLL_Admin.getInstance().updateBus(idBus, name_of_bus, plate_number, type, stt);
                 new Alert(Alert.AlertType.INFORMATION, "Update Successful!").showAndWait();
+                toggleDetail();
                 show(0, "");
                 break;
             }
@@ -288,7 +290,7 @@ public class BusPage implements Initializable {
             CRUDType = "Update";
             toggleDetail();
         } catch (Exception err) {
-            new Alert(Alert.AlertType.INFORMATION, "Choose only 1 row!").showAndWait();
+            new Alert(Alert.AlertType.INFORMATION, "Please choose 1 row!").showAndWait();
         }
 
     }

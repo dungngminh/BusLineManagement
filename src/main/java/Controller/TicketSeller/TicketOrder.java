@@ -199,8 +199,8 @@ public class TicketOrder implements Initializable {
     }
 
     @FXML
-    void btn_confirm_clicked(MouseEvent event) throws IOException {
-//        try {
+    void btn_confirm_clicked(MouseEvent event) {
+        try {
             if(txf_namecustomer.getText().equals("") || txf_phonecustomer.getText().equals("")) {
                 new Alert(Alert.AlertType.WARNING, "Fill all field!").showAndWait();
             } else if(!Pattern.matches("((\\+84)|09|03|07|08|05|[2|5|7|8|9])+([0-9]{8})\\b", txf_phonecustomer.getText()) ||
@@ -236,9 +236,9 @@ public class TicketOrder implements Initializable {
                     scene.setRoot(newPane);
                 }
             }
-//        } catch (Exception err) {
-//            new Alert(Alert.AlertType.WARNING, "Unknown Error").showAndWait();
-//        }
+        } catch (Exception err) {
+            new Alert(Alert.AlertType.WARNING, "Unknown Error").showAndWait();
+        }
 
     }
     // DONE

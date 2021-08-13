@@ -28,13 +28,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
 import javafx.util.Callback;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
+
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -156,8 +157,6 @@ public class SchedulePage implements Initializable {
     @FXML
     private TableColumn<ScheduleEntity_ViewModel, String> col_outdate;
 
-    @FXML
-    private TableColumn<ScheduleEntity_ViewModel, Integer> col_duration;
 
     @FXML
     private TableColumn<ScheduleEntity_ViewModel, Integer> col_dpr;
@@ -186,6 +185,8 @@ public class SchedulePage implements Initializable {
     @FXML
     private Button btn_reAll;
 
+    @FXML
+    private Label lb_duration;
     //SUPPORT PROPERTY
     private static String CRUDType;
     private static int idSchedule;
@@ -194,6 +195,7 @@ public class SchedulePage implements Initializable {
     void btn_cancel_clicked(MouseEvent event) {
         cbx_route.getSelectionModel().select(null);
         cbx_bus.getSelectionModel().select(null);
+        cbx_driver.getSelectionModel().select(null);
         tfx_typeofbus.setText("");
         tfx_price.setText("");
         spn_timepickerH.getValueFactory().setValue(0);
@@ -205,11 +207,16 @@ public class SchedulePage implements Initializable {
 
     @FXML
     void btn_create_clicked(MouseEvent event) {
+        lb_duration.setVisible(true);
+        tfx_duration.setVisible(true);
         tfx_day_per_route.setDisable(false);
         btn_ok.setText("Add");
         CRUDType = "Create";
         toggle_updateDpr.setVisible(false);
         lb_update.setVisible(false);
+        cbx_route.getSelectionModel().select(null);
+        cbx_bus.getSelectionModel().select(null);
+        cbx_driver.getSelectionModel().select(null);
         toggleDetail();
     }
 
@@ -294,6 +301,8 @@ public class SchedulePage implements Initializable {
 
     @FXML
     void btn_update_clicked(MouseEvent event) {
+        lb_duration.setVisible(false);
+        tfx_duration.setVisible(false);
         toggle_updateDpr.setVisible(true);
         lb_update.setVisible(true);
         CRUDType = "Update";
@@ -302,7 +311,6 @@ public class SchedulePage implements Initializable {
             ScheduleEntity_ViewModel scheduleEntity_viewModel = table_view.getSelectionModel().getSelectedItem();
             idSchedule = scheduleEntity_viewModel.getIdSchedule();
             List<RouteEntity> routeEntity = BLL_Admin.getInstance().getRoutes(0, "");
-
             routeEntity.forEach(route -> {
                 if (route.toString().equals(scheduleEntity_viewModel.getRouteName())) {
                     System.out.println(route);
@@ -336,12 +344,11 @@ public class SchedulePage implements Initializable {
 
             tfx_day_per_route.setText(Integer.toString(scheduleEntity_viewModel.getDpr()));
             tfx_duration.setText(Integer.toString(scheduleEntity_viewModel.getDuration()));
-
+            toggleDetail();
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, "Please choose 1 row !").showAndWait();
-            e.printStackTrace();
         }
-        toggleDetail();
+
     }
 
     @FXML
@@ -352,6 +359,8 @@ public class SchedulePage implements Initializable {
                     BLL_Admin.getInstance().updateDPR(item.getIdSchedule(), item.getDpr());
             }
             new Alert(Alert.AlertType.INFORMATION,"Update all OutDate Schedule successful!").showAndWait();
+            show("");
+
         }catch(Exception ee){
             new Alert(Alert.AlertType.ERROR, "Update fail, try again").showAndWait();
         }
@@ -481,7 +490,6 @@ public class SchedulePage implements Initializable {
         col_price.setCellValueFactory(new PropertyValueFactory<>("price"));
         col_departTime.setCellValueFactory(new PropertyValueFactory<>("departTime"));
         col_outdate.setCellValueFactory(new PropertyValueFactory<>("outDate"));
-        col_duration.setCellValueFactory(new PropertyValueFactory<>("duration"));
         col_dpr.setCellValueFactory(new PropertyValueFactory<>("dpr"));
 
         table_view.setRowFactory(tv -> new TableRow<>() {
