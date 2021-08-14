@@ -160,7 +160,7 @@ public class BLL_Admin {
         driver.setPhone(phoneNumber);
         driver.setAddress(address);
         driver.setIsDelete(false);
-        driver.setStatus(1);
+        driver.setStatus(stt);
         DAL.getInstance().insertDriver(driver);
     }
 

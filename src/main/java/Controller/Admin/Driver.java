@@ -169,6 +169,9 @@ public class Driver implements Initializable {
     @FXML
     void btn_create_clicked(MouseEvent event) {
         CRUDType = "Create";
+        txf_nameofdriver.setText("");
+        txf_phonenumber.setText("");
+        txf_address.setText("");
         toggleDetail();
     }
 
@@ -256,6 +259,7 @@ public class Driver implements Initializable {
                     BLL_Admin.getInstance().addDriver(name_of_driver, phonenumber, address, 0);
                     new Alert(Alert.AlertType.INFORMATION, "Add new Driver successfully!").showAndWait();
                     toggleDetail();
+
                     show(-1, "");
                     break;
                 }catch (Exception e){
