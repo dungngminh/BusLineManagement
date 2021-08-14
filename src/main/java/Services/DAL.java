@@ -665,17 +665,17 @@ public class DAL {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
         String subQr1 = paid == null ? "" : ("AND T.isPaid = " + paid);
-        String subQr2 = fromProvince == null ? "" : "AND departDate >= :departDate\n" +
+        String subQr2 = fromProvince == null ? "" : ("AND DAY(departDate) = DAY(:departDate)\n" +
                 "AND R.startStation IN (SELECT STA.stationName FROM Station STA WHERE STA.idProvince =\n" +
                 "                                            (SELECT PRO.idProvince FROM Province PRO WHERE PRO.provinceName = :from))\n" +
                 "AND R.endStation IN (SELECT STA.stationName FROM Station STA WHERE STA.idProvince =\n" +
-                "                                            (SELECT PRO.idProvince FROM Province PRO WHERE PRO.provinceName = :to))";
+                "                                            (SELECT PRO.idProvince FROM Province PRO WHERE PRO.provinceName = :to))");
         String sql = "SELECT DISTINCT T.* FROM Route R\n" +
                 "INNER JOIN Schedule S on R.idRoute = S.idRoute\n" +
                 "INNER JOIN TripInformation TI on S.idSchedule = TI.idSchedule\n" +
                 "INNER JOIN Ticket T on TI.idTrip = T.idTrip\n" +
                 "\n" +
-                "WHERE departDate >= GETDATE()" + subQr1 + subQr2;
+                "WHERE DAY(departDate) >= DAY(GETDATE())" + subQr1 + subQr2;
         SQLQuery query = session.createSQLQuery(sql);
         if (fromProvince != null) {
             query.setParameter("departDate", departDate);

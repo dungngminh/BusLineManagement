@@ -67,9 +67,7 @@ public class Preloader implements Initializable {
                         e.printStackTrace();
                     }
                 }
-
             });
-
         }
 
         public void showHomePage(String path) throws IOException {
