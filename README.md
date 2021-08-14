@@ -111,7 +111,47 @@ You still need to install these things first:
     database-init.sh
    ```
    
+### Directory Structure
 
+```
+project
+│   README.md
+│
+└───screenshot
+│
+│
+└───src/main
+│   └───java
+|   |   |   main.java                           <- [Main class in java Program]
+|   |   |
+│   │   │   Controller                          <- [Controller]
+|   |   |   └───Admin Controller
+|   |   |   └───BusType Controller
+|   |   |   └───TicketSeller Controller
+|   |   |
+│   │   │   Model                               <- [Model]
+|   |   |   └───Entity Class
+|   |   |   └───ViewModel Class
+|   |   |
+|   |   |   Services                            <- [Services]
+|   |   |   └───DBConnectionHelper Class
+|   |   |   └───BusinessLogic Class
+|   |   |
+|   |   |   Utils                               <- [Utilities]
+|   |   |   └───HibernateUtil Class
+│   │
+│   └───resources                 
+│   |    │   css
+|   |    |
+│   |    │   images
+|   |    |
+|   |    |   util
+|   |    |
+|   |    |   views                              <- [Contains FXML file for UI/ UX]
+|   |    |   └───Admin View
+|   |    |   └───BusType View
+|   |    |   └───Seller View
+```
 
 
 <!-- USAGE EXAMPLES -->
@@ -242,7 +282,7 @@ Project Link: [Bus Lines Management](https://github.com/dungngminh/QuanLyNhaXe_M
 [forks-url]: https://github.com/dungngminh/QuanLyNhaXe_Maven/network/members
 [stars-shield]: https://img.shields.io/badge/STARS-_3_-blue?style=for-the-badge
 [stars-url]: https://github.com/dungngminh/QuanLyNhaXe_Maven/stargazers
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
+[issues-shield]: https://img.shields.io/badge/ISSUES-_2%20closed_-blue?style=for-the-badge
 [issues-url]: https://github.com/dungngminh/QuanLyNhaXe_Maven/issues
 [license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
 [license-url]: https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/master/LICENSE.txt
