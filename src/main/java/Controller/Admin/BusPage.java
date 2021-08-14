@@ -190,6 +190,9 @@ public class BusPage implements Initializable {
     @FXML
     void btn_create_clicked(MouseEvent event) {
         CRUDType = "Create";
+        cbx_nameoftype.getSelectionModel().clearSelection();
+        cbx_status.setVisible(false);
+        lbl_status.setVisible(false);
         toggleDetail();
     }
 
@@ -221,33 +224,41 @@ public class BusPage implements Initializable {
 
     @FXML
     void btn_ok_clicked(MouseEvent event) {
-        String name_of_bus = txf_nameofbus.getText().trim();
-        String plate_number = txf_platenumber.getText().trim();
-        TypeOfBusEntity type = BLL_Admin.getInstance().
-                getTypeOfBusObj(cbx_nameoftype.getSelectionModel().getSelectedIndex() + 1);
-        if(name_of_bus.equals("") || plate_number.equals("")) {
-            new Alert(Alert.AlertType.WARNING, "Fill all field!").showAndWait();
-            return;
-        }
-        switch(CRUDType) {
-            case "Create": {
-                BLL_Admin.getInstance().addBus(name_of_bus, plate_number,  type, false, 0);
-                new Alert(Alert.AlertType.INFORMATION, "Create Successful!").showAndWait();
-                toggleDetail();
-                show(0, "");
-                break;
+        try {
+            String name_of_bus = txf_nameofbus.getText().trim();
+            String plate_number = txf_platenumber.getText().trim();
+            TypeOfBusEntity type = BLL_Admin.getInstance().
+                    getTypeOfBusObj(cbx_nameoftype.getSelectionModel().getSelectedIndex() + 1);
+            if(name_of_bus.equals("") || plate_number.equals("")) {
+                new Alert(Alert.AlertType.WARNING, "Fill all field!").showAndWait();
+                return;
             }
-            case "Update": {
-                int stt = cbx_status.getSelectionModel().getSelectedItem().equals("Available") ? 0 : 1;
-                BLL_Admin.getInstance().updateBus(idBus, name_of_bus, plate_number, type, stt);
-                new Alert(Alert.AlertType.INFORMATION, "Update Successful!").showAndWait();
-                toggleDetail();
-                show(0, "");
-                break;
+            switch(CRUDType) {
+                case "Create": {
+                    if(txf_platenumber.getText().trim().length() > 10) {
+                        new Alert(Alert.AlertType.ERROR, "Plate number <= 10 characters!").showAndWait();
+                    }
+                    BLL_Admin.getInstance().addBus(name_of_bus, plate_number,  type, false, 0);
+                    new Alert(Alert.AlertType.INFORMATION, "Create Successful!").showAndWait();
+                    toggleDetail();
+                    show(0, "");
+                    break;
+                }
+                case "Update": {
+                    int stt = cbx_status.getSelectionModel().getSelectedItem().equals("Available") ? 0 : 1;
+                    BLL_Admin.getInstance().updateBus(idBus, name_of_bus, plate_number, type, stt);
+                    new Alert(Alert.AlertType.INFORMATION, "Update Successful!").showAndWait();
+                    toggleDetail();
+                    show(0, "");
+                    break;
+                }
+                default:
+                    break;
             }
-            default:
-                break;
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, "Check data again!").showAndWait();
         }
+
     }
 
     @FXML
@@ -350,6 +361,7 @@ public class BusPage implements Initializable {
 
     @FXML
     void cbx_nameoftype_Action(ActionEvent event) {
+        if(cbx_nameoftype.getSelectionModel().isEmpty()) return;
         TypeOfBusEntity tob = BLL_Admin.getInstance().getTypeOfBusObj(cbx_nameoftype.getSelectionModel().
                 getSelectedIndex() + 1);
         txf_brandname.setText(tob.getBrandName());

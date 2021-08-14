@@ -263,8 +263,8 @@ public class Driver implements Initializable {
                     show(-1, "");
                     break;
                 }catch (Exception e){
-                    System.out.println("Add not successfully!");
                     new Alert(Alert.AlertType.WARNING, "Error occurred, Please check again!").showAndWait();
+                    break;
                 }
             }
             case "Update": {
@@ -278,6 +278,7 @@ public class Driver implements Initializable {
                 }catch (Exception e){
                     System.out.println("Update not successfully!");
                     new Alert(Alert.AlertType.WARNING, "Error occurred during updating, Please check again!").showAndWait();
+                    break;
                 }
             }
             default:
