@@ -10,6 +10,7 @@ import com.jfoenix.transitions.hamburger.HamburgerBasicCloseTransition;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
@@ -53,7 +54,15 @@ public class InitSideBar {
                             }
 
                             case "schedule":{
-                                showPage(rootPane, "SchedulePage");
+                                int bus = BLL_Admin.getInstance().getAllBus().size();
+                                int route = BLL_Admin.getInstance().getRoutes(0, "").size();
+                                int driver = BLL_Admin.getInstance().getListDriver(0, "").size();
+                                if (bus == 0 || route == 0 || driver == 0) {
+                                    new Alert(Alert.AlertType.ERROR,
+                                            "NOT ENOUGH DATA, PLEASE CHECK DATA FROM BUSES, ROUTES AND DRIVERS"
+                                    ).showAndWait();
+                                }
+                                else showPage(rootPane, "SchedulePage");
                                 break;
                             }
 
