@@ -240,7 +240,7 @@ public class SchedulePage implements Initializable {
             BusEntity busSelected = cbx_bus.getSelectionModel().getSelectedItem();
             int priceInput = Integer.parseInt(tfx_price.getText());
             int dprInput = Integer.parseInt(tfx_day_per_route.getText());
-            int durationInput = Integer.parseInt(tfx_duration.getText());
+            int durationInput = tfx_duration.getText().equals("") ? 0 : Integer.parseInt(tfx_duration.getText());
             String time = spn_timepickerH.getValue().toString() + ":" + spn_timepickerM.getValue().toString() + ":" + spn_timepickerS.getValue().toString();
             Date departTimeInput = new SimpleDateFormat("HH:mm:ss").parse(time);
             DriverEntity driverSelected = cbx_driver.getSelectionModel().getSelectedItem();
@@ -252,6 +252,7 @@ public class SchedulePage implements Initializable {
                         BLL_Admin.getInstance().addSchedule(routeSelected, busSelected, driverSelected, departTimeInput, durationInput, priceInput, dprInput);
                         new Alert(Alert.AlertType.INFORMATION, "Create successful!").showAndWait();
                         show("");
+                        toggleDetail();
                         break;
                     case "Update":
                         if (tfx_day_per_route.isDisabled())
@@ -261,16 +262,17 @@ public class SchedulePage implements Initializable {
                         new Alert(Alert.AlertType.INFORMATION, "Update successful!").showAndWait();
 
                         show("");
+                        toggleDetail();
                         break;
                     default:
                         break;
                 }
             }
         } catch (Exception e) {
-            new Alert(Alert.AlertType.WARNING, "Fail").showAndWait();
+            new Alert(Alert.AlertType.WARNING, "Fail, please fill all information").showAndWait();
             e.printStackTrace();
         }
-        toggleDetail();
+
     }
 
     @FXML
@@ -281,6 +283,7 @@ public class SchedulePage implements Initializable {
         spn_timepickerM.getValueFactory().setValue(0);
         spn_timepickerS.getValueFactory().setValue(0);
         tfx_day_per_route.setText("");
+        tfx_duration.setText("");
     }
 
     @FXML
@@ -304,6 +307,10 @@ public class SchedulePage implements Initializable {
         lb_duration.setVisible(false);
         tfx_duration.setVisible(false);
         toggle_updateDpr.setVisible(true);
+        toggle_updateDpr.selectedProperty().set(true);
+        if(toggle_updateDpr.isSelected()) {
+            tfx_day_per_route.setDisable(toggle_updateDpr.isSelected());
+        }
         lb_update.setVisible(true);
         CRUDType = "Update";
         btn_ok.setText("OK");
@@ -347,6 +354,7 @@ public class SchedulePage implements Initializable {
             toggleDetail();
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, "Please choose 1 row !").showAndWait();
+            e.printStackTrace();
         }
 
     }

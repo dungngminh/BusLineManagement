@@ -220,12 +220,14 @@ public class RoutePage implements Initializable {
                                     } else BLL_Admin.getInstance().addRoute(startStation, endStation, note, distance);
                                     new Alert(Alert.AlertType.INFORMATION, "Add route successful!").showAndWait();
                                     show(0, "");
+                                    toggleDetail();
                                     break;
                                 case "Update":
                                     int stt = cbx_status.getSelectionModel().getSelectedItem().equals("Available") ? 0 : 1;
                                     BLL_Admin.getInstance().updateRoute(idRoute, startStation, endStation, note, distance, stt);
                                     new Alert(Alert.AlertType.INFORMATION, "Update route successful!").showAndWait();
                                     show(0, "");
+                                    toggleDetail();
                                     break;
                                 default:
                                     break;
@@ -458,6 +460,7 @@ public class RoutePage implements Initializable {
 
     private void toggleDetail() {
         if (btn_ok.isVisible()) {
+
             btn_ok.setVisible(false);
             btn_reset.setVisible(false);
             btn_cancel.setVisible(false);

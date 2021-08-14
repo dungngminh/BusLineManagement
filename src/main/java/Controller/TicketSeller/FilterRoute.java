@@ -351,8 +351,7 @@ public class FilterRoute implements Initializable {
                     lbl31.setText(listRoute.get(beginIndex - 1).getDestStation());
                     String time = new SimpleDateFormat("HH:mm").format(listRoute.get(beginIndex - 1).getDepartTime());
 
-                    lbl41.setText("Depart time: " + time + "\nDuration: " +
-                            listRoute.get(beginIndex - 1).getDuration() + "h\n" +
+                    lbl41.setText("Depart time: " + time + "h\n" +
                             "Price: " + listRoute.get(beginIndex - 1).getPrice());
                     break;
                 }
@@ -369,8 +368,7 @@ public class FilterRoute implements Initializable {
                     lbl22.setText(listRoute.get(beginIndex).getStartStation());
                     lbl32.setText(listRoute.get(beginIndex).getDestStation());
                     String time = new SimpleDateFormat("HH:mm").format(listRoute.get(beginIndex).getDepartTime());
-                    lbl42.setText("Depart time: " + time + "\nDuration: " +
-                            listRoute.get(beginIndex).getDuration() + "h\n" +
+                    lbl42.setText("Depart time: " + time + "h\n" +
                             "Price: " + listRoute.get(beginIndex - 1).getPrice());
                     break;
                 }
@@ -387,8 +385,7 @@ public class FilterRoute implements Initializable {
                     lbl23.setText(listRoute.get(beginIndex + 1).getStartStation());
                     lbl33.setText(listRoute.get(beginIndex + 1).getDestStation());
                     String time = new SimpleDateFormat("HH:mm").format(listRoute.get(beginIndex + 1).getDepartTime());
-                    lbl43.setText("Depart time: " + time + "\nDuration: " +
-                            listRoute.get(beginIndex + 1).getDuration() + "h\n" +
+                    lbl43.setText("Depart time: " + time + "h\n" +
                             "Price: " + listRoute.get(beginIndex - 1).getPrice());
                     break;
                 }
@@ -405,8 +402,7 @@ public class FilterRoute implements Initializable {
                     lbl24.setText(listRoute.get(beginIndex + 2).getStartStation());
                     lbl34.setText(listRoute.get(beginIndex + 2).getDestStation());
                     String time = new SimpleDateFormat("HH:mm").format(listRoute.get(beginIndex + 2).getDepartTime());
-                    lbl44.setText("Depart time: " + time + "\nDuration: " +
-                            listRoute.get(beginIndex + 2).getDuration() + "h\n" +
+                    lbl44.setText("Depart time: " + time + "h\n" +
                             "Price: " + listRoute.get(beginIndex - 1).getPrice());
                     break;
                 }
@@ -423,8 +419,7 @@ public class FilterRoute implements Initializable {
                     lbl25.setText(listRoute.get(beginIndex + 3).getStartStation());
                     lbl35.setText(listRoute.get(beginIndex + 3).getDestStation());
                     String time = new SimpleDateFormat("HH:mm").format(listRoute.get(beginIndex + 3).getDepartTime());
-                    lbl45.setText("Depart time: " + time + "\nDuration: " +
-                            listRoute.get(beginIndex + 3).getDuration() + "h\n" +
+                    lbl45.setText("Depart time: " + time + "h\n" +
                             "Price: " + listRoute.get(beginIndex - 1).getPrice());
                     break;
                 }
