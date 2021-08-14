@@ -156,7 +156,7 @@ public class DAL {
         bus.setPlateNumber(plateNumber);
         bus.setIdType(tob.getIdType());
         bus.setIsDelete(false);
-        bus.setStatus(1);
+        bus.setStatus(stt);
         bus.setTypeOfBusByIdType(tob);
 
         //Save the BusEntity in database
