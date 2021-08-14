@@ -282,7 +282,7 @@ Project Link: [Bus Lines Management](https://github.com/dungngminh/QuanLyNhaXe_M
 [forks-url]: https://github.com/dungngminh/QuanLyNhaXe_Maven/network/members
 [stars-shield]: https://img.shields.io/badge/STARS-_3_-blue?style=for-the-badge
 [stars-url]: https://github.com/dungngminh/QuanLyNhaXe_Maven/stargazers
-[issues-shield]: https://img.shields.io/github/issues-closed/dungngminh/quanlynhaxe_maven?style=flat-square
+[issues-shield]: https://img.shields.io/badge/ISSUES-_2%20closed_-blue?style=for-the-badge
 [issues-url]: https://github.com/dungngminh/QuanLyNhaXe_Maven/issues
 [license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
 [license-url]: https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/master/LICENSE.txt
