@@ -520,8 +520,8 @@ public class DAL {
                 "Driver DRI ON SCH.idDriver = DRI.idDriver INNER JOIN Route ROU ON SCH.idRoute = ROU.idRoute " +
                 "INNER JOIN Bus ON SCH.idBus = Bus.idBus INNER JOIN TypeOfBus TYPE ON Bus.idType = TYPE.idType " +
                 "WHERE DRI.[status] = 0 AND DRI.isDelete = 0 and ROU.[status] = 0 and Bus.[status] = 0 and Bus.isDelete = 0 and SCH.isDelete = 0 " +
-                "and TYPE.isDelete = 0", ScheduleEntity.class);
-
+                "and TYPE.isDelete = 0",ScheduleEntity.class
+        );
         List<ScheduleEntity> list = query.getResultList();
         session.getTransaction().commit();
         session.close();
