@@ -236,12 +236,12 @@ public class BLL_Admin {
         DAL.getInstance().getScheduleData().forEach(data -> {
             if ((data.getRouteByIdRoute().getStartStation() + " - " + data.getRouteByIdRoute().getEndStation() +
                     " || " + data.getBusByIdBus().getTypeOfBusByIdType().getTypeName() + " || " +
-                    new SimpleDateFormat("HH:mm:ss").format(data.getDepartTime())).toLowerCase().contains(name.toLowerCase()))
+                    new SimpleDateFormat("HH:mm").format(data.getDepartTime())).toLowerCase().contains(name.toLowerCase()))
 
                 list.add(new ScheduleEntity_ViewModel(data.getIdSchedule(),
                         (data.getRouteByIdRoute().getStartStation() + " - " + data.getRouteByIdRoute().getEndStation()),
                         data.getBusByIdBus().getBusName(), data.getBusByIdBus().getTypeOfBusByIdType().getTypeName(),
-                        data.getDriverByIdDriver().getNameDriver(), new SimpleDateFormat("HH:mm:ss").format(data.getDepartTime()),
+                        data.getDriverByIdDriver().getNameDriver(), new SimpleDateFormat("HH:mm").format(data.getDepartTime()),
                         new SimpleDateFormat("dd/MM/yyyy").format(DAL.getInstance().getOutDateUpdate(data.getIdSchedule())),
                         data.getPrice(), data.getDuration(), data.getDpr(), data.getIsDelete()));
 
