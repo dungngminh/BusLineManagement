@@ -80,14 +80,14 @@ public class TicketForm implements Initializable {
         lb_type.setText(modelTicket.getTripInformationByIdTrip().getScheduleByIdSchedule().getBusByIdBus()
                 .getTypeOfBusByIdType().getTypeName());
         lb_departdate.setText(date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + "\n" +
-                new SimpleDateFormat("HH:mm:ss").format(modelTicket.getTripInformationByIdTrip()
+                new SimpleDateFormat("HH:mm").format(modelTicket.getTripInformationByIdTrip()
                         .getScheduleByIdSchedule().getDepartTime()));
         lb_startstation.setText(modelTicket.getTripInformationByIdTrip().getScheduleByIdSchedule()
                 .getRouteByIdRoute().getStartStation());
         lb_destination.setText(modelTicket.getTripInformationByIdTrip().getScheduleByIdSchedule()
                 .getRouteByIdRoute().getEndStation());
-        //lb_phone.setText(modelTicket.getTripInformationByIdTrip()
-             //   .getDriverByIdDriver().getPhone());
+        lb_phone.setText(modelTicket.getTripInformationByIdTrip().getScheduleByIdSchedule()
+                .getDriverByIdDriver().getPhone());
         lb_price.setText("0đ");
         lb_pay.setText(modelTicket.getIsPaid() ? "Paid" : "Unpaid");
         lb_name.setText(modelTicket.getNameCustomer());

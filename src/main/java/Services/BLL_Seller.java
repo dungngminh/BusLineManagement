@@ -117,7 +117,7 @@ public class BLL_Seller {
                 String nameTicket = ticket.getNameTicket();
                 String route = ticket.getTripInformationByIdTrip().getScheduleByIdSchedule().getRouteByIdRoute().getStartStation() +
                         "-" + ticket.getTripInformationByIdTrip().getScheduleByIdSchedule().getRouteByIdRoute().getEndStation();
-                String departTime = new SimpleDateFormat("HH:mm:ss").format(ticket.getTripInformationByIdTrip()
+                String departTime = new SimpleDateFormat("HH:mm").format(ticket.getTripInformationByIdTrip()
                         .getScheduleByIdSchedule().getDepartTime());
                 String departDateDisplay = new SimpleDateFormat("dd/MM/yyyy").format(ticket.getTripInformationByIdTrip().getDepartDate());
                 String name = ticket.getNameCustomer();
