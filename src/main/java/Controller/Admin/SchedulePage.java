@@ -31,6 +31,11 @@ import javafx.scene.layout.HBox;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import javafx.util.Callback;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -152,8 +157,6 @@ public class SchedulePage implements Initializable {
     @FXML
     private TableColumn<ScheduleEntity_ViewModel, String> col_outdate;
 
-    @FXML
-    private TableColumn<ScheduleEntity_ViewModel, Integer> col_duration;
 
     @FXML
     private TableColumn<ScheduleEntity_ViewModel, Integer> col_dpr;
@@ -182,6 +185,8 @@ public class SchedulePage implements Initializable {
     @FXML
     private Button btn_reAll;
 
+    @FXML
+    private Label lb_duration;
     //SUPPORT PROPERTY
     private static String CRUDType;
     private static int idSchedule;
@@ -190,6 +195,7 @@ public class SchedulePage implements Initializable {
     void btn_cancel_clicked(MouseEvent event) {
         cbx_route.getSelectionModel().select(null);
         cbx_bus.getSelectionModel().select(null);
+        cbx_driver.getSelectionModel().select(null);
         tfx_typeofbus.setText("");
         tfx_price.setText("");
         spn_timepickerH.getValueFactory().setValue(0);
@@ -201,11 +207,16 @@ public class SchedulePage implements Initializable {
 
     @FXML
     void btn_create_clicked(MouseEvent event) {
+        lb_duration.setVisible(true);
+        tfx_duration.setVisible(true);
         tfx_day_per_route.setDisable(false);
         btn_ok.setText("Add");
         CRUDType = "Create";
         toggle_updateDpr.setVisible(false);
         lb_update.setVisible(false);
+        cbx_route.getSelectionModel().select(null);
+        cbx_bus.getSelectionModel().select(null);
+        cbx_driver.getSelectionModel().select(null);
         toggleDetail();
     }
 
@@ -229,7 +240,7 @@ public class SchedulePage implements Initializable {
             BusEntity busSelected = cbx_bus.getSelectionModel().getSelectedItem();
             int priceInput = Integer.parseInt(tfx_price.getText());
             int dprInput = Integer.parseInt(tfx_day_per_route.getText());
-            int durationInput = Integer.parseInt(tfx_duration.getText());
+            int durationInput = tfx_duration.getText().equals("") ? 0 : Integer.parseInt(tfx_duration.getText());
             String time = spn_timepickerH.getValue().toString() + ":" + spn_timepickerM.getValue().toString() + ":" + spn_timepickerS.getValue().toString();
             Date departTimeInput = new SimpleDateFormat("HH:mm:ss").parse(time);
             DriverEntity driverSelected = cbx_driver.getSelectionModel().getSelectedItem();
@@ -241,6 +252,7 @@ public class SchedulePage implements Initializable {
                         BLL_Admin.getInstance().addSchedule(routeSelected, busSelected, driverSelected, departTimeInput, durationInput, priceInput, dprInput);
                         new Alert(Alert.AlertType.INFORMATION, "Create successful!").showAndWait();
                         show("");
+                        toggleDetail();
                         break;
                     case "Update":
                         if (tfx_day_per_route.isDisabled())
@@ -250,16 +262,17 @@ public class SchedulePage implements Initializable {
                         new Alert(Alert.AlertType.INFORMATION, "Update successful!").showAndWait();
 
                         show("");
+                        toggleDetail();
                         break;
                     default:
                         break;
                 }
             }
         } catch (Exception e) {
-            new Alert(Alert.AlertType.WARNING, "Fail").showAndWait();
+            new Alert(Alert.AlertType.WARNING, "Fail, please fill all information").showAndWait();
             e.printStackTrace();
         }
-        toggleDetail();
+
     }
 
     @FXML
@@ -270,6 +283,7 @@ public class SchedulePage implements Initializable {
         spn_timepickerM.getValueFactory().setValue(0);
         spn_timepickerS.getValueFactory().setValue(0);
         tfx_day_per_route.setText("");
+        tfx_duration.setText("");
     }
 
     @FXML
@@ -290,7 +304,13 @@ public class SchedulePage implements Initializable {
 
     @FXML
     void btn_update_clicked(MouseEvent event) {
+        lb_duration.setVisible(false);
+        tfx_duration.setVisible(false);
         toggle_updateDpr.setVisible(true);
+        toggle_updateDpr.selectedProperty().set(true);
+        if(toggle_updateDpr.isSelected()) {
+            tfx_day_per_route.setDisable(toggle_updateDpr.isSelected());
+        }
         lb_update.setVisible(true);
         CRUDType = "Update";
         btn_ok.setText("OK");
@@ -298,7 +318,6 @@ public class SchedulePage implements Initializable {
             ScheduleEntity_ViewModel scheduleEntity_viewModel = table_view.getSelectionModel().getSelectedItem();
             idSchedule = scheduleEntity_viewModel.getIdSchedule();
             List<RouteEntity> routeEntity = BLL_Admin.getInstance().getRoutes(0, "");
-
             routeEntity.forEach(route -> {
                 if (route.toString().equals(scheduleEntity_viewModel.getRouteName())) {
                     System.out.println(route);
@@ -332,36 +351,39 @@ public class SchedulePage implements Initializable {
 
             tfx_day_per_route.setText(Integer.toString(scheduleEntity_viewModel.getDpr()));
             tfx_duration.setText(Integer.toString(scheduleEntity_viewModel.getDuration()));
-
+            toggleDetail();
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, "Please choose 1 row !").showAndWait();
             e.printStackTrace();
         }
-        toggleDetail();
+
     }
 
     @FXML
     void onReAllClicked(MouseEvent event) throws ParseException {
         try {
             for (ScheduleEntity_ViewModel item : table_view.getItems()) {
-                if(checkOutDate(item.getOutDate()))
+                if (checkOutDate(item.getOutDate()))
                     BLL_Admin.getInstance().updateDPR(item.getIdSchedule(), item.getDpr());
             }
-            new Alert(Alert.AlertType.INFORMATION,"Update all OutDate Schedule successful!").showAndWait();
-        }catch(Exception ee){
+            new Alert(Alert.AlertType.INFORMATION, "Update all OutDate Schedule successful!").showAndWait();
+            show("");
+
+        } catch (Exception ee) {
             new Alert(Alert.AlertType.ERROR, "Update fail, try again").showAndWait();
         }
     }
+
     @FXML
     void btn_export_clicked(MouseEvent event) throws IOException {
-        if(table_view.getItems().isEmpty()) {
+        if (table_view.getItems().isEmpty()) {
             new Alert(Alert.AlertType.WARNING, "List is empty!").showAndWait();
             return;
         }
-        Workbook workbook = new HSSFWorkbook();
-        Sheet spreadsheet = workbook.createSheet("schedule");
+        HSSFWorkbook workbook = new HSSFWorkbook();
+        HSSFSheet spreadsheet = workbook.createSheet("schedule");
 
-        Row row = spreadsheet.createRow(0);
+        HSSFRow row = spreadsheet.createRow(0);
 
         for (int j = 0; j < table_view.getColumns().size(); j++) {
             row.createCell(j).setCellValue(table_view.getColumns().get(j).getText());
@@ -370,10 +392,9 @@ public class SchedulePage implements Initializable {
         for (int i = 0; i < table_view.getItems().size(); i++) {
             row = spreadsheet.createRow(i + 1);
             for (int j = 0; j < table_view.getColumns().size(); j++) {
-                if(table_view.getColumns().get(j).getCellData(i) != null) {
+                if (table_view.getColumns().get(j).getCellData(i) != null) {
                     row.createCell(j).setCellValue(table_view.getColumns().get(j).getCellData(i).toString());
-                }
-                else {
+                } else {
                     row.createCell(j).setCellValue("");
                 }
             }
@@ -385,13 +406,13 @@ public class SchedulePage implements Initializable {
         stage.setTitle("Export data schedule");
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initOwner(
-                ((Node)event.getSource()).getScene().getWindow() );
+                ((Node) event.getSource()).getScene().getWindow());
 
         DirectoryChooser directoryChooser = new DirectoryChooser();
-        directoryChooser.setInitialDirectory(new File("src"));
+        directoryChooser.setInitialDirectory(new File(System.getProperty("user.home"), "./"));
 
         File selectedDirectory = directoryChooser.showDialog(stage);
-        if(selectedDirectory != null) {
+        if (selectedDirectory != null) {
             if (!selectedDirectory.canRead()) {
                 Boolean b = selectedDirectory.setReadable(true, false);
             }
@@ -415,26 +436,22 @@ public class SchedulePage implements Initializable {
     @FXML
     void onReOutdateClicked(MouseEvent event) throws ParseException {
         ScheduleEntity_ViewModel scheduleEntity_viewModel = table_view.getSelectionModel().getSelectedItem();
-        if(!checkOutDate(scheduleEntity_viewModel.getOutDate())){
-            new Alert(Alert.AlertType.WARNING,"It's not time to update!").showAndWait();
-        }
-        else {
-             BLL_Admin.getInstance().updateDPR(scheduleEntity_viewModel.getIdSchedule(), scheduleEntity_viewModel.getDpr());
-             new Alert(Alert.AlertType.INFORMATION, "Update Outdate successful!").showAndWait();
-             show("");
+        if (!checkOutDate(scheduleEntity_viewModel.getOutDate())) {
+            new Alert(Alert.AlertType.WARNING, "It's not time to update!").showAndWait();
+        } else {
+            BLL_Admin.getInstance().updateDPR(scheduleEntity_viewModel.getIdSchedule(), scheduleEntity_viewModel.getDpr());
+            new Alert(Alert.AlertType.INFORMATION, "Update Outdate successful!").showAndWait();
+            show("");
         }
     }
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // Init combobox for bus and route
-        BLL_Admin.getInstance().getAllBus().forEach(bus -> cbx_bus.getItems().add(bus));
-        BLL_Admin.getInstance().getRoutes(0, "").forEach(route -> cbx_route.getItems().add(route));
-        BLL_Admin.getInstance().getListDriver(0, "").forEach(driver -> cbx_driver.getItems().add(driver));
-        if (cbx_route.getItems().isEmpty() || cbx_bus.getItems().isEmpty() || cbx_driver.getItems().isEmpty()) {
-            new Alert(Alert.AlertType.ERROR, "NOT ENOUGH DATA, PLEASE CHECK DATA FROM BUSES, ROUTES AND DRIVERS").showAndWait();
-        } else {
+            // Init combobox for bus and route and driver
+            BLL_Admin.getInstance().getAllBus().forEach(bus -> cbx_bus.getItems().add(bus));
+            BLL_Admin.getInstance().getRoutes(0, "").forEach(route -> cbx_route.getItems().add(route));
+            BLL_Admin.getInstance().getListDriver(0, "").forEach(driver -> cbx_driver.getItems().add(driver));
             try {
                 // Init for side bar
                 InitSideBar.getInstance().initializeForNavBar(this.pane, this.jfx_drawer, this.jfx_hambur);
@@ -464,7 +481,6 @@ public class SchedulePage implements Initializable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
     }
 
     private void show(String key) {
@@ -477,7 +493,6 @@ public class SchedulePage implements Initializable {
         col_price.setCellValueFactory(new PropertyValueFactory<>("price"));
         col_departTime.setCellValueFactory(new PropertyValueFactory<>("departTime"));
         col_outdate.setCellValueFactory(new PropertyValueFactory<>("outDate"));
-        col_duration.setCellValueFactory(new PropertyValueFactory<>("duration"));
         col_dpr.setCellValueFactory(new PropertyValueFactory<>("dpr"));
 
         table_view.setRowFactory(tv -> new TableRow<>() {
@@ -506,6 +521,7 @@ public class SchedulePage implements Initializable {
                 Date.from(LocalDate.now().
                         atStartOfDay(ZoneId.systemDefault()).toInstant()).getTime(), TimeUnit.MILLISECONDS) <= 7;
     }
+
     private void toggleDetail() {
         if (btn_ok.isVisible()) {
             btn_ok.setVisible(false);

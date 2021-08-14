@@ -71,6 +71,14 @@
          </center>
       </BorderPane>
       <JFXHamburger fx:id="jfx_hambur" layoutX="10.0" layoutY="10.0" />
+      <ImageView fitHeight="35.0" fitWidth="45.0" onMouseClicked="#on_btnNotification_Clicked" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="10.0">
+         <image>
+            <Image url="@../../images/Dashboard/notification_seller.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="CLOSED_HAND" />
+         </cursor>
+      </ImageView>
    </children>
    <stylesheets>
       <URL value="@../../css/seller_css/dashboard.css" />

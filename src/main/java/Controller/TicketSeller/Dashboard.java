@@ -11,12 +11,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -89,19 +92,47 @@ public class Dashboard implements Initializable {
 
     @FXML
     void btn_search_clicked(MouseEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/seller_view/FilterRoute.fxml"));
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/seller_view/FilterRoute.fxml"));
 
 
-        FilterRoute controller = new FilterRoute(cbx_start.getSelectionModel().getSelectedItem(),
-                cbx_dest.getSelectionModel().getSelectedItem(), datetime.getValue());
-        loader.setController(controller);
+            FilterRoute controller = new FilterRoute(cbx_start.getSelectionModel().getSelectedItem(),
+                    cbx_dest.getSelectionModel().getSelectedItem(), datetime.getValue());
+            loader.setController(controller);
 
-        AnchorPane newPane = loader.load();
+            AnchorPane newPane = loader.load();
 
-        newPane.requestLayout();
+            newPane.requestLayout();
 //        rootPane.getChildren().setAll(newPane);
-        Scene scene= rootPane.getScene();
-        scene.setRoot(newPane);
+            Scene scene = rootPane.getScene();
+            scene.setRoot(newPane);
+        }catch(Exception e){
+            new Alert(Alert.AlertType.WARNING, "Error occurred, Check again!").showAndWait();
+            System.out.println("Error occurred, Check again!");
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void on_btnNotification_Clicked(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/seller_view/Notification.fxml"));
+
+            Scene scene = new Scene(loader.load());
+            Stage stage = new Stage();
+
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.setTitle("Recent notification");
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initOwner(
+                    ((Node)event.getSource()).getScene().getWindow() );
+
+            stage.show();
+
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).showAndWait();
+        }
     }
 
 }

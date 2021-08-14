@@ -20,6 +20,8 @@ import javafx.scene.layout.*;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -145,18 +147,17 @@ public class BusPage implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            // Init for side bar
             InitSideBar.getInstance().initializeForNavBar(this.pane, this.jfx_drawer, this.jfx_hambur);
-            //done
+
             // Init combobox for type of bus
             BLL_Admin.getInstance().getListTypeOfBus().forEach(type -> {
                cbx_nameoftype.getItems().add(type.getTypeName());
             });
-            //done
+
             // Init combobox status
-                cbx_status.getItems().add("Available");
-                cbx_status.getItems().add("Unavailable");
-            // done
+            cbx_status.getItems().add("Available");
+            cbx_status.getItems().add("Unavailable");
+
             // Init tableview
             show(0, "");
             //done
@@ -185,9 +186,13 @@ public class BusPage implements Initializable {
         table_view.setItems(listObj);
         table_view.refresh();
     }
+
     @FXML
     void btn_create_clicked(MouseEvent event) {
         CRUDType = "Create";
+        cbx_nameoftype.getSelectionModel().clearSelection();
+        cbx_status.setVisible(false);
+        lbl_status.setVisible(false);
         toggleDetail();
     }
 
@@ -219,31 +224,41 @@ public class BusPage implements Initializable {
 
     @FXML
     void btn_ok_clicked(MouseEvent event) {
-        String name_of_bus = txf_nameofbus.getText().trim();
-        String plate_number = txf_platenumber.getText().trim();
-        TypeOfBusEntity type = BLL_Admin.getInstance().
-                getTypeOfBusObj(cbx_nameoftype.getSelectionModel().getSelectedIndex() + 1);
-        if(name_of_bus.equals("") || plate_number.equals("")) {
-            new Alert(Alert.AlertType.WARNING, "Fill all field!").showAndWait();
-            return;
-        }
-        switch(CRUDType) {
-            case "Create": {
-                BLL_Admin.getInstance().addBus(name_of_bus, plate_number,  type, false, 0);
-                new Alert(Alert.AlertType.INFORMATION, "Create Successful!").showAndWait();
-                show(0, "");
-                break;
+        try {
+            String name_of_bus = txf_nameofbus.getText().trim();
+            String plate_number = txf_platenumber.getText().trim();
+            TypeOfBusEntity type = BLL_Admin.getInstance().
+                    getTypeOfBusObj(cbx_nameoftype.getSelectionModel().getSelectedIndex() + 1);
+            if(name_of_bus.equals("") || plate_number.equals("")) {
+                new Alert(Alert.AlertType.WARNING, "Fill all field!").showAndWait();
+                return;
             }
-            case "Update": {
-                int stt = cbx_status.getSelectionModel().getSelectedItem().equals("Available") ? 0 : 1;
-                BLL_Admin.getInstance().updateBus(idBus, name_of_bus, plate_number, type, stt);
-                new Alert(Alert.AlertType.INFORMATION, "Update Successful!").showAndWait();
-                show(0, "");
-                break;
+            switch(CRUDType) {
+                case "Create": {
+                    if(txf_platenumber.getText().trim().length() > 10) {
+                        new Alert(Alert.AlertType.ERROR, "Plate number <= 10 characters!").showAndWait();
+                    }
+                    BLL_Admin.getInstance().addBus(name_of_bus, plate_number,  type, false, 0);
+                    new Alert(Alert.AlertType.INFORMATION, "Create Successful!").showAndWait();
+                    toggleDetail();
+                    show(0, "");
+                    break;
+                }
+                case "Update": {
+                    int stt = cbx_status.getSelectionModel().getSelectedItem().equals("Available") ? 0 : 1;
+                    BLL_Admin.getInstance().updateBus(idBus, name_of_bus, plate_number, type, stt);
+                    new Alert(Alert.AlertType.INFORMATION, "Update Successful!").showAndWait();
+                    toggleDetail();
+                    show(0, "");
+                    break;
+                }
+                default:
+                    break;
             }
-            default:
-                break;
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, "Check data again!").showAndWait();
         }
+
     }
 
     @FXML
@@ -286,7 +301,7 @@ public class BusPage implements Initializable {
             CRUDType = "Update";
             toggleDetail();
         } catch (Exception err) {
-            new Alert(Alert.AlertType.INFORMATION, "Choose only 1 row!").showAndWait();
+            new Alert(Alert.AlertType.INFORMATION, "Please choose 1 row!").showAndWait();
         }
 
     }
@@ -297,10 +312,10 @@ public class BusPage implements Initializable {
             new Alert(Alert.AlertType.WARNING, "List is empty!").showAndWait();
             return;
         }
-        Workbook workbook = new HSSFWorkbook();
-        Sheet spreadsheet = workbook.createSheet("bus");
+        HSSFWorkbook workbook = new HSSFWorkbook();
+        HSSFSheet spreadsheet = workbook.createSheet("bus");
 
-        Row row = spreadsheet.createRow(0);
+        HSSFRow row = spreadsheet.createRow(0);
 
         for (int j = 0; j < table_view.getColumns().size(); j++) {
             row.createCell(j).setCellValue(table_view.getColumns().get(j).getText());
@@ -318,7 +333,6 @@ public class BusPage implements Initializable {
             }
         }
 
-        // Show Selected Directory
         Stage stage = new Stage();
 
         stage.setTitle("Export data bus");
@@ -327,7 +341,7 @@ public class BusPage implements Initializable {
                 ((Node)event.getSource()).getScene().getWindow() );
 
         DirectoryChooser directoryChooser = new DirectoryChooser();
-        directoryChooser.setInitialDirectory(new File("src"));
+        directoryChooser.setInitialDirectory(new File(System.getProperty("user.home"), "./"));
 
         File selectedDirectory = directoryChooser.showDialog(stage);
         if(selectedDirectory != null) {
@@ -347,6 +361,7 @@ public class BusPage implements Initializable {
 
     @FXML
     void cbx_nameoftype_Action(ActionEvent event) {
+        if(cbx_nameoftype.getSelectionModel().isEmpty()) return;
         TypeOfBusEntity tob = BLL_Admin.getInstance().getTypeOfBusObj(cbx_nameoftype.getSelectionModel().
                 getSelectedIndex() + 1);
         txf_brandname.setText(tob.getBrandName());
@@ -377,7 +392,6 @@ public class BusPage implements Initializable {
             AnchorPane.setLeftAnchor(border_pane, 280.0);
         }
         jfx_hambur.toFront();
-
     }
 
 }

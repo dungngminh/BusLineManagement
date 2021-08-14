@@ -225,33 +225,6 @@
                </BorderPane.margin>
             </GridPane>
          </center>
-         <bottom>
-            <FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="40.0" prefWidth="1166.0" BorderPane.alignment="CENTER">
-               <children>
-                  <ImageView fx:id="arrow_left" fitHeight="30.0" fitWidth="40.0" onMouseClicked="#btn_arrow_left_clicked" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../images/Icon/arrow.png" />
-                     </image>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </ImageView>
-                  <Label fx:id="lbIndex" alignment="CENTER" prefHeight="20.0" prefWidth="28.0" text="Label">
-                     <FlowPane.margin>
-                        <Insets left="10.0" right="10.0" />
-                     </FlowPane.margin>
-                  </Label>
-                  <ImageView fx:id="arrow_right" fitHeight="30.0" fitWidth="40.0" onMouseClicked="#btn_arrow_right_clicked" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-                     <image>
-                        <Image url="@../../images/Icon/arrow.png" />
-                     </image>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </ImageView>
-               </children>
-            </FlowPane>
-         </bottom>
          <top>
             <FlowPane alignment="CENTER_RIGHT" columnHalignment="CENTER" prefHeight="49.0" prefWidth="1166.0" BorderPane.alignment="CENTER">
                <children>
@@ -263,6 +236,59 @@
                </children>
             </FlowPane>
          </top>
+         <bottom>
+            <GridPane BorderPane.alignment="CENTER">
+              <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <FlowPane alignment="CENTER" columnHalignment="CENTER" maxWidth="-Infinity" prefHeight="40.0" prefWidth="500.0" GridPane.columnIndex="1">
+                     <children>
+                        <ImageView fx:id="arrow_left" fitHeight="30.0" fitWidth="40.0" onMouseClicked="#btn_arrow_left_clicked" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/Icon/arrow.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                        <Label fx:id="lbIndex" alignment="CENTER" prefHeight="20.0" prefWidth="28.0" text="Label">
+                           <FlowPane.margin>
+                              <Insets left="10.0" right="10.0" />
+                           </FlowPane.margin>
+                        </Label>
+                        <ImageView fx:id="arrow_right" fitHeight="30.0" fitWidth="40.0" onMouseClicked="#btn_arrow_right_clicked" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                           <image>
+                              <Image url="@../../images/Icon/arrow.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                     </children>
+                  </FlowPane>
+                  <ImageView fitHeight="34.0" fitWidth="56.0" onMouseClicked="#btnBack_Click" pickOnBounds="true" preserveRatio="true">
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin>
+                     <image>
+                        <Image url="@../../images/Icon/back-arrow.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="CLOSED_HAND" />
+                     </cursor>
+                  </ImageView>
+               </children>
+               <BorderPane.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </BorderPane.margin>
+            </GridPane>
+         </bottom>
       </BorderPane>
       <JFXHamburger fx:id="jfx_hambur" layoutX="10.0" layoutY="10.0" />
    </children>

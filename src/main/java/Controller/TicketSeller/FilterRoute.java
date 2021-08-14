@@ -182,83 +182,109 @@ public class FilterRoute implements Initializable {
             //
         } catch (IOException e) {
             e.printStackTrace();
+            System.out.println("init false");
         }
     }
 
     @FXML
     void btn1_clicked(MouseEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/seller_view/TicketOrder.fxml"));
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/seller_view/TicketOrder.fxml"));
 
 
-        TicketOrder controller = new TicketOrder(listRoute.get(beginIndex - 1).getModelTrip(), date, startProvince, endProvince);
+            TicketOrder controller = new TicketOrder(listRoute.get(beginIndex - 1).getModelTrip(), date, startProvince, endProvince);
 
-        loader.setController(controller);
-        AnchorPane newPane = loader.load();
-        newPane.requestLayout();
+            loader.setController(controller);
+            AnchorPane newPane = loader.load();
+            newPane.requestLayout();
 //        rootPane.getChildren().setAll(newPane);
-        Scene scene= rootPane.getScene();
-        scene.setRoot(newPane);
+            Scene scene = rootPane.getScene();
+            scene.setRoot(newPane);
+        }catch (Exception e){
+            System.out.println("Error occurred, Please check again!");
+            new Alert(Alert.AlertType.WARNING, "Error occurred, Please check again!").showAndWait();
+        }
     }
 
     @FXML
     void btn2_clicked(MouseEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/seller_view/TicketOrder.fxml"));
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/seller_view/TicketOrder.fxml"));
 
 
-        TicketOrder controller = new TicketOrder(listRoute.get(beginIndex).getModelTrip(), date, startProvince, endProvince);
+            TicketOrder controller = new TicketOrder(listRoute.get(beginIndex).getModelTrip(), date, startProvince, endProvince);
 
-        loader.setController(controller);
-        AnchorPane newPane = loader.load();
-        newPane.requestLayout();
+            loader.setController(controller);
+            AnchorPane newPane = loader.load();
+            newPane.requestLayout();
 //        rootPane.getChildren().setAll(newPane);
-        Scene scene= rootPane.getScene();
-        scene.setRoot(newPane);
+            Scene scene= rootPane.getScene();
+            scene.setRoot(newPane);
+        }catch (Exception e){
+            System.out.println("Error occurred, Please check again!");
+            new Alert(Alert.AlertType.WARNING, "Error occurred, Please check again!").showAndWait();
+        }
     }
 
 
     @FXML
     void btn3_clicked(MouseEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/seller_view/TicketOrder.fxml"));
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/seller_view/TicketOrder.fxml"));
 
 
-        TicketOrder controller = new TicketOrder(listRoute.get(beginIndex + 1).getModelTrip(), date, startProvince, endProvince);
+            TicketOrder controller = new TicketOrder(listRoute.get(beginIndex + 1).getModelTrip(), date, startProvince, endProvince);
 
-        loader.setController(controller);
-        AnchorPane newPane = loader.load();
-        newPane.requestLayout();
+            loader.setController(controller);
+            AnchorPane newPane = loader.load();
+            newPane.requestLayout();
 //        rootPane.getChildren().setAll(newPane);
-        Scene scene= rootPane.getScene();
-        scene.setRoot(newPane);
+            Scene scene= rootPane.getScene();
+            scene.setRoot(newPane);
+        }catch (Exception e){
+            System.out.println("Error occurred, Please check again!");
+            new Alert(Alert.AlertType.WARNING, "Error occurred, Please check again!").showAndWait();
+        }
     }
 
     @FXML
     void btn4_clicked(MouseEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/seller_view/TicketOrder.fxml"));
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/seller_view/TicketOrder.fxml"));
 
 
-        TicketOrder controller = new TicketOrder(listRoute.get(beginIndex + 2).getModelTrip(), date, startProvince, endProvince);
+            TicketOrder controller = new TicketOrder(listRoute.get(beginIndex + 2).getModelTrip(), date, startProvince, endProvince);
 
-        loader.setController(controller);
-        AnchorPane newPane = loader.load();
-        newPane.requestLayout();
+            loader.setController(controller);
+            AnchorPane newPane = loader.load();
+            newPane.requestLayout();
 //        rootPane.getChildren().setAll(newPane);
-        Scene scene= rootPane.getScene();
-        scene.setRoot(newPane);
+            Scene scene= rootPane.getScene();
+            scene.setRoot(newPane);
+        }catch (Exception e){
+            System.out.println("Error occurred, Please check again!");
+            new Alert(Alert.AlertType.WARNING, "Error occurred, Please check again!").showAndWait();
+        }
     }
 
     @FXML
     void btn5_clicked(MouseEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/seller_view/TicketOrder.fxml"));
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/seller_view/TicketOrder.fxml"));
 
 
-        TicketOrder controller = new TicketOrder(listRoute.get(beginIndex + 3).getModelTrip(), date, startProvince, endProvince);
+            TicketOrder controller = new TicketOrder(listRoute.get(beginIndex + 3).getModelTrip(), date, startProvince, endProvince);
 
-        loader.setController(controller);
-        AnchorPane newPane = loader.load();
-        newPane.requestLayout();
+            loader.setController(controller);
+            AnchorPane newPane = loader.load();
+            newPane.requestLayout();
 //        rootPane.getChildren().setAll(newPane);
-        Scene scene= rootPane.getScene();
-        scene.setRoot(newPane);
+            Scene scene= rootPane.getScene();
+            scene.setRoot(newPane);
+        }catch (Exception e){
+            System.out.println("Error occurred, Please check again!");
+            new Alert(Alert.AlertType.WARNING, "Error occurred, Please check again!").showAndWait();
+        }
     }
 
     @FXML
@@ -285,6 +311,15 @@ public class FilterRoute implements Initializable {
         else {
             new Alert(Alert.AlertType.WARNING, "Out of data!").showAndWait();
         }
+    }
+
+    @FXML
+    void btnBack_Click(MouseEvent event) throws IOException {
+        AnchorPane newPane = FXMLLoader.load(getClass().getResource("/view/seller_view/Dashboard.fxml"));
+        newPane.requestLayout();
+//        rootPane.getChildren().setAll(newPane);
+        Scene scene= rootPane.getScene();
+        scene.setRoot(newPane);
     }
 
     @FXML
@@ -316,8 +351,7 @@ public class FilterRoute implements Initializable {
                     lbl31.setText(listRoute.get(beginIndex - 1).getDestStation());
                     String time = new SimpleDateFormat("HH:mm").format(listRoute.get(beginIndex - 1).getDepartTime());
 
-                    lbl41.setText("Depart time: " + time + "\nDuration: " +
-                            listRoute.get(beginIndex - 1).getDuration() + "h\n" +
+                    lbl41.setText("Depart time: " + time + "h\n" +
                             "Price: " + listRoute.get(beginIndex - 1).getPrice());
                     break;
                 }
@@ -334,8 +368,7 @@ public class FilterRoute implements Initializable {
                     lbl22.setText(listRoute.get(beginIndex).getStartStation());
                     lbl32.setText(listRoute.get(beginIndex).getDestStation());
                     String time = new SimpleDateFormat("HH:mm").format(listRoute.get(beginIndex).getDepartTime());
-                    lbl42.setText("Depart time: " + time + "\nDuration: " +
-                            listRoute.get(beginIndex).getDuration() + "h\n" +
+                    lbl42.setText("Depart time: " + time + "h\n" +
                             "Price: " + listRoute.get(beginIndex - 1).getPrice());
                     break;
                 }
@@ -352,8 +385,7 @@ public class FilterRoute implements Initializable {
                     lbl23.setText(listRoute.get(beginIndex + 1).getStartStation());
                     lbl33.setText(listRoute.get(beginIndex + 1).getDestStation());
                     String time = new SimpleDateFormat("HH:mm").format(listRoute.get(beginIndex + 1).getDepartTime());
-                    lbl43.setText("Depart time: " + time + "\nDuration: " +
-                            listRoute.get(beginIndex + 1).getDuration() + "h\n" +
+                    lbl43.setText("Depart time: " + time + "h\n" +
                             "Price: " + listRoute.get(beginIndex - 1).getPrice());
                     break;
                 }
@@ -370,8 +402,7 @@ public class FilterRoute implements Initializable {
                     lbl24.setText(listRoute.get(beginIndex + 2).getStartStation());
                     lbl34.setText(listRoute.get(beginIndex + 2).getDestStation());
                     String time = new SimpleDateFormat("HH:mm").format(listRoute.get(beginIndex + 2).getDepartTime());
-                    lbl44.setText("Depart time: " + time + "\nDuration: " +
-                            listRoute.get(beginIndex + 2).getDuration() + "h\n" +
+                    lbl44.setText("Depart time: " + time + "h\n" +
                             "Price: " + listRoute.get(beginIndex - 1).getPrice());
                     break;
                 }
@@ -388,8 +419,7 @@ public class FilterRoute implements Initializable {
                     lbl25.setText(listRoute.get(beginIndex + 3).getStartStation());
                     lbl35.setText(listRoute.get(beginIndex + 3).getDestStation());
                     String time = new SimpleDateFormat("HH:mm").format(listRoute.get(beginIndex + 3).getDepartTime());
-                    lbl45.setText("Depart time: " + time + "\nDuration: " +
-                            listRoute.get(beginIndex + 3).getDuration() + "h\n" +
+                    lbl45.setText("Depart time: " + time + "h\n" +
                             "Price: " + listRoute.get(beginIndex - 1).getPrice());
                     break;
                 }

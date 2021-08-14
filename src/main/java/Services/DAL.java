@@ -4,6 +4,7 @@ import Model.*;
 import Util.HibernateUtils;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
+import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
 
@@ -12,6 +13,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import java.util.Date;
@@ -154,7 +156,7 @@ public class DAL {
         bus.setPlateNumber(plateNumber);
         bus.setIdType(tob.getIdType());
         bus.setIsDelete(false);
-        bus.setStatus(1);
+        bus.setStatus(stt);
         bus.setTypeOfBusByIdType(tob);
 
         //Save the BusEntity in database
@@ -170,7 +172,7 @@ public class DAL {
     public void updateBus(int idBus, String busName, String plateNumber, TypeOfBusEntity tob, int stt) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
-        Query query = session.createQuery("update BusEntity set busName = :busName, plateNumber = :plateNumber, typeOfBusByIdType = :tob, status = :stt" +
+        var query = session.createQuery("update BusEntity set busName = :busName, plateNumber = :plateNumber, typeOfBusByIdType = :tob, status = :stt" +
                 " where idBus = :idBus");
         query.setParameter("busName", busName);
         query.setParameter("plateNumber", plateNumber);
@@ -187,7 +189,7 @@ public class DAL {
     public void deleteBus(int idBus) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
-        Query<BusEntity> query = session.createQuery("update BusEntity set isDelete = :del" +
+        var query = session.createNativeQuery("update Bus set isDelete = :del" +
                 " where idBus = :idBus");
         query.setParameter("del", true);
         query.setParameter("idBus", idBus);
@@ -224,7 +226,7 @@ public class DAL {
         AccountEntity acc = new AccountEntity();
         acc.setUsername(username);
         acc.setPassword(password);
-        System.out.println(idRole);
+
         acc.setIdRole(idRole);
         acc.setIsOnline(false);
         acc.setIsDelete(false);
@@ -316,7 +318,7 @@ public class DAL {
     public void updateDriver(int id, String driverName, String phoneNumber, String address, int stt) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
-        Query query = session.createQuery("update DriverEntity set nameDriver = :name, phone = :phoneNumber, address = :address, status = :stt" +
+        var query = session.createNativeQuery("update Driver set nameDriver = :name, phone = :phoneNumber, address = :address, status = :stt" +
                 " where idDriver = :id");
         query.setParameter("name", driverName);
         query.setParameter("phoneNumber", phoneNumber);
@@ -333,7 +335,7 @@ public class DAL {
     public void deleteDriver(int idDriver) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
-        Query<DriverEntity> query = session.createQuery("update DriverEntity set isDelete = :del" +
+        var query = session.createNativeQuery("update Driver set isDelete = :del" +
                 " where idDriver = :idDriver");
         query.setParameter("del", true);
         query.setParameter("idDriver", idDriver);
@@ -351,7 +353,7 @@ public class DAL {
     public List<ProvinceEntity> getProvinceName() {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
-        Query<ProvinceEntity> query = session.createQuery("From ProvinceEntity ", ProvinceEntity.class);
+        Query<ProvinceEntity> query = session.createNativeQuery("SELECT * FROM Province", ProvinceEntity.class);
         List<ProvinceEntity> result = query.getResultList();
         session.getTransaction().commit();
         session.close();
@@ -371,7 +373,9 @@ public class DAL {
     public List<RouteEntity> getRoutes() {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
-        Query<RouteEntity> query = session.createQuery("From RouteEntity", RouteEntity.class);
+        var query = session.createSQLQuery("SELECT * FROM Route");
+        query.addEntity(RouteEntity.class);
+        //Query<RouteEntity> query = session.createQuery("From RouteEntity", RouteEntity.class);
         List<RouteEntity> result = query.getResultList();
         session.getTransaction().commit();
         session.close();
@@ -382,8 +386,9 @@ public class DAL {
     public void updateRoute(int idRoute, String startStation, String endStation, String note, int distance, int stt) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
-        var query = session.createQuery("update RouteEntity set startStation=:startStation,endStation =:endStation,note =:note, distance =:distance, status =:stt" +
-                " where idRoute = :idRoute");
+        var query = session.createNativeQuery("UPDATE RouteEntity SET startStation=:startStation,endStation =:endStation,note =:note, distance =:distance, status =:stt" +
+                " WHERE idRoute = :idRoute");
+
         query.setParameter("startStation", startStation);
         query.setParameter("endStation", endStation);
         query.setParameter("distance", distance);
@@ -400,8 +405,8 @@ public class DAL {
     public void deleteRoute(int idRoute) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
-        var query = session.createQuery("update RouteEntity set status = :stt" +
-                " where idRoute = :idRoute");
+        var query = session.createSQLQuery("UPDATE Route SET status = :stt" +
+                " WHERE idRoute = :idRoute");
         query.setParameter("stt", 2);
 
         query.setParameter("idRoute", idRoute);
@@ -425,8 +430,8 @@ public class DAL {
     public void removeSchedule(int idSchedule) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
-        Query query = session.createQuery("update ScheduleEntity set isDelete = :del" +
-                " where idSchedule = :id");
+        var query = session.createSQLQuery("UPDATE Schedule SET isDelete = :del" +
+                " WHERE idSchedule = :id");
         query.setParameter("del", true);
         query.setParameter("id", idSchedule);
         query.executeUpdate();
@@ -438,8 +443,9 @@ public class DAL {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
         //TODO Query update Schedule
-        Query query = session.createQuery("Update ScheduleEntity set idRoute = :idRoute, idBus = :idBus, idDriver = :idDriver,departTime = :departTime" +
-                ", price = :price, dpr = :dpr where idSchedule = :idSchedule");
+        var query = session.createSQLQuery("UPDATE Schedule SET idRoute = :idRoute, idBus = :idBus, idDriver = :idDriver,departTime = :departTime" +
+                ", price = :price, dpr = :dpr WHERE idSchedule = :idSchedule");
+
         query.setParameter("idRoute", routeSelected.getIdRoute());
         query.setParameter("idBus", busSelected.getIdBus());
         query.setParameter("idDriver", driverSelected.getIdDriver());
@@ -455,8 +461,9 @@ public class DAL {
     public void updateScheduleNotDPR(int idSchedule, RouteEntity routeSelected, BusEntity busSelected, DriverEntity driverSelected, Date departTimeInput, int durationInput, int priceInput) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
-        Query query = session.createQuery("Update ScheduleEntity set idRoute = :idRoute, idBus = :idBus, idDriver = :idDriver,departTime = :departTime" +
-                ", price = :price where idSchedule = :idSchedule");
+        var query = session.createSQLQuery("UPDATE Schedule SET idRoute = :idRoute, idBus = :idBus, idDriver = :idDriver,departTime = :departTime" +
+                ", price = :price WHERE idSchedule = :idSchedule");
+
         query.setParameter("idRoute", routeSelected.getIdRoute());
         query.setParameter("idBus", busSelected.getIdBus());
         query.setParameter("idDriver", driverSelected.getIdDriver());
@@ -471,7 +478,7 @@ public class DAL {
     public void updateDPR(int idSchedule, int dpr) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
-        var query = session.createQuery("Update ScheduleEntity set dpr = :dpr where idSchedule = :idSchedule");
+        var query = session.createSQLQuery("UPDATE Schedule SET dpr = :dpr WHERE idSchedule = :idSchedule");
         query.setParameter("dpr", dpr);
         query.setParameter("idSchedule", idSchedule);
         query.executeUpdate();
@@ -487,7 +494,6 @@ public class DAL {
 
         Session session = HibernateUtils.getSessionFactory().openSession();
 
-
         for (List<String> x : listPairStation) {
 
             session.beginTransaction();
@@ -501,21 +507,21 @@ public class DAL {
             result.addAll(query.getResultList());
             session.getTransaction().commit();
 
-
         }
         session.close();
-
         return result;
     }
-
 
     public List<ScheduleEntity> getScheduleData() {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
-        Query<ScheduleEntity> query = session.createQuery("Select SCH from ScheduleEntity SCH, DriverEntity DRI, " +
-                "RouteEntity ROU, BusEntity BUS, TypeOfBusEntity TYPE where SCH.idDriver = DRI.idDriver AND DRI.status = 0 AND DRI.isDelete = false " +
-                "AND SCH.idRoute = ROU.idRoute AND ROU.status = 0 AND SCH.idBus = BUS.idBus AND BUS.status = 0 AND BUS.isDelete = false " +
-                "AND BUS.idType = TYPE.idType AND TYPE.isDelete = false", ScheduleEntity.class);
+
+        var query = session.createNativeQuery("SELECT SCH.* FROM Schedule SCH INNER JOIN " +
+                "Driver DRI ON SCH.idDriver = DRI.idDriver INNER JOIN Route ROU ON SCH.idRoute = ROU.idRoute " +
+                "INNER JOIN Bus ON SCH.idBus = Bus.idBus INNER JOIN TypeOfBus TYPE ON Bus.idType = TYPE.idType " +
+                "WHERE DRI.[status] = 0 AND DRI.isDelete = 0 and ROU.[status] = 0 and Bus.[status] = 0 and Bus.isDelete = 0 and SCH.isDelete = 0 " +
+                "and TYPE.isDelete = 0",ScheduleEntity.class
+        );
         List<ScheduleEntity> list = query.getResultList();
         session.getTransaction().commit();
         session.close();
@@ -548,7 +554,7 @@ public class DAL {
                 "                                            (SELECT PRO.idProvince FROM Province PRO WHERE PRO.provinceName = :from))\n" +
                 "AND R.endStation IN (SELECT STA.stationName FROM Station STA WHERE STA.idProvince =\n" +
                 "                                            (SELECT PRO.idProvince FROM Province PRO WHERE PRO.provinceName = :to))";
-        SQLQuery query = session.createSQLQuery(sql);
+        var query = session.createSQLQuery(sql);
         query.setParameter("departDate", departDate);
         query.setParameter("from", startPro.getProvinceName());
         query.setParameter("to", endPro.getProvinceName());
@@ -659,17 +665,17 @@ public class DAL {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
         String subQr1 = paid == null ? "" : ("AND T.isPaid = " + paid);
-        String subQr2 = fromProvince == null ? "" : "AND departDate >= :departDate\n" +
+        String subQr2 = fromProvince == null ? "" : ("AND DAY(departDate) = DAY(:departDate)\n" +
                 "AND R.startStation IN (SELECT STA.stationName FROM Station STA WHERE STA.idProvince =\n" +
                 "                                            (SELECT PRO.idProvince FROM Province PRO WHERE PRO.provinceName = :from))\n" +
                 "AND R.endStation IN (SELECT STA.stationName FROM Station STA WHERE STA.idProvince =\n" +
-                "                                            (SELECT PRO.idProvince FROM Province PRO WHERE PRO.provinceName = :to))";
+                "                                            (SELECT PRO.idProvince FROM Province PRO WHERE PRO.provinceName = :to))");
         String sql = "SELECT DISTINCT T.* FROM Route R\n" +
                 "INNER JOIN Schedule S on R.idRoute = S.idRoute\n" +
                 "INNER JOIN TripInformation TI on S.idSchedule = TI.idSchedule\n" +
                 "INNER JOIN Ticket T on TI.idTrip = T.idTrip\n" +
                 "\n" +
-                "WHERE departDate >= GETDATE()" + subQr1 + subQr2;
+                "WHERE DAY(departDate) >= DAY(GETDATE())" + subQr1 + subQr2;
         SQLQuery query = session.createSQLQuery(sql);
         if (fromProvince != null) {
             query.setParameter("departDate", departDate);
@@ -750,7 +756,7 @@ public class DAL {
         Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
         String sql = "SELECT COUNT(TI.idSchedule)\n" +
-                "FROM Schedule SCH INNER JOIN TripInformation TI ON SCH.idSchedule = TI.idSchedule\n" +
+                "FROM Schedule SCH INNER JOIN TripInformation TI ON SCH.idSchedule = TI.idSchedule WHERE SCH.isDelete = 0 \n" +
                 "GROUP BY Ti.idSchedule\n" +
                 "HAVING max(TI.departDate) <= DATEADD(day,7,GETDATE())";
         var query = session.createSQLQuery(sql);
@@ -825,4 +831,62 @@ public class DAL {
 
 
     //DONE
+
+    // NOTICE DAL for Notifocation(Dashboard of Admin)
+    public void pushMessageIntoDB(String message) {
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        NotificationEntity noti = new NotificationEntity();
+        noti.setIdUser(current.getIdUser());
+        noti.setNotifyContent(message);
+        noti.setTime(new Timestamp(System.currentTimeMillis()));
+        noti.setAccountByIdUser(current);
+
+        session.save(noti);
+        //Commit the transaction
+        session.getTransaction().commit();
+        session.close();
+    }
+
+    public List<NotificationEntity> getAllNotification() {
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        session.beginTransaction();
+        String sql = "SELECT NOTI.* FROM Notification NOTI WHERE NOTI.time >= DATEADD(day, -7, GETDATE())\n" +
+                "ORDER BY NOTI.time DESC";
+        SQLQuery query = session.createSQLQuery(sql);
+
+        query.addEntity(NotificationEntity.class);
+        List<NotificationEntity> result = query.getResultList();
+        session.getTransaction().commit();
+        session.close();
+
+        return result;
+    }
+
+    public void updateNotification(Integer idNotify, String content) {
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        Query query = session.createQuery("update NotificationEntity set notifyContent = :content, time = :time" +
+                " where id = :id");
+        query.setParameter("content", content);
+        query.setParameter("time", new Timestamp(System.currentTimeMillis()));
+        query.setParameter("id", idNotify);
+        query.executeUpdate();
+        session.getTransaction().commit();
+        session.close();
+    }
+
+    public void deleteNotification(Integer id) {
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        Query query = session.createQuery("delete from NotificationEntity where idNotify = :id");
+        query.setParameter("id", id);
+        query.executeUpdate();
+        session.getTransaction().commit();
+        session.close();
+    }
+    // DONE
 }

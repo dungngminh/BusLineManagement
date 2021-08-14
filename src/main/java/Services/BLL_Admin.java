@@ -2,6 +2,7 @@ package Services;
 
 import Model.*;
 import Model.ViewModel.BusEntity_ViewModel;
+import Model.ViewModel.Notification_ViewModel;
 import Model.ViewModel.ScheduleEntity_ViewModel;
 
 import javafx.util.Pair;
@@ -159,7 +160,7 @@ public class BLL_Admin {
         driver.setPhone(phoneNumber);
         driver.setAddress(address);
         driver.setIsDelete(false);
-        driver.setStatus(1);
+        driver.setStatus(stt);
         DAL.getInstance().insertDriver(driver);
     }
 
@@ -235,12 +236,12 @@ public class BLL_Admin {
         DAL.getInstance().getScheduleData().forEach(data -> {
             if ((data.getRouteByIdRoute().getStartStation() + " - " + data.getRouteByIdRoute().getEndStation() +
                     " || " + data.getBusByIdBus().getTypeOfBusByIdType().getTypeName() + " || " +
-                    new SimpleDateFormat("HH:mm:ss").format(data.getDepartTime())).toLowerCase().contains(name.toLowerCase()))
+                    new SimpleDateFormat("HH:mm").format(data.getDepartTime())).toLowerCase().contains(name.toLowerCase()))
 
                 list.add(new ScheduleEntity_ViewModel(data.getIdSchedule(),
                         (data.getRouteByIdRoute().getStartStation() + " - " + data.getRouteByIdRoute().getEndStation()),
                         data.getBusByIdBus().getBusName(), data.getBusByIdBus().getTypeOfBusByIdType().getTypeName(),
-                        data.getDriverByIdDriver().getNameDriver(), new SimpleDateFormat("HH:mm:ss").format(data.getDepartTime()),
+                        data.getDriverByIdDriver().getNameDriver(), new SimpleDateFormat("HH:mm").format(data.getDepartTime()),
                         new SimpleDateFormat("dd/MM/yyyy").format(DAL.getInstance().getOutDateUpdate(data.getIdSchedule())),
                         data.getPrice(), data.getDuration(), data.getDpr(), data.getIsDelete()));
 
@@ -411,5 +412,31 @@ public class BLL_Admin {
     }
 
     //DONE
+
+    // NOTICE BLL for Notifocation(Dashboard of Admin)
+
+    public void pushMessageIntoDB(String message) {
+        DAL.getInstance().pushMessageIntoDB(message);
+    }
+
+    public List<Notification_ViewModel> getAllNotification() {
+        List<Notification_ViewModel> list = new ArrayList<>();
+
+        DAL.getInstance().getAllNotification().forEach(noti -> {
+            list.add(new Notification_ViewModel(noti.getIdNotify(), noti.getAccountByIdUser().getUsername(), noti.getNotifyContent(),
+                    new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(noti.getTime())));
+        });
+        return list;
+    }
+
+    public void updateNotification(Integer idNotify, String content) {
+        DAL.getInstance().updateNotification(idNotify, content);
+    }
+
+    public void deleteNotification(Integer id) {
+        DAL.getInstance().deleteNotification(id);
+    }
+
+    // DONE
 
 }

@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane id="navbar" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="757.0" prefWidth="156.0" stylesheets="@../../css/nav_bar.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox alignment="BASELINE_CENTER" prefHeight="521.0" prefWidth="156.0" styleClass="vbox" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -19,10 +18,10 @@
          <children>
             <ImageView fitHeight="118.0" fitWidth="121.0" pickOnBounds="true" preserveRatio="true" styleClass="btn">
                <image>
-                  <Image url="@../../images/Icon/logo.png" />
+                  <Image url="@../../images/Stuff/logo.png" />
                </image>
                <VBox.margin>
-                  <Insets top="5.0" />
+                  <Insets top="30.0" />
                </VBox.margin>
             </ImageView>
             <Button id="dashboard" fx:id="btn_dashboard" accessibleText="dashboard" contentDisplay="TOP" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="85.0" prefWidth="156.0" styleClass="btn" stylesheets="@../../css/nav_bar.css" text="Dashboard" textAlignment="JUSTIFY" textFill="WHITE">

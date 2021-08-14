@@ -18,6 +18,8 @@ import javafx.scene.layout.*;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -116,7 +118,6 @@ public class Driver implements Initializable {
     @FXML
     private Button btn_search;
 
-    // Var static
     private static String CRUDType;
     private static Integer idDriver;
 
@@ -125,7 +126,6 @@ public class Driver implements Initializable {
         try {
             // Init for side bar
             InitSideBar.getInstance().initializeForNavBar(this.pane, this.jfx_drawer, this.jfx_hambur);
-            //done
 
             toggleDetail();
             show(-1, "");
@@ -156,10 +156,6 @@ public class Driver implements Initializable {
         table_view.refresh();
     }
 
-
-    //done
-
-    // Handle event
     @FXML
     void btn_cancel_clicked(MouseEvent event) {
         btn_reset.fire();
@@ -173,19 +169,25 @@ public class Driver implements Initializable {
     @FXML
     void btn_create_clicked(MouseEvent event) {
         CRUDType = "Create";
+        txf_nameofdriver.setText("");
+        txf_phonenumber.setText("");
+        txf_address.setText("");
         toggleDetail();
     }
 
     @FXML
     void btn_delete_clicked(MouseEvent event) {
-//        try {
+
+        try {
             DriverEntity tbl = table_view.getSelectionModel().getSelectedItem();
             idDriver = tbl.getIdDriver();
             BLL_Admin.getInstance().deleteDriver(idDriver);
+            new Alert(Alert.AlertType.INFORMATION, "Delete successfully!").showAndWait();
             show(-1, "");
-//        } catch (Exception err) {
-//            new Alert(Alert.AlertType.INFORMATION, "Choose only 1 row!").showAndWait();
-//        }
+        } catch (Exception err) {
+            new Alert(Alert.AlertType.WARNING, "Choose only 1 row!").showAndWait();
+        }
+
     }
 
     @FXML
@@ -194,10 +196,10 @@ public class Driver implements Initializable {
             new Alert(Alert.AlertType.WARNING, "List is empty!").showAndWait();
             return;
         }
-        Workbook workbook = new HSSFWorkbook();
-        Sheet spreadsheet = workbook.createSheet("driver");
+        HSSFWorkbook workbook = new HSSFWorkbook();
+        HSSFSheet spreadsheet = workbook.createSheet("driver");
 
-        Row row = spreadsheet.createRow(0);
+        HSSFRow row = spreadsheet.createRow(0);
 
         for (int j = 0; j < table_view.getColumns().size(); j++) {
             row.createCell(j).setCellValue(table_view.getColumns().get(j).getText());
@@ -224,7 +226,7 @@ public class Driver implements Initializable {
                 ((Node)event.getSource()).getScene().getWindow() );
 
         DirectoryChooser directoryChooser = new DirectoryChooser();
-        directoryChooser.setInitialDirectory(new File("src"));
+        directoryChooser.setInitialDirectory(new File(System.getProperty("user.home"), "./"));
 
         File selectedDirectory = directoryChooser.showDialog(stage);
         if(selectedDirectory != null) {
@@ -253,15 +255,31 @@ public class Driver implements Initializable {
         }
         switch(CRUDType) {
             case "Create": {
-                BLL_Admin.getInstance().addDriver(name_of_driver, phonenumber,  address, 0);
-                show(-1, "");
-                break;
+                try {
+                    BLL_Admin.getInstance().addDriver(name_of_driver, phonenumber, address, 0);
+                    new Alert(Alert.AlertType.INFORMATION, "Add new Driver successfully!").showAndWait();
+                    toggleDetail();
+
+                    show(-1, "");
+                    break;
+                }catch (Exception e){
+                    new Alert(Alert.AlertType.WARNING, "Error occurred, Please check again!").showAndWait();
+                    break;
+                }
             }
             case "Update": {
-                int stt = cbx_status.getSelectionModel().getSelectedItem().equals("Available") ? 0 : 1;
-                BLL_Admin.getInstance().updateDriver(idDriver, name_of_driver, phonenumber, address, stt);
-                show(-1, "");
-                break;
+                try {
+                    int stt = cbx_status.getSelectionModel().getSelectedItem().equals("Available") ? 0 : 1;
+                    BLL_Admin.getInstance().updateDriver(idDriver, name_of_driver, phonenumber, address, stt);
+                    new Alert(Alert.AlertType.INFORMATION, "Update Driver successfully!").showAndWait();
+                    toggleDetail();
+                    show(-1, "");
+                    break;
+                }catch (Exception e){
+                    System.out.println("Update not successfully!");
+                    new Alert(Alert.AlertType.WARNING, "Error occurred during updating, Please check again!").showAndWait();
+                    break;
+                }
             }
             default:
                 break;

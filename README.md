@@ -165,6 +165,7 @@ There are some screenshots about this app, and the sequence of using the app.
     ![image_login](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/login1.jpg)
     
 **2. Admin Dashboard**
+
     <br/>
     <br/>
     ![image_dashboard](https://raw.githubusercontent.com/dungngminh/QuanLyNhaXe_Maven/feature/screenshot/dashboard.png)
@@ -172,7 +173,12 @@ There are some screenshots about this app, and the sequence of using the app.
 **3. Main Page**
     <br/>
     <br/>
-    ![image_main](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/ticketseller_dashboard1.jpg)
+    ![image_dashboard](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/dashboard.jpg)
+ 
+**3. Main Page**
+    <br/>
+    <br/>
+    ![image_dashboard1](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/ticketseller_dashboard1.jpg)
 
 **4. Bus Page**
     <br/>
@@ -211,7 +217,7 @@ There are some screenshots about this app, and the sequence of using the app.
     <br/>
     ![image_acc2](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/acc2.jpg)
     
-**8. Ticket Detail**
+**9. Ticket Detail**
     <br/>
     <br/>
     ![image_ticket1](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/ticketdetail.jpg)
