@@ -111,7 +111,47 @@ You still need to install these things first:
     database-init.sh
    ```
    
+### Directory Structure
 
+```
+project
+│   README.md
+│
+└───screenshot
+│
+│
+└───src/main
+│   └───java
+|   |   |   main.java                           <- [Main class in java Program]
+|   |   |
+│   │   │   Controller                          <- [Controller]
+|   |   |   └───Admin Controller
+|   |   |   └───BusType Controller
+|   |   |   └───TicketSeller Controller
+|   |   |
+│   │   │   Model                               <- [Model]
+|   |   |   └───Entity Class
+|   |   |   └───ViewModel Class
+|   |   |
+|   |   |   Services                            <- [Services]
+|   |   |   └───DBConnectionHelper Class
+|   |   |   └───BusinessLogic Class
+|   |   |
+|   |   |   Utils                               <- [Utilities]
+|   |   |   └───HibernateUtil Class
+│   │
+│   └───resources                 
+│   |    │   css
+|   |    |
+│   |    │   images
+|   |    |
+|   |    |   util
+|   |    |
+|   |    |   views                              <- [Contains FXML file for UI/ UX]
+|   |    |   └───Admin View
+|   |    |   └───BusType View
+|   |    |   └───Seller View
+```
 
 
 <!-- USAGE EXAMPLES -->
@@ -125,6 +165,12 @@ There are some screenshots about this app, and the sequence of using the app.
     ![image_login](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/login1.jpg)
     
 **2. Admin Dashboard**
+
+    <br/>
+    <br/>
+    ![image_dashboard](https://raw.githubusercontent.com/dungngminh/QuanLyNhaXe_Maven/feature/screenshot/dashboard.png)
+    
+**3. Main Page**
     <br/>
     <br/>
     ![image_dashboard](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/dashboard.jpg)
@@ -163,7 +209,7 @@ There are some screenshots about this app, and the sequence of using the app.
      <br/>
     ![image_driver2](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/driver2.jpg)
 
-**7. Decentralize**
+**8. Decentralize**
     <br/>
     <br/>
     ![image_acc1](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/acc1.jpg)
@@ -238,11 +284,11 @@ Project Link: [Bus Lines Management](https://github.com/dungngminh/QuanLyNhaXe_M
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/badge/CONTRIBUTORS-_4_-brightgreen?style=for-the-badge
 [contributors-url]: https://github.com/dungngminh/QuanLyNhaXe_Maven/graphs/contributors
-[forks-shield]: https://img.shields.io/badge/FORKS-_0_-blue?style=for-the-badge
+[forks-shield]: https://img.shields.io/badge/FORKS-_1_-blue?style=for-the-badge
 [forks-url]: https://github.com/dungngminh/QuanLyNhaXe_Maven/network/members
 [stars-shield]: https://img.shields.io/badge/STARS-_3_-blue?style=for-the-badge
 [stars-url]: https://github.com/dungngminh/QuanLyNhaXe_Maven/stargazers
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
+[issues-shield]: https://img.shields.io/badge/ISSUES-_2%20closed_-blue?style=for-the-badge
 [issues-url]: https://github.com/dungngminh/QuanLyNhaXe_Maven/issues
 [license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
 [license-url]: https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/master/LICENSE.txt
