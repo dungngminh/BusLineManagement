@@ -164,12 +164,17 @@ There are some screenshots about this app, and the sequence of using the app.
     <br/>
     ![image_login](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/login1.jpg)
     
-**2. Main Page**
+**2. Admin Dashboard**
+    <br/>
+    <br/>
+    ![image_dashboard](https://raw.githubusercontent.com/dungngminh/QuanLyNhaXe_Maven/feature/screenshot/dashboard.png)
+    
+**3. Main Page**
     <br/>
     <br/>
     ![image_main](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/ticketseller_dashboard1.jpg)
 
-**3. Bus Page**
+**4. Bus Page**
     <br/>
     <br/>
     ![image_bus1](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/bus.jpg)
@@ -177,7 +182,7 @@ There are some screenshots about this app, and the sequence of using the app.
     <br/>
     ![imgae_bus2](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/bus1.jpg)
 
-**4. Route**
+**5. Route**
     <br/>
     <br/>
     ![image_route1](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/route1.jpg)
@@ -185,12 +190,12 @@ There are some screenshots about this app, and the sequence of using the app.
     <br/>
     ![image_route2](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/route2.jpg)
     
-**5. Route List**
+**6. Route List**
     <br/>
     <br/>
     ![image_ticket2](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/routebydate.jpg)
     
-**6. Driver**
+**7. Driver**
     <br/>
     <br/>
     ![image_driver1](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/driver1.jpg)
@@ -198,7 +203,7 @@ There are some screenshots about this app, and the sequence of using the app.
      <br/>
     ![image_driver2](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/driver2.jpg)
 
-**7. Decentralize**
+**8. Decentralize**
     <br/>
     <br/>
     ![image_acc1](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/acc1.jpg)
@@ -273,7 +278,7 @@ Project Link: [Bus Lines Management](https://github.com/dungngminh/QuanLyNhaXe_M
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/badge/CONTRIBUTORS-_4_-brightgreen?style=for-the-badge
 [contributors-url]: https://github.com/dungngminh/QuanLyNhaXe_Maven/graphs/contributors
-[forks-shield]: https://img.shields.io/badge/FORKS-_0_-blue?style=for-the-badge
+[forks-shield]: https://img.shields.io/badge/FORKS-_1_-blue?style=for-the-badge
 [forks-url]: https://github.com/dungngminh/QuanLyNhaXe_Maven/network/members
 [stars-shield]: https://img.shields.io/badge/STARS-_3_-blue?style=for-the-badge
 [stars-url]: https://github.com/dungngminh/QuanLyNhaXe_Maven/stargazers
