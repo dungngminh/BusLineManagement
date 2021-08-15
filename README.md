@@ -11,7 +11,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="https://www.taximobility.com/blog/wp-content/uploads/2018/07/Bus-Charter-Management-Software.png" alt="Logo">
+    <img src="https://image.freepik.com/free-vector/passengers-waiting-bus-city-queue-town-road-flat-vector-illustration-public-transport-urban-lifestyle_74855-8493.jpg" alt="Logo">
   </a>
 
   <h3 align="center">BUS LINES MANAGEMENT</h3>
