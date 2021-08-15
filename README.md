@@ -168,11 +168,6 @@ There are some screenshots about this app, and the sequence of using the app.
     <br/>
     <br/>
     ![image_dashboard](https://raw.githubusercontent.com/dungngminh/QuanLyNhaXe_Maven/feature/screenshot/dashboard.png)
-    
-**3. Main Page**
-    <br/>
-    <br/>
-    ![image_main](https://github.com/dungngminh/QuanLyNhaXe_Maven/blob/feature/screenshot/dashboard.jpg)
  
 **3. Main Page**
     <br/>
